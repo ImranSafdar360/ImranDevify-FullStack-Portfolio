@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* Default theme colors - will be overridden by theme system */
+  /* Basic colors */
   --color-background: #ffffff;
   --color-foreground: #171717;
   --color-primary: #3b82f6;
@@ -30,10 +30,6 @@
   --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
   --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   
-  /* Animations */
-  --animation-duration: 0.3s;
-  --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
-  
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -46,33 +42,6 @@
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
-@theme inline {
-  --color-background: var(--color-background);
-  --color-foreground: var(--color-foreground);
-  --color-primary: var(--color-primary);
-  --color-primary-foreground: var(--color-primary-foreground);
-  --color-secondary: var(--color-secondary);
-  --color-secondary-foreground: var(--color-secondary-foreground);
-  --color-muted: var(--color-muted);
-  --color-muted-foreground: var(--color-muted-foreground);
-  --color-accent: var(--color-accent);
-  --color-accent-foreground: var(--color-accent-foreground);
-  --color-destructive: var(--color-destructive);
-  --color-destructive-foreground: var(--color-destructive-foreground);
-  --color-success: var(--color-success);
-  --color-success-foreground: var(--color-success-foreground);
-  --color-warning: var(--color-warning);
-  --color-warning-foreground: var(--color-warning-foreground);
-  --color-info: var(--color-info);
-  --color-info-foreground: var(--color-info-foreground);
-  --color-border: var(--color-border);
-  --color-input: var(--color-input);
-  --color-ring: var(--color-ring);
-  --radius: var(--radius);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-}
-
 * {
   border-color: var(--color-border);
 }
@@ -81,8 +50,6 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
-  transition: background-color var(--animation-duration) var(--animation-easing),
-              color var(--animation-duration) var(--animation-easing);
 }
 
 /* Custom scrollbar */
@@ -101,11 +68,6 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-foreground);
-}
-
-/* Smooth transitions */
-* {
-  transition: all var(--animation-duration) var(--animation-easing);
 }
 
 /* Focus styles */
@@ -132,99 +94,20 @@ body {
 }
 
 /* Shadow utilities */
-.shadow-theme-sm {
+.shadow-sm {
   box-shadow: var(--shadow-sm);
 }
 
-.shadow-theme-md {
+.shadow-md {
   box-shadow: var(--shadow-md);
 }
 
-.shadow-theme-lg {
+.shadow-lg {
   box-shadow: var(--shadow-lg);
 }
 
-.shadow-theme-xl {
+.shadow-xl {
   box-shadow: var(--shadow-xl);
-}
-
-/* Animation utilities */
-.animate-theme {
-  transition-duration: var(--animation-duration);
-  transition-timing-function: var(--animation-easing);
-}
-
-/* Theme-specific animations */
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 5px var(--color-primary); }
-  50% { box-shadow: 0 0 20px var(--color-primary), 0 0 30px var(--color-primary); }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-.animate-shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--color-primary),
-    transparent
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-}
-
-/* Cyberpunk theme specific styles */
-.theme-cyberpunk {
-  --glow-color: var(--color-primary);
-}
-
-.theme-cyberpunk .glow-effect {
-  box-shadow: 
-    0 0 5px var(--glow-color),
-    0 0 10px var(--glow-color),
-    0 0 15px var(--glow-color);
-}
-
-.theme-cyberpunk .text-glow {
-  text-shadow: 
-    0 0 5px var(--glow-color),
-    0 0 10px var(--glow-color);
-}
-
-/* Nature theme specific styles */
-.theme-nature .organic-border {
-  border-radius: 50% 20% / 10% 40%;
-}
-
-.theme-nature .leaf-shadow {
-  box-shadow: 
-    0 4px 8px rgba(34, 197, 94, 0.1),
-    0 2px 4px rgba(34, 197, 94, 0.06);
-}
-
-/* Accessibility improvements */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
 }
 
 /* High contrast mode support */

@@ -131,14 +131,7 @@ export const analytics = {
     });
   },
 
-  trackThemeChange: (fromTheme: string, toTheme: string) => {
-    trackEvent({
-      action: 'theme_change',
-      category: 'user_preference',
-      label: `${fromTheme}_to_${toTheme}`,
-      custom_parameters: { from_theme: fromTheme, to_theme: toTheme },
-    });
-  },
+
 
   // Performance tracking
   trackPerformance: (metricName: string, value: number, rating: string) => {

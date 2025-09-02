@@ -9,37 +9,14 @@ export async function GET(request: NextRequest) {
     
     const title = searchParams.get('title') || 'Imran Safdar - Full Stack Developer';
     const description = searchParams.get('description') || 'Full-stack developer passionate about creating innovative solutions';
-    const theme = searchParams.get('theme') || 'default';
 
-    // Theme colors
-    const themes = {
-      default: {
-        bg: '#ffffff',
-        primary: '#3b82f6',
-        secondary: '#1e293b',
-        text: '#171717',
-      },
-      dark: {
-        bg: '#0a0a0a',
-        primary: '#3b82f6',
-        secondary: '#f8fafc',
-        text: '#ededed',
-      },
-      cyberpunk: {
-        bg: '#0d0d0d',
-        primary: '#ff0080',
-        secondary: '#00ff80',
-        text: '#ffffff',
-      },
-      nature: {
-        bg: '#fefffe',
-        primary: '#22c55e',
-        secondary: '#84cc16',
-        text: '#1c1917',
-      },
+    // Default colors
+    const colors = {
+      bg: '#ffffff',
+      primary: '#3b82f6',
+      secondary: '#1e293b',
+      text: '#171717',
     };
-
-    const currentTheme = themes[theme as keyof typeof themes] || themes.default;
 
     return new ImageResponse(
       (
@@ -51,8 +28,8 @@ export async function GET(request: NextRequest) {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: currentTheme.bg,
-            backgroundImage: `linear-gradient(135deg, ${currentTheme.primary}20 0%, ${currentTheme.secondary}20 100%)`,
+            backgroundColor: colors.bg,
+            backgroundImage: `linear-gradient(135deg, ${colors.primary}20 0%, ${colors.secondary}20 100%)`,
             fontFamily: 'Inter, system-ui, sans-serif',
           }}
         >
@@ -64,7 +41,7 @@ export async function GET(request: NextRequest) {
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundImage: `radial-gradient(circle at 25% 25%, ${currentTheme.primary}15 0%, transparent 50%), radial-gradient(circle at 75% 75%, ${currentTheme.secondary}15 0%, transparent 50%)`,
+              backgroundImage: `radial-gradient(circle at 25% 25%, ${colors.primary}15 0%, transparent 50%), radial-gradient(circle at 75% 75%, ${colors.secondary}15 0%, transparent 50%)`,
             }}
           />
           
@@ -86,14 +63,14 @@ export async function GET(request: NextRequest) {
                 width: '120px',
                 height: '120px',
                 borderRadius: '60px',
-                background: `linear-gradient(135deg, ${currentTheme.primary} 0%, ${currentTheme.secondary} 100%)`,
+                background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.secondary} 100%)`,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 marginBottom: '40px',
                 fontSize: '48px',
                 fontWeight: 'bold',
-                color: currentTheme.bg,
+                color: colors.bg,
               }}
             >
               IS
@@ -104,7 +81,7 @@ export async function GET(request: NextRequest) {
               style={{
                 fontSize: '64px',
                 fontWeight: 'bold',
-                color: currentTheme.text,
+                color: colors.text,
                 margin: '0 0 20px 0',
                 lineHeight: 1.1,
                 maxWidth: '900px',
@@ -117,7 +94,7 @@ export async function GET(request: NextRequest) {
             <p
               style={{
                 fontSize: '24px',
-                color: currentTheme.text,
+                color: colors.text,
                 opacity: 0.8,
                 margin: 0,
                 maxWidth: '700px',
@@ -132,7 +109,7 @@ export async function GET(request: NextRequest) {
               style={{
                 width: '100px',
                 height: '4px',
-                background: `linear-gradient(90deg, ${currentTheme.primary} 0%, ${currentTheme.secondary} 100%)`,
+                background: `linear-gradient(90deg, ${colors.primary} 0%, ${colors.secondary} 100%)`,
                 marginTop: '40px',
                 borderRadius: '2px',
               }}
@@ -148,7 +125,7 @@ export async function GET(request: NextRequest) {
               display: 'flex',
               alignItems: 'center',
               gap: '12px',
-              color: currentTheme.text,
+              color: colors.text,
               opacity: 0.6,
               fontSize: '18px',
             }}
@@ -158,7 +135,7 @@ export async function GET(request: NextRequest) {
                 width: '24px',
                 height: '24px',
                 borderRadius: '12px',
-                background: currentTheme.primary,
+                background: colors.primary,
               }}
             />
             imran-safdar.dev

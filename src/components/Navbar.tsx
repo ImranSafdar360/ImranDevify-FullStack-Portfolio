@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
 import { useState } from 'react';
-import ThemeToggle from './ThemeToggle';
+
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -41,8 +41,6 @@ export default function Navbar() {
                 {item.name}
               </Link>
             ))}
-            
-            <ThemeToggle />
             
             {session?.user?.role === 'admin' && (
               <Link
@@ -105,10 +103,6 @@ export default function Navbar() {
                 {item.name}
               </Link>
             ))}
-            
-            <div className="px-3 py-2">
-              <ThemeToggle />
-            </div>
             
             {session?.user?.role === 'admin' && (
               <Link
