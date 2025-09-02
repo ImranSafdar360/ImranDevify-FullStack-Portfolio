@@ -1,0 +1,29 @@
+# robots.txt for imran-safdar.com
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login
+Disallow: /_next/
+Disallow: /static/
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login
+
+# Crawl delay
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://imran-safdar.com/sitemap.xml
