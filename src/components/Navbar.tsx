@@ -3,11 +3,13 @@
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
 import { useState } from 'react';
+import { useLoginDialog } from './LoginDialogProvider';
 
 
 export default function Navbar() {
   const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { openDialog } = useLoginDialog();
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -42,13 +44,20 @@ export default function Navbar() {
               </Link>
             ))}
             
-            {session?.user?.role === 'admin' && (
+            {session?.user?.role === 'admin' ? (
               <Link
                 href="/admin"
                 className="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition-colors"
               >
                 Admin
               </Link>
+            ) : (
+              <button
+                onClick={() => openDialog()}
+                className="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-600 transition-colors"
+              >
+                Admin
+              </button>
             )}
             
             {session ? (
@@ -59,12 +68,12 @@ export default function Navbar() {
                 Logout
               </button>
             ) : (
-              <Link
-                href="/login"
+              <button
+                onClick={() => openDialog()}
                 className="text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
               >
                 Login
-              </Link>
+              </button>
             )}
           </div>
 
@@ -104,7 +113,7 @@ export default function Navbar() {
               </Link>
             ))}
             
-            {session?.user?.role === 'admin' && (
+            {session?.user?.role === 'admin' ? (
               <Link
                 href="/admin"
                 className="bg-primary text-white block px-3 py-2 text-base font-medium rounded-md hover:bg-blue-600 transition-colors"
@@ -112,6 +121,16 @@ export default function Navbar() {
               >
                 Admin
               </Link>
+            ) : (
+              <button
+                onClick={() => {
+                  openDialog();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="bg-primary text-white block px-3 py-2 text-base font-medium rounded-md hover:bg-blue-600 transition-colors w-full text-left"
+              >
+                Admin
+              </button>
             )}
             
             {session ? (
@@ -125,13 +144,15 @@ export default function Navbar() {
                 Logout
               </button>
             ) : (
-              <Link
-                href="/login"
-                className="text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-primary block px-3 py-2 text-base font-medium transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
+              <button
+                onClick={() => {
+                  openDialog();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="text-gray-700 hover:text-primary dark:text-gray-300 dark:hover:text-primary block px-3 py-2 text-base font-medium transition-colors w-full text-left"
               >
                 Login
-              </Link>
+              </button>
             )}
           </div>
         </div>

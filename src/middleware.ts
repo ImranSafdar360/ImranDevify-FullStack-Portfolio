@@ -94,9 +94,10 @@ export default withAuth(
 
     // Check if user is trying to access admin routes
     if (req.nextUrl.pathname.startsWith('/admin')) {
-      // Check if user has admin role
-      if (req.nextauth.token?.role !== 'admin') {
-        return NextResponse.redirect(new URL('/login', req.url));
+      // If not authenticated or not admin, do not redirect to /login.
+      // Let the client-side admin layout handle opening the login dialog.
+      if (!req.nextauth.token || req.nextauth.token?.role !== 'admin') {
+        return NextResponse.next();
       }
     }
 
@@ -105,17 +106,8 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ token, req }) => {
-        // Allow access to login page without authentication
-        if (req.nextUrl.pathname === '/login') {
-          return true;
-        }
-        
-        // For admin routes, require authentication
-        if (req.nextUrl.pathname.startsWith('/admin')) {
-          return !!token;
-        }
-        
-        // Allow all other routes
+        // We are not using server redirect to login anymore.
+        // Allow access; client will gate admin and show dialog if needed.
         return true;
       },
     },
@@ -125,7 +117,6 @@ export default withAuth(
 export const config = {
   matcher: [
     '/admin/:path*', 
-    '/login',
     '/api/:path*',
     '/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)',
   ]

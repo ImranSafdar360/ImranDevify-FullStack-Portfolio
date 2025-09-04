@@ -14,12 +14,15 @@ export async function seedDatabase() {
     console.log('✅ Connected to MongoDB');
 
     // Create admin user
-    const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com';
-    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPassword: string | undefined = process.env.ADMIN_PASSWORD;
+    if (!adminEmail || !adminPassword) {
+      throw new Error('Admin email or password is not set');
+    }
 
     const existingAdmin = await User.findOne({ email: adminEmail });
     if (!existingAdmin) {
-      const hashedPassword = await bcrypt.hash(adminPassword, 12);
+      const hashedPassword = await bcrypt.hash(adminPassword!, 12);
       await User.create({
         email: adminEmail,
         password: hashedPassword,
