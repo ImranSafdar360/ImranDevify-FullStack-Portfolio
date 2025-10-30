@@ -4,13 +4,16 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer
+      className="border-t"
+      style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text)', borderColor: 'var(--color-subtext)' }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <h3 className="text-xl font-bold mb-4">Imran Safdar</h3>
-            <p className="text-gray-400 mb-4 max-w-md">
+            <p className="mb-4 max-w-md" style={{ color: 'var(--color-subtext)' }}>
               Full-stack developer passionate about creating innovative solutions 
               and building exceptional digital experiences.
             </p>
@@ -19,7 +22,8 @@ export default function Footer() {
                 href="https://github.com/imran-safdar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="transition-colors"
+                style={{ color: 'var(--color-subtext)' }}
               >
                 <span className="sr-only">GitHub</span>
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -30,7 +34,8 @@ export default function Footer() {
                 href="https://linkedin.com/in/imran-safdar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="transition-colors"
+                style={{ color: 'var(--color-subtext)' }}
               >
                 <span className="sr-only">LinkedIn</span>
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -41,7 +46,8 @@ export default function Footer() {
                 href="https://twitter.com/imran_safdar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="transition-colors"
+                style={{ color: 'var(--color-subtext)' }}
               >
                 <span className="sr-only">Twitter</span>
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -56,22 +62,22 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/about" className="transition-colors" style={{ color: 'var(--color-subtext)' }}>
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/projects" className="transition-colors" style={{ color: 'var(--color-subtext)' }}>
                   Projects
                 </Link>
               </li>
               <li>
-                <Link href="/skills" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/skills" className="transition-colors" style={{ color: 'var(--color-subtext)' }}>
                   Skills
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/contact" className="transition-colors" style={{ color: 'var(--color-subtext)' }}>
                   Contact
                 </Link>
               </li>
@@ -81,7 +87,7 @@ export default function Footer() {
           {/* Services */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Services</h4>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2" style={{ color: 'var(--color-subtext)' }}>
               <li>Web Development</li>
               <li>Mobile Apps</li>
               <li>API Development</li>
@@ -91,15 +97,15 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
+        <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center" style={{ borderColor: 'var(--color-subtext)' }}>
+          <p className="text-sm" style={{ color: 'var(--color-subtext)' }}>
             © {currentYear} Imran Safdar. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">
+            <Link href="/privacy" className="text-sm transition-colors" style={{ color: 'var(--color-subtext)' }}>
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">
+            <Link href="/terms" className="text-sm transition-colors" style={{ color: 'var(--color-subtext)' }}>
               Terms of Service
             </Link>
           </div>

@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Inter, Anton } from "next/font/google";
 import Providers from "@/components/Providers";
 
 import "./globals.css";
@@ -11,14 +11,20 @@ const fontSans = Inter({
   variable: "--font-sans",
 });
 
+const fontAnton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-anton",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scheme-only-dark">
-      <body className={`${fontSans.variable} font-sans antialiased`}>
+    <html lang="en">
+      <body className={`${fontSans.variable} ${fontAnton.variable} font-sans antialiased dark`}>
         <Providers>
           <header>
             <ShowOnNonAdmin>

@@ -72,12 +72,12 @@ export default async function AdminDashboard() {
   ];
 
   return (
-    <div>
+    <div style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text)' }}>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+        <h1 className="text-3xl font-bold" style={{ color: 'var(--color-text)' }}>
           Dashboard
         </h1>
-        <p className="text-gray-600 dark:text-gray-300 mt-2">
+        <p className="mt-2" style={{ color: 'var(--color-subtext)' }}>
           Welcome to your portfolio admin panel. Here's an overview of your content.
         </p>
       </div>
@@ -88,28 +88,29 @@ export default async function AdminDashboard() {
           <a
             key={card.title}
             href={card.href}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+            className="rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border"
+            style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-subtext)' }}
           >
             <div className="flex items-center">
               <div className={`p-3 rounded-lg ${card.color}`}>
                 <span className="text-2xl">{card.icon}</span>
               </div>
               <div className="ml-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                <h3 className="text-lg font-semibold" style={{ color: 'var(--color-text)' }}>
                   {card.title}
                 </h3>
-                <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--color-subtext)' }}>
                   <span>Total: {card.count}</span>
                   {card.title === 'Messages' ? (
-                    <span className="text-orange-600 dark:text-orange-400">
+                    <span className="text-orange-600">
                       • Unread: {card.featured}
                     </span>
                   ) : card.title === 'Skills' ? (
-                    <span className="text-green-600 dark:text-green-400">
+                    <span className="text-green-600">
                       • Advanced+: {card.featured}
                     </span>
                   ) : (
-                    <span className="text-blue-600 dark:text-blue-400">
+                    <span style={{ color: '#00C3FF' }}>
                       • Featured: {card.featured}
                     </span>
                   )}
@@ -123,25 +124,25 @@ export default async function AdminDashboard() {
       {/* Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Recent Projects */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+        <div className="rounded-lg shadow-md p-6 border" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-subtext)' }}>
+          <h2 className="text-xl font-semibold mb-4" style={{ color: 'var(--color-text)' }}>
             Recent Projects
           </h2>
           {stats.projects.length > 0 ? (
             <div className="space-y-3">
               {stats.projects.slice(0, 5).map((project: any) => (
-                <div key={project._id} className="flex items-center justify-between py-2 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                <div key={project._id} className="flex items-center justify-between py-2 border-b last:border-b-0" style={{ borderColor: 'var(--color-subtext)' }}>
                   <div>
-                    <h3 className="font-medium text-gray-900 dark:text-white">
+                    <h3 className="font-medium" style={{ color: 'var(--color-text)' }}>
                       {project.title}
                     </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                    <p className="text-sm" style={{ color: 'var(--color-subtext)' }}>
                       {project.techStack.slice(0, 2).join(', ')}
                       {project.techStack.length > 2 && ` +${project.techStack.length - 2} more`}
                     </p>
                   </div>
                   {project.featured && (
-                    <span className="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded-full text-xs">
+                    <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">
                       Featured
                     </span>
                   )}
@@ -149,32 +150,32 @@ export default async function AdminDashboard() {
               ))}
             </div>
           ) : (
-            <p className="text-gray-600 dark:text-gray-300">No projects yet</p>
+            <p style={{ color: 'var(--color-subtext)' }}>No projects yet</p>
           )}
         </div>
 
         {/* Recent Messages */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+        <div className="rounded-lg shadow-md p-6 border" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-subtext)' }}>
+          <h2 className="text-xl font-semibold mb-4" style={{ color: 'var(--color-text)' }}>
             Recent Messages
           </h2>
           {stats.contacts.length > 0 ? (
             <div className="space-y-3">
               {stats.contacts.slice(0, 5).map((contact: any) => (
-                <div key={contact._id} className="flex items-start justify-between py-2 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                <div key={contact._id} className="flex items-start justify-between py-2 border-b last:border-b-0" style={{ borderColor: 'var(--color-subtext)' }}>
                   <div className="flex-1">
-                    <h3 className="font-medium text-gray-900 dark:text-white">
+                    <h3 className="font-medium" style={{ color: 'var(--color-text)' }}>
                       {contact.name}
                     </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">
+                    <p className="text-sm mb-1" style={{ color: 'var(--color-subtext)' }}>
                       {contact.subject}
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs" style={{ color: 'var(--color-subtext)' }}>
                       {new Date(contact.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                   {!contact.isRead && (
-                    <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-full text-xs">
+                    <span className="px-2 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(0,195,255,0.1)', color: '#00C3FF' }}>
                       New
                     </span>
                   )}
@@ -182,44 +183,48 @@ export default async function AdminDashboard() {
               ))}
             </div>
           ) : (
-            <p className="text-gray-600 dark:text-gray-300">No messages yet</p>
+            <p style={{ color: 'var(--color-subtext)' }}>No messages yet</p>
           )}
         </div>
       </div>
 
       {/* Quick Actions */}
-      <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-lg p-6">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+      <div className="mt-8 rounded-lg p-6" style={{ backgroundColor: 'rgba(0,0,0,0.05)' }}>
+        <h2 className="text-xl font-semibold mb-4" style={{ color: 'var(--color-text)' }}>
           Quick Actions
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <a
             href="/admin/projects"
-            className="bg-white dark:bg-gray-800 rounded-lg p-4 text-center hover:shadow-md transition-shadow"
+            className="rounded-lg p-4 text-center hover:shadow-md transition-shadow border"
+            style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-subtext)' }}
           >
             <div className="text-2xl mb-2">➕</div>
-            <div className="font-medium text-gray-900 dark:text-white">Add Project</div>
+            <div className="font-medium" style={{ color: 'var(--color-text)' }}>Add Project</div>
           </a>
           <a
             href="/admin/skills"
-            className="bg-white dark:bg-gray-800 rounded-lg p-4 text-center hover:shadow-md transition-shadow"
+            className="rounded-lg p-4 text-center hover:shadow-md transition-shadow border"
+            style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-subtext)' }}
           >
             <div className="text-2xl mb-2">🔧</div>
-            <div className="font-medium text-gray-900 dark:text-white">Add Skill</div>
+            <div className="font-medium" style={{ color: 'var(--color-text)' }}>Add Skill</div>
           </a>
           <a
             href="/admin/about"
-            className="bg-white dark:bg-gray-800 rounded-lg p-4 text-center hover:shadow-md transition-shadow"
+            className="rounded-lg p-4 text-center hover:shadow-md transition-shadow border"
+            style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-subtext)' }}
           >
             <div className="text-2xl mb-2">✏️</div>
-            <div className="font-medium text-gray-900 dark:text-white">Edit About</div>
+            <div className="font-medium" style={{ color: 'var(--color-text)' }}>Edit About</div>
           </a>
           <a
             href="/admin/contact"
-            className="bg-white dark:bg-gray-800 rounded-lg p-4 text-center hover:shadow-md transition-shadow"
+            className="rounded-lg p-4 text-center hover:shadow-md transition-shadow border"
+            style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-subtext)' }}
           >
             <div className="text-2xl mb-2">📬</div>
-            <div className="font-medium text-gray-900 dark:text-white">View Messages</div>
+            <div className="font-medium" style={{ color: 'var(--color-text)' }}>View Messages</div>
           </a>
         </div>
       </div>
