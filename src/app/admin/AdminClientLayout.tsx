@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Sidebar,
   SidebarContent,
@@ -37,9 +37,8 @@ import { BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import FeedbackDialog from "@/components/feedback-dialog";
-import { useMemo } from "react";
+import { useEffect } from "react";
 import React from "react";
-import { useLoginDialog } from "@/components/LoginDialogProvider";
 
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: RiDashboardLine },
@@ -57,9 +56,17 @@ export default function AdminClientLayout({
 }) {
   const { data: session, status } = useSession();
   const pathname = usePathname();
-  const { openDialog } = useLoginDialog();
+  const router = useRouter();
 
   const segments = pathname.split("/").filter(Boolean);
+
+  useEffect(() => {
+    if (status === "authenticated" && (!session || session.user.role !== "admin")) {
+      router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
+    } else if (status === "unauthenticated") {
+      router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
+    }
+  }, [session, status, router, pathname]);
 
   if (status === "loading") {
     return (
@@ -70,25 +77,11 @@ export default function AdminClientLayout({
   }
 
   if (!session || session.user.role !== "admin") {
-    // open dialog if not already open
-    if (typeof window !== "undefined") {
-      openDialog();
-    }
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center text-foreground">
-          <h1 className="text-2xl font-bold mb-4">
-            Access Denied
-          </h1>
-          <p className="mb-6">
-            You need admin privileges to access this page.
-          </p>
-          <button
-            onClick={() => openDialog()}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
-          >
-            Open Login
-          </button>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4">Redirecting to login...</p>
         </div>
       </div>
     );

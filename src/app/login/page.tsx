@@ -1,52 +1,20 @@
 "use client";
 
-import React, { createContext, useCallback, useContext, useMemo, useState, useId } from "react";
+import React, { useState, useId } from "react";
 import { signIn, getSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import Link from "next/link";
 
-interface LoginDialogContextValue {
-  open: boolean;
-  openDialog: () => void;
-  closeDialog: () => void;
-}
-
-const LoginDialogContext = createContext<LoginDialogContextValue | undefined>(undefined);
-
-export function useLoginDialog() {
-  const ctx = useContext(LoginDialogContext);
-  if (!ctx) throw new Error("useLoginDialog must be used within LoginDialogProvider");
-  return ctx;
-}
-
-export default function LoginDialogProvider({ children }: { children: React.ReactNode }) {
-  const [open, setOpen] = useState(false);
-  const openDialog = useCallback(() => setOpen(true), []);
-  const closeDialog = useCallback(() => setOpen(false), []);
-
-  const value = useMemo(() => ({ open, openDialog, closeDialog }), [open, openDialog, closeDialog]);
-
-  return (
-    <LoginDialogContext.Provider value={value}>
-      {children}
-      <LoginDialog open={open} onOpenChange={(v) => (v ? openDialog() : closeDialog())} />
-    </LoginDialogContext.Provider>
-  );
-}
-
-function LoginDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void }) {
+export default function LoginPage() {
   const id = useId();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/admin";
+  
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -71,11 +39,11 @@ function LoginDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (v: 
         setError("Invalid email or password");
       } else {
         const session = await getSession();
-        onOpenChange(false);
         if (session?.user?.role === "admin") {
-          router.push("/admin");
-        } else {
+          router.push(callbackUrl);
           router.refresh();
+        } else {
+          setError("Access denied. Admin privileges required.");
         }
       }
     } catch (err) {
@@ -86,8 +54,8 @@ function LoginDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (v: 
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+    <div className="min-h-screen bg-background flex items-center justify-center px-4">
+      <div className="w-full max-w-md space-y-8">
         <div className="flex flex-col items-center gap-2">
           <div
             className="flex size-11 shrink-0 items-center justify-center rounded-full border"
@@ -104,12 +72,10 @@ function LoginDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (v: 
               <circle cx="16" cy="16" r="12" fill="none" strokeWidth="8" />
             </svg>
           </div>
-          <DialogHeader>
-            <DialogTitle className="sm:text-center">Welcome back</DialogTitle>
-            <DialogDescription className="sm:text-center">
-              Enter your credentials to login to your account.
-            </DialogDescription>
-          </DialogHeader>
+          <h1 className="text-2xl font-bold text-center">Welcome back</h1>
+          <p className="text-muted-foreground text-center">
+            Enter your credentials to login to your account.
+          </p>
         </div>
 
         <form className="space-y-5" onSubmit={handleSubmit}>
@@ -175,7 +141,14 @@ function LoginDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (v: 
         <Button variant="outline" className="w-full" type="button">
           Login with Google
         </Button>
-      </DialogContent>
-    </Dialog>
+
+        <div className="text-center">
+          <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
+            ← Back to home
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }
+
