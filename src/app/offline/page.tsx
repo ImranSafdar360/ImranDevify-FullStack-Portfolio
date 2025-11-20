@@ -29,7 +29,7 @@ export default function OfflinePage() {
 
         <div className="space-y-4">
           <button
-            onClick={() => window.location.reload()}
+            // onClick={() => window.location.reload()}
             className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
           >
             <RefreshCw className="w-4 h-4" />

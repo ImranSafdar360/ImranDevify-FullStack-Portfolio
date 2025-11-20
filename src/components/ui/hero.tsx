@@ -2,69 +2,131 @@
 
 import { Button } from "@/components/ui/button";
 import LightRays from "../LightRays";
+import GradientText from "./gradient-text";
+import GlassBadge from "./glass-badge";
+import LiquidGlass from "liquid-glass-react";
+import { useRef } from "react";
+import AnimatedButton from "../Button";
+import SocialDock from "./social-dock";
 
 export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const values = [
+    {
+      icon: "🛠️",
+      title: "Clean Architecture",
+      description: "systems built to grow, not break",
+    },
+    {
+      icon: "⚡",
+      title: "Serious Performance",
+      description: "fast, stable, optimized experiences",
+    },
+    {
+      icon: "🎯",
+      title: "Technical Precision",
+      description: "engineered for long-term success",
+    },
+  ];
+
+  // Social Media Icons with brand colors
+  const WhatsAppIcon = () => (
+    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  );
+
+  const LinkedInIcon = () => (
+    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+    </svg>
+  );
+
+  const EmailIcon = () => (
+    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+    </svg>
+  );
+
+  const socialItems = [
+    {
+      icon: <WhatsAppIcon />,
+      label: "WhatsApp",
+      href: "https://wa.me/your-number",
+      gradientFrom: "#25D366",
+      gradientTo: "#128C7E",
+    },
+    {
+      icon: <LinkedInIcon />,
+      label: "LinkedIn",
+      href: "https://linkedin.com/in/your-profile",
+      gradientFrom: "#0077B5",
+      gradientTo: "#005885",
+    },
+    {
+      icon: <EmailIcon />,
+      label: "Email",
+      href: "mailto:your-email@gmail.com",
+      gradientFrom: "#EA4335",
+      gradientTo: "#C5221F",
+    },
+  ];
   return (
     <section className="w-full relative overflow-hidden bg-black text-white">
-<div style={{ width: '100%', height: '600px', position: 'absolute', top: 0, left: 0 }}>
-  <LightRays
-    raysOrigin="top-center"
-    // raysColor="#00ffff"
-    raysSpeed={.5}
-    lightSpread={0.9}
-    rayLength={1.2}
-    followMouse={true}
-    mouseInfluence={0.1}
-    noiseAmount={0.1}
-    distortion={0.05}
-    className="custom-rays"
-  />
-</div>
-      <div className="relative w-full h-full flex flex-col justify-center items-center gap-[32px] mx-auto px-6 py-32 md:py-40">
-        {/* Badge (Glassmorphism) */}
-        <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium backdrop-blur-md bg-white/10 border border-white/10 mb-6">
-          🚀 Full-Stack MERN + React Native Developer
-        </span>
+      <div
+        ref={containerRef}
+        className="relative w-full h-full flex flex-col justify-center items-center gap-[32px] mx-auto px-6 py-32 md:py-40"
+      >
+        <div className="relative w-full flex justify-center items-center">
+          <LiquidGlass
+            mouseContainer={containerRef}
+            elasticity={0.3}
+            padding="16px 24px"
+            style={{ position: "absolute", top: "50%", left: "50%" }}
+          >
+            <p className="text-white text-[15px] font-medium">
+              ★ 4.9/5.0 No basic sites. Made to feel premium
+            </p>
+          </LiquidGlass>
+        </div>
 
         {/* Gradient Title */}
         <h1
-          className="text-4xl md:text-6xl tracking-tight leading-tight mb-6 text-center"
-          style={{ fontFamily: "var(--font-boldonse), sans-serif" }}
+          className="text-4xl md:text-[64px] tracking-tight leading-[94px] mt-6 text-center"
+          style={{ fontFamily: "var(--font-boldonse)" }}
         >
-          Building{" "}
-          <span className="bg-gradient-to-r from-[#0180FF] to-[#4DAAFF] bg-clip-text text-transparent">
-            Fast, Stable & Scalable
-          </span>{" "}
-          Digital Products for SaaS & Agencies
+          <GradientText>Build Products</GradientText> That Perform, Scale, and
+          Stand Out.
         </h1>
 
         {/* Subtitle */}
-        <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-10 text-center max-w-[780px]">
-          I build high-performance websites, full-stack platforms, and smooth
-          mobile apps that load instantly, scale naturally, and feel seamless
-          for your users.
+        <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-0 text-center max-w-[900px]">
+          I’m 𝗜𝗺𝗿𝗮𝗻 𝗦𝗮𝗳𝗱𝗮𝗿, a MERN Stack & React Native developer helping 𝗦𝗮𝗮𝗦
+          𝗳𝗼𝘂𝗻𝗱𝗲𝗿𝘀, 𝗮𝗴𝗲𝗻𝗰𝗶𝗲𝘀, 𝗮𝗻𝗱 𝘀𝘁𝗮𝗿𝘁𝘂𝗽𝘀 turn complex ideas into fast,
+          reliable, growth-ready digital products.
         </p>
 
         {/* CTA Section (A/B Optimized) */}
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col justify-center items-center gap-[21px] sm:flex-row">
           {/* Primary CTA */}
-          <Button
-            size="lg"
-            className="px-8 py-6 text-base md:text-lg font-semibold bg-[#0180FF] hover:bg-[#0066CC]"
-          >
-            Start Your Project →
-          </Button>
-
-          {/* Secondary Ghost Button (Glass Outline) */}
-          <Button
-            size="lg"
-            variant="outline"
-            className="px-8 py-6 text-base md:text-lg font-semibold border-white/20 text-white hover:bg-white/10"
-          >
-            View Portfolio
-          </Button>
+          <AnimatedButton onClick={() => {}}>Book 1:1 Meeting</AnimatedButton>
+          <h6 className="text-gray-300 text-[22px] font-semibold">or DM</h6>
+          <SocialDock items={socialItems} />
         </div>
       </div>
+      {/* <div className="w-full flex justify-between items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {values.map((value, index) => (
+            <div key={index}>
+              <h4 className="text-lg font-semibold mb-1">{value.title}</h4>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                {value.description}
+              </p>
+            </div>
+          ))}
+        </div>
+        <div>Circle CTA</div>
+      </div> */}
     </section>
   );
 }
