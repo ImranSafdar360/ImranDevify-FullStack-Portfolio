@@ -2,9 +2,11 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import Image from 'next/image';
 
 interface SocialIcon {
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
+  imageSrc?: string;
   label: string;
   href: string;
   gradientFrom: string;
@@ -36,7 +38,7 @@ const SocialDock = ({ items, className }: SocialDockProps) => {
         >
           {/* Icon Container with Gradient Background */}
           <motion.div
-            className="w-12 h-12 rounded-[8px] flex items-center justify-center cursor-pointer relative overflow-hidden"
+            className="w-12 h-12 rounded-[12px] flex items-center justify-center cursor-pointer relative overflow-hidden"
             style={{
               background: `linear-gradient(135deg, ${item.gradientFrom}, ${item.gradientTo})`,
             }}
@@ -45,8 +47,20 @@ const SocialDock = ({ items, className }: SocialDockProps) => {
             }}
           >
             {/* Icon */}
-            <div className="relative z-10 text-white">
-              {item.icon}
+            <div className="relative z-10 flex items-center justify-center">
+              {item.imageSrc ? (
+                <Image
+                  src={item.imageSrc}
+                  alt={item.label}
+                  width={34}
+                  height={34}
+                  className="object-contain"
+                />
+              ) : (
+                <div className="text-white">
+                  {item.icon}
+                </div>
+              )}
             </div>
             
             {/* Shine effect on hover */}
