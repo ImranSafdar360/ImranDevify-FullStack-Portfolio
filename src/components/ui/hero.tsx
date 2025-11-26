@@ -109,7 +109,11 @@ export default function Hero() {
         {/* Gradient Title */}
         <h1
           className="text-4xl md:text-[64px] tracking-tight leading-[94px] mt-6 text-center"
-          style={{ fontFamily: "var(--font-boldonse)" }}
+          style={{ 
+            fontFamily: "var(--font-boldonse)",
+            fontWeight: 400,
+            fontStyle: "normal"
+          }}
         >
           <GradientText>Build Products</GradientText> That Perform, Scale, and
           Stand Out.

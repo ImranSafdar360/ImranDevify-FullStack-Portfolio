@@ -1,4 +1,4 @@
-import { Inter, Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Providers from "@/components/Providers";
 
 import "./globals.css";
@@ -14,11 +14,9 @@ const fontJakarta = Plus_Jakarta_Sans({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
 
-const fontBoldonse = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-boldonse",
-});
+// Boldonse font is loaded via CSS @font-face in globals.css
+// This approach allows the build to succeed even if font files are not present
+// The CSS will handle font loading gracefully with fallbacks
 
 export default function RootLayout({
   children,
@@ -27,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fontSans.variable} ${fontJakarta.variable} ${fontBoldonse.variable} antialiased dark`}>
+      <body className={`${fontSans.variable} ${fontJakarta.variable} antialiased dark`}>
         <Providers>
           {/* <header>
             <ShowOnNonAdmin>

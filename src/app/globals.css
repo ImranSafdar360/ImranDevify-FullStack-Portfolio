@@ -1,6 +1,22 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Boldonse Font - Load from local files */
+/* All three variants (woff2, woff, ttf) are loaded for maximum browser compatibility */
+@font-face {
+  font-family: 'Boldonse';
+  src: url('/fonts/Boldonse-Regular.woff2') format('woff2'),
+       url('/fonts/Boldonse-Regular.woff') format('woff'),
+       url('/fonts/Boldonse-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-boldonse: 'Boldonse', serif, system-ui, Arial;
+}
+
 .dark {
   /* Minimal dark theme overrides */
   --color-background: #06090D;

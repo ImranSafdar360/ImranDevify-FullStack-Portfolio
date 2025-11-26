@@ -88,7 +88,9 @@ export default withAuth(
   async function middleware(req) {
     // Apply security middleware first
     const securityResponse = await applySecurityMiddleware(req);
-    if (securityResponse.status !== 200) {
+    
+    // Check if security middleware returned an error response
+    if (securityResponse.status && securityResponse.status !== 200) {
       return securityResponse;
     }
 
@@ -118,7 +120,9 @@ export const config = {
   matcher: [
     '/admin/:path*', 
     '/api/:path*',
-    '/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)',
+    '/login/:path*',
+    // Only match specific routes, exclude root route to prevent redirect loops
+    // The root route (/) should not go through auth middleware
   ]
 };
 

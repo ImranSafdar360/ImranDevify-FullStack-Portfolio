@@ -1,7 +1,7 @@
 import { RiAddLine, RiBriefcaseLine, RiChatQuoteLine, RiMailLine, RiPencilLine, RiToolsLine } from "@remixicon/react";
 
 async function getDashboardStats() {
-  const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
+  const baseUrl = process.env.NEXTAUTH_URL;
   
   try {
     const [projectsRes, skillsRes, testimonialsRes, contactsRes] = await Promise.all([
