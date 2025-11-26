@@ -76,24 +76,24 @@ const nextConfig: NextConfig = {
     ];
   },
   
-  // Redirects for SEO
-  async redirects() {
-    return [
-      // Redirect trailing slashes (except root)
-      {
-        source: '/:path*/',
-        destination: '/:path*',
-        permanent: true,
-        has: [
-          {
-            type: 'header',
-            key: 'host',
-            value: '(?!localhost).*',
-          },
-        ],
-      },
-    ];
-  },
+  // Redirects for SEO - Disabled to prevent redirect loops on Vercel
+  // async redirects() {
+  //   return [
+  //     // Redirect trailing slashes (except root)
+  //     {
+  //       source: '/:path*/',
+  //       destination: '/:path*',
+  //       permanent: true,
+  //       has: [
+  //         {
+  //           type: 'header',
+  //           key: 'host',
+  //           value: '(?!localhost).*',
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // },
   
   // Experimental features
   experimental: {
