@@ -59,13 +59,14 @@ export default function OptimizedImage({
       });
     });
 
-    if (observer && imgRef.current) {
-      observer.observe(imgRef.current);
+    const currentImgRef = imgRef.current;
+    if (observer && currentImgRef) {
+      observer.observe(currentImgRef);
     }
 
     return () => {
-      if (observer && imgRef.current) {
-        observer.unobserve(imgRef.current);
+      if (observer && currentImgRef) {
+        observer.unobserve(currentImgRef);
       }
     };
   }, [priority, loading]);

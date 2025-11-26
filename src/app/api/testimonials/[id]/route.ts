@@ -8,11 +8,12 @@ import { authOptions } from '../../../../lib/auth';
 // GET /api/testimonials/[id] - Get single testimonial
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     await connectDB();
-    const testimonial = await Testimonial.findById(params.id);
+    const testimonial = await Testimonial.findById(id);
     
     if (!testimonial) {
       return NextResponse.json(
@@ -34,7 +35,7 @@ export async function GET(
 // PUT /api/testimonials/[id] - Update testimonial
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -46,12 +47,13 @@ export async function PUT(
       );
     }
 
+    const { id } = await params;
     const body = await request.json();
     const validatedData = TestimonialSchema.parse(body);
 
     await connectDB();
     const testimonial = await Testimonial.findByIdAndUpdate(
-      params.id,
+      id,
       validatedData,
       { new: true, runValidators: true }
     );
@@ -64,12 +66,13 @@ export async function PUT(
     }
     
     return NextResponse.json({ success: true, data: testimonial });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error updating testimonial:', error);
+    const err = error as { name?: string; errors?: unknown };
     
-    if (error.name === 'ZodError') {
+    if (err.name === 'ZodError') {
       return NextResponse.json(
-        { success: false, error: 'Validation error', details: error.errors },
+        { success: false, error: 'Validation error', details: err.errors },
         { status: 400 }
       );
     }
@@ -84,7 +87,7 @@ export async function PUT(
 // DELETE /api/testimonials/[id] - Delete testimonial
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -96,8 +99,9 @@ export async function DELETE(
       );
     }
 
+    const { id } = await params;
     await connectDB();
-    const testimonial = await Testimonial.findByIdAndDelete(params.id);
+    const testimonial = await Testimonial.findByIdAndDelete(id);
     
     if (!testimonial) {
       return NextResponse.json(

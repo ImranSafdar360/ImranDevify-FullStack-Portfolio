@@ -42,12 +42,13 @@ export async function POST(request: NextRequest) {
       { success: true, data: skill },
       { status: 201 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error creating skill:', error);
+    const err = error as { name?: string; errors?: unknown };
     
-    if (error.name === 'ZodError') {
+    if (err.name === 'ZodError') {
       return NextResponse.json(
-        { success: false, error: 'Validation error', details: error.errors },
+        { success: false, error: 'Validation error', details: err.errors },
         { status: 400 }
       );
     }

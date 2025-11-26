@@ -7,7 +7,7 @@ import { authOptions } from '../../../../lib/auth';
 // PUT /api/contact/[id] - Mark message as read
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -19,9 +19,10 @@ export async function PUT(
       );
     }
 
+    const { id } = await params;
     await connectDB();
     const contact = await Contact.findByIdAndUpdate(
-      params.id,
+      id,
       { isRead: true },
       { new: true }
     );
@@ -46,7 +47,7 @@ export async function PUT(
 // DELETE /api/contact/[id] - Delete contact message
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -58,8 +59,9 @@ export async function DELETE(
       );
     }
 
+    const { id } = await params;
     await connectDB();
-    const contact = await Contact.findByIdAndDelete(params.id);
+    const contact = await Contact.findByIdAndDelete(id);
     
     if (!contact) {
       return NextResponse.json(

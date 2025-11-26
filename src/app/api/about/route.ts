@@ -57,12 +57,13 @@ export async function POST(request: NextRequest) {
       { success: true, data: about },
       { status: existingAbout ? 200 : 201 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const err = error as { name?: string; errors?: unknown };
     console.error('Error saving about:', error);
     
-    if (error.name === 'ZodError') {
+    if (err.name === 'ZodError') {
       return NextResponse.json(
-        { success: false, error: 'Validation error', details: error.errors },
+        { success: false, error: 'Validation error', details: err.errors },
         { status: 400 }
       );
     }

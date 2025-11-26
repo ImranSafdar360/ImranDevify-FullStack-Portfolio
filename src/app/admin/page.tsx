@@ -1,3 +1,5 @@
+import { RiAddLine, RiBriefcaseLine, RiChatQuoteLine, RiMailLine, RiPencilLine, RiToolsLine } from "@remixicon/react";
+
 async function getDashboardStats() {
   const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
   
@@ -40,32 +42,32 @@ export default async function AdminDashboard() {
     {
       title: 'Projects',
       count: stats.projects.length,
-      featured: stats.projects.filter((p: any) => p.featured).length,
-      icon: '💼',
+      featured: stats.projects.filter((p: { featured: boolean; }) => p.featured).length,
+      icon: <RiBriefcaseLine />,
       href: '/admin/projects',
       color: 'bg-blue-500',
     },
     {
       title: 'Skills',
       count: stats.skills.length,
-      featured: stats.skills.filter((s: any) => s.level === 'Expert' || s.level === 'Advanced').length,
-      icon: '🛠️',
+      featured: stats.skills.filter((s: { level: 'Expert' | 'Advanced'; }) => s.level === 'Expert' || s.level === 'Advanced').length,
+      icon: <RiToolsLine />,
       href: '/admin/skills',
       color: 'bg-green-500',
     },
     {
       title: 'Testimonials',
       count: stats.testimonials.length,
-      featured: stats.testimonials.filter((t: any) => t.featured).length,
-      icon: '💬',
+      featured: stats.testimonials.filter((t: { featured: boolean; }) => t.featured).length,
+      icon: <RiChatQuoteLine />,
       href: '/admin/testimonials',
       color: 'bg-purple-500',
     },
     {
       title: 'Messages',
       count: stats.contacts.length,
-      featured: stats.contacts.filter((c: any) => !c.isRead).length,
-      icon: '📧',
+      featured: stats.contacts.filter((c: { isRead: boolean; }) => !c.isRead).length,
+      icon: <RiMailLine />,
       href: '/admin/contact',
       color: 'bg-orange-500',
     },
@@ -78,7 +80,7 @@ export default async function AdminDashboard() {
           Dashboard
         </h1>
         <p className="mt-2" style={{ color: 'var(--color-subtext)' }}>
-          Welcome to your portfolio admin panel. Here's an overview of your content.
+          Welcome to your portfolio admin panel. Here&apos;s an overview of your content.
         </p>
       </div>
 
@@ -130,7 +132,7 @@ export default async function AdminDashboard() {
           </h2>
           {stats.projects.length > 0 ? (
             <div className="space-y-3">
-              {stats.projects.slice(0, 5).map((project: any) => (
+              {stats.projects.slice(0, 5).map((project: { _id: string; title: string; techStack: string[]; featured: boolean; }) => (
                 <div key={project._id} className="flex items-center justify-between py-2 border-b last:border-b-0" style={{ borderColor: 'var(--color-subtext)' }}>
                   <div>
                     <h3 className="font-medium" style={{ color: 'var(--color-text)' }}>
@@ -161,7 +163,7 @@ export default async function AdminDashboard() {
           </h2>
           {stats.contacts.length > 0 ? (
             <div className="space-y-3">
-              {stats.contacts.slice(0, 5).map((contact: any) => (
+              {stats.contacts.slice(0, 5).map((contact: { _id: string; name: string; subject: string; createdAt: string; isRead: boolean; }) => (
                 <div key={contact._id} className="flex items-start justify-between py-2 border-b last:border-b-0" style={{ borderColor: 'var(--color-subtext)' }}>
                   <div className="flex-1">
                     <h3 className="font-medium" style={{ color: 'var(--color-text)' }}>
@@ -199,7 +201,7 @@ export default async function AdminDashboard() {
             className="rounded-lg p-4 text-center hover:shadow-md transition-shadow border"
             style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-subtext)' }}
           >
-            <div className="text-2xl mb-2">➕</div>
+            <div className="text-2xl mb-2"><RiAddLine className="size-6" /></div>
             <div className="font-medium" style={{ color: 'var(--color-text)' }}>Add Project</div>
           </a>
           <a
@@ -207,7 +209,7 @@ export default async function AdminDashboard() {
             className="rounded-lg p-4 text-center hover:shadow-md transition-shadow border"
             style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-subtext)' }}
           >
-            <div className="text-2xl mb-2">🔧</div>
+            <div className="text-2xl mb-2"><RiToolsLine className="size-6" /></div>
             <div className="font-medium" style={{ color: 'var(--color-text)' }}>Add Skill</div>
           </a>
           <a
@@ -215,7 +217,7 @@ export default async function AdminDashboard() {
             className="rounded-lg p-4 text-center hover:shadow-md transition-shadow border"
             style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-subtext)' }}
           >
-            <div className="text-2xl mb-2">✏️</div>
+            <div className="text-2xl mb-2"><RiPencilLine className="size-6" /></div>
             <div className="font-medium" style={{ color: 'var(--color-text)' }}>Edit About</div>
           </a>
           <a
@@ -223,7 +225,7 @@ export default async function AdminDashboard() {
             className="rounded-lg p-4 text-center hover:shadow-md transition-shadow border"
             style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-subtext)' }}
           >
-            <div className="text-2xl mb-2">📬</div>
+            <div className="text-2xl mb-2"><RiMailLine className="size-6" /></div>
             <div className="font-medium" style={{ color: 'var(--color-text)' }}>View Messages</div>
           </a>
         </div>

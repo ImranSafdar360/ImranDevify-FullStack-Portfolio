@@ -119,7 +119,7 @@ export default function PWAInstallPrompt() {
                   <div>
                     <p className="text-xs text-muted-foreground mb-3">
                       Install this app for a better experience. Tap the share button in Safari 
-                      and select "Add to Home Screen".
+                      and select &quot;Add to Home Screen&quot;.
                     </p>
                     <div className="flex gap-2">
                       <button

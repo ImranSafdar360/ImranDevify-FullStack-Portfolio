@@ -162,12 +162,23 @@ export function createRateLimitMiddleware(limiter: RateLimiter) {
   };
 }
 
+// Redis client interface for type safety
+interface RedisClient {
+  pipeline(): RedisPipeline;
+}
+
+interface RedisPipeline {
+  incr(key: string): RedisPipeline;
+  expire(key: string, seconds: number): RedisPipeline;
+  exec(): Promise<Array<[Error | null, number]>>;
+}
+
 // Distributed rate limiting for production (Redis-based)
 export class DistributedRateLimiter {
-  private redis: unknown; // Redis client - replace with proper Redis type
+  private redis: RedisClient;
   private config: RateLimitConfig;
 
-  constructor(redisClient: unknown, config: RateLimitConfig) {
+  constructor(redisClient: RedisClient, config: RateLimitConfig) {
     this.redis = redisClient;
     this.config = config;
   }

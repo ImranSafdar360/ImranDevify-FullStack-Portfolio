@@ -86,6 +86,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import Image from "next/image";
 
 type Item = {
   id: string;
@@ -146,8 +147,8 @@ const getColumns = ({ data, setData }: GetColumnsProps): ColumnDef<Item>[] => [
     accessorKey: "name",
     cell: ({ row }) => (
       <div className="flex items-center gap-3">
-        <img
-          className="rounded-full"
+        <Image
+          className="rounded-full object-cover" 
           src={row.original.image}
           width={32}
           height={32}
@@ -230,7 +231,7 @@ const getColumns = ({ data, setData }: GetColumnsProps): ColumnDef<Item>[] => [
     accessorKey: "referral",
     cell: ({ row }) => (
       <div className="flex items-center gap-3">
-        <img
+        <Image
           className="rounded-full"
           src={row.original.referral.image}
           width={20}

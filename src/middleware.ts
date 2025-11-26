@@ -105,7 +105,7 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized: ({ token, req }) => {
+      authorized: () => {
         // We are not using server redirect to login anymore.
         // Allow access; client will gate admin and show dialog if needed.
         return true;

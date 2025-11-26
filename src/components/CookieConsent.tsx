@@ -87,7 +87,7 @@ export default function CookieConsent() {
                     <div>
                       <p className="text-muted-foreground mb-4">
                         We use cookies to enhance your browsing experience, serve personalized content, 
-                        and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
+                        and analyze our traffic. By clicking &quot;Accept All&quot;, you consent to our use of cookies.
                       </p>
                       
                       <div className="flex flex-wrap gap-3">

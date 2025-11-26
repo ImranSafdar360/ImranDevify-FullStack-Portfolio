@@ -4,7 +4,6 @@ import styled from "styled-components";
 const AnimatedButton = ({
   children,
   onClick,
-  className,
 }: {
   children: React.ReactNode;
   onClick: () => void;

@@ -14,23 +14,23 @@ const LiquidGlass = dynamic(() => import("liquid-glass-react"), {
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const values = [
-    {
-      icon: "🛠️",
-      title: "Clean Architecture",
-      description: "systems built to grow, not break",
-    },
-    {
-      icon: "⚡",
-      title: "Serious Performance",
-      description: "fast, stable, optimized experiences",
-    },
-    {
-      icon: "🎯",
-      title: "Technical Precision",
-      description: "engineered for long-term success",
-    },
-  ];
+  // const values = [
+  //   {
+  //     icon: "🛠️",
+  //     title: "Clean Architecture",
+  //     description: "systems built to grow, not break",
+  //   },
+  //   {
+  //     icon: "⚡",
+  //     title: "Serious Performance",
+  //     description: "fast, stable, optimized experiences",
+  //   },
+  //   {
+  //     icon: "🎯",
+  //     title: "Technical Precision",
+  //     description: "engineered for long-term success",
+  //   },
+  // ];
 
   // Social Media Icons with brand colors
   const WhatsAppIcon = () => (

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useId } from "react";
+import React, { useState, useId, Suspense } from "react";
 import { signIn, getSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 
-export default function LoginPage() {
+function LoginForm() {
   const id = useId();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -47,7 +47,7 @@ export default function LoginPage() {
         }
       }
     } catch (err) {
-      setError("An error occurred during login");
+      setError("An error occurred during login: " + err);
     } finally {
       setIsSubmitting(false);
     }
@@ -149,6 +149,40 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-background flex items-center justify-center px-4">
+        <div className="w-full max-w-md space-y-8">
+          <div className="flex flex-col items-center gap-2">
+            <div
+              className="flex size-11 shrink-0 items-center justify-center rounded-full border"
+              aria-hidden="true"
+            >
+              <svg
+                className="stroke-zinc-800 dark:stroke-zinc-100"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 32 32"
+                aria-hidden="true"
+              >
+                <circle cx="16" cy="16" r="12" fill="none" strokeWidth="8" />
+              </svg>
+            </div>
+            <h1 className="text-2xl font-bold text-center">Welcome back</h1>
+            <p className="text-muted-foreground text-center">
+              Loading...
+            </p>
+          </div>
+        </div>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }
 

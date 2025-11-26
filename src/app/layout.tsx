@@ -2,9 +2,6 @@ import { Inter, Plus_Jakarta_Sans, Boldonse } from "next/font/google";
 import Providers from "@/components/Providers";
 
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import ShowOnNonAdmin from "@/components/ShowOnNonAdmin";
 
 const fontSans = Inter({
   subsets: ["latin"],

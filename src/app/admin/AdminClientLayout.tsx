@@ -26,9 +26,7 @@ import {
   RiMailLine,
   RiHomeLine,
   RiLogoutBoxLine,
-  RiScanLine,
 } from "@remixicon/react";
-import UserDropdown from "@/components/user-dropdown";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { BreadcrumbList } from "@/components/ui/breadcrumb";
 import { BreadcrumbItem } from "@/components/ui/breadcrumb";
@@ -36,7 +34,6 @@ import { BreadcrumbLink } from "@/components/ui/breadcrumb";
 import { BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
-import FeedbackDialog from "@/components/feedback-dialog";
 import { useEffect } from "react";
 import React from "react";
 
