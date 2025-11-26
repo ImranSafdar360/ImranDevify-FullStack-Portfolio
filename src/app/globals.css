@@ -3,7 +3,7 @@
 
 .dark {
   /* Minimal dark theme overrides */
-  --color-background: #000000;
+  --color-background: #06090D;
   --color-text: #ffffff;
   --color-subtext: #C9C9C9;
 }
@@ -11,13 +11,13 @@
 .light {
   /* Minimal light theme overrides */
   --color-background: #ffffff;
-  --color-text: #000000;
+  --color-text: #06090D;
   --color-subtext: #C9C9C9;
 }
 
 :root {
   /* Minimal light theme variables */
-  --color-background: #000000;
+  --color-background: #06090D;
   --color-text: #ffffff;
   --color-subtext: #C9C9C9;
 }

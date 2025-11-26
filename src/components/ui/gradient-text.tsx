@@ -14,7 +14,7 @@ const GradientText = ({
   className,
   fromColor = '#00C7FE',
   toColor = '#0080FF',
-  direction = 'to-r'
+  direction = 'to-br'
 }: GradientTextProps) => {
   const directionMap = {
     'to-r': 'to right',
@@ -27,13 +27,14 @@ const GradientText = ({
     'to-tl': 'to top left',
   };
 
-  const gradientDirection = directionMap[direction] || 'to right';
+  const gradientDirection = directionMap[direction] || 'to bottom right';
 
   return (
     <span
       className={cn('bg-clip-text text-transparent inline-block', className)}
       style={{
-        backgroundImage: `linear-gradient(${gradientDirection}, ${fromColor}, ${toColor})`,
+        background: fromColor,
+        backgroundImage: `linear-gradient(${gradientDirection}, ${fromColor} 5%, ${toColor} 100%)`,
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
         backgroundClip: 'text',

@@ -76,7 +76,7 @@ const Noise: React.FC<NoiseProps> = ({
       className="pointer-events-none absolute top-0 left-0 h-screen w-screen"
       ref={grainRef}
       style={{
-        imageRendering: 'pixelated'
+        imageRendering: 'crisp-edges'
       }}
     />
   );
