@@ -72,23 +72,23 @@ export default function Hero() {
       {/* Gradient Circles with Blur Effect */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Top Left Circle */}
-        <div 
+        <div
           className="absolute top-0 left-0 w-[350px] h-[350px] rounded-full opacity-20 blur-[120px]"
           style={{
-            background: 'linear-gradient(135deg, #00C7FE 0%, #0080FF 100%)',
-            transform: 'translate(-20%, -20%)',
+            background: "linear-gradient(135deg, #00C7FE 0%, #0080FF 100%)",
+            transform: "translate(-20%, -20%)",
           }}
         />
         {/* Bottom Right Circle */}
-        <div 
+        <div
           className="absolute bottom-0 right-0 w-[350px] h-[350px] rounded-full opacity-20 blur-[120px]"
           style={{
-            background: 'linear-gradient(135deg, #0080FF 0%, #00C7FE 100%)',
-            transform: 'translate(20%, 20%)',
+            background: "linear-gradient(135deg, #0080FF 0%, #00C7FE 100%)",
+            transform: "translate(20%, 20%)",
           }}
         />
       </div>
-      
+
       <div
         ref={containerRef}
         className="relative w-full h-full flex flex-col justify-center items-center gap-[32px] mx-auto px-6 py-32 md:py-40 z-10"
@@ -101,7 +101,7 @@ export default function Hero() {
             style={{ position: "absolute", top: "50%", left: "50%" }}
           >
             <p className="text-white text-[15px] font-medium">
-              ★ 4.9/5.0 No basic sites. Made to feel premium
+              Premium Product Engineering No Templates. No Shortcuts.{" "}
             </p>
           </LiquidGlass>
         </div>
@@ -109,10 +109,10 @@ export default function Hero() {
         {/* Gradient Title */}
         <h1
           className="text-4xl md:text-[64px] tracking-tight leading-[94px] mt-6 text-center"
-          style={{ 
+          style={{
             fontFamily: "var(--font-boldonse)",
             fontWeight: 400,
-            fontStyle: "normal"
+            fontStyle: "normal",
           }}
         >
           <GradientText>Build Products</GradientText> That Perform, Scale, and
@@ -136,8 +136,12 @@ export default function Hero() {
       </div>
       <div className="w-full flex justify-between items-center">
         <h6 className="text-gray-300 text-[16px] font-medium max-w-[350px]">
-          Focused on clean architecture, performance engineering, and
-          user-centric design.
+          <span className="text-white">• &nbsp;</span> Focused on clean
+          architecture
+          <br />
+          <span className="text-white">• &nbsp;</span> Performance engineering
+          <br />
+          <span className="text-white">• &nbsp;</span> User-centric design
         </h6>
         <CircularText
           text="TELL*ME*ABOUT*YOUR*PROJECT*"

@@ -47,3 +47,19 @@ body {
 * {
   font-family: inherit;
 }
+
+/* Hide scrollbar for featured work section */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Override ScrollStack padding for full-width case study cards */
+.case-studies-stack .scroll-stack-inner {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
