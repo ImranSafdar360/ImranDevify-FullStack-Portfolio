@@ -63,3 +63,29 @@ body {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+
+/* Swiper Custom Styles for Case Studies */
+.case-studies-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.case-studies-swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.case-studies-swiper .swiper-slide-active {
+  z-index: 10;
+}
+
+/* Hide default Swiper navigation and pagination */
+.case-studies-swiper .swiper-button-next,
+.case-studies-swiper .swiper-button-prev {
+  display: none;
+}
+
+.case-studies-swiper .swiper-pagination {
+  display: none;
+}

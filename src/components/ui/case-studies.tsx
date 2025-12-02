@@ -1,10 +1,18 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Section from "../common/Section";
 import GradientText from "./gradient-text";
 import { ArrowRight } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 interface CaseStudy {
   id: string;
@@ -29,7 +37,7 @@ const caseStudies: CaseStudy[] = [
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&fit=crop",
     techStack: ["React", "Node.js", "PostgreSQL", "Redis", "TypeScript"],
-    category: "SaaS",
+    category: "SaaS / Analytics",
     results: ["40% faster load times", "99.9% uptime", "10M+ events/day"],
   },
   {
@@ -42,7 +50,7 @@ const caseStudies: CaseStudy[] = [
     image:
       "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80&fit=crop",
     techStack: ["React Native", "Firebase", "Stripe", "Redux"],
-    category: "Mobile",
+    category: "Mobile / E-Commerce",
     results: ["4.8★ rating", "50K+ downloads", "30% conversion"],
   },
   {
@@ -55,30 +63,35 @@ const caseStudies: CaseStudy[] = [
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&fit=crop",
     techStack: ["Next.js", "Python", "MongoDB", "D3.js", "GraphQL"],
-    category: "Enterprise",
+    category: "Enterprise / Dashboard",
     results: ["80% time saved", "500+ users", "Real-time sync"],
   },
   {
     id: "4",
-    title: "FinTech Payment Gateway",
+    title: "AI Chat Platform",
     description:
-      "Secure, scalable payment processing system with fraud detection and compliance features.",
+      "Advanced AI-powered chat platform with neural network integration and real-time communication.",
     longDescription:
-      "A robust payment gateway solution built for financial institutions, featuring advanced security, PCI compliance, and support for multiple payment methods.",
+      "A cutting-edge AI chat platform featuring neural network integration, real-time messaging, and intelligent conversation capabilities.",
     image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80&fit=crop",
-    techStack: ["Node.js", "PostgreSQL", "Docker", "Kubernetes", "AWS"],
-    category: "FinTech",
-    results: ["99.99% uptime", "PCI compliant", "1M+ transactions"],
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80&fit=crop",
+    techStack: ["Next.js", "OpenAI", "WebSocket", "PostgreSQL"],
+    category: "AI / LLM",
+    results: ["Real-time AI", "99.9% uptime", "1M+ messages"],
   },
 ];
 
 export default function CaseStudies() {
+  const [swiper, setSwiper] = useState<any>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const currentProject = caseStudies[activeIndex];
+
   return (
     <Section>
       <div className="w-full max-w-[1440px] mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-16">
           <h2
             className="text-4xl md:text-5xl lg:text-6xl mb-6 text-white"
             style={{
@@ -87,132 +100,235 @@ export default function CaseStudies() {
               fontStyle: "normal",
             }}
           >
-            Case Studies & <GradientText>Recent Work</GradientText>
+            Best Project <GradientText>Picks</GradientText>
           </h2>
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Real projects engineered with performance, scalability, and user experience at the core.
+            This collection shows the projects I've created to connect, represent, and inspire confidence.
           </p>
         </div>
 
-        {/* Staggered Grid - 2×2 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {caseStudies.map((study, index) => (
-            <CaseStudyCard key={study.id} study={study} index={index} />
-          ))}
+        {/* Carousel Container */}
+        <div className="relative">
+          {/* Gradient Overlays - Left & Right */}
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 w-[100px] lg:w-[200px] h-[500px] md:h-[600px] lg:h-[700px] bg-gradient-to-r from-[#06090D] to-transparent z-20 pointer-events-none" />
+          <div className="absolute top-1/2 -translate-y-1/2 right-0 w-[100px] lg:w-[200px] h-[500px] md:h-[600px] lg:h-[700px] bg-gradient-to-l from-[#06090D] to-transparent z-20 pointer-events-none" />
+
+          {/* Cards Container with Preview Cards */}
+          <div className="relative flex items-center justify-center gap-4 md:gap-6 mb-8">
+            {/* Left Preview Card */}
+            {(() => {
+              const prevIndex = (activeIndex - 1 + caseStudies.length) % caseStudies.length;
+              const prevProject = caseStudies[prevIndex];
+              return (
+                <div
+                  className="hidden md:block relative w-[20%] h-[400px] md:h-[500px] rounded-[20px] overflow-hidden transition-all duration-500 cursor-pointer z-0"
+                  onClick={() => swiper?.slidePrev()}
+                  style={{
+                    background: "rgba(255, 255, 255, 0.04)",
+                    backdropFilter: "blur(20px) saturate(180%)",
+                    WebkitBackdropFilter: "blur(20px) saturate(180%)",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    transform: "translateX(20%) scale(0.85)",
+                    opacity: 0.4,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.opacity = "0.6";
+                    e.currentTarget.style.transform = "translateX(15%) scale(0.88)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.opacity = "0.4";
+                    e.currentTarget.style.transform = "translateX(20%) scale(0.85)";
+                  }}
+                >
+                  <Image
+                    src={prevProject.image}
+                    alt={prevProject.title}
+                    fill
+                    className="object-cover"
+                    sizes="20vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#06090D]/80" />
+                </div>
+              );
+            })()}
+
+            {/* Swiper Carousel - Main Card */}
+            <div className="w-full md:w-[60%]">
+            <Swiper
+              onSwiper={setSwiper}
+              onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+              modules={[Autoplay, EffectFade, Navigation, Pagination]}
+              effect="fade"
+              fadeEffect={{
+                crossFade: true,
+              }}
+              loop={true}
+              autoplay={{
+                delay: 4000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              speed={800}
+              slidesPerView={1}
+              spaceBetween={0}
+              className="case-studies-swiper"
+            >
+              {caseStudies.map((study, index) => (
+                <SwiperSlide key={study.id}>
+                  <div
+                    className="relative w-full h-[500px] md:h-[600px] lg:h-[700px] rounded-[24px] overflow-hidden group/main transition-all duration-500"
+                    style={{
+                      background: "rgba(255, 255, 255, 0.04)",
+                      backdropFilter: "blur(20px) saturate(180%)",
+                      WebkitBackdropFilter: "blur(20px) saturate(180%)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      boxShadow: "0 20px 60px rgba(0, 0, 0, 0.4)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.boxShadow = "0 25px 70px rgba(0, 199, 254, 0.2)";
+                      e.currentTarget.style.borderColor = "rgba(0, 199, 254, 0.3)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = "0 20px 60px rgba(0, 0, 0, 0.4)";
+                      e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
+                    }}
+                  >
+                    <Image
+                      src={study.image}
+                      alt={study.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 60vw"
+                      priority={index === 0}
+                    />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#06090D]/60" />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            </div>
+
+            {/* Right Preview Card */}
+            {(() => {
+              const nextIndex = (activeIndex + 1) % caseStudies.length;
+              const nextProject = caseStudies[nextIndex];
+              return (
+                <div
+                  className="hidden md:block relative w-[20%] h-[400px] md:h-[500px] rounded-[20px] overflow-hidden transition-all duration-500 cursor-pointer z-0"
+                  onClick={() => swiper?.slideNext()}
+                  style={{
+                    background: "rgba(255, 255, 255, 0.04)",
+                    backdropFilter: "blur(20px) saturate(180%)",
+                    WebkitBackdropFilter: "blur(20px) saturate(180%)",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    transform: "translateX(-20%) scale(0.85)",
+                    opacity: 0.4,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.opacity = "0.6";
+                    e.currentTarget.style.transform = "translateX(-15%) scale(0.88)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.opacity = "0.4";
+                    e.currentTarget.style.transform = "translateX(-20%) scale(0.85)";
+                  }}
+                >
+                  <Image
+                    src={nextProject.image}
+                    alt={nextProject.title}
+                    fill
+                    className="object-cover"
+                    sizes="20vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#06090D]/80" />
+                </div>
+              );
+            })()}
+          </div>
+
+          {/* Bottom Info Bar */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
+            {/* Left Side - Project Info */}
+            <div className="flex items-center gap-4 flex-wrap">
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-2 h-2 rounded-full"
+                  style={{ background: "#00C7FE" }}
+                />
+                <span className="text-white text-lg font-medium">
+                  {currentProject.title}
+                </span>
+              </div>
+              <span
+                className="px-3 py-1 rounded-full text-xs font-medium"
+                style={{
+                  background: "rgba(255, 255, 255, 0.1)",
+                  color: "#ffffff",
+                }}
+              >
+                {currentProject.category}
+              </span>
+            </div>
+
+            {/* Right Side - View Button */}
+            <button
+              className="flex items-center gap-2 text-white font-medium hover:text-[#00C7FE] transition-colors duration-300"
+            >
+              <span>View</span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Navigation Controls */}
+          <div className="flex flex-col items-center gap-4">
+            {/* Previous/Next Buttons */}
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => swiper?.slidePrev()}
+                className="px-6 py-3 rounded-lg text-white font-medium transition-all duration-300 hover:bg-white/10"
+                style={{
+                  background: "rgba(255, 255, 255, 0.05)",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                }}
+              >
+                Previous
+              </button>
+              <button
+                onClick={() => swiper?.slideNext()}
+                className="px-6 py-3 rounded-lg text-white font-medium transition-all duration-300 hover:bg-white/10"
+                style={{
+                  background: "rgba(255, 255, 255, 0.05)",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                }}
+              >
+                Next
+              </button>
+            </div>
+
+            {/* Pagination Dots */}
+            <div className="flex items-center gap-2">
+              {caseStudies.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => swiper?.slideToLoop(index)}
+                  className="transition-all duration-300"
+                  aria-label={`Go to project ${index + 1}`}
+                >
+                  <div
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === activeIndex
+                        ? "w-8 bg-[#00C7FE]"
+                        : "bg-gray-600 hover:bg-gray-500"
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </Section>
   );
 }
 
-interface CaseStudyCardProps {
-  study: CaseStudy;
-  index: number;
-}
-
-function CaseStudyCard({ study, index }: CaseStudyCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -100px 0px",
-      }
-    );
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
-    return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
-    };
-  }, []);
-
-  // Stagger delay: 0ms, 100ms, 200ms, 300ms
-  const staggerDelay = index * 100;
-
-  return (
-    <div
-      ref={cardRef}
-      className="group relative w-full rounded-[20px] overflow-hidden"
-      style={{
-        background: "rgba(255, 255, 255, 0.04)",
-        backdropFilter: "blur(20px) saturate(180%)",
-        WebkitBackdropFilter: "blur(20px) saturate(180%)",
-        border: "1px solid rgba(255, 255, 255, 0.1)",
-        boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.2)",
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(40px)",
-        transition: `opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${staggerDelay}ms, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${staggerDelay}ms`,
-      }}
-    >
-      {/* Image Container */}
-      <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden">
-        <Image
-          src={study.image}
-          alt={study.title}
-          fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
-        
-        {/* Gradient Overlay - Only on Hover */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#06090D]/0 via-[#06090D]/0 to-[#06090D]/0 group-hover:from-[#06090D]/40 group-hover:via-[#06090D]/30 group-hover:to-[#06090D]/60 transition-all duration-500" />
-      </div>
-
-      {/* Content Section */}
-      <div className="p-6 md:p-8">
-        {/* Title */}
-        <h3
-          className="text-2xl md:text-3xl mb-4 text-white group-hover:text-[#00C7FE] transition-colors duration-300"
-          style={{
-            fontFamily: "var(--font-boldonse)",
-            fontWeight: 400,
-            fontStyle: "normal",
-          }}
-        >
-          {study.title}
-        </h3>
-
-        {/* Value Outcome - 1-2 lines */}
-        <p className="text-gray-300 text-base md:text-lg mb-6 leading-relaxed line-clamp-2">
-          {study.description}
-        </p>
-
-        {/* CTA Button */}
-        <button
-          className="flex items-center gap-2 text-white font-medium group/btn transition-all duration-300"
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = "#00C7FE";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = "#ffffff";
-          }}
-        >
-          <span className="text-base md:text-lg">View Case Study</span>
-          <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover/btn:translate-x-2" />
-        </button>
-      </div>
-
-      {/* Hover Shadow Effect */}
-      <div
-        className="absolute inset-0 rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{
-          boxShadow: "0 20px 60px rgba(0, 199, 254, 0.15)",
-        }}
-      />
-    </div>
-  );
-}
