@@ -31,7 +31,7 @@ const GradientText = ({
 
   return (
     <span
-      className={cn('bg-clip-text text-transparent inline-block', className)}
+      className={cn('bg-clip-text text-transparent inline-block leading-normal', className)}
       style={{
         background: fromColor,
         backgroundImage: `linear-gradient(${gradientDirection}, ${fromColor} 5%, ${toColor} 100%)`,

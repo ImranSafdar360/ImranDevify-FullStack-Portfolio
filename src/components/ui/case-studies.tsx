@@ -13,6 +13,7 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import AnimatedButton from "../Button";
 
 interface CaseStudy {
   id: string;
@@ -88,7 +89,7 @@ export default function CaseStudies() {
   const currentProject = caseStudies[activeIndex];
 
   return (
-    <Section>
+    <div className="w-full">
       <div className="w-full max-w-[1440px] mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -106,229 +107,147 @@ export default function CaseStudies() {
             This collection shows the projects I've created to connect, represent, and inspire confidence.
           </p>
         </div>
+      </div>
 
-        {/* Carousel Container */}
-        <div className="relative">
-          {/* Gradient Overlays - Left & Right */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-0 w-[100px] lg:w-[200px] h-[500px] md:h-[600px] lg:h-[700px] bg-gradient-to-r from-[#06090D] to-transparent z-20 pointer-events-none" />
-          <div className="absolute top-1/2 -translate-y-1/2 right-0 w-[100px] lg:w-[200px] h-[500px] md:h-[600px] lg:h-[700px] bg-gradient-to-l from-[#06090D] to-transparent z-20 pointer-events-none" />
-
-          {/* Cards Container with Preview Cards */}
-          <div className="relative flex items-center justify-center gap-4 md:gap-6 mb-8">
-            {/* Left Preview Card */}
-            {(() => {
-              const prevIndex = (activeIndex - 1 + caseStudies.length) % caseStudies.length;
-              const prevProject = caseStudies[prevIndex];
-              return (
+      {/* Carousel Container - Full Width */}
+      <div className="relative w-full mb-8">
+      <div className="absolute top-1/2 -translate-y-1/2 left-0 w-[80px] lg:w-[150px] h-full bg-gradient-to-r from-[#06090D] to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute top-1/2 -translate-y-1/2  right-0 w-[80px] lg:w-[150px] h-full bg-gradient-to-l from-[#06090D] to-transparent z-10 pointer-events-none"></div>
+          {/* Swiper Carousel - Full Width */}
+          <Swiper
+            onSwiper={setSwiper}
+            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+            modules={[Autoplay, EffectFade, Navigation, Pagination]}
+            effect="fade"
+            fadeEffect={{
+              crossFade: true,
+            }}
+            loop={true}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            speed={800}
+            slidesPerView={1}
+            spaceBetween={0}
+            className="case-studies-swiper"
+          >
+            {caseStudies.map((study, index) => (
+              <SwiperSlide key={study.id}>
                 <div
-                  className="hidden md:block relative w-[20%] h-[400px] md:h-[500px] rounded-[20px] overflow-hidden transition-all duration-500 cursor-pointer z-0"
-                  onClick={() => swiper?.slidePrev()}
+                  className="relative w-full h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden group/main transition-all duration-500"
                   style={{
                     background: "rgba(255, 255, 255, 0.04)",
                     backdropFilter: "blur(20px) saturate(180%)",
                     WebkitBackdropFilter: "blur(20px) saturate(180%)",
                     border: "1px solid rgba(255, 255, 255, 0.1)",
-                    transform: "translateX(20%) scale(0.85)",
-                    opacity: 0.4,
+                    boxShadow: "0 20px 60px rgba(0, 0, 0, 0.4)",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity = "0.6";
-                    e.currentTarget.style.transform = "translateX(15%) scale(0.88)";
+                    e.currentTarget.style.boxShadow = "0 25px 70px rgba(0, 199, 254, 0.2)";
+                    e.currentTarget.style.borderColor = "rgba(0, 199, 254, 0.3)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = "0.4";
-                    e.currentTarget.style.transform = "translateX(20%) scale(0.85)";
+                    e.currentTarget.style.boxShadow = "0 20px 60px rgba(0, 0, 0, 0.4)";
+                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
                   }}
                 >
                   <Image
-                    src={prevProject.image}
-                    alt={prevProject.title}
+                    src={study.image}
+                    alt={study.title}
                     fill
                     className="object-cover"
-                    sizes="20vw"
+                    sizes="100vw"
+                    priority={index === 0}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#06090D]/80" />
+                  {/* Gradient Overlay */}
+                  {/* <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#262626]/60" /> */}
                 </div>
-              );
-            })()}
+              </SwiperSlide>
+            ))}
+          </Swiper>
+      </div>
 
-            {/* Swiper Carousel - Main Card */}
-            <div className="w-full md:w-[60%]">
-            <Swiper
-              onSwiper={setSwiper}
-              onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-              modules={[Autoplay, EffectFade, Navigation, Pagination]}
-              effect="fade"
-              fadeEffect={{
-                crossFade: true,
-              }}
-              loop={true}
-              autoplay={{
-                delay: 4000,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true,
-              }}
-              speed={800}
-              slidesPerView={1}
-              spaceBetween={0}
-              className="case-studies-swiper"
-            >
-              {caseStudies.map((study, index) => (
-                <SwiperSlide key={study.id}>
-                  <div
-                    className="relative w-full h-[500px] md:h-[600px] lg:h-[700px] rounded-[24px] overflow-hidden group/main transition-all duration-500"
-                    style={{
-                      background: "rgba(255, 255, 255, 0.04)",
-                      backdropFilter: "blur(20px) saturate(180%)",
-                      WebkitBackdropFilter: "blur(20px) saturate(180%)",
-                      border: "1px solid rgba(255, 255, 255, 0.1)",
-                      boxShadow: "0 20px 60px rgba(0, 0, 0, 0.4)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = "0 25px 70px rgba(0, 199, 254, 0.2)";
-                      e.currentTarget.style.borderColor = "rgba(0, 199, 254, 0.3)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = "0 20px 60px rgba(0, 0, 0, 0.4)";
-                      e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
-                    }}
-                  >
-                    <Image
-                      src={study.image}
-                      alt={study.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 60vw"
-                      priority={index === 0}
-                    />
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#06090D]/60" />
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            </div>
-
-            {/* Right Preview Card */}
-            {(() => {
-              const nextIndex = (activeIndex + 1) % caseStudies.length;
-              const nextProject = caseStudies[nextIndex];
-              return (
-                <div
-                  className="hidden md:block relative w-[20%] h-[400px] md:h-[500px] rounded-[20px] overflow-hidden transition-all duration-500 cursor-pointer z-0"
-                  onClick={() => swiper?.slideNext()}
-                  style={{
-                    background: "rgba(255, 255, 255, 0.04)",
-                    backdropFilter: "blur(20px) saturate(180%)",
-                    WebkitBackdropFilter: "blur(20px) saturate(180%)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                    transform: "translateX(-20%) scale(0.85)",
-                    opacity: 0.4,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity = "0.6";
-                    e.currentTarget.style.transform = "translateX(-15%) scale(0.88)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = "0.4";
-                    e.currentTarget.style.transform = "translateX(-20%) scale(0.85)";
-                  }}
-                >
-                  <Image
-                    src={nextProject.image}
-                    alt={nextProject.title}
-                    fill
-                    className="object-cover"
-                    sizes="20vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#06090D]/80" />
-                </div>
-              );
-            })()}
-          </div>
-
-          {/* Bottom Info Bar */}
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
-            {/* Left Side - Project Info */}
-            <div className="flex items-center gap-4 flex-wrap">
-              <div className="flex items-center gap-3">
-                <div
-                  className="w-2 h-2 rounded-full"
-                  style={{ background: "#00C7FE" }}
-                />
-                <span className="text-white text-lg font-medium">
-                  {currentProject.title}
-                </span>
-              </div>
-              <span
-                className="px-3 py-1 rounded-full text-xs font-medium"
-                style={{
-                  background: "rgba(255, 255, 255, 0.1)",
-                  color: "#ffffff",
-                }}
-              >
-                {currentProject.category}
+      <div className="w-full max-w-[1440px] mx-auto px-6">
+        {/* Bottom Info Bar */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
+          {/* Left Side - Project Info */}
+          <div className="flex items-center gap-4 flex-wrap">
+            <div className="flex items-center gap-3">
+              <div
+                className="w-2 h-2 rounded-full"
+                style={{ background: "#00C7FE" }}
+              />
+              <span className="text-white text-lg font-medium">
+                {currentProject.title}
               </span>
             </div>
-
-            {/* Right Side - View Button */}
-            <button
-              className="flex items-center gap-2 text-white font-medium hover:text-[#00C7FE] transition-colors duration-300"
+            <span
+              className="px-3 py-1 rounded-full text-xs font-medium"
+              style={{
+                background: "rgba(255, 255, 255, 0.1)",
+                color: "#ffffff",
+              }}
             >
-              <span>View</span>
-              <ArrowRight className="w-5 h-5" />
+              {currentProject.category}
+            </span>
+          </div>
+
+          {/* Right Side - View Button */}
+          <AnimatedButton onClick={() => {}}>
+            View
+          </AnimatedButton>
+        </div>
+
+        {/* Navigation Controls */}
+        <div className="flex flex-col items-center gap-4">
+          {/* Previous/Next Buttons */}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => swiper?.slidePrev()}
+              className="px-6 py-3 rounded-lg text-white font-medium transition-all duration-300 hover:bg-white/10"
+              style={{
+                background: "rgba(255, 255, 255, 0.05)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+              }}
+            >
+              Previous
+            </button>
+            <button
+              onClick={() => swiper?.slideNext()}
+              className="px-6 py-3 rounded-lg text-white font-medium transition-all duration-300 hover:bg-white/10"
+              style={{
+                background: "rgba(255, 255, 255, 0.05)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+              }}
+            >
+              Next
             </button>
           </div>
 
-          {/* Navigation Controls */}
-          <div className="flex flex-col items-center gap-4">
-            {/* Previous/Next Buttons */}
-            <div className="flex items-center gap-4">
+          {/* Pagination Dots */}
+          <div className="flex items-center gap-2">
+            {caseStudies.map((_, index) => (
               <button
-                onClick={() => swiper?.slidePrev()}
-                className="px-6 py-3 rounded-lg text-white font-medium transition-all duration-300 hover:bg-white/10"
-                style={{
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                }}
+                key={index}
+                onClick={() => swiper?.slideToLoop(index)}
+                className="transition-all duration-300"
+                aria-label={`Go to project ${index + 1}`}
               >
-                Previous
+                <div
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    index === activeIndex
+                      ? "w-8 bg-[#00C7FE]"
+                      : "bg-gray-600 hover:bg-gray-500"
+                  }`}
+                />
               </button>
-              <button
-                onClick={() => swiper?.slideNext()}
-                className="px-6 py-3 rounded-lg text-white font-medium transition-all duration-300 hover:bg-white/10"
-                style={{
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                }}
-              >
-                Next
-              </button>
-            </div>
-
-            {/* Pagination Dots */}
-            <div className="flex items-center gap-2">
-              {caseStudies.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => swiper?.slideToLoop(index)}
-                  className="transition-all duration-300"
-                  aria-label={`Go to project ${index + 1}`}
-                >
-                  <div
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === activeIndex
-                        ? "w-8 bg-[#00C7FE]"
-                        : "bg-gray-600 hover:bg-gray-500"
-                    }`}
-                  />
-                </button>
-              ))}
-            </div>
+            ))}
           </div>
         </div>
       </div>
-    </Section>
+    </div>
   );
 }
 
