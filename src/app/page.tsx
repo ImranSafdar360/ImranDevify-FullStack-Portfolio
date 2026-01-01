@@ -10,6 +10,7 @@ import WhoIWorkWith from "@/components/ui/why-choose-me";
 import WhyChooseMeSection from "@/components/ui/why-choose-me-section";
 import WorkProcess from "@/components/ui/work-process";
 import TestimonialsSection from "@/components/ui/testimonials-section";
+import CTASection from "@/components/ui/cta-section";
 import React from "react";
 
 const HomePage = () => {
@@ -24,6 +25,7 @@ const HomePage = () => {
       <WhyChooseMeSection />
       <WorkProcess />
       <TestimonialsSection />
+      <CTASection />
     </Container>
   );
 };

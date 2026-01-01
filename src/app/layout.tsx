@@ -2,6 +2,9 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Providers from "@/components/Providers";
 
 import "./globals.css";
+import ShowOnNonAdmin from "@/components/ShowOnNonAdmin";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -27,17 +30,17 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${fontSans.variable} ${fontJakarta.variable} antialiased dark`}>
         <Providers>
-          {/* <header>
+          <header>
             <ShowOnNonAdmin>
               <Navbar />
             </ShowOnNonAdmin>
-          </header> */}
+          </header>
           {children}
-          {/* <footer className="mt-[100px] mx-[30px]">
+          <footer className="mt-[100px] mx-[30px]">
             <ShowOnNonAdmin>
               <Footer />
             </ShowOnNonAdmin>
-          </footer> */}
+          </footer>
         </Providers>
       </body>
     </html>

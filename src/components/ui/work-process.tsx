@@ -158,8 +158,7 @@ export default function WorkProcess() {
         </div>
 
         {/* Process Steps with Timeline */}
-        <div className="relative">
-          {/* Vertical Timeline Line */}
+        {/* <div className="relative">
           <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 hidden md:block">
             <div
               className="w-full h-full"
@@ -167,7 +166,6 @@ export default function WorkProcess() {
             />
           </div>
 
-          {/* Process Steps */}
           <div className="space-y-24 md:space-y-32">
             {processSteps.map((step, index) => (
               <div
@@ -181,7 +179,6 @@ export default function WorkProcess() {
                     : "opacity-0 translate-y-8"
                 } transition-all duration-700`}
               >
-                {/* Timeline Dot */}
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block z-10">
                   <div
                     className="w-4 h-4 rounded-full"
@@ -189,7 +186,6 @@ export default function WorkProcess() {
                   />
                 </div>
 
-                {/* Left Column - Visual or Content */}
                 <div
                   className={
                     step.visualPosition === "left"
@@ -236,7 +232,6 @@ export default function WorkProcess() {
                   )}
                 </div>
 
-                {/* Right Column - Content or Visual */}
                 <div
                   className={
                     step.visualPosition === "left"
@@ -285,7 +280,9 @@ export default function WorkProcess() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
+
+        
 
         {/* Optional Micro CTA */}
         <div className="text-center mt-16 md:mt-20">

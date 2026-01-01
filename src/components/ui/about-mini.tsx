@@ -2,242 +2,247 @@
 
 import React from "react";
 import Image from "next/image";
-import GradientText from "./gradient-text";
-import AnimatedButton from "../Button";
+import Link from "next/link";
+import { motion } from "framer-motion";
 import {
-  Heart,
-  Zap,
   Code,
   Database,
-  Sparkles,
-  CheckCircle2,
+  Smartphone,
+  Server,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  Globe,
+  Zap,
+  Layout,
+  Cpu
 } from "lucide-react";
+import AnimatedButton from "../Button";
+import Section from "../common/Section";
+
+const BentoCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className={`relative overflow-hidden rounded-[24px] border border-white/10 bg-white/5 backdrop-blur-xl p-6 shadow-xl ${className}`}
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-500 hover:opacity-100" />
+      {children}
+    </motion.div>
+  );
+};
+
+const TechItem = ({ icon: Icon, label }: { icon: any; label: string }) => (
+  <div className="flex flex-col items-center justify-center gap-2 p-3 rounded-xl bg-white/5 border border-white/5 transition-colors hover:bg-white/10 hover:border-white/10">
+    <Icon size={24} className="text-[#8B5CF6]" />
+    <span className="text-xs font-medium text-gray-300">{label}</span>
+  </div>
+);
 
 export default function AboutMini() {
-  // Portrait image - using placeholder, replace with your actual image
   const portraitImage = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&fit=crop";
 
   return (
-    <div className="relative w-full py-20 px-6">
-      <div className="w-full max-w-[1440px] mx-auto">
-        {/* Bento Grid Container */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left Column - Main About Card */}
-          <div className="lg:col-span-2">
-            <div
-              className="relative w-full h-full min-h-[600px] rounded-[24px] overflow-hidden group"
-              style={{
-                background: "rgba(255, 255, 255, 0.04)",
-                backdropFilter: "blur(20px) saturate(180%)",
-                WebkitBackdropFilter: "blur(20px) saturate(180%)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.3)",
-                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-              }}
-            >
-              {/* Portrait Image - Top 2/3 */}
-              <div className="relative w-full h-[60%] overflow-hidden">
-                <Image
+    <Section>
+      <div className="mx-auto">
+        {/* Section Header */}
+        <div className="mb-12 text-center md:text-left bg-[#06090D]">
+           <h2 className="text-sm font-semibold tracking-wider text-[#8B5CF6] uppercase mb-3">About Me</h2>
+           <h3 
+             className="text-3xl md:text-5xl text-white max-w-2xl text-center"
+             style={{ fontFamily: 'var(--font-boldonse)' }}
+           >
+             Building Digital Products with Modern Technologies
+           </h3>
+        </div>
+
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[minmax(180px,auto)]">
+          
+          {/* Card 1: Hero - Span 2x2 */}
+          <BentoCard className="lg:col-span-2 lg:row-span-2 min-h-[400px] flex flex-col justify-end group">
+            <div className="absolute inset-0">
+               <Image
                   src={portraitImage}
                   alt="Imran Safdar"
                   fill
                   className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   priority
-                />
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#06090D]/80" />
-              </div>
-
-              {/* Quote Overlay */}
-              <div
-                className="absolute bottom-[45%] left-6 max-w-[280px] rounded-[16px] p-4 z-10"
-                style={{
-                  background: "rgba(255, 255, 255, 0.15)",
-                  backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255, 255, 255, 0.2)",
-                }}
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-[#06090D] via-[#06090D]/50 to-transparent" />
+            </div>
+            
+            <div className="relative z-10 p-2">
+              <div 
+                className="inline-block px-3 py-1 mb-4 rounded-full border border-white/20 bg-black/30 backdrop-blur-md"
               >
-                <div className="flex items-start gap-3">
-                  <span className="text-3xl text-white font-serif leading-none">"</span>
-                  <p className="text-white text-sm leading-relaxed">
-                    I don't just write code. I build relationships and reliable systems.
-                  </p>
-                </div>
+                 <span className="text-xs font-medium text-white">Available for work</span>
               </div>
+              <h4 
+                className="text-4xl text-white mb-2"
+                style={{ fontFamily: 'var(--font-boldonse)' }}
+              >
+                Imran Safdar
+              </h4>
+              <p className="text-[#8B5CF6] font-medium text-lg mb-4">
+                MERN Stack & React Native Developer
+              </p>
+              <p className="text-gray-300 text-sm md:text-base leading-relaxed max-w-lg mb-6">
+                I transform complex problems into elegant solutions. Specializing in building scalable web applications and cross-platform mobile experiences that users love.
+              </p>
+              <AnimatedButton onClick={() => {}}>
+                Download Resume
+              </AnimatedButton>
+            </div>
+          </BentoCard>
 
-              {/* Content Section - Bottom 1/3 */}
-              <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-[#06090D] to-transparent">
-                <h3
-                  className="text-3xl md:text-4xl mb-2 text-white"
-                  style={{
-                    fontFamily: "var(--font-boldonse)",
-                    fontWeight: 400,
-                    fontStyle: "normal",
-                  }}
-                >
-                  Imran Safdar
-                </h3>
-                <p className="text-lg mb-6" style={{ color: "#8B5CF6" }}>
-                  Full Stack Engineer & Founder
+          {/* Card 2: MERN Stack Arsenal */}
+          <BentoCard className="lg:col-span-1 lg:row-span-1">
+             <div className="h-full flex flex-col">
+                <div className="flex items-center gap-3 mb-4">
+                   <div className="p-2 rounded-lg bg-[#8B5CF6]/20">
+                      <Database className="text-[#8B5CF6]" size={20} />
+                   </div>
+                   <h5 className="text-lg font-semibold text-white">MERN Arsenal</h5>
+                </div>
+                <div className="grid grid-cols-2 gap-3 flex-1 content-start">
+                   <TechItem icon={Database} label="MongoDB" />
+                   <TechItem icon={Server} label="Express" />
+                   <TechItem icon={Code} label="React" />
+                   <TechItem icon={Cpu} label="Node.js" />
+                </div>
+             </div>
+          </BentoCard>
+
+          {/* Card 3: Mobile Specialist */}
+          <BentoCard className="lg:col-span-1 lg:row-span-1 bg-gradient-to-br from-indigo-900/20 to-purple-900/20">
+             <div className="h-full flex flex-col">
+                <div className="flex items-center gap-3 mb-4">
+                   <div className="p-2 rounded-lg bg-blue-500/20">
+                      <Smartphone className="text-blue-400" size={20} />
+                   </div>
+                   <h5 className="text-lg font-semibold text-white">Mobile Dev</h5>
+                </div>
+                <p className="text-gray-300 text-sm mb-4 flex-1">
+                  Crafting native-like experiences with <strong>React Native</strong> & <strong>Expo</strong>. One codebase, everywhere.
                 </p>
-                <p className="text-gray-300 text-base leading-relaxed mb-6 max-w-2xl">
-                  I'm a full-stack product engineer building fast, scalable, and user-focused digital experiences for SaaS founders, agencies, and startups.
-                </p>
-                <div className="flex items-center gap-2 mb-6">
-                  <AnimatedButton onClick={() => {}}>
-                    Learn more about my story
-                  </AnimatedButton>
+                <div className="flex gap-2 mt-auto">
+                   <span className="px-3 py-1 rounded-md bg-white/5 text-xs text-blue-300 border border-blue-500/20">iOS</span>
+                   <span className="px-3 py-1 rounded-md bg-white/5 text-xs text-green-300 border border-green-500/20">Android</span>
                 </div>
-              </div>
-            </div>
-          </div>
+             </div>
+          </BentoCard>
 
-          {/* Right Column - Three Smaller Cards */}
-          <div className="flex flex-col gap-6">
-            {/* Philosophy Card */}
-            <div
-              className="relative rounded-[24px] overflow-hidden group cursor-pointer"
-              style={{
-                background: "rgba(255, 255, 255, 0.04)",
-                backdropFilter: "blur(20px) saturate(180%)",
-                WebkitBackdropFilter: "blur(20px) saturate(180%)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.3)",
-                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px)";
-                e.currentTarget.style.boxShadow = "0 12px 40px 0 rgba(139, 92, 246, 0.2)";
-                e.currentTarget.style.borderColor = "rgba(139, 92, 246, 0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 8px 32px 0 rgba(0, 0, 0, 0.3)";
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
-              }}
-            >
-              <div className="p-6">
-                {/* Tag */}
-                <div className="flex justify-between items-start mb-4">
-                  <Heart
-                    className="text-[#8B5CF6] transition-transform duration-300 group-hover:scale-110"
-                    size={24}
-                    style={{ filter: "drop-shadow(0 0 8px rgba(139, 92, 246, 0.5))" }}
-                  />
-                  <span
-                    className="px-3 py-1 rounded-full text-xs font-medium"
-                    style={{
-                      background: "rgba(255, 255, 255, 0.1)",
-                      color: "#ffffff",
-                    }}
-                  >
-                    PHILOSOPHY
-                  </span>
-                </div>
-                <h4 className="text-xl font-semibold text-white mb-3">
-                  Partner, not Vendor.
-                </h4>
-                <p className="text-gray-300 text-sm leading-relaxed">
-                  I deeply care about the product's success. I ask the hard questions, push back on bad UX, and treat your budget like my own.
-                </p>
+          {/* Card 4: Stats */}
+          <BentoCard className="lg:col-span-1 lg:row-span-1">
+            <div className="h-full flex flex-col justify-center items-center text-center">
+              <div className="mb-2">
+                 <Zap className="text-yellow-400 mx-auto" size={32} />
+              </div>
+              <span className="text-5xl font-bold text-white mb-1" style={{ fontFamily: 'var(--font-boldonse)' }}>5+</span>
+              <span className="text-gray-400 text-sm uppercase tracking-wide">Years Exp.</span>
+              <div className="w-full h-px bg-white/10 my-4" />
+              <div className="flex justify-between w-full px-4">
+                 <div className="text-center">
+                    <span className="block text-xl font-bold text-white">20+</span>
+                    <span className="text-[10px] text-gray-500">PROJECTS</span>
+                 </div>
+                 <div className="text-center">
+                    <span className="block text-xl font-bold text-white">100%</span>
+                    <span className="text-[10px] text-gray-500">SUCCESS</span>
+                 </div>
               </div>
             </div>
+          </BentoCard>
 
-            {/* Toolkit Card */}
-            <div
-              className="relative rounded-[24px] overflow-hidden group flex-1 cursor-pointer"
-              style={{
-                background: "rgba(255, 255, 255, 0.04)",
-                backdropFilter: "blur(20px) saturate(180%)",
-                WebkitBackdropFilter: "blur(20px) saturate(180%)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.3)",
-                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px)";
-                e.currentTarget.style.boxShadow = "0 12px 40px 0 rgba(59, 130, 246, 0.2)";
-                e.currentTarget.style.borderColor = "rgba(59, 130, 246, 0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 8px 32px 0 rgba(0, 0, 0, 0.3)";
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
-              }}
-            >
-              <div className="p-6 h-full flex flex-col">
-                <h4 className="text-xl font-semibold text-white mb-4">
-                  Toolkit
-                </h4>
-                <div className="space-y-3 flex-1">
-                  <div className="flex items-center gap-3">
-                    <Zap className="text-[#FBBF24]" size={20} />
-                    <span className="text-gray-300 text-sm">Next.js & React</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Code className="text-[#3B82F6]" size={20} />
-                    <span className="text-gray-300 text-sm">React Native</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Database className="text-[#10B981]" size={20} />
-                    <span className="text-gray-300 text-sm">Node & Postgres</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Sparkles className="text-[#8B5CF6]" size={20} />
-                    <span className="text-gray-300 text-sm">Tailwind</span>
-                  </div>
+          {/* Card 5: Connect */}
+          <BentoCard className="lg:col-span-1 lg:row-span-1">
+             <div className="h-full flex flex-col">
+                <h5 className="text-lg font-semibold text-white mb-6">Let's Connect</h5>
+                <div className="flex flex-col gap-4 flex-1">
+                   <Link href="https://github.com" target="_blank" className="flex items-center gap-4 group/link">
+                      <div className="p-2 rounded-full bg-white/5 group-hover/link:bg-white/10 transition-colors">
+                         <Github className="text-white" size={20} />
+                      </div>
+                      <span className="text-gray-300 group-hover/link:text-white transition-colors">Github</span>
+                   </Link>
+                   <Link href="https://linkedin.com" target="_blank" className="flex items-center gap-4 group/link">
+                      <div className="p-2 rounded-full bg-blue-600/20 group-hover/link:bg-blue-600/30 transition-colors">
+                         <Linkedin className="text-blue-400" size={20} />
+                      </div>
+                      <span className="text-gray-300 group-hover/link:text-white transition-colors">LinkedIn</span>
+                   </Link>
+                   <Link href="mailto:hello@example.com" className="flex items-center gap-4 group/link">
+                      <div className="p-2 rounded-full bg-green-600/20 group-hover/link:bg-green-600/30 transition-colors">
+                         <Mail className="text-green-400" size={20} />
+                      </div>
+                      <span className="text-gray-300 group-hover/link:text-white transition-colors">Email</span>
+                   </Link>
                 </div>
-              </div>
-            </div>
+             </div>
+          </BentoCard>
 
-            {/* Experience Card */}
-            <div
-              className="relative rounded-[24px] overflow-hidden group cursor-pointer"
-              style={{
-                background: "rgba(255, 255, 255, 0.04)",
-                backdropFilter: "blur(20px) saturate(180%)",
-                WebkitBackdropFilter: "blur(20px) saturate(180%)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.3)",
-                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px)";
-                e.currentTarget.style.boxShadow = "0 12px 40px 0 rgba(16, 185, 129, 0.2)";
-                e.currentTarget.style.borderColor = "rgba(16, 185, 129, 0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 8px 32px 0 rgba(0, 0, 0, 0.3)";
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
-              }}
-            >
-              <div className="p-6">
-                <div className="mb-4">
-                  <div className="flex items-baseline gap-2">
-                    <span
-                      className="text-5xl font-bold text-white"
-                      style={{
-                        fontFamily: "var(--font-boldonse)",
-                        fontWeight: 400,
-                      }}
-                    >
-                      5+
-                    </span>
-                  </div>
-                  <p className="text-gray-400 text-sm mt-1">Years Experience</p>
+          {/* Card 6: Philosophy */}
+          <BentoCard className="lg:col-span-2 lg:row-span-1">
+             <div className="flex flex-col md:flex-row items-center gap-6 h-full">
+                <div className="flex-1">
+                   <div className="flex items-center gap-2 mb-3">
+                      <Layout className="text-[#8B5CF6]" size={20} />
+                      <h5 className="text-lg font-semibold text-white">Engineering Philosophy</h5>
+                   </div>
+                   <p className="text-gray-300 text-sm leading-relaxed mb-4">
+                      "I believe in writing code that is not just functional, but maintainable and scalable. A great product is a perfect blend of robust engineering and intuitive design."
+                   </p>
+                   <div className="flex gap-4">
+                      <div className="flex items-center gap-2">
+                         <div className="w-2 h-2 rounded-full bg-green-500" />
+                         <span className="text-xs text-gray-400">Clean Code</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                         <div className="w-2 h-2 rounded-full bg-blue-500" />
+                         <span className="text-xs text-gray-400">User Centric</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                         <div className="w-2 h-2 rounded-full bg-purple-500" />
+                         <span className="text-xs text-gray-400">Pixel Perfect</span>
+                      </div>
+                   </div>
                 </div>
-                <div className="flex items-center gap-2 pt-4 border-t border-gray-800">
-                  <CheckCircle2 className="text-[#10B981]" size={16} />
-                  <span className="text-white text-sm">100% Delivery Rate</span>
+                {/* Decorative Element */}
+                <div className="relative w-full md:w-1/3 h-32 md:h-full rounded-xl bg-gradient-to-br from-purple-500/5 to-blue-500/5 border border-white/5 overflow-hidden flex items-center justify-center">
+                   <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
+                   <Code size={48} className="text-white/10" />
                 </div>
-              </div>
-            </div>
-          </div>
+             </div>
+          </BentoCard>
+
+          {/* Card 7: Location */}
+          <BentoCard className="lg:col-span-2 lg:row-span-1">
+             <div className="h-full flex items-center justify-between p-4">
+                <div className="flex items-center gap-4">
+                   <div className="p-3 rounded-full bg-red-500/10 text-red-400">
+                      <MapPin size={24} />
+                   </div>
+                   <div>
+                      <h5 className="text-white font-medium">Remote Capable</h5>
+                      <p className="text-gray-400 text-sm">Based in Pakistan, working globally</p>
+                   </div>
+                </div>
+                <div className="hidden md:flex items-center gap-8">
+                   <div className="text-right">
+                      <span className="block text-xs text-gray-500 uppercase">Current Time</span>
+                      <span className="text-white font-mono">{new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</span>
+                   </div>
+                   <Globe className="text-gray-600 animate-pulse" size={48} strokeWidth={1} />
+                </div>
+             </div>
+          </BentoCard>
+
         </div>
       </div>
-    </div>
+    </Section>
   );
 }
-
