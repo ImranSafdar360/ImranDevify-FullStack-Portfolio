@@ -2,10 +2,9 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Section from "../common/Section";
 import GradientText from "./gradient-text";
-import { ArrowRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperType } from "swiper";
 import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 
 // Import Swiper styles
@@ -83,7 +82,7 @@ const caseStudies: CaseStudy[] = [
 ];
 
 export default function CaseStudies() {
-  const [swiper, setSwiper] = useState<any>(null);
+  const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const currentProject = caseStudies[activeIndex];
@@ -104,7 +103,7 @@ export default function CaseStudies() {
             Best Project <GradientText>Picks</GradientText>
           </h2>
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            This collection shows the projects I've created to connect, represent, and inspire confidence.
+            This collection shows the projects I&apos;ve created to connect, represent, and inspire confidence.
           </p>
         </div>
       </div>

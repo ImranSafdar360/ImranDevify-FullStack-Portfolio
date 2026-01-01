@@ -1,26 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "motion/react";
+
 import Logo from "./header/Logo";
 import { Github, Linkedin, Twitter, Instagram, ArrowUpRight } from "lucide-react";
-import GradientText from "./ui/gradient-text";
+
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    if (href === "/") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-         // Handle other potential in-page links if any, otherwise navigate
-         // For now assuming mostly pages which Next.js Link handles, but 
-         // if we want smooth scroll locally we can add logic.
-         // Simple fallback for actual pages:
-         window.location.href = href;
-    }
-  };
+
 
   const socialLinks = [
     { name: "GitHub", href: "https://github.com/imran-safdar", icon: Github },
@@ -54,7 +43,7 @@ export default function Footer() {
                 <Logo />
               </div>
               <p className="text-gray-400 text-lg leading-relaxed max-w-md">
-                Crafting digital experiences that blend <span className="text-white font-medium">beauty</span> with <span className="text-white font-medium">performance</span>. Let's build something extraordinary together.
+                Crafting digital experiences that blend <span className="text-white font-medium">beauty</span> with <span className="text-white font-medium">performance</span>. Let&apos;s build something extraordinary together.
               </p>
               
               <div className="flex items-center gap-4 mt-4">

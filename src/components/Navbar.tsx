@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
 import Logo from './header/Logo';
-import { motion, useScroll, useMotionValueEvent, useSpring, useMotionValue, useTransform } from 'motion/react';
+import { motion, useScroll, useMotionValueEvent, useSpring, useMotionValue } from 'motion/react';
 import { cn } from "@/lib/utils";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
@@ -125,7 +125,7 @@ export default function Navbar() {
                         href="/contact"
                         className="hidden lg:flex items-center gap-2 text-sm font-medium text-white px-5 py-2.5 rounded-full border border-white/10 hover:bg-white hover:text-black transition-all duration-300 group"
                      >
-                        Let's Talk
+                        Let&apos;s Talk
                         <ArrowUpRight className="w-4 h-4 transition-transform group-hover:rotate-45" />
                      </Link>
                  </Magnetic>

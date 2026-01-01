@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import GradientText from "./gradient-text";
-import { ArrowRight, Mail, Calendar } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import AnimatedButton from "../Button";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 
 export default function CTASection() {
   const [hovered, setHovered] = useState(false);
@@ -49,7 +48,7 @@ export default function CTASection() {
         </h2>
 
         <p className="max-w-xl text-lg md:text-xl text-gray-400 mb-12 leading-relaxed">
-            Let's turn your idea into a high-performance product. No fluff, just clean code and real results.
+            Let&apos;s turn your idea into a high-performance product. No fluff, just clean code and real results.
         </p>
 
         {/* Action Buttons */}

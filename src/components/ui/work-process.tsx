@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import GradientText from "./gradient-text";
 import AnimatedButton from "../Button";
 
@@ -48,87 +48,7 @@ const processSteps: ProcessStep[] = [
 ];
 
 export default function WorkProcess() {
-  const [visibleSteps, setVisibleSteps] = useState<boolean[]>(
-    new Array(processSteps.length).fill(false)
-  );
-  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
-    const observers = stepRefs.current.map((ref, index) => {
-      if (!ref) return null;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setTimeout(() => {
-                setVisibleSteps((prev) => {
-                  const newState = [...prev];
-                  newState[index] = true;
-                  return newState;
-                });
-              }, index * 150);
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-
-      observer.observe(ref);
-      return observer;
-    });
-
-    return () => {
-      observers.forEach((observer) => {
-        if (observer) observer.disconnect();
-      });
-    };
-  }, []);
-
-  // 3D Cube Component
-  const CubeIcon = () => (
-    <div className="relative w-24 h-24 md:w-32 md:h-32">
-      <div
-        className="absolute inset-0"
-        style={{
-          transformStyle: "preserve-3d",
-          transform: "rotateX(-20deg) rotateY(20deg)",
-        }}
-      >
-        {/* Front face */}
-        <div
-          className="absolute w-full h-full"
-          style={{
-            background: "rgba(0, 199, 254, 0.2)",
-            border: "1px solid rgba(0, 199, 254, 0.4)",
-            transform: "translateZ(24px)",
-            backdropFilter: "blur(10px)",
-            boxShadow: "0 0 20px rgba(0, 199, 254, 0.3), inset 0 0 20px rgba(0, 199, 254, 0.1)",
-          }}
-        />
-        {/* Top face */}
-        <div
-          className="absolute w-full h-full"
-          style={{
-            background: "rgba(0, 199, 254, 0.15)",
-            border: "1px solid rgba(0, 199, 254, 0.3)",
-            transform: "rotateX(90deg) translateZ(24px)",
-            backdropFilter: "blur(10px)",
-          }}
-        />
-        {/* Right face */}
-        <div
-          className="absolute w-full h-full"
-          style={{
-            background: "rgba(0, 199, 254, 0.1)",
-            border: "1px solid rgba(0, 199, 254, 0.25)",
-            transform: "rotateY(90deg) translateZ(24px)",
-            backdropFilter: "blur(10px)",
-          }}
-        />
-      </div>
-    </div>
-  );
 
   return (
     <section className="w-full py-20 md:py-32" style={{ background: "#06090D" }}>

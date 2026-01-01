@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import GradientText from "./gradient-text";
-import { Target, Code, MessageSquare, MonitorSmartphone, ArrowRight } from "lucide-react";
+import { Target, Code, MessageSquare, MonitorSmartphone } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface FeatureCard {

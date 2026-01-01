@@ -34,7 +34,7 @@ const BentoCard = ({ children, className = "" }: { children: React.ReactNode; cl
   );
 };
 
-const TechItem = ({ icon: Icon, label }: { icon: any; label: string }) => (
+const TechItem = ({ icon: Icon, label }: { icon: React.ElementType; label: string }) => (
   <div className="flex flex-col items-center justify-center gap-2 p-3 rounded-xl bg-white/5 border border-white/5 transition-colors hover:bg-white/10 hover:border-white/10">
     <Icon size={24} className="text-[#8B5CF6]" />
     <span className="text-xs font-medium text-gray-300">{label}</span>
@@ -161,7 +161,7 @@ export default function AboutMini() {
           {/* Card 5: Connect */}
           <BentoCard className="lg:col-span-1 lg:row-span-1">
              <div className="h-full flex flex-col">
-                <h5 className="text-lg font-semibold text-white mb-6">Let's Connect</h5>
+                <h5 className="text-lg font-semibold text-white mb-6">Let&apos;s Connect</h5>
                 <div className="flex flex-col gap-4 flex-1">
                    <Link href="https://github.com" target="_blank" className="flex items-center gap-4 group/link">
                       <div className="p-2 rounded-full bg-white/5 group-hover/link:bg-white/10 transition-colors">
@@ -193,9 +193,9 @@ export default function AboutMini() {
                       <Layout className="text-[#8B5CF6]" size={20} />
                       <h5 className="text-lg font-semibold text-white">Engineering Philosophy</h5>
                    </div>
-                   <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                      "I believe in writing code that is not just functional, but maintainable and scalable. A great product is a perfect blend of robust engineering and intuitive design."
-                   </p>
+                    <p className="text-gray-300 text-sm leading-relaxed mb-4">
+                      &quot;I believe in writing code that is not just functional, but maintainable and scalable. A great product is a perfect blend of robust engineering and intuitive design.&quot;
+                    </p>
                    <div className="flex gap-4">
                       <div className="flex items-center gap-2">
                          <div className="w-2 h-2 rounded-full bg-green-500" />
