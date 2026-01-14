@@ -6,6 +6,7 @@ import Section from "../common/Section";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import profilePic from "../../../public/images/profile-pic.png";
+import { InfiniteMovingCards } from "./infinite-moving-cards";
 
 gsap.registerPlugin(useGSAP);
 
@@ -90,7 +91,7 @@ export default function FeaturedWork() {
           container.removeEventListener("mouseenter", () => tween.pause());
           container.removeEventListener("mouseleave", () => tween.play());
         }
-      }
+      };
     },
     { scope: containerRef }
   );
@@ -99,25 +100,12 @@ export default function FeaturedWork() {
 
   return (
     <Section className="w-full max-w-full relative -mt-[60px] min-h-[450px]">
-      <div className="w-full h-[450px] relative flex justify-center items-center overflow-hidden" ref={containerRef}>
-        <div className="absolute top-1/2 -translate-y-1/2 left-0 w-[80px] lg:w-[170px] h-[450px] bg-gradient-to-r from-[#06090D] to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute top-1/2 -translate-y-1/2  right-0 w-[80px] lg:w-[170px] h-[450px] bg-gradient-to-l from-[#06090D] to-transparent z-10 pointer-events-none"></div>
-        {/* Content Card - Overlay on top of scrolling section */}
-        {/* <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 w-full max-w-[400px] h-[650px] rounded-[20px] bg-black/20">
-          <div
-            className="relative w-full h-full flex flex-col items-center justify-center gap-[24px] rounded-[20px] p-2 overflow-hidden"
-            style={{
-              background: "rgba(255, 255, 255, 0.06)",
-              backdropFilter: "blur(24px) saturate(180%)",
-              WebkitBackdropFilter: "blur(24px) saturate(180%)",
-              border: "1px solid rgba(255, 255, 255, 0.12)",
-              boxShadow:
-                "0 8px 32px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.1)",
-            }}
-          >
-            <Image src={profilePic} alt="Profile Image" className="w-full h-full object-contain rounded-[20px]" />
-          </div>
-        </div> */}
+      <div
+        className="w-full h-[450px] relative flex justify-center items-center overflow-hidden"
+        ref={containerRef}
+      >
+        <div className="absolute top-1/2 -translate-y-1/2 left-0 w-[80px] lg:w-[170px] h-[400px] bg-gradient-to-r from-[#06090D] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute top-1/2 -translate-y-1/2  right-0 w-[80px] lg:w-[170px] h-[400px] bg-gradient-to-l from-[#06090D] to-transparent z-10 pointer-events-none"></div>
         {/* Scrolling Track */}
         <div
           ref={trackRef}

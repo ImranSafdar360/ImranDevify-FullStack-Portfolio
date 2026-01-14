@@ -4,38 +4,38 @@
 /* Boldonse Font - Load from local files */
 /* All three variants (woff2, woff, ttf) are loaded for maximum browser compatibility */
 @font-face {
-  font-family: 'Boldonse';
-  src: url('/fonts/Boldonse-Regular.woff2') format('woff2'),
-       url('/fonts/Boldonse-Regular.woff') format('woff'),
-       url('/fonts/Boldonse-Regular.ttf') format('truetype');
+  font-family: "Boldonse";
+  src: url("/fonts/Boldonse-Regular.woff2") format("woff2"),
+    url("/fonts/Boldonse-Regular.woff") format("woff"),
+    url("/fonts/Boldonse-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 :root {
-  --font-boldonse: 'Boldonse', serif, system-ui, Arial;
+  --font-boldonse: "Boldonse", serif, system-ui, Arial;
 }
 
 .dark {
   /* Minimal dark theme overrides */
-  --color-background: #06090D;
+  --color-background: #06090d;
   --color-text: #ffffff;
-  --color-subtext: #C9C9C9;
+  --color-subtext: #c9c9c9;
 }
 
 .light {
   /* Minimal light theme overrides */
   --color-background: #ffffff;
-  --color-text: #06090D;
-  --color-subtext: #C9C9C9;
+  --color-text: #06090d;
+  --color-subtext: #c9c9c9;
 }
 
 :root {
   /* Minimal light theme variables */
-  --color-background: #06090D;
+  --color-background: #06090d;
   --color-text: #ffffff;
-  --color-subtext: #C9C9C9;
+  --color-subtext: #c9c9c9;
 }
 
 body {
@@ -50,12 +50,12 @@ body {
 
 /* Hide scrollbar for featured work section */
 .hide-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari and Opera */
+  display: none; /* Chrome, Safari and Opera */
 }
 
 /* Override ScrollStack padding for full-width case study cards */

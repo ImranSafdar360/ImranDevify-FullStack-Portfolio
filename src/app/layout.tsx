@@ -4,7 +4,7 @@ import Providers from "@/components/Providers";
 import "./globals.css";
 import ShowOnNonAdmin from "@/components/ShowOnNonAdmin";
 import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/header/Navbar";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -28,7 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fontSans.variable} ${fontJakarta.variable} antialiased dark`}>
+      <body
+        className={`${fontSans.variable} ${fontJakarta.variable} antialiased dark`}
+      >
         <Providers>
           <header>
             <ShowOnNonAdmin>
