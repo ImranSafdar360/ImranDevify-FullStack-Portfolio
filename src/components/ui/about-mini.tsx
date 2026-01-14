@@ -1,248 +1,233 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import {
-  Code,
-  Database,
-  Smartphone,
-  Server,
-  Github,
-  Linkedin,
-  Mail,
-  MapPin,
-  Globe,
-  Zap,
-  Layout,
-  Cpu
+   Code,
+   Zap,
+   MapPin,
+   Clock,
+   ArrowUpRight,
+   Database,
+   Cpu,
+   Smartphone
 } from "lucide-react";
 import AnimatedButton from "../Button";
 import Section from "../common/Section";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import GradientText from "./gradient-text";
 
-const BentoCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
-  return (
-    <motion.div
-      whileHover={{ scale: 1.02 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className={`relative overflow-hidden rounded-[24px] border border-white/10 bg-white/5 backdrop-blur-xl p-6 shadow-xl ${className}`}
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-500 hover:opacity-100" />
-      {children}
-    </motion.div>
-  );
-};
-
-const TechItem = ({ icon: Icon, label }: { icon: React.ElementType; label: string }) => (
-  <div className="flex flex-col items-center justify-center gap-2 p-3 rounded-xl bg-white/5 border border-white/5 transition-colors hover:bg-white/10 hover:border-white/10">
-    <Icon size={24} className="text-[#8B5CF6]" />
-    <span className="text-xs font-medium text-gray-300">{label}</span>
-  </div>
-);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function AboutMini() {
-  const portraitImage = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&fit=crop";
+   const containerRef = useRef<HTMLDivElement>(null);
+   const router = useRouter();
+   const [time, setTime] = useState("");
 
-  return (
-    <Section>
-      <div className="mx-auto">
-        {/* Section Header */}
-        <div className="mb-12 text-center md:text-left bg-[#06090D]">
-           <h2 className="text-sm font-semibold tracking-wider text-[#8B5CF6] uppercase mb-3">About Me</h2>
-           <h3 
-             className="text-3xl md:text-5xl text-white max-w-2xl text-center"
-             style={{ fontFamily: 'var(--font-boldonse)' }}
-           >
-             Building Digital Products with Modern Technologies
-           </h3>
-        </div>
+   useEffect(() => {
+      const updateTime = () => {
+         setTime(
+            new Date().toLocaleTimeString("en-US", {
+               hour: "2-digit",
+               minute: "2-digit",
+               hour12: true,
+               timeZone: "Asia/Karachi",
+            })
+         );
+      };
+      updateTime();
+      const interval = setInterval(updateTime, 1000);
+      return () => clearInterval(interval);
+   }, []);
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[minmax(180px,auto)]">
-          
-          {/* Card 1: Hero - Span 2x2 */}
-          <BentoCard className="lg:col-span-2 lg:row-span-2 min-h-[400px] flex flex-col justify-end group">
-            <div className="absolute inset-0">
-               <Image
-                  src={portraitImage}
-                  alt="Imran Safdar"
-                  fill
-                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority
-               />
-               <div className="absolute inset-0 bg-gradient-to-t from-[#06090D] via-[#06090D]/50 to-transparent" />
+   useGSAP(
+      () => {
+         // Reveal animations for content blocks
+         const listItems = gsap.utils.toArray<HTMLElement>(".reveal-item");
+
+         listItems.forEach((item) => {
+            gsap.fromTo(
+               item,
+               { y: 30, opacity: 0 },
+               {
+                  y: 0,
+                  opacity: 1,
+                  duration: 0.8,
+                  ease: "power2.out",
+                  scrollTrigger: {
+                     trigger: item,
+                     start: "top 85%",
+                  }
+               }
+            );
+         });
+
+         // Parallax effect for the sticky image
+         gsap.to(".sticky-image-container", {
+            yPercent: 10,
+            ease: "none",
+            scrollTrigger: {
+               trigger: containerRef.current,
+               start: "top bottom",
+               end: "bottom top",
+               scrub: true,
+            },
+         });
+      },
+      { scope: containerRef }
+   );
+
+   return (
+      <Section className="relative overflow-hidden">
+         <div ref={containerRef} className="mx-auto px-6 py-24 lg:py-40">
+
+            {/* Main Grid: Shifted ratio for better content balance */}
+            <div className="grid grid-cols-1 lg:grid-cols-[0.85fr,1.15fr] gap-16 lg:gap-24 items-start">
+
+               {/* Left Column: Sticky Cinematic Frame */}
+               <div className="lg:sticky lg:top-32 order-1">
+                  <div className="sticky-image-container relative w-full aspect-[4/5] rounded-[48px] overflow-hidden border border-white/10 group bg-[#0A0A0A]">
+                     <Image
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&fit=crop"
+                        alt="Imran Safdar"
+                        fill
+                        className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"
+                     />
+                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+
+                     {/* Floating ID Tag */}
+                     <div className="absolute bottom-8 left-8 right-8">
+                        <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-black/40 backdrop-blur-xl border border-white/10">
+                           <div className="w-2 h-2 rounded-full bg-[#00C7FE] animate-pulse shadow-[0_0_10px_#00C7FE]" />
+                           <span className="text-[10px] font-bold text-white uppercase tracking-[0.2em]">Live Connection: PK-Global</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               {/* Right Column: Refined Narrative Structure */}
+               <div className="flex flex-col gap-20 lg:gap-24 order-2 pt-4">
+
+                  {/* 1. The Opening Section */}
+                  <div className="reveal-item space-y-10">
+                     <div className="space-y-6">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#00C7FE]/20 bg-[#00C7FE]/5">
+                           <span className="text-[10px] font-bold text-[#00C7FE] uppercase tracking-widest">Story</span>
+                        </div>
+                        <h2 className="text-6xl md:text-8xl text-white font-bold leading-[0.85] tracking-tighter uppercase" style={{ fontFamily: 'var(--font-boldonse)' }}>
+                           ABOUT <br /> <GradientText>MYSELF</GradientText>
+                        </h2>
+                     </div>
+
+                     <div className="space-y-6">
+                        <p className="text-2xl md:text-3xl text-white font-medium leading-tight max-w-xl">
+                           Full-stack engineer building <span className="text-gray-500 italic">robust & high-performance</span> digital systems.
+                        </p>
+                        <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-2xl">
+                           With over five years of active development, I specialize in the MERN ecosystem and cross-platform mobile apps. I don't just write code; I architect solutions that scale and resonate with users.
+                        </p>
+                     </div>
+                  </div>
+
+                  {/* 2. Core Pillars (Competencies) */}
+                  <div className="reveal-item space-y-10">
+                     <div className="flex items-center gap-4">
+                        <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em]">Core Pillars</span>
+                        <div className="flex-1 h-px bg-white/10" />
+                     </div>
+
+                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <PillarItem
+                           icon={Code}
+                           title="Web Systems"
+                           desc="High-speed architectures using Next.js and React."
+                        />
+                        <PillarItem
+                           icon={Smartphone}
+                           title="Mobile Apps"
+                           desc="Native performance with React Native & Expo."
+                        />
+                        <PillarItem
+                           icon={Database}
+                           title="Backend/Cloud"
+                           desc="Scalable API logic with Node and MongoDB."
+                        />
+                        <PillarItem
+                           icon={Zap}
+                           title="Optimization"
+                           desc="Core Web Vitals and performance fine-tuning."
+                        />
+                     </div>
+                  </div>
+
+                  {/* 3. Data Dashboard (Stats + Context) */}
+                  <div className="reveal-item p-1 gap-1 rounded-[40px] bg-white/[0.03] border border-white/10 overflow-hidden">
+                     <div className="bg-[#080808] rounded-[36px] p-8 lg:p-12 space-y-12">
+                        <div className="grid grid-cols-2 gap-8">
+                           <div className="space-y-2">
+                              <span className="text-6xl font-bold text-white tracking-tighter block" style={{ fontFamily: 'var(--font-boldonse)' }}>20+</span>
+                              <p className="text-gray-500 text-[10px] font-bold uppercase tracking-widest leading-none">Global Projects <br /> Delivered</p>
+                           </div>
+                           <div className="space-y-2">
+                              <span className="text-6xl font-bold text-white tracking-tighter block" style={{ fontFamily: 'var(--font-boldonse)' }}>100%</span>
+                              <p className="text-gray-500 text-[10px] font-bold uppercase tracking-widest leading-none">Reliability & <br /> Satisfaction</p>
+                           </div>
+                        </div>
+
+                        <div className="pt-10 border-t border-white/5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8">
+                           <div className="flex items-center gap-4">
+                              <div className="w-12 h-12 rounded-full bg-[#00C7FE]/10 flex items-center justify-center text-[#00C7FE]">
+                                 <MapPin size={22} />
+                              </div>
+                              <div>
+                                 <p className="text-white text-sm font-bold">Rawalpindi, PK</p>
+                                 <p className="text-gray-500 text-[10px] uppercase tracking-wide">Available for Remote</p>
+                              </div>
+                           </div>
+
+                           <div className="flex items-center gap-4 px-6 py-4 rounded-2xl bg-white/[0.02] border border-white/5 min-w-[180px]">
+                              <Clock className="text-[#00C7FE]" size={18} />
+                              <div className="flex flex-col">
+                                 <span className="text-[9px] text-gray-500 uppercase tracking-widest font-bold">Local Time (GMT+5)</span>
+                                 <span className="text-white font-mono text-sm">{time}</span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  {/* 4. The Action */}
+                  <div className="reveal-item flex flex-col sm:flex-row items-center gap-8 py-4">
+                     <AnimatedButton onClick={() => router.push('/about')} className="group px-10 py-4 h-auto">
+                        <span className="flex items-center gap-3 text-base font-bold uppercase tracking-tight">
+                           Read Full Story
+                           <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                        </span>
+                     </AnimatedButton>
+                     <span className="text-gray-500 text-sm italic">Deep dive into my 5+ year journey.</span>
+                  </div>
+
+               </div>
+
             </div>
-            
-            <div className="relative z-10 p-2">
-              <div 
-                className="inline-block px-3 py-1 mb-4 rounded-full border border-white/20 bg-black/30 backdrop-blur-md"
-              >
-                 <span className="text-xs font-medium text-white">Available for work</span>
-              </div>
-              <h4 
-                className="text-4xl text-white mb-2"
-                style={{ fontFamily: 'var(--font-boldonse)' }}
-              >
-                Imran Safdar
-              </h4>
-              <p className="text-[#8B5CF6] font-medium text-lg mb-4">
-                MERN Stack & React Native Developer
-              </p>
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed max-w-lg mb-6">
-                I transform complex problems into elegant solutions. Specializing in building scalable web applications and cross-platform mobile experiences that users love.
-              </p>
-              <AnimatedButton onClick={() => {}}>
-                Download Resume
-              </AnimatedButton>
+         </div>
+      </Section>
+   );
+}
+
+function PillarItem({ icon: Icon, title, desc }: { icon: any, title: string, desc: string }) {
+   return (
+      <div className="group space-y-4">
+         <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-gray-400 group-hover:text-[#00C7FE] group-hover:border-[#00C7FE]/20 group-hover:bg-[#00C7FE]/5 transition-all duration-500">
+               <Icon size={24} strokeWidth={1.5} />
             </div>
-          </BentoCard>
-
-          {/* Card 2: MERN Stack Arsenal */}
-          <BentoCard className="lg:col-span-1 lg:row-span-1">
-             <div className="h-full flex flex-col">
-                <div className="flex items-center gap-3 mb-4">
-                   <div className="p-2 rounded-lg bg-[#8B5CF6]/20">
-                      <Database className="text-[#8B5CF6]" size={20} />
-                   </div>
-                   <h5 className="text-lg font-semibold text-white">MERN Arsenal</h5>
-                </div>
-                <div className="grid grid-cols-2 gap-3 flex-1 content-start">
-                   <TechItem icon={Database} label="MongoDB" />
-                   <TechItem icon={Server} label="Express" />
-                   <TechItem icon={Code} label="React" />
-                   <TechItem icon={Cpu} label="Node.js" />
-                </div>
-             </div>
-          </BentoCard>
-
-          {/* Card 3: Mobile Specialist */}
-          <BentoCard className="lg:col-span-1 lg:row-span-1 bg-gradient-to-br from-indigo-900/20 to-purple-900/20">
-             <div className="h-full flex flex-col">
-                <div className="flex items-center gap-3 mb-4">
-                   <div className="p-2 rounded-lg bg-blue-500/20">
-                      <Smartphone className="text-blue-400" size={20} />
-                   </div>
-                   <h5 className="text-lg font-semibold text-white">Mobile Dev</h5>
-                </div>
-                <p className="text-gray-300 text-sm mb-4 flex-1">
-                  Crafting native-like experiences with <strong>React Native</strong> & <strong>Expo</strong>. One codebase, everywhere.
-                </p>
-                <div className="flex gap-2 mt-auto">
-                   <span className="px-3 py-1 rounded-md bg-white/5 text-xs text-blue-300 border border-blue-500/20">iOS</span>
-                   <span className="px-3 py-1 rounded-md bg-white/5 text-xs text-green-300 border border-green-500/20">Android</span>
-                </div>
-             </div>
-          </BentoCard>
-
-          {/* Card 4: Stats */}
-          <BentoCard className="lg:col-span-1 lg:row-span-1">
-            <div className="h-full flex flex-col justify-center items-center text-center">
-              <div className="mb-2">
-                 <Zap className="text-yellow-400 mx-auto" size={32} />
-              </div>
-              <span className="text-5xl font-bold text-white mb-1" style={{ fontFamily: 'var(--font-boldonse)' }}>5+</span>
-              <span className="text-gray-400 text-sm uppercase tracking-wide">Years Exp.</span>
-              <div className="w-full h-px bg-white/10 my-4" />
-              <div className="flex justify-between w-full px-4">
-                 <div className="text-center">
-                    <span className="block text-xl font-bold text-white">20+</span>
-                    <span className="text-[10px] text-gray-500">PROJECTS</span>
-                 </div>
-                 <div className="text-center">
-                    <span className="block text-xl font-bold text-white">100%</span>
-                    <span className="text-[10px] text-gray-500">SUCCESS</span>
-                 </div>
-              </div>
-            </div>
-          </BentoCard>
-
-          {/* Card 5: Connect */}
-          <BentoCard className="lg:col-span-1 lg:row-span-1">
-             <div className="h-full flex flex-col">
-                <h5 className="text-lg font-semibold text-white mb-6">Let&apos;s Connect</h5>
-                <div className="flex flex-col gap-4 flex-1">
-                   <Link href="https://github.com" target="_blank" className="flex items-center gap-4 group/link">
-                      <div className="p-2 rounded-full bg-white/5 group-hover/link:bg-white/10 transition-colors">
-                         <Github className="text-white" size={20} />
-                      </div>
-                      <span className="text-gray-300 group-hover/link:text-white transition-colors">Github</span>
-                   </Link>
-                   <Link href="https://linkedin.com" target="_blank" className="flex items-center gap-4 group/link">
-                      <div className="p-2 rounded-full bg-blue-600/20 group-hover/link:bg-blue-600/30 transition-colors">
-                         <Linkedin className="text-blue-400" size={20} />
-                      </div>
-                      <span className="text-gray-300 group-hover/link:text-white transition-colors">LinkedIn</span>
-                   </Link>
-                   <Link href="mailto:hello@example.com" className="flex items-center gap-4 group/link">
-                      <div className="p-2 rounded-full bg-green-600/20 group-hover/link:bg-green-600/30 transition-colors">
-                         <Mail className="text-green-400" size={20} />
-                      </div>
-                      <span className="text-gray-300 group-hover/link:text-white transition-colors">Email</span>
-                   </Link>
-                </div>
-             </div>
-          </BentoCard>
-
-          {/* Card 6: Philosophy */}
-          <BentoCard className="lg:col-span-2 lg:row-span-1">
-             <div className="flex flex-col md:flex-row items-center gap-6 h-full">
-                <div className="flex-1">
-                   <div className="flex items-center gap-2 mb-3">
-                      <Layout className="text-[#8B5CF6]" size={20} />
-                      <h5 className="text-lg font-semibold text-white">Engineering Philosophy</h5>
-                   </div>
-                    <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                      &quot;I believe in writing code that is not just functional, but maintainable and scalable. A great product is a perfect blend of robust engineering and intuitive design.&quot;
-                    </p>
-                   <div className="flex gap-4">
-                      <div className="flex items-center gap-2">
-                         <div className="w-2 h-2 rounded-full bg-green-500" />
-                         <span className="text-xs text-gray-400">Clean Code</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                         <div className="w-2 h-2 rounded-full bg-blue-500" />
-                         <span className="text-xs text-gray-400">User Centric</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                         <div className="w-2 h-2 rounded-full bg-purple-500" />
-                         <span className="text-xs text-gray-400">Pixel Perfect</span>
-                      </div>
-                   </div>
-                </div>
-                {/* Decorative Element */}
-                <div className="relative w-full md:w-1/3 h-32 md:h-full rounded-xl bg-gradient-to-br from-purple-500/5 to-blue-500/5 border border-white/5 overflow-hidden flex items-center justify-center">
-                   <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
-                   <Code size={48} className="text-white/10" />
-                </div>
-             </div>
-          </BentoCard>
-
-          {/* Card 7: Location */}
-          <BentoCard className="lg:col-span-2 lg:row-span-1">
-             <div className="h-full flex items-center justify-between p-4">
-                <div className="flex items-center gap-4">
-                   <div className="p-3 rounded-full bg-red-500/10 text-red-400">
-                      <MapPin size={24} />
-                   </div>
-                   <div>
-                      <h5 className="text-white font-medium">Remote Capable</h5>
-                      <p className="text-gray-400 text-sm">Based in Pakistan, working globally</p>
-                   </div>
-                </div>
-                <div className="hidden md:flex items-center gap-8">
-                   <div className="text-right">
-                      <span className="block text-xs text-gray-500 uppercase">Current Time</span>
-                      <span className="text-white font-mono">{new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</span>
-                   </div>
-                   <Globe className="text-gray-600 animate-pulse" size={48} strokeWidth={1} />
-                </div>
-             </div>
-          </BentoCard>
-
-        </div>
+            <h4 className="text-xl text-white font-bold tracking-tight">{title}</h4>
+         </div>
+         <p className="text-gray-500 text-base leading-relaxed pl-1">{desc}</p>
       </div>
-    </Section>
-  );
+   )
 }

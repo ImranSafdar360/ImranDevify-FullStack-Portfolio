@@ -1,136 +1,111 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import Section from "../common/Section";
-import AnimatedButton from "../Button";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import profilePic from "../../../public/images/profile-pic.png";
+
+gsap.registerPlugin(useGSAP);
 
 interface ProjectImage {
   src: string;
   alt: string;
-  width: number; // Different widths for each image
+  width: number;
 }
 
-// Using Unsplash free images - tech/design related for portfolio showcase
-// These are high-quality placeholder images that you can replace with your own project screenshots
 const projectImages: ProjectImage[] = [
   {
-    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&fit=crop",
+    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d3f3be42208d9a93cec_Jack2%20Media.webp",
     alt: "Dashboard Analytics",
     width: 320,
   },
   {
-    src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&fit=crop",
+    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d060d0ac5a20234a41d_motorsports%20website.webp",
     alt: "Data Visualization",
     width: 280,
   },
   {
-    src: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80&fit=crop",
+    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d3f3be42208d9a93cec_Jack2%20Media.webp",
     alt: "Mobile App Design",
     width: 360,
   },
   {
-    src: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80&fit=crop",
+    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d8619a4019a34e37414_nutradora.webp",
     alt: "Web Development",
     width: 300,
   },
   {
-    src: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&fit=crop",
+    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6cf619f16864efb14f1f_genesis%20innovation%20landing%20page.webp",
     alt: "Code Editor",
     width: 340,
   },
   {
-    src: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80&fit=crop",
+    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d3f3be42208d9a93cec_Jack2%20Media.webp",
     alt: "UI Design",
     width: 290,
   },
   {
-    src: "https://images.unsplash.com/photo-1557683316-973673baf926?w=800&q=80&fit=crop",
+    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d060d0ac5a20234a41d_motorsports%20website.webp",
     alt: "React Development",
     width: 310,
   },
   {
-    src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80&fit=crop",
+    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d3f3be42208d9a93cec_Jack2%20Media.webp",
     alt: "SaaS Platform",
     width: 350,
   },
   {
-    src: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80&fit=crop",
+    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d8619a4019a34e37414_nutradora.webp",
     alt: "Tech Stack",
     width: 270,
   },
 ];
 
 export default function FeaturedWork() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const animationFrameRef = useRef<number | undefined>(undefined);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
+  useGSAP(
+    () => {
+      const track = trackRef.current;
+      if (!track) return;
 
-    let scrollPosition = 0;
-    const scrollSpeed = 0.5; // Adjust speed (pixels per frame)
-    let isAnimating = true;
+      const tween = gsap.to(track, {
+        xPercent: 25,
+        repeat: -1,
+        duration: 30,
+        ease: "none",
+      });
 
-    const animate = () => {
-      if (!isAnimating) return;
-
-      scrollPosition += scrollSpeed;
-
-      // Calculate the width of the first set of images (half of total)
-      const firstSetWidth = container.scrollWidth / 2;
-
-      // Reset scroll position seamlessly when we've scrolled through first set
-      if (scrollPosition >= firstSetWidth) {
-        scrollPosition = 0;
+      const container = containerRef.current;
+      if (container) {
+        container.addEventListener("mouseenter", () => tween.pause());
+        container.addEventListener("mouseleave", () => tween.play());
       }
 
-      container.scrollLeft = scrollPosition;
-      animationFrameRef.current = requestAnimationFrame(animate);
-    };
-
-    // Start animation
-    animationFrameRef.current = requestAnimationFrame(animate);
-
-    // Pause on hover
-    const handleMouseEnter = () => {
-      isAnimating = false;
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
+      return () => {
+        if (container) {
+          container.removeEventListener("mouseenter", () => tween.pause());
+          container.removeEventListener("mouseleave", () => tween.play());
+        }
       }
-    };
+    },
+    { scope: containerRef }
+  );
 
-    const handleMouseLeave = () => {
-      isAnimating = true;
-      animationFrameRef.current = requestAnimationFrame(animate);
-    };
-
-    container.addEventListener("mouseenter", handleMouseEnter);
-    container.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-      container.removeEventListener("mouseenter", handleMouseEnter);
-      container.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
-
-  // Duplicate images for seamless loop
   const duplicatedImages = [...projectImages, ...projectImages];
 
   return (
-    <Section className="w-full max-w-[1440px] relative">
-      {/* Horizontal Scrolling Container - Full Width */}
-      <div className="w-full h-[450px] relative flex justify-center items-center">
-        <div className="absolute top-1/2 -translate-y-1/2 left-0 w-[80px] lg:w-[150px] h-[300px] bg-gradient-to-r from-[#06090D] to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute top-1/2 -translate-y-1/2  right-0 w-[80px] lg:w-[150px] h-[300px] bg-gradient-to-l from-[#06090D] to-transparent z-10 pointer-events-none"></div>
+    <Section className="w-full max-w-full relative -mt-[60px] min-h-[450px]">
+      <div className="w-full h-[450px] relative flex justify-center items-center overflow-hidden" ref={containerRef}>
+        <div className="absolute top-1/2 -translate-y-1/2 left-0 w-[80px] lg:w-[170px] h-[450px] bg-gradient-to-r from-[#06090D] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute top-1/2 -translate-y-1/2  right-0 w-[80px] lg:w-[170px] h-[450px] bg-gradient-to-l from-[#06090D] to-transparent z-10 pointer-events-none"></div>
         {/* Content Card - Overlay on top of scrolling section */}
-        <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 w-full max-w-[500px] h-[450px] px-6">
+        {/* <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 w-full max-w-[400px] h-[650px] rounded-[20px] bg-black/20">
           <div
-            className="relative w-full h-full flex flex-col items-center justify-center gap-[24px] rounded-[20px] overflow-hidden"
+            className="relative w-full h-full flex flex-col items-center justify-center gap-[24px] rounded-[20px] p-2 overflow-hidden"
             style={{
               background: "rgba(255, 255, 255, 0.06)",
               backdropFilter: "blur(24px) saturate(180%)",
@@ -140,50 +115,33 @@ export default function FeaturedWork() {
                 "0 8px 32px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.1)",
             }}
           >
-              <h2
-                className="text-2xl md:text-[28px] text-white text-center"
-                style={{
-                  fontFamily: "var(--font-boldonse)",
-                  fontWeight: 400,
-                  fontStyle: "normal",
-                }}
-              >
-                Featured Work at a Glance
-              </h2>
-              <p className="text-gray-300 text-sm md:text-base text-center leading-relaxed max-w-md mx-auto">
-                High-performing interfaces, scalable architectures, and
-                user-centered product experiences — built for teams serious
-                about quality.
-              </p>
-              <AnimatedButton onClick={() => {}}>
-                Explore Case Studies
-              </AnimatedButton>
+            <Image src={profilePic} alt="Profile Image" className="w-full h-full object-contain rounded-[20px]" />
           </div>
-        </div>
-
-        {/* Scrolling images with top padding to accommodate card */}
+        </div> */}
+        {/* Scrolling Track */}
         <div
-          ref={scrollContainerRef}
-          className="w-full overflow-x-scroll flex gap-6 px-6 hide-scrollbar"
+          ref={trackRef}
+          className="flex gap-6 px-6 will-change-transform"
+          style={{ width: "fit-content" }}
         >
           {duplicatedImages.map((image, index) => (
             <div
               key={`${image.alt}-${index}`}
-              className="flex-shrink-0 relative group"
+              className="flex-shrink-0 relative group rounded-[20px] overflow-hidden bg-gray-800/20 border border-gray-700/30 p-2"
               style={{
-                width: `${image.width}px`,
-                height: "280px", // Same height for all images
+                width: `600px`,
+                height: "400px",
               }}
             >
-              <div className="relative w-full h-full rounded-[10px] overflow-hidden bg-gray-800/20 border border-gray-700/30">
+              <div className="relative w-full h-full overflow-hidden">
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="object-cover rounded-[24px]"
                   sizes={`${image.width}px`}
+                  priority={index < 4} // Prioritize first few images
                 />
-                {/* Subtle overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
             </div>

@@ -80,27 +80,6 @@ export default function TestimonialsSection() {
             </p>
           </div>
         </div>
-
-        {/* CTA Section */}
-        <div className="text-center">
-          <h3
-            className="text-3xl md:text-4xl lg:text-5xl mb-6 text-white"
-            style={{
-              fontFamily: "var(--font-boldonse)",
-              fontWeight: 400,
-              fontStyle: "normal",
-            }}
-          >
-            Ready to Build Something That Actually Works?
-          </h3>
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 leading-relaxed">
-            If you care about performance, scalability, and working with someone
-            who treats your product like their own — let&apos;s talk.
-          </p>
-          <AnimatedButton onClick={() => {}}>
-            Let&apos;s Build Together
-          </AnimatedButton>
-        </div>
       </div>
     </section>
   );

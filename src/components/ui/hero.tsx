@@ -7,6 +7,7 @@ import AnimatedButton from "../Button";
 import SocialDock from "./social-dock";
 import CircularText from "../CircularText";
 import { Mail } from "lucide-react";
+import Section from "../common/Section";
 
 const LiquidGlass = dynamic(() => import("liquid-glass-react"), {
   ssr: false,
@@ -68,7 +69,7 @@ export default function Hero() {
     },
   ];
   return (
-    <section className="w-full relative">
+    <Section className="w-full relative flex flex-col justify-center items-center gap-[120px] my-[60px]">
       {/* Gradient Circles with Blur Effect */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Top Left Circle */}
@@ -91,7 +92,7 @@ export default function Hero() {
 
       <div
         ref={containerRef}
-        className="relative w-full h-full flex flex-col justify-center items-center gap-[32px] mx-auto px-6 py-32 md:py-40 z-10"
+        className="relative w-full h-full flex flex-col justify-center items-center gap-[32px] mx-auto px-6 z-10"
       >
         <div className="relative w-full flex justify-center items-center">
           <LiquidGlass
@@ -108,7 +109,7 @@ export default function Hero() {
 
         {/* Gradient Title */}
         <h1
-          className="text-4xl md:text-[64px] tracking-tight leading-[94px] mt-6 text-center"
+          className="text-4xl md:text-[64px] tracking-tight leading-[94px] mt-6 text-center max-w-[1200px]"
           style={{
             fontFamily: "var(--font-boldonse)",
             fontWeight: 400,
@@ -129,7 +130,7 @@ export default function Hero() {
         {/* CTA Section (A/B Optimized) */}
         <div className="flex flex-col justify-center items-center gap-[21px] sm:flex-row">
           {/* Primary CTA */}
-          <AnimatedButton onClick={() => {}}>Book 1:1 Meeting</AnimatedButton>
+          <AnimatedButton onClick={() => { }}>Book 1:1 Meeting</AnimatedButton>
           <h6 className="text-gray-300 text-[22px] font-semibold">or DM</h6>
           <SocialDock items={socialItems} />
         </div>
@@ -151,6 +152,6 @@ export default function Hero() {
           icon={<Mail className="w-8 h-8 text-[#1F1F1F]" />}
         />
       </div>
-    </section>
+    </Section>
   );
 }
