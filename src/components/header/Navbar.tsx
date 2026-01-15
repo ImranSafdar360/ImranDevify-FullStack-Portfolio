@@ -11,8 +11,8 @@ export default function Navbar() {
       bgColor: "#0D0716",
       textColor: "#fff",
       links: [
-        { label: "Company", ariaLabel: "About Company" },
-        { label: "Careers", ariaLabel: "About Careers" },
+        { label: "Company", ariaLabel: "About Company", href: "#" },
+        { label: "Careers", ariaLabel: "About Careers", href: "#" },
       ],
     },
     {
@@ -20,8 +20,8 @@ export default function Navbar() {
       bgColor: "#170D27",
       textColor: "#fff",
       links: [
-        { label: "Featured", ariaLabel: "Featured Projects" },
-        { label: "Case Studies", ariaLabel: "Project Case Studies" },
+        { label: "Featured", ariaLabel: "Featured Projects", href: "#" },
+        { label: "Case Studies", ariaLabel: "Project Case Studies", href: "#" },
       ],
     },
     {
@@ -29,9 +29,17 @@ export default function Navbar() {
       bgColor: "#271E37",
       textColor: "#fff",
       links: [
-        { label: "Email", ariaLabel: "Email us" },
-        { label: "Twitter", ariaLabel: "Twitter" },
-        { label: "LinkedIn", ariaLabel: "LinkedIn" },
+        {
+          label: "Email",
+          ariaLabel: "Email us",
+          href: "mailto:hello@example.com",
+        },
+        { label: "Twitter", ariaLabel: "Twitter", href: "https://twitter.com" },
+        {
+          label: "LinkedIn",
+          ariaLabel: "LinkedIn",
+          href: "https://linkedin.com",
+        },
       ],
     },
   ];

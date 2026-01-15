@@ -101,7 +101,7 @@ export default function AboutMini() {
           >
             Imran <GradientText>Safdar</GradientText>
           </h1>
-          <p className="text-[18px] leading-[32px] font-light text-white/70">
+          <p className="text-[18px] leading-[32px] font-light text-white/70 mb-[16px]">
             I'm a Full Stack Developer with over 5 years of experience in the
             field.
           </p>

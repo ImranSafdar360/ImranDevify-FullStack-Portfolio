@@ -12,6 +12,9 @@ import {
   SiGit,
   SiGithub,
   SiOpenai,
+  SiPostgresql,
+  SiMysql,
+  SiNextdotjs,
 } from "react-icons/si";
 import { FaMobileAlt } from "react-icons/fa";
 
@@ -73,17 +76,17 @@ const AntigravityLogo = () => (
 );
 
 const expertise = [
-  { icon: SiMongodb, text: "MongoDB" },
-  { icon: SiExpress, text: "Express.js" },
-  { icon: SiReact, text: "React" },
-  { icon: SiNodedotjs, text: "Node.js" },
+  { icon: SiReact, text: "React.js" },
+  { icon: SiNextdotjs, text: "Next.js" },
   { icon: SiReact, text: "React Native" },
   { icon: SiExpo, text: "Expo" },
+  { icon: SiNodedotjs, text: "Node.js" },
+  { icon: SiExpress, text: "Express.js" },
+  { icon: SiMongodb, text: "MongoDB" },
+  { icon: SiPostgresql, text: "Postgres SQL" },
+  { icon: SiMysql, text: "MySQL" },
   { icon: SiGit, text: "Git" },
   { icon: SiGithub, text: "GitHub" },
-  { icon: SiOpenai, text: "AI Tools" },
-  { icon: CursorLogo, text: "Cursor" },
-  { icon: AntigravityLogo, text: "Antigravity" },
 ];
 
 export const LogoMarquee = () => {
