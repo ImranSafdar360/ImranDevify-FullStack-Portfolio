@@ -99,11 +99,9 @@ export default function Services() {
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
           <h2
-            className="text-4xl md:text-5xl lg:text-6xl mb-6 text-white"
+            className="w-full max-w-[800px] mx-auto text-4xl md:text-5xl lg:text-6xl leading-[72px] mb-6 text-white"
             style={{
               fontFamily: "var(--font-boldonse)",
-              fontWeight: 400,
-              fontStyle: "normal",
             }}
           >
             Helping You Transform <GradientText>Your Product</GradientText>
@@ -115,108 +113,55 @@ export default function Services() {
         </div>
 
         {/* Service Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-16">
           {services.map((service, index) => (
             <div
               key={service.label}
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}
-              className={`relative rounded-[12px] p-6 md:p-8 transition-all duration-500 ${
+              className={`flex flex-col gap-[24px] group relative rounded-[40px] p-[40px] pt-[65px] transition-all duration-500 ease-out ${
                 visibleCards[index]
                   ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
-              }`}
+                  : "opacity-0 translate-y-12"
+              } hover:scale-[1.02]`}
               style={{
-                background: service.isHero
-                  ? "#2a2a2a"
-                  : "#262626",
+                background: "rgba(255, 255, 255, 0.05)",
+                backdropFilter: "blur(20px) saturate(180%)",
+                WebkitBackdropFilter: "blur(20px) saturate(180%)",
                 border: "1px solid rgba(255, 255, 255, 0.1)",
                 boxShadow: service.isHero
-                  ? "0 20px 60px rgba(0, 0, 0, 0.4)"
+                  ? "0 20px 60px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.02)"
                   : "0 10px 40px rgba(0, 0, 0, 0.3)",
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-8px)";
-                e.currentTarget.style.boxShadow = "0 25px 70px rgba(0, 199, 254, 0.2)";
-                e.currentTarget.style.borderColor = "rgba(0, 199, 254, 0.4)";
-                e.currentTarget.style.background = service.isHero
-                  ? "#2d2d2d"
-                  : "#2a2a2a";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = service.isHero
-                  ? "0 20px 60px rgba(0, 0, 0, 0.4)"
-                  : "0 10px 40px rgba(0, 0, 0, 0.3)";
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
-                e.currentTarget.style.background = service.isHero
-                  ? "#2a2a2a"
-                  : "#262626";
-              }}
             >
-              {/* Rotated Label - Sticker Style */}
               <div
-                className="absolute top-4 left-4 px-3 py-1.5 rounded-sm text-xs font-bold text-white uppercase tracking-wider"
+                className="absolute -top-9 left-7 -rotate-[4deg] w-fit px-[12px] py-[8px] rounded-[10px] text-[36px] font-bold bg-white text-black uppercase z-20"
                 style={{
-                  background: "#1a1a1a",
-                  border: "1px solid rgba(255, 255, 255, 0.25)",
-                  transform: "rotate(-3deg)",
-                  transformOrigin: "top left",
-                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.3)",
+                  fontFamily: "var(--font-boldonse)",
                 }}
               >
                 {service.label}
               </div>
 
               {/* Content */}
-              <div className="mt-12 md:mt-14">
-                {/* Title */}
-                <h3
-                  className="text-2xl md:text-3xl mb-4 text-white font-bold transition-colors duration-300"
-                  style={{
-                    fontFamily: "var(--font-boldonse)",
-                    fontWeight: 400,
-                    fontStyle: "normal",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "#00C7FE";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "#ffffff";
-                  }}
-                >
-                  {service.title}
-                </h3>
-
+              <div className="relative flex flex-col gap-[32px] z-10">
                 {/* Description */}
-                <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-6">
+                <p className="text-[20px] leading-[28px] font-medium text-white/70">
                   {service.description}
                 </p>
 
-                {/* Dashed Line */}
-                <div
-                  className="w-full h-px mb-6"
-                  style={{
-                    background: "repeating-linear-gradient(to right, rgba(255, 255, 255, 0.2) 0px, rgba(255, 255, 255, 0.2) 8px, transparent 8px, transparent 16px)",
-                  }}
-                />
-
                 {/* Services List */}
-                <ul className="space-y-3">
+                <ul className="space-y-2">
                   {service.services.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start gap-3">
-                      <div
-                        className="w-full h-px mt-2.5 flex-shrink-0"
-                        style={{
-                          background: "repeating-linear-gradient(to right, rgba(255, 255, 255, 0.15) 0px, rgba(255, 255, 255, 0.15) 4px, transparent 4px, transparent 8px)",
-                          maxWidth: "40px",
-                        }}
-                      />
-                      <span className="text-gray-300 text-sm md:text-base leading-relaxed">
+                    <div
+                      key={itemIndex}
+                      className="flex items-center gap-4 py-[15px] border-t border-white/70 border-dashed"
+                    >
+                      <p className="text-[18px] leading-[22px] font-semibold text-white/90">
                         {item}
-                      </span>
-                    </li>
+                      </p>
+                    </div>
                   ))}
                 </ul>
               </div>
@@ -225,9 +170,9 @@ export default function Services() {
         </div>
 
         {/* Micro-Line */}
-        <p className="text-center text-gray-400 text-sm md:text-base mb-8">
-          Built with performance, scalability, and user experience in mind — from
-          day one.
+        <p className="text-center text-gray-500 text-[20px] leading-[28px] mb-8 font-light tracking-wide italic">
+          &ldquo;Engineering digital products with precision, scalability, and
+          impact.&rdquo;
         </p>
 
         {/* CTA */}
@@ -240,4 +185,3 @@ export default function Services() {
     </section>
   );
 }
-

@@ -82,7 +82,10 @@ export default function WhoIWorkWith() {
   }, []);
 
   return (
-    <section className="w-full py-20 md:py-32" style={{ background: "#06090D" }}>
+    <section
+      className="w-full py-20 md:py-32"
+      style={{ background: "#06090D" }}
+    >
       <div className="w-full max-w-[1440px] mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
@@ -90,8 +93,6 @@ export default function WhoIWorkWith() {
             className="text-4xl md:text-5xl lg:text-6xl mb-6 text-white"
             style={{
               fontFamily: "var(--font-boldonse)",
-              fontWeight: 400,
-              fontStyle: "normal",
             }}
           >
             Who I Usually <GradientText>Work With</GradientText>
@@ -110,67 +111,46 @@ export default function WhoIWorkWith() {
               ref={(el) => {
                 itemRefs.current[index] = el;
               }}
-              className={`relative rounded-[12px] p-6 md:p-8 transition-all duration-500 ${
+              className={`group relative flex flex-col gap-[40px] rounded-[40px] p-[40px] transition-all duration-500 ease-out ${
                 visibleItems[index]
                   ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-8"
+                  : "opacity-0 translate-y-12"
               }`}
               style={{
-                background: "#262626",
+                background: "rgba(255, 255, 255, 0.05)",
+                backdropFilter: "blur(20px) saturate(180%)",
+                WebkitBackdropFilter: "blur(20px) saturate(180%)",
                 border: "1px solid rgba(255, 255, 255, 0.1)",
-                boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.3)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px)";
-                e.currentTarget.style.boxShadow = "0 12px 40px rgba(0, 199, 254, 0.2)";
-                e.currentTarget.style.borderColor = "rgba(0, 199, 254, 0.4)";
-                const titleElement = e.currentTarget.querySelector("h4");
-                if (titleElement) {
-                  (titleElement as HTMLElement).style.transform = "translateY(-2px)";
-                }
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 8px 32px 0 rgba(0, 0, 0, 0.3)";
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
-                const titleElement = e.currentTarget.querySelector("h4");
-                if (titleElement) {
-                  (titleElement as HTMLElement).style.transform = "translateY(0)";
-                }
+                boxShadow: "0 10px 40px rgba(0, 0, 0, 0.3)",
               }}
             >
-              {/* Blue Bullet Point */}
-              <div className="flex items-start gap-3 mb-4">
-                <div
-                  className="w-3 h-3 rounded-full flex-shrink-0 mt-1.5 transition-all duration-300"
-                  style={{ background: "#00C7FE" }}
-                />
+              {/* Header with Icon/Dot */}
+              <div className="flex flex-col gap-[36px] relative z-10">
                 <h4
-                  className="text-xl md:text-2xl text-white font-bold transition-all duration-300"
+                  className="text-[28px] leading-[42px] font-bold uppercase text-white transition-all duration-300 group-hover:text-[#00C7FE]"
                   style={{
                     fontFamily: "var(--font-boldonse)",
-                    fontWeight: 400,
-                    fontStyle: "normal",
                   }}
                 >
                   {client.title}
                 </h4>
+                {/* Description */}
+                <p className="text-[20px] leading-[28px] font-medium text-white/70 relative z-10">
+                  {client.description}
+                </p>
               </div>
 
-              {/* Description */}
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-6">
-                {client.description}
-              </p>
-
               {/* Micro Points */}
-              <ul className="space-y-2 ml-6">
+              <ul className="space-y-4 relative mt-4 z-10">
                 {client.microPoints.map((point, pointIndex) => (
                   <li
                     key={pointIndex}
-                    className="text-gray-400 text-xs md:text-sm leading-relaxed flex items-start gap-2"
+                    className="flex items-center gap-3 group/item transition-colors duration-300"
                   >
-                    <span className="text-[#00C7FE] mt-1.5">•</span>
-                    <span>{point}</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover/item:bg-[#00C7FE] transition-colors duration-300 shrink-0" />
+                    <span className="text-[18px] leading-[22px] font-semibold text-gray-400 group-hover/item:text-white transition-colors duration-300">
+                      {point}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -179,8 +159,8 @@ export default function WhoIWorkWith() {
         </div>
 
         {/* Bottom Line */}
-        <p className="text-center text-gray-300 text-lg md:text-xl mb-8">
-          Serious about your product and your online presence?
+        <p className="text-center text-gray-500 text-sm md:text-base mb-10 font-light tracking-wide italic">
+          &ldquo;Serious about your product and your online presence?&rdquo;
         </p>
 
         {/* CTA */}
@@ -193,4 +173,3 @@ export default function WhoIWorkWith() {
     </section>
   );
 }
-
