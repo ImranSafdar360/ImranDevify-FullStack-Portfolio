@@ -32,7 +32,7 @@ const clients: ClientCard[] = [
     ],
   },
   {
-    title: "Product-Driven Businesses",
+    title: "Small Businesses",
     description:
       "For businesses investing in digital products, not quick fixes — where code quality, performance, and UX actually matter.",
     microPoints: [
@@ -44,43 +44,6 @@ const clients: ClientCard[] = [
 ];
 
 export default function WhoIWorkWith() {
-  const [visibleItems, setVisibleItems] = useState<boolean[]>(
-    new Array(clients.length).fill(false),
-  );
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const observers = itemRefs.current.map((ref, index) => {
-      if (!ref) return null;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setTimeout(() => {
-                setVisibleItems((prev) => {
-                  const newState = [...prev];
-                  newState[index] = true;
-                  return newState;
-                });
-              }, index * 150); // Staggered delay
-            }
-          });
-        },
-        { threshold: 0.1 },
-      );
-
-      observer.observe(ref);
-      return observer;
-    });
-
-    return () => {
-      observers.forEach((observer) => {
-        if (observer) observer.disconnect();
-      });
-    };
-  }, []);
-
   return (
     <section
       className="w-full py-20 md:py-32"
@@ -104,18 +67,11 @@ export default function WhoIWorkWith() {
         </div>
 
         {/* Client Cards Grid - 3 Equal Width Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 mb-16">
           {clients.map((client, index) => (
             <div
               key={client.title}
-              ref={(el) => {
-                itemRefs.current[index] = el;
-              }}
-              className={`group relative flex flex-col gap-[40px] rounded-[40px] p-[40px] transition-all duration-500 ease-out ${
-                visibleItems[index]
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-12"
-              }`}
+              className={`group relative flex flex-col gap-[40px] rounded-[40px] p-[40px] transition-all duration-500 ease-out`}
               style={{
                 background: "rgba(255, 255, 255, 0.05)",
                 backdropFilter: "blur(20px) saturate(180%)",
@@ -126,34 +82,21 @@ export default function WhoIWorkWith() {
             >
               {/* Header with Icon/Dot */}
               <div className="flex flex-col gap-[36px] relative z-10">
-                <h4
-                  className="text-[28px] leading-[42px] font-bold uppercase text-white transition-all duration-300 group-hover:text-[#00C7FE]"
-                  style={{
-                    fontFamily: "var(--font-boldonse)",
-                  }}
-                >
-                  {client.title}
-                </h4>
+                <div className="flex items-center gap-2">
+                  <GradientText>
+                    <p className="text-[28px] leading-[32px] font-bold text-white">
+                      ●
+                    </p>
+                  </GradientText>
+                  <h4 className="text-[28px] leading-[32px] font-bold text-white">
+                    {client.title}
+                  </h4>
+                </div>
                 {/* Description */}
                 <p className="text-[20px] leading-[28px] font-medium text-white/70 relative z-10">
                   {client.description}
                 </p>
               </div>
-
-              {/* Micro Points */}
-              <ul className="space-y-4 relative mt-4 z-10">
-                {client.microPoints.map((point, pointIndex) => (
-                  <li
-                    key={pointIndex}
-                    className="flex items-center gap-3 group/item transition-colors duration-300"
-                  >
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover/item:bg-[#00C7FE] transition-colors duration-300 shrink-0" />
-                    <span className="text-[18px] leading-[22px] font-semibold text-gray-400 group-hover/item:text-white transition-colors duration-300">
-                      {point}
-                    </span>
-                  </li>
-                ))}
-              </ul>
             </div>
           ))}
         </div>

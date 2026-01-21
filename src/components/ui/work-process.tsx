@@ -1,301 +1,168 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GradientText from "./gradient-text";
-import AnimatedButton from "../Button";
-import Image from "next/image";
+import { Compass, Layers, Code2, Rocket } from "lucide-react";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+gsap.registerPlugin(useGSAP);
 
 interface ProcessStep {
   id: string;
   title: string;
   description: string;
-  points: string[];
-  image: string;
+  icon: React.ReactNode;
 }
 
 const processSteps: ProcessStep[] = [
   {
     id: "01",
-    title: "STRATEGY & DISCOVERY",
+    title: "Strategy & Discovery",
     description:
-      "Deep diving into your vision, requirements, and user needs to build a solid foundation. No shortcuts, just pure alignment.",
-    points: [
-      "User research & competitive analysis",
-      "Requirement documentation & technical scoping",
-      "Goal setting & success metrics definition",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
+      "Deeply understanding your goals to create a strategic roadmap for success.",
+    icon: <Compass className="w-10 h-10" />,
   },
   {
     id: "02",
-    title: "ARCHITECTURE & DESIGN",
+    title: "Architecture & Design",
     description:
-      "Crafting high-performance architecture and user-centric designs that are built to scale and delight.",
-    points: [
-      "Scalable system & database architecture",
-      "UI/UX wireframing & high-fidelity prototyping",
-      "Brand-aligned design systems",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1586717791821-3f44a563cc4c?auto=format&fit=crop&q=80&w=800",
+      "Crafting scalable architectures and intuitive interfaces with a focus on UI/UX.",
+    icon: <Layers className="w-10 h-10" />,
   },
   {
     id: "03",
-    title: "PRECISION ENGINEERING",
+    title: "Precision Engineering",
     description:
-      "Translating designs into clean, maintainable, and highly optimized code using the most advanced tech stacks.",
-    points: [
-      "Full-stack development (MERN, Next.js)",
-      "API development & third-party integrations",
-      "Unit testing & code optimization",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
+      "Building high-performance, maintainable codebases using the latest technologies.",
+    icon: <Code2 className="w-10 h-10" />,
   },
   {
     id: "04",
-    title: "DEPLOYMENT & GROWTH",
+    title: "Deployment & Growth",
     description:
-      "Ensuring a seamless launch and continuous optimization to keep your product fast, stable, and ready for more users.",
-    points: [
-      "CI/CD pipeline & cloud deployment",
-      "Core Web Vitals & performance monitoring",
-      "Post-launch support & iterative features",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+      "Launching your product safely and ensuring long-term scalability and stability.",
+    icon: <Rocket className="w-10 h-10" />,
   },
 ];
 
 export default function WorkProcess() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState<number>(1);
   const containerRef = useRef<HTMLDivElement>(null);
-  const stepsRootRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(
-    () => {
-      if (!containerRef.current || !stepsRootRef.current) return;
+  useGSAP(() => {
+    const cards = gsap.utils.toArray<HTMLElement>(".process-card-wrapper");
+    const contents = gsap.utils.toArray<HTMLElement>(".process-card-content");
+    const descriptions = gsap.utils.toArray<HTMLElement>(
+      ".process-description",
+    );
 
-      const steps = gsap.utils.toArray<HTMLElement>(".process-item");
-      const contents = gsap.utils.toArray<HTMLElement>(".process-content");
-      const images = gsap.utils.toArray<HTMLElement>(
-        ".process-image-container"
-      );
+    cards.forEach((card, i) => {
+      const isActive = activeIndex === i;
 
-      // Total height calculation for the section or pin duration
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: `+=${processSteps.length * 100}%`,
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
-        },
+      // Card expansion and basic styles
+      gsap.to(card, {
+        flexGrow: isActive ? 3 : 1, // Increased ratio for more dramatic effect
+        backgroundColor: isActive ? "#F3F4F6" : "rgba(255, 255, 255, 0.03)",
+        borderColor: isActive
+          ? "rgba(255, 255, 255, 1)"
+          : "rgba(255, 255, 255, 0.05)",
+        duration: 0.8,
+        ease: "power3.inOut",
       });
 
-      steps.forEach((step, i) => {
-        // Step expansion
-        if (i > 0) {
-          tl.to(
-            contents[i],
-            {
-              height: "auto",
-              opacity: 1,
-              duration: 1,
-              ease: "power2.inOut",
-            },
-            i
-          );
-
-          tl.to(
-            images[i],
-            {
-              opacity: 1,
-              scale: 1,
-              duration: 1,
-              ease: "power2.inOut",
-            },
-            i
-          );
-
-          // Close previous content
-          tl.to(
-            contents[i - 1],
-            {
-              height: 0,
-              opacity: 0,
-              duration: 1,
-              ease: "power2.inOut",
-            },
-            i
-          );
-
-          tl.to(
-            images[i - 1],
-            {
-              opacity: 0,
-              scale: 0.9,
-              duration: 1,
-              ease: "power2.inOut",
-            },
-            i
-          );
-        } else {
-          // First step is open by default but we still want it in the timeline
-          tl.set(contents[0], { height: "auto", opacity: 1 });
-          tl.set(images[0], { opacity: 1, scale: 1 });
-        }
-
-        // Final state: close last element if user continues scrolling past
-        if (i === steps.length - 1) {
-          tl.to(
-            contents[i],
-            {
-              height: 0,
-              opacity: 0,
-              duration: 1,
-              ease: "power2.inOut",
-            },
-            i + 1
-          );
-          tl.to(
-            images[i],
-            {
-              opacity: 0,
-              scale: 0.9,
-              duration: 1,
-              ease: "power2.inOut",
-            },
-            i + 1
-          );
-        }
+      // Synchronized text and icon color
+      gsap.to(contents[i], {
+        color: isActive ? "#000000" : "#FFFFFF",
+        duration: 0.6,
+        ease: "power2.inOut",
       });
 
-      return () => {
-        ScrollTrigger.getAll().forEach((st) => st.kill());
-      };
-    },
-    { scope: sectionRef }
-  );
+      // Smooth description expansion
+      gsap.to(descriptions[i], {
+        height: isActive ? 65 : 0,
+        opacity: isActive ? 1 : 0,
+        y: isActive ? 0 : 20,
+        marginTop: isActive ? 24 : 0,
+        duration: 0.8,
+        ease: "power3.inOut",
+        overwrite: true,
+      });
+    });
+  }, [activeIndex]);
+
+  const handleToggle = (index: number) => {
+    setActiveIndex(activeIndex === index ? -1 : index);
+  };
 
   return (
-    <section
-      ref={sectionRef}
-      className="w-full bg-[#06090D] overflow-hidden min-h-screen flex flex-col justify-center"
-    >
-      <div className="w-full max-w-[1440px] mx-auto px-6 py-12 md:py-20 flex flex-col h-full">
-        {/* Section Header - Sticky-ish behavior relative to pin */}
-        <div className="mb-12 md:mb-16">
-          <div className="flex justify-between items-end gap-6 flex-wrap">
-            <div>
-              <h2
-                className="text-5xl md:text-7xl lg:text-8xl text-white mb-6"
-                style={{
-                  fontFamily: "var(--font-boldonse)",
-                  fontWeight: 400,
-                  fontStyle: "normal",
-                  lineHeight: 0.9,
-                }}
-              >
-                Work <GradientText>Process</GradientText>
-              </h2>
-              <p className="text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed">
-                Modern, functional design that puts users first and helps your
-                product stand out.
-              </p>
-            </div>
-            <div className="hidden lg:block">
-              <AnimatedButton onClick={() => {}}>
-                View More Detail
-              </AnimatedButton>
-            </div>
-          </div>
+    <section className="w-full py-20 md:py-32 bg-transparent overflow-hidden">
+      <div className="max-w-[1440px] mx-auto px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center justify-center gap-4 text-center mb-16 md:mb-24">
+          <h2
+            className="text-5xl md:text-[64px] font-bold text-white tracking-tight"
+            style={{ fontFamily: "var(--font-boldonse)" }}
+          >
+            How I Get It <GradientText>Done</GradientText>, Smoothly
+          </h2>
+          <p className="text-gray-400 text-lg md:text-xl max-w-2xl font-medium">
+            From initial research to final launch, I follow a disciplined
+            workflow to ensure every project exceeds expectations.
+          </p>
         </div>
 
-        {/* Main Interaction Area */}
+        {/* Horizontal Expanding Cards */}
         <div
           ref={containerRef}
-          className="flex-1 flex flex-col lg:flex-row gap-12 items-start"
+          className="flex flex-col md:flex-row gap-4 h-auto md:h-[400px] w-full items-stretch"
         >
-          {/* Accordion List */}
-          <div ref={stepsRootRef} className="w-full lg:w-3/5 space-y-0">
-            {processSteps.map((step, index) => (
+          {processSteps.map((step, index) => (
+            <div
+              key={step.id}
+              onClick={() => handleToggle(index)}
+              style={{ flexBasis: "0%" }} // Crucial for predictable flex-grow expansion
+              className="process-card-wrapper w-fit min-w-[250px] relative group cursor-pointer overflow-hidden rounded-[24px] md:rounded-[24px] border border-white/5"
+            >
+              {/* Background Pattern for Active State */}
               <div
-                key={step.id}
-                className="process-item border-b border-white/10 last:border-0"
+                className={`absolute inset-0 transition-opacity duration-700 ${activeIndex === index ? "opacity-5" : "opacity-0"}`}
               >
-                <div className="py-8 md:py-10">
-                  <h3
-                    className="text-3xl md:text-5xl lg:text-6xl text-white uppercase mb-0 cursor-default"
-                    style={{
-                      fontFamily: "var(--font-boldonse)",
-                      fontWeight: 400,
-                      fontStyle: "normal",
-                      letterSpacing: "-0.01em",
-                    }}
-                  >
-                    {step.title}
-                  </h3>
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage:
+                      "radial-gradient(circle, #000 1px, transparent 1px)",
+                    backgroundSize: "24px 24px",
+                  }}
+                ></div>
+              </div>
 
-                  {/* Detailed Content - Animates height and opacity */}
-                  <div className="process-content h-0 opacity-0 overflow-hidden">
-                    <div className="pt-8 pb-4">
-                      <p className="text-gray-400 text-lg md:text-xl leading-relaxed mb-8 max-w-xl font-light">
+              <div className="process-card-content h-full flex flex-col p-8 md:p-8 relative z-10">
+                {/* Icon */}
+                <div
+                  className={`mb-auto transition-transform duration-500 ${activeIndex === index ? "scale-100" : "scale-100 opacity-60"}`}
+                >
+                  {step.icon}
+                </div>
+
+                {/* Content */}
+                <div className="mt-auto">
+                  <div className="flex flex-col">
+                    <h3 className="text-2xl md:text-[32px] font-bold tracking-tight leading-tight">
+                      {step.title}
+                    </h3>
+
+                    <div className="process-description h-0 opacity-0 overflow-hidden">
+                      <p className="text-current opacity-70 text-lg md:text-xl font-medium leading-relaxed max-w-[420px]">
                         {step.description}
                       </p>
-                      <ul className="space-y-4">
-                        {step.points.map((point, idx) => (
-                          <li
-                            key={idx}
-                            className="flex items-center gap-4 text-gray-300"
-                          >
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#00C7FE]" />
-                            <span className="text-base md:text-lg font-light tracking-wide">
-                              {point}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
                     </div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* Persistent Image Area (Right) */}
-          <div className="hidden lg:flex w-2/5 h-[450px] sticky top-1/2 -translate-y-1/2 items-center justify-center">
-            <div className="relative w-full h-full rounded-[32px] overflow-hidden bg-white/5 border border-white/10 backdrop-blur-xl transition-all duration-700 hover:border-[#00C7FE]/30 hover:shadow-[0_0_50px_rgba(0,199,254,0.1)]">
-              {processSteps.map((step, index) => (
-                <div
-                  key={`img-${step.id}`}
-                  className="process-image-container absolute inset-0 opacity-0 scale-90 transition-all duration-700 flex items-center justify-center p-8"
-                >
-                  <div className="relative w-full h-full rounded-[24px] overflow-hidden">
-                    <Image
-                      src={step.image}
-                      alt={step.title}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#06090D] via-transparent to-transparent opacity-40" />
-                  </div>
-                </div>
-              ))}
             </div>
-          </div>
-        </div>
-
-        {/* Mobile-only CTA */}
-        <div className="lg:hidden mt-8 flex justify-center">
-          <AnimatedButton onClick={() => {}}>View More Detail</AnimatedButton>
+          ))}
         </div>
       </div>
     </section>
