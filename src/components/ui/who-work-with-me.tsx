@@ -45,7 +45,7 @@ const clients: ClientCard[] = [
 
 export default function WhoIWorkWith() {
   const [visibleItems, setVisibleItems] = useState<boolean[]>(
-    new Array(clients.length).fill(false)
+    new Array(clients.length).fill(false),
   );
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -67,7 +67,7 @@ export default function WhoIWorkWith() {
             }
           });
         },
-        { threshold: 0.1 }
+        { threshold: 0.1 },
       );
 
       observer.observe(ref);

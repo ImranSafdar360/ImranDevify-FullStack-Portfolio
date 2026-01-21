@@ -1,21 +1,21 @@
 import type { NextConfig } from "next";
-import bundleAnalyzer from '@next/bundle-analyzer';
+import bundleAnalyzer from "@next/bundle-analyzer";
 
 const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
+  enabled: process.env.ANALYZE === "true",
 });
 
 const nextConfig: NextConfig = {
   // Performance optimizations
   compress: true,
   poweredByHeader: false,
-  
+
   // SEO and metadata
   generateEtags: true,
-  
+
   // Image optimization
   images: {
-    formats: ['image/webp', 'image/avif'],
+    formats: ["image/webp", "image/avif"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
@@ -23,71 +23,81 @@ const nextConfig: NextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
       },
       {
-        protocol: 'https',
-        hostname: 'cdn.prod.website-files.com',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "cdn.prod.website-files.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.wzwebs.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "img.freepik.com",
+        pathname: "/**",
       },
     ],
   },
-  
+
   // Headers for SEO and security
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           // Security headers
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
+            key: "X-Frame-Options",
+            value: "DENY",
           },
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
           },
           {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
           },
           // Performance headers
           {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on',
+            key: "X-DNS-Prefetch-Control",
+            value: "on",
           },
         ],
       },
       // Cache static assets
       {
-        source: '/(.*)\\.(ico|png|jpg|jpeg|gif|webp|svg|css|js)',
+        source: "/(.*)\\.(ico|png|jpg|jpeg|gif|webp|svg|css|js)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
       // Cache API routes with shorter TTL
       {
-        source: '/api/(.*)',
+        source: "/api/(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=300, s-maxage=300',
+            key: "Cache-Control",
+            value: "public, max-age=300, s-maxage=300",
           },
         ],
       },
     ];
   },
-  
+
   // Redirects for SEO - Disabled to prevent redirect loops on Vercel
   // async redirects() {
   //   return [
@@ -106,13 +116,12 @@ const nextConfig: NextConfig = {
   //     },
   //   ];
   // },
-  
+
   // Experimental features
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
-    webVitalsAttribution: ['CLS', 'LCP'],
+    optimizePackageImports: ["lucide-react", "framer-motion"],
+    webVitalsAttribution: ["CLS", "LCP"],
   },
-  
 };
 
 export default withBundleAnalyzer(nextConfig);

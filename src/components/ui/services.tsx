@@ -57,7 +57,7 @@ const services: ServiceCard[] = [
 
 export default function Services() {
   const [visibleCards, setVisibleCards] = useState<boolean[]>(
-    new Array(services.length).fill(false)
+    new Array(services.length).fill(false),
   );
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -79,7 +79,7 @@ export default function Services() {
             }
           });
         },
-        { threshold: 0.1 }
+        { threshold: 0.1 },
       );
 
       observer.observe(ref);
@@ -170,7 +170,7 @@ export default function Services() {
         </div>
 
         {/* Micro-Line */}
-        <p className="text-center text-gray-500 text-[20px] leading-[28px] mb-8 font-light tracking-wide italic">
+        <p className="text-center text-gray-500 text-[20px] leading-[28px] mb-4 font-light tracking-wide">
           &ldquo;Engineering digital products with precision, scalability, and
           impact.&rdquo;
         </p>
