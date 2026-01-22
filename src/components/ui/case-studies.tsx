@@ -89,15 +89,27 @@ export default function CaseStudies() {
   const router = useRouter();
 
   return (
-    <section className="w-full px-4 md:px-6 bg-transparent">
+    <section className="w-full py-20 px-6">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="w-full rounded-[24px] bg-black md:rounded-[40px] overflow-hidden py-16 md:py-24 border border-white/5"
+        className="relative w-full rounded-[40px] md:rounded-[64px] overflow-hidden bg-[#0A0A0A] border border-white/5 py-16 md:py-24 px-6 md:px-20"
       >
-        <div className="max-w-[1440px] mx-auto flex flex-col gap-16">
+        {/* Grid Background */}
+        <div
+          className="absolute inset-0 opacity-20 pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)`,
+            backgroundSize: "40px 40px",
+          }}
+        />
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black pointer-events-none" />
+
+        <div className="relative z-10 max-w-[1440px] mx-auto flex flex-col gap-16">
           {/* Header */}
           <div className="flex flex-col items-center justify-center gap-[16px] text-center">
             <motion.h2
@@ -105,7 +117,7 @@ export default function CaseStudies() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-4xl md:text-[64px] leading-[84px] font-bold text-white"
+              className="text-4xl md:text-[64px] leading-tight font-bold text-white"
               style={{ fontFamily: "var(--font-boldonse)" }}
             >
               Best <GradientText>Projects</GradientText> Picks
@@ -134,13 +146,10 @@ export default function CaseStudies() {
             ))}
           </div>
 
-          <div>
-            {" "}
-            {/* Micro-Line */}
-            <p className="text-center text-gray-500 text-[20px] leading-[28px] mb-4 font-light tracking-wide">
+          <div className="flex flex-col items-center mt-8">
+            <p className="text-center text-gray-400 text-lg md:text-xl mb-6 font-medium">
               Want to see more results? Let&apos;s explore it.
             </p>
-            {/* CTA */}
             <div className="flex justify-center">
               <AnimatedButton onClick={() => {}}>
                 See All Projects

@@ -38,7 +38,7 @@ export default function RootLayout({
             </ShowOnNonAdmin>
           </header>
           {children}
-          <footer className="mt-[100px] mx-[30px]">
+          <footer>
             <ShowOnNonAdmin>
               <Footer />
             </ShowOnNonAdmin>
