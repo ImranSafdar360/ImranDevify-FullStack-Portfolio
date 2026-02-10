@@ -16,47 +16,47 @@ interface ProjectImage {
 
 const projectImages: ProjectImage[] = [
   {
-    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d3f3be42208d9a93cec_Jack2%20Media.webp",
+    src: "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FPetMock.423bd46e.png&w=1080&q=75",
     alt: "Dashboard Analytics",
     width: 320,
   },
   {
-    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d060d0ac5a20234a41d_motorsports%20website.webp",
+    src: "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FMarkitMock.91eccd8b.png&w=1080&q=75",
     alt: "Data Visualization",
     width: 280,
   },
   {
-    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d3f3be42208d9a93cec_Jack2%20Media.webp",
+    src: "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FXionMock.673a96ac.png&w=1080&q=75",
     alt: "Mobile App Design",
     width: 360,
   },
   {
-    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d8619a4019a34e37414_nutradora.webp",
+    src: "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FVinhMockup.36fc6310.png&w=1080&q=75",
     alt: "Web Development",
     width: 300,
   },
   {
-    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6cf619f16864efb14f1f_genesis%20innovation%20landing%20page.webp",
+    src: "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FPetMock.423bd46e.png&w=1080&q=75",
     alt: "Code Editor",
     width: 340,
   },
   {
-    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d3f3be42208d9a93cec_Jack2%20Media.webp",
+    src: "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FXionMock.673a96ac.png&w=1080&q=75",
     alt: "UI Design",
     width: 290,
   },
   {
-    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d060d0ac5a20234a41d_motorsports%20website.webp",
+    src: "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FMarkitMock.91eccd8b.png&w=1080&q=75",
     alt: "React Development",
     width: 310,
   },
   {
-    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d3f3be42208d9a93cec_Jack2%20Media.webp",
+    src: "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FXionMock.673a96ac.png&w=1080&q=75",
     alt: "SaaS Platform",
     width: 350,
   },
   {
-    src: "https://cdn.prod.website-files.com/65c7568517fcb5339e36e278/672c6d8619a4019a34e37414_nutradora.webp",
+    src: "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FPetMock.423bd46e.png&w=1080&q=75",
     alt: "Tech Stack",
     width: 270,
   },
@@ -77,19 +77,6 @@ export default function FeaturedWork() {
         duration: 30,
         ease: "none",
       });
-
-      const container = containerRef.current;
-      if (container) {
-        container.addEventListener("mouseenter", () => tween.pause());
-        container.addEventListener("mouseleave", () => tween.play());
-      }
-
-      return () => {
-        if (container) {
-          container.removeEventListener("mouseenter", () => tween.pause());
-          container.removeEventListener("mouseleave", () => tween.play());
-        }
-      };
     },
     { scope: containerRef },
   );
@@ -97,9 +84,9 @@ export default function FeaturedWork() {
   const duplicatedImages = [...projectImages, ...projectImages];
 
   return (
-    <Section className="w-full max-w-full relative -mt-[60px] min-h-[450px]">
+    <Section className="w-full max-w-full relative -mt-[70px] min-h-[300px]">
       <div
-        className="w-full h-[450px] relative flex justify-center items-center overflow-hidden"
+        className="w-full h-[300px] relative flex justify-center items-center overflow-hidden"
         ref={containerRef}
       >
         <div className="absolute top-1/2 -translate-y-1/2 left-0 w-[80px] lg:w-[170px] h-[400px] bg-gradient-to-r from-[#06090D] to-transparent z-10 pointer-events-none"></div>
@@ -113,10 +100,10 @@ export default function FeaturedWork() {
           {duplicatedImages.map((image, index) => (
             <div
               key={`${image.alt}-${index}`}
-              className="flex-shrink-0 relative group rounded-[20px] overflow-hidden bg-gray-800/20 border border-gray-700/30 p-2"
+              className="flex-shrink-0 relative group rounded-[20px] overflow-hidden"
               style={{
-                width: `600px`,
-                height: "400px",
+                width: `455px`,
+                height: "300px",
               }}
             >
               <div className="relative w-full h-full overflow-hidden">

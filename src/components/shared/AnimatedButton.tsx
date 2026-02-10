@@ -16,6 +16,9 @@ const AnimatedButton = ({
           viewBox="0 0 24 24"
           className="arr-2"
           xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          style={{ width: '24px', height: '24px', flexShrink: 0 }}
         >
           <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
         </svg>
@@ -25,6 +28,9 @@ const AnimatedButton = ({
           viewBox="0 0 24 24"
           className="arr-1"
           xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          style={{ width: '24px', height: '24px', flexShrink: 0 }}
         >
           <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
         </svg>
@@ -41,15 +47,15 @@ const StyledWrapper = styled.div`
     display: flex;
     align-items: center;
     gap: 4px;
-    padding: 16px 36px;
-    border: 1px solid;
+    padding: 12px 36px;
+    border: 4px solid;
     border-color: transparent;
     font-size: 16px;
-    background-color: #ffffff;
-    border-radius: 50px;
+    background-color: inherit;
+    border-radius: 100px;
     font-weight: 600;
-    color: #1f387e;
-    box-shadow: 0 0 0 1px #ffffff;
+    color: white;
+    box-shadow: 0 0 0 2px white;
     cursor: pointer;
     overflow: hidden;
     transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -58,9 +64,16 @@ const StyledWrapper = styled.div`
   .animated-button svg {
     position: absolute;
     width: 24px;
-    fill: #1f387e;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    max-width: 24px;
+    max-height: 24px;
+    flex-shrink: 0;
+    fill: white;
     z-index: 9;
     transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    display: block;
   }
 
   .animated-button .arr-1 {
@@ -78,7 +91,7 @@ const StyledWrapper = styled.div`
     transform: translate(-50%, -50%);
     width: 20px;
     height: 20px;
-    background-color: #ffffff;
+    background-color: white;
     border-radius: 50%;
     opacity: 0;
     transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
@@ -93,8 +106,8 @@ const StyledWrapper = styled.div`
 
   .animated-button:hover {
     box-shadow: 0 0 0 12px transparent;
-    color: #1e1e1e;
-    border-radius: 50px;
+    color: #212121;
+    border-radius: 12px;
   }
 
   .animated-button:hover .arr-1 {
@@ -110,17 +123,17 @@ const StyledWrapper = styled.div`
   }
 
   .animated-button:hover svg {
-    fill: #1e1e1e;
+    fill: #212121;
   }
 
   .animated-button:active {
     scale: 0.95;
-    box-shadow: 0 0 0 4px #ffffff;
+    box-shadow: 0 0 0 4px white;
   }
 
   .animated-button:hover .circle {
     width: 220px;
     height: 220px;
     opacity: 1;
-  }
-`;
+  }`;
+

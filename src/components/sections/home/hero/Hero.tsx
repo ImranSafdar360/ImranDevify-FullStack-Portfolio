@@ -6,6 +6,7 @@ import AnimatedButton from "@/components/shared/AnimatedButton";
 import SocialDock from "@/components/ui/social-dock";
 import Section from "@/components/shared/Section";
 import Image from "next/image";
+import FeaturedWork from "../featured-work/FeaturedWork";
 
 const LiquidGlass = dynamic(() => import("liquid-glass-react"), {
   ssr: false,
@@ -50,7 +51,7 @@ export default function Hero() {
     },
   ];
   return (
-    <Section className="w-full max-w-full relative flex flex-col justify-center items-center gap-[120px]">
+    <Section className="w-full max-w-full relative flex flex-col justify-start items-center gap-[120px] pt-[150px]">
       <Image
         src="/images/hero-bg.avif"
         alt="Hero"
@@ -100,6 +101,7 @@ export default function Hero() {
           <SocialDock items={socialItems} />
         </div>
       </div>
+      <FeaturedWork />
     </Section>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import Hero from "@/components/sections/home/hero/Hero";
-import FeaturedWork from "@/components/sections/home/featured-work/FeaturedWork";
 import AboutMini from "@/components/sections/home/about/AboutMini";
 import CaseStudies from "@/components/sections/home/case-studies/CaseStudies";
 import Services from "@/components/sections/home/services/Services";
@@ -17,7 +16,6 @@ const HomePage = () => {
   return (
     <>
       <Hero />
-      <FeaturedWork />
       <AboutMini />
       <CaseStudies />
       <Services />

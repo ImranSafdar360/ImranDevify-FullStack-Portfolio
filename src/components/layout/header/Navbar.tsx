@@ -1,60 +1,78 @@
 "use client";
 
-import CardNav from "./CardNav";
+import Link from "next/link";
 import Logo from "./Logo";
-// import logo from "./logo.svg";
 
 export default function Navbar() {
-  const items = [
-    {
-      label: "About",
-      bgColor: "#0D0716",
-      textColor: "#fff",
-      links: [
-        { label: "Company", ariaLabel: "About Company", href: "#" },
-        { label: "Careers", ariaLabel: "About Careers", href: "#" },
-      ],
-    },
-    {
-      label: "Projects",
-      bgColor: "#170D27",
-      textColor: "#fff",
-      links: [
-        { label: "Featured", ariaLabel: "Featured Projects", href: "#" },
-        { label: "Case Studies", ariaLabel: "Project Case Studies", href: "#" },
-      ],
-    },
-    {
-      label: "Contact",
-      bgColor: "#271E37",
-      textColor: "#fff",
-      links: [
-        {
-          label: "Email",
-          ariaLabel: "Email us",
-          href: "mailto:hello@example.com",
-        },
-        { label: "Twitter", ariaLabel: "Twitter", href: "https://twitter.com" },
-        {
-          label: "LinkedIn",
-          ariaLabel: "LinkedIn",
-          href: "https://linkedin.com",
-        },
-      ],
-    },
+  // Left side navigation links
+  const leftLinks = [
+    { name: "Work", href: "/projects" },
+    { name: "About", href: "/about" },
+    { name: "Services", href: "/services" },
+  ];
+
+  // Right side navigation links
+  const rightLinks = [
+    { name: "Blog", href: "/blogs" },
+    { name: "Contact", href: "/contact" },
+    { name: "Resume", href: "/resume" },
   ];
 
   return (
-    <CardNav
-      logo={<Logo />}
-      isComponentLogo={true}
-      logoAlt="Company Logo"
-      items={items}
-      baseColor="#262626"
-      menuColor="#fff"
-      buttonBgColor="#fff"
-      buttonTextColor="#000"
-      ease="power3.out"
-    />
+    <nav className="fixed top-0 left-0 w-full z-50">
+          <div className="relative w-full max-w-[900px] mx-auto flex">
+            
+            {/* Main content area with glass effect - merges with thin bars */}
+            <div 
+              className="w-full relative rounded-b-[64px] overflow-hidden"
+              style={{
+                background: 'linear-gradient(to bottom, rgba(13, 13, 13, 0.1) 0%, rgba(13, 13, 13, 0.05) 50%, rgba(13, 13, 13, 0.02) 100%)',
+                boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                borderTop: 'none',
+                paddingLeft: '24px',
+                paddingRight: '24px',
+              }}
+            >
+              {/* Content container with three sections */}
+              <div className="relative flex items-center justify-between px-4 md:px-8 lg:px-12 py-4 md:py-5">
+                {/* Left section - 3 links */}
+                <div className="flex items-center gap-4 sm:gap-6 md:gap-8 flex-1 justify-start">
+                  {leftLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className="text-white/90 hover:text-white text-sm md:text-base font-bold transition-all duration-300 relative group whitespace-nowrap"
+                    >
+                      {link.name}
+                      <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-white group-hover:w-full transition-all duration-300"></span>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Center section - Brand Logo */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex-shrink-0">
+                  <Logo />
+                </div>
+
+                {/* Right section - 3 links */}
+                <div className="flex items-center gap-4 sm:gap-6 md:gap-8 flex-1 justify-end">
+                  {rightLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className="text-white/90 hover:text-white text-sm md:text-base font-bold transition-all duration-300 relative group whitespace-nowrap"
+                    >
+                      {link.name}
+                      <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-white group-hover:w-full transition-all duration-300"></span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+          </div>
+    </nav>
   );
 }

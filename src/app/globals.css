@@ -18,20 +18,6 @@
   --font-boldonse: "Boldonse", serif, system-ui, Arial;
 }
 
-.dark {
-  /* Minimal dark theme overrides */
-  --color-background: #0a0a0a;
-  --color-text: #ffffff;
-  --color-subtext: #c9c9c9;
-}
-
-.light {
-  /* Minimal light theme overrides */
-  --color-background: #ffffff;
-  --color-text: #06090d;
-  --color-subtext: #c9c9c9;
-}
-
 :root {
   /* Minimal light theme variables */
   --color-background: #06090d;
