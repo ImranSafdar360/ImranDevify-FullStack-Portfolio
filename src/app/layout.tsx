@@ -1,10 +1,8 @@
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
-import Providers from "@/components/Providers";
-
+import Providers from "@/components/layout/providers/Providers";
 import "./globals.css";
-import ShowOnNonAdmin from "@/components/ShowOnNonAdmin";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/header/Navbar";
+import Footer from "@/components/layout/footer/Footer";
+import Navbar from "@/components/layout/header/Navbar";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -16,10 +14,6 @@ const fontJakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
-
-// Boldonse font is loaded via CSS @font-face in globals.css
-// This approach allows the build to succeed even if font files are not present
-// The CSS will handle font loading gracefully with fallbacks
 
 export default function RootLayout({
   children,
@@ -33,15 +27,11 @@ export default function RootLayout({
       >
         <Providers>
           <header>
-            <ShowOnNonAdmin>
-              <Navbar />
-            </ShowOnNonAdmin>
+            <Navbar />
           </header>
           {children}
           <footer>
-            <ShowOnNonAdmin>
-              <Footer />
-            </ShowOnNonAdmin>
+            <Footer />
           </footer>
         </Providers>
       </body>

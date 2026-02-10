@@ -45,7 +45,7 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // Headers for SEO and security
+  // Headers for security
   async headers() {
     return [
       {
@@ -82,16 +82,6 @@ const nextConfig: NextConfig = {
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      // Cache API routes with shorter TTL
-      {
-        source: "/api/(.*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=300, s-maxage=300",
           },
         ],
       },

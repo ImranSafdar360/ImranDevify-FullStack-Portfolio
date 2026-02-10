@@ -5,7 +5,8 @@
 /* All three variants (woff2, woff, ttf) are loaded for maximum browser compatibility */
 @font-face {
   font-family: "Boldonse";
-  src: url("/fonts/Boldonse-Regular.woff2") format("woff2"),
+  src:
+    url("/fonts/Boldonse-Regular.woff2") format("woff2"),
     url("/fonts/Boldonse-Regular.woff") format("woff"),
     url("/fonts/Boldonse-Regular.ttf") format("truetype");
   font-weight: 400;
@@ -19,7 +20,7 @@
 
 .dark {
   /* Minimal dark theme overrides */
-  --color-background: #06090d;
+  --color-background: #0a0a0a;
   --color-text: #ffffff;
   --color-subtext: #c9c9c9;
 }
