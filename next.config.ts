@@ -6,6 +6,16 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
+  // ESLint configuration
+  eslint: {
+    // Ignore ESLint errors during build to avoid compatibility issues
+    ignoreDuringBuilds: false,
+  },
+  // TypeScript configuration
+  typescript: {
+    // Ignore TypeScript errors during build (set to false in production)
+    ignoreBuildErrors: false,
+  },
   // Performance optimizations
   compress: true,
   poweredByHeader: false,

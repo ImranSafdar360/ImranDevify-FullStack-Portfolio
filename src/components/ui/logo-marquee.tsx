@@ -11,68 +11,17 @@ import {
   SiExpo,
   SiGit,
   SiGithub,
-  SiOpenai,
   SiPostgresql,
   SiMysql,
   SiNextdotjs,
 } from "react-icons/si";
-import { FaMobileAlt } from "react-icons/fa";
+import { IconType } from "react-icons";
 
-const ExpertiseItem = ({ icon: Icon, text }: { icon: any; text: string }) => (
+const ExpertiseItem = ({ icon: Icon, text }: { icon: IconType; text: string }) => (
   <div className="flex items-center gap-4 text-white/30 hover:text-white/90 transition-all duration-500 group cursor-pointer">
     <Icon className="w-8 h-8 group-hover:scale-110 transition-transform duration-500" />
     <span className="text-[22px] font-semibold tracking-tight">{text}</span>
   </div>
-);
-
-// Custom SVG for Cursor
-const CursorLogo = () => (
-  <svg
-    width="32"
-    height="32"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M5.5 3.5L18.5 12L5.5 20.5V3.5Z"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M11 11.5L15 15.5"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
-// Custom SVG for Antigravity (Representing smooth, floating, powerful AI)
-const AntigravityLogo = () => (
-  <svg
-    width="32"
-    height="32"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M12 2L2 12L12 22L22 12L12 2Z"
-      stroke="currentColor"
-      strokeWidth="2"
-      fill="currentColor"
-      fillOpacity="0.2"
-    />
-    <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" />
-    <path
-      d="M12 8V4M12 20V16M8 12H4M20 12H16"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-    />
-  </svg>
 );
 
 const expertise = [

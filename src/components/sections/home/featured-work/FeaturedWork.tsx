@@ -71,7 +71,7 @@ export default function FeaturedWork() {
       const track = trackRef.current;
       if (!track) return;
 
-      const tween = gsap.to(track, {
+      gsap.to(track, {
         xPercent: 25,
         repeat: -1,
         duration: 30,
