@@ -2,15 +2,12 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 interface SocialIcon {
-  icon?: React.ReactNode;
-  imageSrc?: string;
+  imageSrc?: StaticImageData;
   label: string;
   href: string;
-  gradientFrom: string;
-  gradientTo: string;
 }
 
 interface SocialDockProps {
@@ -39,30 +36,22 @@ const SocialDock = ({ items, className }: SocialDockProps) => {
           {/* Icon Container with Gradient Background */}
           <motion.div
             className="w-12 h-12 rounded-[12px] flex items-center justify-center cursor-pointer relative overflow-hidden"
-            style={{
-              background: `linear-gradient(135deg, ${item.gradientFrom}, ${item.gradientTo})`,
-            }}
             whileHover={{
-              boxShadow: `0 8px 24px ${item.gradientFrom}40`,
+              boxShadow: `0 8px 24px rgba(255,255,255,0.4)`,
             }}
           >
             {/* Icon */}
-            <div className="relative z-10 flex items-center justify-center">
-              {item.imageSrc ? (
-                <Image
-                  src={item.imageSrc}
-                  alt={item.label}
-                  width={34}
-                  height={34}
-                  className="object-contain"
-                />
-              ) : (
-                <div className="text-white">
-                  {item.icon}
-                </div>
+            <div className="w-full h-full relative z-10 flex items-center justify-center">
+              {item.imageSrc && (
+              <Image
+                src={item.imageSrc}
+                alt={item.label}
+                fill
+                className="object-cover"
+              />
               )}
             </div>
-            
+
             {/* Shine effect on hover */}
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
@@ -76,17 +65,17 @@ const SocialDock = ({ items, className }: SocialDockProps) => {
           <AnimatePresence>
             {hoveredIndex === index && (
               <motion.div
-                initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                initial={{ opacity: 0, y: 5, scale: 0.8 }}
                 animate={{ opacity: 1, y: -8, scale: 1 }}
-                exit={{ opacity: 0, y: 10, scale: 0.8 }}
+                exit={{ opacity: 0, y: 5, scale: 0.8 }}
                 transition={{ duration: 0.2 }}
-                className="absolute -top-12 left-1/2 transform -translate-x-1/2 whitespace-nowrap"
+                className="absolute -top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap"
               >
-                <div className="bg-gray-900 text-white text-xs font-medium px-3 py-1.5 rounded-lg shadow-lg border border-gray-700">
+                <div className="bg-black text-white text-xs font-medium px-3 py-1.5 rounded-lg shadow-lg border border-white/10">
                   {item.label}
                   {/* Tooltip arrow */}
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-px">
-                    <div className="border-4 border-transparent border-t-gray-900"></div>
+                    <div className="border-4 border-transparent border-t-black"></div>
                   </div>
                 </div>
               </motion.div>
