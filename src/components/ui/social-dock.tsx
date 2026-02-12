@@ -18,14 +18,15 @@ interface SocialDockProps {
 const SocialDock = ({ items, className }: SocialDockProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
+  const handleClick = (href: string) => {
+    window.open(href, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       {items.map((item, index) => (
-        <motion.a
+        <motion.div
           key={index}
-          href={item.href}
-          target="_blank"
-          rel="noopener noreferrer"
           className="relative group"
           onHoverStart={() => setHoveredIndex(index)}
           onHoverEnd={() => setHoveredIndex(null)}
@@ -36,6 +37,7 @@ const SocialDock = ({ items, className }: SocialDockProps) => {
           {/* Icon Container with Gradient Background */}
           <motion.div
             className="w-12 h-12 rounded-[12px] flex items-center justify-center cursor-pointer relative overflow-hidden"
+            onClick={() => handleClick(item.href)}
             whileHover={{
               boxShadow: `0 8px 24px rgba(255,255,255,0.4)`,
             }}
@@ -48,13 +50,14 @@ const SocialDock = ({ items, className }: SocialDockProps) => {
                 alt={item.label}
                 fill
                 className="object-cover"
+                loading='lazy'
               />
               )}
             </div>
 
             {/* Shine effect on hover */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent z-20"
               initial={{ x: '-100%' }}
               animate={hoveredIndex === index ? { x: '100%' } : { x: '-100%' }}
               transition={{ duration: 0.6 }}
@@ -69,7 +72,7 @@ const SocialDock = ({ items, className }: SocialDockProps) => {
                 animate={{ opacity: 1, y: -8, scale: 1 }}
                 exit={{ opacity: 0, y: 5, scale: 0.8 }}
                 transition={{ duration: 0.2 }}
-                className="absolute -top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap"
+                className="absolute -top-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap pointer-events-none z-20"
               >
                 <div className="bg-black text-white text-xs font-medium px-3 py-1.5 rounded-lg shadow-lg border border-white/10">
                   {item.label}
@@ -81,7 +84,7 @@ const SocialDock = ({ items, className }: SocialDockProps) => {
               </motion.div>
             )}
           </AnimatePresence>
-        </motion.a>
+        </motion.div>
       ))}
     </div>
   );

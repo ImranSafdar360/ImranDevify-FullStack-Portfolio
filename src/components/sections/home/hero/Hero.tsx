@@ -10,6 +10,7 @@ import FeaturedWork from "../featured-work/FeaturedWork";
 import whatsappIcon from "../../../../../public/images/icons/whatsapp.png";
 import linkedinIcon from "../../../../../public/images/icons/linkedin.png";
 import gmailIcon from "../../../../../public/images/icons/gmail.png";
+import GradientText from "@/components/ui/gradient-text";
 
 const LiquidGlass = dynamic(() => import("liquid-glass-react"), {
   ssr: false,
@@ -18,30 +19,40 @@ const LiquidGlass = dynamic(() => import("liquid-glass-react"), {
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Social media links with demo messages
+  const phoneNumber = "923494898190";
+  const email = "imransafdar360@gmail.com";
+  const linkedinProfile = "imran-safdar/";
+  
+  const demoMessage = encodeURIComponent("Hi! I'm interested in discussing a project with you. Let's connect!");
+  const emailSubject = encodeURIComponent("Project Inquiry - Let's Connect");
+  const emailBody = encodeURIComponent("Hi Imran,\n\nI came across your portfolio and I'm interested in discussing a potential project with you.\n\nLooking forward to hearing from you!\n\nBest regards");
+
   const socialItems = [
     {
       imageSrc: whatsappIcon,
       label: "WhatsApp",
-      href: "https://wa.me/your-number",
+      href: `https://wa.me/${phoneNumber}?text=${demoMessage}`,
     },
     {
       imageSrc: linkedinIcon,
       label: "LinkedIn",
-      href: "https://linkedin.com/in/your-profile",
+      href: `https://www.linkedin.com/in/${linkedinProfile}`,
     },
     {
       imageSrc: gmailIcon,
       label: "Gmail",
-      href: "mailto:your-email@gmail.com",
+      href: `mailto:${email}?subject=${emailSubject}&body=${emailBody}`,
     },
   ];
   return (
-    <Section className="w-full max-w-full relative flex flex-col justify-start items-center gap-[120px] pt-[150px]">
+    <Section className="max-w-full relative flex flex-col justify-start items-center gap-[120px] pt-[150px]">
       <Image
-        src="/images/hero-bg.avif"
-        alt="Hero"
+        src="/images/hero-bg.webp"
+        alt="Hero Background Effect"
         fill
         className="object-cover absolute top-0 left-0 w-full h-full"
+        loading="lazy"
       />
 
       <div
@@ -68,11 +79,11 @@ export default function Hero() {
             fontFamily: "var(--font-boldonse)",
           }}
         >
-          Build Products That Perform, Scale, and Stand Out.
+          Build Products That Perform, Scale, and <span className="bg-white px-2 py-1 rounded-2xl inline-block"><GradientText>Stand Out.</GradientText></span>
         </h1>
 
         {/* Subtitle */}
-        <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-0 text-center max-w-[900px]">
+        <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-0 text-center max-w-[900px] font-medium">
           I’m 𝗜𝗺𝗿𝗮𝗻 𝗦𝗮𝗳𝗱𝗮𝗿, a MERN Stack & React Native developer helping 𝗦𝗮𝗮𝗦
           𝗳𝗼𝘂𝗻𝗱𝗲𝗿𝘀, 𝗮𝗴𝗲𝗻𝗰𝗶𝗲𝘀, 𝗮𝗻𝗱 𝘀𝘁𝗮𝗿𝘁𝘂𝗽𝘀 turn complex ideas into fast,
           reliable, growth-ready digital products.

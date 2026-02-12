@@ -64,61 +64,114 @@ const projectImages: ProjectImage[] = [
 
 export default function FeaturedWork() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const trackTopRef = useRef<HTMLDivElement>(null);
+  const trackBottomRef = useRef<HTMLDivElement>(null);
+
+  const duplicatedImages = [
+    ...projectImages,
+    ...projectImages,
+    ...projectImages,
+    ...projectImages,
+  ];
+
+  const reversedImages = [...duplicatedImages].reverse();
 
   useGSAP(
     () => {
-      const track = trackRef.current;
-      if (!track) return;
+      const trackTop = trackTopRef.current;
+      const trackBottom = trackBottomRef.current;
+      if (!trackTop || !trackBottom) return;
 
-      gsap.to(track, {
-        xPercent: 25,
+      gsap.set(trackTop, { xPercent: 0 });
+      gsap.set(trackBottom, { xPercent: -50 });
+
+      gsap.to(trackTop, {
+        xPercent: -50,
         repeat: -1,
-        duration: 30,
+        duration: 70,
+        ease: "none",
+      });
+
+      gsap.to(trackBottom, {
+        xPercent: 0,
+        repeat: -1,
+        duration: 70,
         ease: "none",
       });
     },
     { scope: containerRef },
   );
 
-  const duplicatedImages = [...projectImages, ...projectImages];
-
   return (
-    <Section className="w-full max-w-full relative -mt-[70px] min-h-[300px]">
+    <Section className="w-full max-w-full relative -mt-[70px] min-h-[600px]">
       <div
-        className="w-full h-[300px] relative flex justify-center items-center overflow-hidden"
+        className="w-full min-h-[600px] relative flex flex-col justify-center items-center gap-[32px] overflow-hidden"
         ref={containerRef}
       >
-        <div className="absolute top-1/2 -translate-y-1/2 left-0 w-[80px] lg:w-[170px] h-[400px] bg-gradient-to-r from-[#06090D] to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute top-1/2 -translate-y-1/2  right-0 w-[80px] lg:w-[170px] h-[400px] bg-gradient-to-l from-[#06090D] to-transparent z-10 pointer-events-none"></div>
-        {/* Scrolling Track */}
-        <div
-          ref={trackRef}
-          className="flex gap-6 px-6 will-change-transform"
-          style={{ width: "fit-content" }}
-        >
-          {duplicatedImages.map((image, index) => (
-            <div
-              key={`${image.alt}-${index}`}
-              className="flex-shrink-0 relative group rounded-[20px] overflow-hidden"
-              style={{
-                width: `455px`,
-                height: "300px",
-              }}
-            >
-              <div className="relative w-full h-full overflow-hidden">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover rounded-[24px]"
-                  sizes={`${image.width}px`}
-                  priority={index < 4} // Prioritize first few images
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        {/* Gradient overlays */}
+        <div className="absolute top-0 left-0 w-[80px] lg:w-[170px] h-full max-h-[350px] bg-gradient-to-r from-[#050509] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-[80px] lg:w-[170px] h-full max-h-[350px] bg-gradient-to-l from-[#050509] to-transparent z-10 pointer-events-none"></div>
+
+        {/* Top Row - Moving Left to Right */}
+        <div className="w-full h-[300px] relative overflow-hidden">
+          <div
+            ref={trackTopRef}
+            className="flex gap-6 px-6 will-change-transform"
+            style={{ width: "fit-content" }}
+          >
+            {duplicatedImages.map((image, index) => (
+              <div
+                key={`top-${image.alt}-${index}`}
+                className="flex-shrink-0 relative group rounded-[20px] overflow-hidden"
+                style={{
+                  width: `455px`,
+                  height: "300px",
+                }}
+              >
+                <div className="relative w-full h-full overflow-hidden">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover rounded-[24px]"
+                    sizes={`${image.width}px`}
+                    priority={index < 4}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom Row - Moving Right to Left */}
+        <div className="w-full h-[300px] relative overflow-hidden">
+          <div
+            ref={trackBottomRef}
+            className="flex gap-6 px-6 will-change-transform"
+            style={{ width: "fit-content" }}
+          >
+            {reversedImages.map((image, index) => (
+              <div
+                key={`bottom-${image.alt}-${index}`}
+                className="flex-shrink-0 relative group rounded-[20px] overflow-hidden"
+                style={{
+                  width: `455px`,
+                  height: "300px",
+                }}
+              >
+                <div className="relative w-full h-full overflow-hidden">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover rounded-[24px]"
+                    sizes={`${image.width}px`}
+                    priority={index < 4}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </Section>

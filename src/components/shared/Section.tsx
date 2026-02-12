@@ -9,14 +9,14 @@ const Section = ({
   className?: string;
 }) => {
   return (
-    <div
+    <section
       className={cn(
         "w-full max-w-[1440px] h-full min-h-screen mx-auto",
         className,
       )}
     >
       {children}
-    </div>
+    </section>
   );
 };
 

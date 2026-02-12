@@ -22,14 +22,15 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 w-full z-50">
           <div className="relative w-full max-w-[900px] mx-auto flex">
             
-            {/* Main content area with glass effect - merges with thin bars */}
+            {/* Main content area with dark glassmorphism effect */}
             <div 
               className="w-full relative rounded-b-[64px] overflow-hidden"
               style={{
-                background: 'linear-gradient(to bottom, rgba(13, 13, 13, 0.1) 0%, rgba(13, 13, 13, 0.05) 50%, rgba(13, 13, 13, 0.02) 100%)',
-                boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
+                background: 'linear-gradient(to bottom, rgba(10, 10, 10, 0.85) 0%, rgba(15, 15, 15, 0.75) 50%, rgba(20, 20, 20, 0.65) 100%)',
+                backdropFilter: 'blur(20px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.1)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
                 borderTop: 'none',
                 paddingLeft: '24px',
                 paddingRight: '24px',
