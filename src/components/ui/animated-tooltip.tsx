@@ -12,6 +12,8 @@ import {
 
 export const AnimatedTooltip = ({
   items,
+  width = 50,
+  height = 50
 }: {
   items: {
     id: number;
@@ -19,6 +21,8 @@ export const AnimatedTooltip = ({
     designation: string;
     image: string;
   }[];
+  width?: number;
+  height?: number;
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const springConfig = { stiffness: 100, damping: 15 };
@@ -88,10 +92,11 @@ export const AnimatedTooltip = ({
           </AnimatePresence>
           <Image
             onMouseMove={handleMouseMove}
-            height={100}
-            width={100}
+            width={width}
+            height={height}
             src={item.image}
             alt={item.name}
+            style={{ width: `${width}px`, height: `${height}px` }}
             className="relative !m-0 h-14 w-14 rounded-full border-2 border-white object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105"
           />
         </div>

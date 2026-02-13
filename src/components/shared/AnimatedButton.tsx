@@ -108,7 +108,7 @@ const AnimatedButton = ({
       ref={buttonRef}
       type={type}
       onClick={onClick}
-      className={`relative w-auto cursor-pointer overflow-hidden rounded-full bg-white px-8 py-5 text-center font-bold text-black shadow-sm transition-all duration-300 hover:shadow-lg ${className}`}
+      className={`relative w-fit cursor-pointer overflow-hidden rounded-full bg-white px-8 py-5 text-center font-bold text-black shadow-sm transition-all duration-300 hover:shadow-lg ${className}`}
     >
       <div
         ref={containerRef}
