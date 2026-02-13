@@ -1,4 +1,4 @@
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans, Sora } from "next/font/google";
 import Providers from "@/components/layout/providers/Providers";
 import "./globals.css";
 import Footer from "@/components/layout/footer/Footer";
@@ -15,6 +15,12 @@ const fontJakarta = Plus_Jakarta_Sans({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
 
+const fontSora = Sora({
+  subsets: ["latin"],
+  variable: "--font-sora",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${fontSans.variable} ${fontJakarta.variable} antialiased dark`}
+        className={`${fontSans.variable} ${fontJakarta.variable} ${fontSora.variable} antialiased dark`}
       >
         <Providers>
           <header>

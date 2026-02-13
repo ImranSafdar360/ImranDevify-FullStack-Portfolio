@@ -11,7 +11,7 @@ const Section = ({
   return (
     <section
       className={cn(
-        "w-full max-w-[1440px] h-full min-h-screen mx-auto",
+        "w-full max-w-[1440px] h-full mx-auto",
         className,
       )}
     >

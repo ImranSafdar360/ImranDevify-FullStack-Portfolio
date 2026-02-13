@@ -31,12 +31,12 @@ export default function CaseStudyCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.6 }}
-      className={`w-full group relative flex flex-col gap-[24px] cursor-pointer ${index === 2 ? "col-span-2" : "col-span-1"}`}
+      className={`w-full group relative flex flex-col gap-[24px] cursor-pointer ${index === 4 ? "col-span-2" : "col-span-1"}`}
       onClick={onClick}
     >
       {/* Image Mockup Wrapper */}
       <div
-        className={`w-full ${index === 2 ? "w-full h-[800px]" : "h-[500px]"} relative overflow-hidden rounded-[1.5rem]`}
+        className={`w-full ${index === 4 ? "w-full h-[800px]" : "h-[500px]"} relative overflow-hidden rounded-[1.5rem]`}
       >
         <Image
           src={study.image}

@@ -1,3 +1,5 @@
+import Section from "@/components/shared/Section";
+import SectionHeader from "@/components/shared/SectionHeader";
 import {
   Accordion,
   AccordionContent,
@@ -40,17 +42,14 @@ export function FAQ() {
   ];
 
   return (
-    <section className="py-[120px] max-w-[1280px] mx-auto flex flex-col justify-center items-center gap-[52px]">
-      <div className="flex items-center justify-center flex-col gap-[6px]">
-        {/* Section Title */}
-        <h2 className="text-[40px] font-bold leading-[40px] text-white">
-          Have Questions? We&apos;ve Got Answers.
-        </h2>
-        <p className="text-[16px] font-normal leading-[25px] text-[rgba(255,255,255,0.7)]">
-          We&apos;ve heard it all. Here&apos;s everything you need to know
-          before working with us.
-        </p>
-      </div>
+    <Section className="relative flex flex-col justify-center items-center gap-[84px]">
+      <SectionHeader 
+      className="max-w-[60%] items-center gap-[8px]"
+      title="Have Questions?" 
+      description="We've heard it all. Here's everything you need to know before working with us." 
+      badgeText="FAQs" 
+      gradientText="We've Got Answers." 
+      />
 
       {/* FAQ Accordion */}
       <Accordion
@@ -96,6 +95,6 @@ export function FAQ() {
           </AccordionItem>
         ))}
       </Accordion>
-    </section>
+    </Section>
   );
 }

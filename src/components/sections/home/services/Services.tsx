@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import GradientText from "@/components/ui/gradient-text";
 import AnimatedButton from "@/components/shared/AnimatedButton";
+import Section from "@/components/shared/Section";
+import SectionHeader from "@/components/shared/SectionHeader";
 
 interface ServiceCard {
   label: string;
@@ -94,81 +95,72 @@ export default function Services() {
   }, []);
 
   return (
-    <section className="w-full py-20 md:py-32">
-      <div className="w-full max-w-[1440px] mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <h2
-            className="w-full max-w-[800px] mx-auto text-4xl md:text-5xl lg:text-6xl leading-[72px] mb-6 text-white"
+    <Section className="relative flex flex-col justify-center items-center gap-[120px]">
+      <SectionHeader
+        className="max-w-[60%] items-center gap-[16px]"
+        title="Building Stronger Brands"
+        description="From idea to scalable product — I design, build, and optimize digital experiences that perform in the real world."
+        badgeText="Services"
+        gradientText="Creating Impressions!"
+      />
+
+      {/* Service Cards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        {services.map((service, index) => (
+          <div
+            key={service.label}
+            ref={(el) => {
+              cardRefs.current[index] = el;
+            }}
+            className={`flex flex-col gap-[24px] group relative rounded-[40px] p-[40px] pt-[65px] transition-all duration-500 ease-out ${visibleCards[index]
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-12"
+              } hover:scale-[1.02]`}
             style={{
-              fontFamily: "var(--font-boldonse)",
+              background: "rgba(255, 255, 255, 0.05)",
+              backdropFilter: "blur(20px) saturate(180%)",
+              WebkitBackdropFilter: "blur(20px) saturate(180%)",
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              boxShadow: service.isHero
+                ? "0 20px 60px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.02)"
+                : "0 10px 40px rgba(0, 0, 0, 0.3)",
             }}
           >
-            Helping You Transform <GradientText>Your Product</GradientText>
-          </h2>
-          <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            From idea to scalable product — I design, build, and optimize
-            digital experiences that perform in the real world.
-          </p>
-        </div>
-
-        {/* Service Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-16">
-          {services.map((service, index) => (
             <div
-              key={service.label}
-              ref={(el) => {
-                cardRefs.current[index] = el;
-              }}
-              className={`flex flex-col gap-[24px] group relative rounded-[40px] p-[40px] pt-[65px] transition-all duration-500 ease-out ${
-                visibleCards[index]
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-12"
-              } hover:scale-[1.02]`}
+              className="absolute -top-9 left-7 -rotate-[4deg] w-fit px-[12px] py-[8px] rounded-[10px] text-[36px] font-bold bg-white text-black uppercase z-20"
               style={{
-                background: "rgba(255, 255, 255, 0.05)",
-                backdropFilter: "blur(20px) saturate(180%)",
-                WebkitBackdropFilter: "blur(20px) saturate(180%)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                boxShadow: service.isHero
-                  ? "0 20px 60px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.02)"
-                  : "0 10px 40px rgba(0, 0, 0, 0.3)",
+                fontFamily: "var(--font-boldonse)",
               }}
             >
-              <div
-                className="absolute -top-9 left-7 -rotate-[4deg] w-fit px-[12px] py-[8px] rounded-[10px] text-[36px] font-bold bg-white text-black uppercase z-20"
-                style={{
-                  fontFamily: "var(--font-boldonse)",
-                }}
-              >
-                {service.label}
-              </div>
-
-              {/* Content */}
-              <div className="relative flex flex-col gap-[32px] z-10">
-                {/* Description */}
-                <p className="text-[20px] leading-[28px] font-medium text-white/70">
-                  {service.description}
-                </p>
-
-                {/* Services List */}
-                <ul className="space-y-2">
-                  {service.services.map((item, itemIndex) => (
-                    <div
-                      key={itemIndex}
-                      className="flex items-center gap-4 py-[15px] border-t border-white/70 border-dashed"
-                    >
-                      <p className="text-[18px] leading-[22px] font-semibold text-white/90">
-                        {item}
-                      </p>
-                    </div>
-                  ))}
-                </ul>
-              </div>
+              {service.label}
             </div>
-          ))}
-        </div>
 
+            {/* Content */}
+            <div className="relative flex flex-col gap-[32px] z-10">
+              {/* Description */}
+              <p className="text-[20px] leading-[28px] font-medium text-white/70">
+                {service.description}
+              </p>
+
+              {/* Services List */}
+              <ul className="space-y-2">
+                {service.services.map((item, itemIndex) => (
+                  <div
+                    key={itemIndex}
+                    className="flex items-center gap-4 py-[15px] border-t border-white/70 border-dashed"
+                  >
+                    <p className="text-[18px] leading-[22px] font-semibold text-white/90">
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div>
         {/* Micro-Line */}
         <p className="text-center text-gray-500 text-[20px] leading-[28px] mb-4 font-light tracking-wide">
           &ldquo;Engineering digital products with precision, scalability, and
@@ -177,11 +169,11 @@ export default function Services() {
 
         {/* CTA */}
         <div className="flex justify-center">
-          <AnimatedButton onClick={() => {}}>
+          <AnimatedButton onClick={() => { }}>
             Have a product in mind? Let&apos;s build it right.
           </AnimatedButton>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

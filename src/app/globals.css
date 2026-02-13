@@ -16,6 +16,7 @@
 
 :root {
   --font-boldonse: "Boldonse", serif, system-ui, Arial;
+  --font-sora: "Sora", sans-serif;
 }
 
 :root {
@@ -77,3 +78,6 @@ body {
   display: none;
 }
 
+.font-sora {
+  font-family: var(--font-sora);
+}

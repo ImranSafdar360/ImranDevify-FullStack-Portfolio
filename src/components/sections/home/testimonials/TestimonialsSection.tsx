@@ -1,3 +1,5 @@
+import Section from "@/components/shared/Section";
+import SectionHeader from "@/components/shared/SectionHeader";
 import { Star } from "lucide-react";
 import Link from "next/link";
 import { BsTwitterX } from "react-icons/bs";
@@ -57,21 +59,14 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <section className="max-w-[1280px] mx-auto flex flex-col items-center gap-[50px]">
-      <div className="flex flex-col justify-center items-center gap-[8px]">
-        <div className="flex justify-center items-center gap-[8px] w-fit px-[12px] py-[8px] bg-black rounded-full">
-          <p className="text-[#FFFFFF] text-[14px] font-light leading-[14px]">
-            Testimonials
-          </p>
-        </div>
-        {/* Section Title */}
-        <h2 className="text-center text-[40px] font-bold text-white">
-          Client Feedback
-        </h2>
-        <p className="text-center text-[#B9B9B9] text-[18px] font-light leading-[27px]">
-          Trusted by 100+ happy clients
-        </p>
-      </div>
+    <Section className="relative flex flex-col justify-center items-center gap-[84px]">
+      <SectionHeader 
+      className="max-w-[60%] items-center gap-[0px]"
+      title="Client " 
+      description="Trusted by 100+ happy clients" 
+      badgeText="Feedback" 
+      gradientText="Testimonials" 
+      />
 
       {/* Reviews Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -160,6 +155,6 @@ export function TestimonialsSection() {
           </div>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }

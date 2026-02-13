@@ -2,10 +2,10 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import AnimatedButton from "@/components/shared/AnimatedButton";
-import GradientText from "@/components/ui/gradient-text";
 import CaseStudyCard from "@/components/sections/home/case-studies/CaseStudyCard";
+import Section from "@/components/shared/Section";
+import SectionHeader from "@/components/shared/SectionHeader";
 
 interface CaseStudy {
   id: string;
@@ -88,75 +88,35 @@ export default function CaseStudies() {
   const router = useRouter();
 
   return (
-    <section className="w-full py-20 px-6">
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative w-full rounded-[40px] md:rounded-[64px] overflow-hidden bg-[#0A0A0A] border border-white/5 py-16 md:py-24 px-6 md:px-20"
-      >
-        {/* Grid Background */}
-        <div
-          className="absolute inset-0 opacity-20 pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
+    <Section className="relative flex flex-col justify-center items-center gap-[84px]">
+      <SectionHeader 
+      className="max-w-[60%] items-center gap-[16px]"
+      title="Proven results from" 
+      description="This collection shows the projects I've created to connect, represent, and inspire confidence." 
+      badgeText="Case-studies" 
+      gradientText="real client work" 
+      />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        {caseStudies.map((study, index) => (
+          <CaseStudyCard
+            key={study.id}
+            study={study}
+            index={index}
+            onClick={() => router.push("/projects/" + study.id)}
+          />
+        ))}
+      </div>
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black pointer-events-none" />
-
-        <div className="relative z-10 max-w-[1440px] mx-auto flex flex-col gap-16">
-          {/* Header */}
-          <div className="flex flex-col items-center justify-center gap-[16px] text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-4xl md:text-[64px] leading-tight font-bold text-white"
-              style={{ fontFamily: "var(--font-boldonse)" }}
-            >
-              Best <GradientText>Projects</GradientText> Picks
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-medium"
-            >
-              This collection shows the projects I&apos;ve created to connect,
-              represent, and inspire confidence.
-            </motion.p>
-          </div>
-
-          {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            {caseStudies.map((study, index) => (
-              <CaseStudyCard
-                key={study.id}
-                study={study}
-                index={index}
-                onClick={() => router.push("/projects/" + study.id)}
-              />
-            ))}
-          </div>
-
-          <div className="flex flex-col items-center mt-8">
-            <p className="text-center text-gray-400 text-lg md:text-xl mb-6 font-medium">
-              Want to see more results? Let&apos;s explore it.
-            </p>
-            <div className="flex justify-center">
-              <AnimatedButton onClick={() => {}}>
-                See All Projects
-              </AnimatedButton>
-            </div>
-          </div>
+      <div className="flex flex-col items-center mt-8">
+        <p className="text-center text-gray-400 text-lg md:text-xl mb-6 font-medium">
+          Want to see more results? Let&apos;s explore it.
+        </p>
+        <div className="flex justify-center">
+          <AnimatedButton onClick={() => { }}>
+            See All Projects
+          </AnimatedButton>
         </div>
-      </motion.div>
-    </section>
+      </div>
+    </Section>
   );
 }

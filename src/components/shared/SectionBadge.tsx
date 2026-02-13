@@ -1,9 +1,10 @@
 import React from 'react'
 import GradientText from '../ui/gradient-text'
+import { cn } from '@/lib/utils'
 
-const SectionBadge = ({ text }: { text: string }) => {
+const SectionBadge = ({ text, className }: { text: string, className?: string }) => {
     return (
-        <div className="relative w-fit flex justify-center items-center gap-[10px] px-[16px] py-[8px] bg-[#080808] rounded-[30px] border-[1px] border-white/70 text-[16px] leading-[26px] font-normal"
+        <div className={cn("relative w-fit flex justify-center items-center gap-[10px] px-[16px] py-[8px] bg-[#080808] rounded-[30px] border-[1px] border-white/70 text-[16px] leading-[26px] font-normal", className)}
             style={{
                 background: "rgba(255, 255, 255, 0.04)",
                 backdropFilter: "blur(20px) saturate(180%)",

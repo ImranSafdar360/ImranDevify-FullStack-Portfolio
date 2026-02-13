@@ -5,11 +5,11 @@ import Section from "@/components/shared/Section";
 import ProfilePic from "../../../../../public/images/profile-pic.avif";
 import ImageCard from "@/components/shared/ImageCard";
 import AnimatedButton from "@/components/shared/AnimatedButton";
-import SectionBadge from "@/components/shared/SectionBadge";
 import GradientText from "@/components/ui/gradient-text";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import SectionSeparator from "@/components/shared/SectionSeparator";
 import { useRouter } from "next/navigation";
+import SectionHeader from "@/components/shared/SectionHeader";
 
 export default function AboutSection() {
   const router = useRouter();
@@ -53,10 +53,14 @@ export default function AboutSection() {
     <Section className="relative flex justify-center items-center gap-[84px]">
       <ImageCard image={ProfilePic} alt="Profile Picture" />
       <div className="flex flex-col justify-center gap-[30px] w-full max-w-[50%]">
-        <SectionBadge text="About Imran" />
-        <h1 className="text-[52px] leading-[32px] font-bold text-white">Building Stronger Brands <GradientText>Creating Impressions!</GradientText></h1>
-        <p className="max-w-[80%] text-[18px] leading-[22px] font-medium text-white/70">Delivering high-quality, on-demand designs with precision.
-          Elevate your brand effortlessly, one snap at a time.</p>
+          <SectionHeader 
+          title="Building Stronger Brands" 
+          description="Delivering high-quality, on-demand designs with precision.
+          Elevate your brand effortlessly, one snap at a time." 
+          badgeText="About Imran" 
+          gradientText="Creating Impressions!"
+          isAbout={true}
+          />
           <div className="w-full max-w-[230px]">
           <SectionSeparator 
               orientation="horizontal" 

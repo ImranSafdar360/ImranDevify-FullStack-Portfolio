@@ -11,18 +11,27 @@ import CTASection from "@/components/sections/home/cta/CTASection";
 import React from "react";
 import { FAQ } from "@/components/sections/home/faqs/FAQs";
 import { TestimonialsSection } from "@/components/sections/home/testimonials/TestimonialsSection";
+import SectionSeparator from "@/components/shared/SectionSeparator";
 
 const HomePage = () => {
   return (
     <>
       <Hero />
+      <SectionSeparator orientation="horizontal" color="FFFFFF" centerOpacity={0.25} className="my-32" />
       <AboutMini />
+      <SectionSeparator orientation="horizontal" color="FFFFFF" centerOpacity={0.25} className="my-32" />
       <CaseStudies />
+      <SectionSeparator orientation="horizontal" color="FFFFFF" centerOpacity={0.25} className="my-32" />
       <Services />
+      <SectionSeparator orientation="horizontal" color="FFFFFF" centerOpacity={0.25} className="my-32" />
       <WhoIWorkWith />
+      <SectionSeparator orientation="horizontal" color="FFFFFF" centerOpacity={0.25} className="my-32" />
       <WorkProcess />
+      <SectionSeparator orientation="horizontal" color="FFFFFF" centerOpacity={0.25} className="my-32" />
       <WhyChooseMeSection />
+      <SectionSeparator orientation="horizontal" color="FFFFFF" centerOpacity={0.25} className="my-32" />
       <TestimonialsSection />
+      <SectionSeparator orientation="horizontal" color="FFFFFF" centerOpacity={0.25} className="my-32" />
       <FAQ />
       <CTASection />
     </>

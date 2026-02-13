@@ -3,8 +3,9 @@
 import React, { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import GradientText from "@/components/ui/gradient-text";
 import { Compass, Layers, Code2, Rocket } from "lucide-react";
+import Section from "@/components/shared/Section";
+import SectionHeader from "@/components/shared/SectionHeader";
 
 gsap.registerPlugin(useGSAP);
 
@@ -96,75 +97,68 @@ export default function WorkProcess() {
   };
 
   return (
-    <section className="w-full py-20 md:py-32 bg-transparent overflow-hidden">
-      <div className="max-w-[1440px] mx-auto px-6">
-        {/* Header */}
-        <div className="flex flex-col items-center justify-center gap-4 text-center mb-16 md:mb-24">
-          <h2
-            className="text-5xl md:text-[64px] font-bold text-white tracking-tight"
-            style={{ fontFamily: "var(--font-boldonse)" }}
-          >
-            How I Get It <GradientText>Done</GradientText>, Smoothly
-          </h2>
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl font-medium">
-            From initial research to final launch, I follow a disciplined
-            workflow to ensure every project exceeds expectations.
-          </p>
-        </div>
+    <Section className="relative flex flex-col justify-center items-center gap-[84px]">
+      <SectionHeader
+        className="max-w-[60%] items-center gap-[8px]"
+        title="How I Get It Done "
+        description="From initial research to final launch, I follow a disciplined workflow to ensure every project exceeds expectations." 
+        badgeText="Process" 
+        gradientText="Smoothly" 
+        />
 
-        {/* Horizontal Expanding Cards */}
-        <div
-          ref={containerRef}
-          className="flex flex-col md:flex-row gap-4 h-auto md:h-[400px] w-full items-stretch"
-        >
-          {processSteps.map((step, index) => (
+
+      {/* Horizontal Expanding Cards */}
+      <div
+        ref={containerRef}
+        className="flex flex-col md:flex-row gap-4 h-auto md:h-[400px] w-full items-stretch"
+      >
+        {processSteps.map((step, index) => (
+          <div
+            key={step.id}
+            onClick={() => handleToggle(index)}
+            style={{ flexBasis: "0%" }} // Crucial for predictable flex-grow expansion
+            className="process-card-wrapper w-fit min-w-[250px] relative group cursor-pointer overflow-hidden rounded-[24px] md:rounded-[24px] border border-white/5"
+          >
+            {/* Background Pattern for Active State */}
             <div
-              key={step.id}
-              onClick={() => handleToggle(index)}
-              style={{ flexBasis: "0%" }} // Crucial for predictable flex-grow expansion
-              className="process-card-wrapper w-fit min-w-[250px] relative group cursor-pointer overflow-hidden rounded-[24px] md:rounded-[24px] border border-white/5"
+              className={`absolute inset-0 transition-opacity duration-700 ${activeIndex === index ? "opacity-5" : "opacity-0"}`}
             >
-              {/* Background Pattern for Active State */}
               <div
-                className={`absolute inset-0 transition-opacity duration-700 ${activeIndex === index ? "opacity-5" : "opacity-0"}`}
+                className="absolute inset-0"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(circle, #000 1px, transparent 1px)",
+                  backgroundSize: "24px 24px",
+                }}
+              ></div>
+            </div>
+
+            <div className="process-card-content h-full flex flex-col p-8 md:p-8 relative z-10">
+              {/* Icon */}
+              <div
+                className={`mb-auto transition-transform duration-500 ${activeIndex === index ? "scale-100" : "scale-100 opacity-60"}`}
               >
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    backgroundImage:
-                      "radial-gradient(circle, #000 1px, transparent 1px)",
-                    backgroundSize: "24px 24px",
-                  }}
-                ></div>
+                {step.icon}
               </div>
 
-              <div className="process-card-content h-full flex flex-col p-8 md:p-8 relative z-10">
-                {/* Icon */}
-                <div
-                  className={`mb-auto transition-transform duration-500 ${activeIndex === index ? "scale-100" : "scale-100 opacity-60"}`}
-                >
-                  {step.icon}
-                </div>
+              {/* Content */}
+              <div className="mt-auto">
+                <div className="flex flex-col">
+                  <h3 className="text-2xl md:text-[32px] font-bold tracking-tight leading-tight">
+                    {step.title}
+                  </h3>
 
-                {/* Content */}
-                <div className="mt-auto">
-                  <div className="flex flex-col">
-                    <h3 className="text-2xl md:text-[32px] font-bold tracking-tight leading-tight">
-                      {step.title}
-                    </h3>
-
-                    <div className="process-description h-0 opacity-0 overflow-hidden">
-                      <p className="text-current opacity-70 text-lg md:text-xl font-medium leading-relaxed max-w-[420px]">
-                        {step.description}
-                      </p>
-                    </div>
+                  <div className="process-description h-0 opacity-0 overflow-hidden">
+                    <p className="text-current opacity-70 text-lg md:text-xl font-medium leading-relaxed max-w-[420px]">
+                      {step.description}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }
