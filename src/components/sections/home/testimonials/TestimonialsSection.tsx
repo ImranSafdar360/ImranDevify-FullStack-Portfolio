@@ -5,11 +5,16 @@ import Link from "next/link";
 import { BsTwitterX } from "react-icons/bs";
 import { FaLinkedin } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
+import Image from "next/image";
+import AnimatedButton from "@/components/shared/AnimatedButton";
+import SectionSeparator from "@/components/shared/SectionSeparator";
+import DynamicCard from "@/components/shared/DynamicCard";
 
 export function TestimonialsSection() {
   const reviews = [
     {
       name: "Ahmed Al-Rashid",
+      image: "https://img.freepik.com/free-photo/close-up-beautiful-girl-portrait-with-purple-hair_23-2150799937.jpg",
       company: "Horizon Travels",
       rating: 5,
       text: "Yelvo Creatives transformed our brand completely. The Shariah-compliant approach gave us confidence, and the results speak for themselves.",
@@ -18,6 +23,7 @@ export function TestimonialsSection() {
     },
     {
       name: "Fatima Hussain",
+      image: "https://img.freepik.com/premium-photo/man-wearing-glasses-blue-shirt-with-white-shirt-that-says-he-is-wearing-blue-shirt_1289061-1605.jpg?w=1480",
       company: "Al-Habib Traders",
       rating: 5,
       text: "Professional, creative, and ethical. They understood our vision and delivered beyond expectations. Our sales have tripled!",
@@ -26,6 +32,7 @@ export function TestimonialsSection() {
     },
     {
       name: "Omar Farooq",
+      image: "https://img.freepik.com/free-photo/front-view-man-posing-outdoors_23-2151038658.jpg?t=st=1771102312~exp=1771105912~hmac=476e6836417da781c2a27b8ee73a7152d54c2002b30be252c578edb1a8f9c620&w=1480",
       company: "Al-Zayaba Hajj",
       rating: 5,
       text: "Working with Yelvo was a game-changer. Their strategic approach to branding helped us compete with international agencies.",
@@ -34,6 +41,7 @@ export function TestimonialsSection() {
     },
     {
       name: "Aisha Khan",
+      image: "https://img.freepik.com/free-photo/monochrome-portrait-man-showing-vulnerability-self-acceptance_23-2151237407.jpg",
       company: "Barakah Foods",
       rating: 5,
       text: "Finally, a creative agency that understands Islamic business values. The quality of work is world-class.",
@@ -42,6 +50,7 @@ export function TestimonialsSection() {
     },
     {
       name: "Ibrahim Malik",
+      image: "https://img.freepik.com/free-photo/portrait-man-cartoon-style_23-2151134201.jpg",
       company: "Noor Academy",
       rating: 5,
       text: "From concept to execution, Yelvo delivered exceptional results. Our enrollment increased by 250% after the rebrand.",
@@ -50,6 +59,7 @@ export function TestimonialsSection() {
     },
     {
       name: "Mariam Siddiqui",
+      image: "https://img.freepik.com/free-photo/young-businesswoman-smiling-camera_197531-11176.jpg?t=st=1771102312~exp=1771105912~hmac=476e6836417da781c2a27b8ee73a7152d54c2002b30be252c578edb1a8f9c620&w=1480",
       company: "Halal Eats",
       rating: 5,
       text: "The best investment we made for our business. Professional, responsive, and truly dedicated to our success.",
@@ -59,100 +69,87 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <Section className="relative flex flex-col justify-center items-center gap-[84px]">
-      <SectionHeader 
-      className="max-w-[60%] items-center gap-[0px]"
-      title="Client " 
-      description="Trusted by 100+ happy clients" 
-      badgeText="Feedback" 
-      gradientText="Testimonials" 
+    <Section className="max-w-[1280px] mx-auto relative flex flex-col justify-center items-center gap-[44px] overflow-hidden">
+      <Image src="/images/left-vector.svg" alt="Left Vector" width={560} height={235} className="absolute -left-20 top-20 z-10" />
+      <Image src="/images/right-vector.svg" alt="Right Vector" width={560} height={235} className="absolute -right-20 top-20 z-10" />
+      <SectionHeader
+        className="max-w-[60%] items-center gap-[0px] z-20"
+        title="Client "
+        description="Trusted by 100+ happy clients for their exceptional work."
+        badgeText="Feedback"
+        gradientText="Testimonials"
       />
-
+      <AnimatedButton onClick={() => { }}>
+        Become one of them
+      </AnimatedButton>
       {/* Reviews Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 z-20 mt-[44px]">
         {reviews.map((review, index) => (
-          <div
-            key={index}
-            className="w-full max-w-[350px] h-full min-h-[335px] p-[12px] rounded-[20px] flex flex-col gap-[14px] transition-all duration-300 hover:scale-105"
-            style={{
-              background: "rgba(255, 255, 255, 0.05)",
-              backdropFilter: "blur(20px) saturate(180%)",
-              WebkitBackdropFilter: "blur(20px) saturate(180%)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              boxShadow:
-                "0 20px 60px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.02)",
-            }}
-          >
+          <DynamicCard key={index}>
             <div
-              className="flex flex-col p-[15px] gap-[10px] rounded-[22px]"
-              style={{
-                // backdropFilter: "blur(20px) saturate(180%)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-              }}
+              className="flex flex-col gap-[24px]"
             >
+              <div className="w-full flex justify-between items-center">
+                <div className="relative w-[40px] h-[40px] flex-shrink-0 overflow-hidden rounded-full">
+                  <Image
+                    src={review.image}
+                    alt={review.name}
+                    fill
+                    className="object-cover rounded-full"
+                  />
+                </div>
+                <div className="flex items-center gap-[10px]">
+                  <Link
+                    href={review.socialLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {review.socialPlatform === "Twitter" ? (
+                      <BsTwitterX size={30} color="#FFFFFF" />
+                    ) : review.socialPlatform === "LinkedIn" ? (
+                      <FaLinkedin size={30} color="#FFFFFF" />
+                    ) : review.socialPlatform === "Instagram" ? (
+                      <FaInstagram size={30} color="#FFFFFF" />
+                    ) : null}
+                  </Link>
+                </div>
+              </div>
               {/* Stars */}
               <div className="flex gap-1">
                 {[...Array(review.rating)].map((_, i) => (
                   <Star
                     key={i}
                     size={20}
-                    fill="#FFDF00"
-                    style={{ color: "#FFDF00" }}
+                    fill="#FFFFFF"
+                    style={{ color: "#FFFFFF" }}
                   />
                 ))}
               </div>
               {/* Review Text */}
-              <p className="text-[18px] leading-[24px] font-light text-[#B9B9B9]">
+              <p className="text-[18px] leading-[24px] font-normal text-white/70">
                 {review.text}
               </p>
             </div>
 
-            {/* Client Info */}
-            <div className="w-full flex justify-between items-center">
-              <div className="flex gap-[10px]">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #FF6600 0%, #E69700 100%)",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: "1rem",
-                      fontWeight: 700,
-                      color: "#FFFFFF",
-                    }}
-                  >
-                    {review.name.charAt(0)}
-                  </span>
-                </div>
-                <div>
-                  <h6 className="text-[18px] font-normal leading-[24px] text-[#FFFFFF]">
-                    {review.name}
-                  </h6>
-                  <p className="text-[14px] font-normal leading-[20px] text-[#B9B9B9]">
-                    {review.company}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center gap-[10px]">
-                <Link
-                  href={review.socialLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {review.socialPlatform === "Twitter" ? (
-                    <BsTwitterX size={30} color="#FFFFFF" />
-                  ) : review.socialPlatform === "LinkedIn" ? (
-                    <FaLinkedin size={30} color="#FFFFFF" />
-                  ) : review.socialPlatform === "Instagram" ? (
-                    <FaInstagram size={30} color="#FFFFFF" />
-                  ) : null}
-                </Link>
-              </div>
+            <div className="w-full max-w-[220px]">
+              <SectionSeparator
+                orientation="horizontal"
+                color="FFFFFF"
+                centerOpacity={0.25}
+                className="my-[12px]"
+              />
             </div>
-          </div>
+
+            {/* Client Info */}
+            <div className="w-full flex flex-col">
+              <h6 className="text-[18px] font-normal leading-[24px] text-[#FFFFFF]">
+                {review.name}
+              </h6>
+              <p className="text-[14px] font-normal leading-[20px] text-[#B9B9B9]">
+                {review.company}
+              </p>
+            </div>
+          </DynamicCard>
         ))}
       </div>
     </Section>

@@ -42,7 +42,7 @@ export function FAQ() {
   ];
 
   return (
-    <Section className="relative flex flex-col justify-center items-center gap-[84px]">
+    <Section className="max-w-[1080px] mx-auto relative flex flex-col justify-center items-center gap-[84px]">
       <SectionHeader 
       className="max-w-[60%] items-center gap-[8px]"
       title="Have Questions?" 
@@ -53,6 +53,7 @@ export function FAQ() {
 
       {/* FAQ Accordion */}
       <Accordion
+        defaultValue="item-0"
         type="single"
         collapsible
         className="w-full flex flex-col gap-4"
@@ -61,18 +62,18 @@ export function FAQ() {
           <AccordionItem
             key={index}
             value={`item-${index}`}
-            className="p-px rounded-[20px] bg-linear-to-r from-[#181818] via-[#666666] to-[#181818] border-none"
+            className="p-px rounded-[12px] bg-linear-to-r from-[#080808] via-[#666666] to-[#080808] border-none"
           >
-            <div className="w-full h-full rounded-[19px] bg-[#181818] px-6 transition-all duration-300">
+            <div className="w-full h-full rounded-[19px] bg-[#080808] px-6 transition-all duration-300">
               <AccordionTrigger
-                className="hover:no-underline py-6"
+                className="hover:no-underline py-6 cursor-pointer"
                 style={{
                   fontSize: "1.125rem",
                   fontWeight: 600,
                   color: "#FFFFFF",
                 }}
               >
-                <span className="flex items-center gap-3">
+                <span className="flex items-center gap-3 font-sora font-semibold">
                   <span
                     className="w-2 h-2 rounded-full shrink-0"
                     style={{ background: "#00C7FE" }}
@@ -81,11 +82,10 @@ export function FAQ() {
                 </span>
               </AccordionTrigger>
               <AccordionContent
-                className="pb-6"
+                className="pb-6 text-white/70"
                 style={{
                   fontSize: "1rem",
                   lineHeight: 1.7,
-                  color: "#B5B5B5",
                   paddingLeft: "1.75rem",
                 }}
               >
