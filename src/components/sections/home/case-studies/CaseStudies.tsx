@@ -6,6 +6,7 @@ import AnimatedButton from "@/components/shared/AnimatedButton";
 import CaseStudyCard from "@/components/sections/home/case-studies/CaseStudyCard";
 import Section from "@/components/shared/Section";
 import SectionHeader from "@/components/shared/SectionHeader";
+import Image from "next/image";
 
 interface CaseStudy {
   id: string;
@@ -76,7 +77,7 @@ const caseStudies: CaseStudy[] = [
   {
     id: "5",
     title: "This Could Be You",
-    description: "Book a free Brand Audit today",
+    description: "Book a free Website Audit today",
     image:
       "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FVinhMockup.36fc6310.png&w=1080&q=75",
     isCTA: true,
@@ -88,15 +89,20 @@ export default function CaseStudies() {
   const router = useRouter();
 
   return (
-    <Section className="relative flex flex-col justify-center items-center gap-[84px]">
-      <SectionHeader 
-      className="max-w-[60%] items-center gap-[16px]"
-      title="Proven results from" 
-      description="This collection shows the projects I've created to connect, represent, and inspire confidence." 
-      badgeText="Case-studies" 
-      gradientText="real client work" 
+    <Section className="relative flex flex-col justify-center items-center gap-[34px] overflow-hidden">
+      <Image src="/images/left-vector.svg" alt="Left Vector" width={560} height={235} className="absolute -left-14 top-20 z-10" />
+      <Image src="/images/right-vector.svg" alt="Right Vector" width={560} height={235} className="absolute -right-14 top-20 z-10" />
+      <SectionHeader
+        className="max-w-[55%] items-center gap-[16px] z-20"
+        title="Proven results from"
+        description="This collection shows the projects I've created to connect, represent, and inspire confidence."
+        badgeText="Case-studies"
+        gradientText="real client work"
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+      <AnimatedButton onClick={() => { }}>
+        See All Projects
+      </AnimatedButton>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-[84px]">
         {caseStudies.map((study, index) => (
           <CaseStudyCard
             key={study.id}
@@ -105,17 +111,6 @@ export default function CaseStudies() {
             onClick={() => router.push("/projects/" + study.id)}
           />
         ))}
-      </div>
-
-      <div className="flex flex-col items-center mt-8">
-        <p className="text-center text-gray-400 text-lg md:text-xl mb-6 font-medium">
-          Want to see more results? Let&apos;s explore it.
-        </p>
-        <div className="flex justify-center">
-          <AnimatedButton onClick={() => { }}>
-            See All Projects
-          </AnimatedButton>
-        </div>
       </div>
     </Section>
   );

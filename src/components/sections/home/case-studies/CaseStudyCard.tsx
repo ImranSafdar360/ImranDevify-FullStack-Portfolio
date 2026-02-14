@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Magnet from "@/components/shared/Magnet";
+import SectionBadge from "@/components/shared/SectionBadge";
 
 interface CaseStudy {
   id: string;
@@ -61,19 +62,15 @@ export default function CaseStudyCard({
       {/* Content */}
       <div className="flex items-start justify-between">
         <div className="w-full max-w-[70%] space-y-2">
-          <h3 className="text-[24px] leading-[30px] font-bold text-white">
+          <h3 className="text-[24px] leading-[30px] font-sora uppercase font-bold text-white">
             {study.title}
           </h3>
-          <p className="text-[18px] leading-[24px] font-medium text-white/50">
+          <p className="text-[18px] leading-[24px] font-medium text-white/70">
             {study.description}
           </p>
         </div>
         {study.category && (
-          <div className="px-4 py-2 rounded-full border border-white/70">
-            <p className="text-[14px] font-normal leading-[20px] text-white/70 uppercase">
-              {study.category}
-            </p>
-          </div>
+          <SectionBadge text={study.category} />
         )}
       </div>
     </motion.div>

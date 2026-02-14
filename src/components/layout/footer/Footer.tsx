@@ -2,122 +2,117 @@
 
 import Link from "next/link";
 import Logo from "@/components/layout/header/Logo";
-import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
+import {
+  FaLinkedinIn,
+  FaGithub,
+  FaTwitter,
+} from "react-icons/fa";
+import CTASection from "@/components/sections/home/cta/CTASection";
+import SectionSeparator from "@/components/shared/SectionSeparator";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const socialLinks = [
-    {
-      name: "LinkedIn",
-      href: "https://linkedin.com/in/imran-safdar",
-      icon: Linkedin,
-    },
-    {
-      name: "Twitter",
-      href: "https://twitter.com/imran_safdar",
-      icon: Twitter,
-    },
-    { name: "GitHub", href: "https://github.com/imran-safdar", icon: Github },
-    {
-      name: "Instagram",
-      href: "https://instagram.com/imran_safdar",
-      icon: Instagram,
-    },
-  ];
-
-  const navLinks = [
-    { name: "Work", href: "/projects" },
-    { name: "About", href: "/about" },
-    { name: "Services", href: "/services" },
-    { name: "Blog", href: "/blogs" },
-    { name: "Contact", href: "/contact" },
-  ];
+  const linksStack: {
+    title: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    links: { title: string; href: string; icon: any }[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    socialLinks?: { icon: any; href: string }[];
+  }[] = [
+      {
+        title: "Navigation",
+        links: [
+          { title: "About", href: "#about", icon: null },
+          { title: "Featured", href: "#featured", icon: null },
+          { title: "Portfolio", href: "/portfolio", icon: null },
+          { title: "Testimonials", href: "#testimonials", icon: null },
+          { title: "Contact", href: "#contact", icon: null },
+        ],
+        socialLinks: [
+          {
+            icon: FaGithub,
+            href: "https://github.com/ImranSafdar360/",
+          },
+          {
+            icon: FaLinkedinIn,
+            href: "https://www.linkedin.com/in/imran-safdar/",
+          },
+          {
+            icon: FaTwitter,
+            href: "https://x.com/Imransafdar777/",
+          },
+        ],
+      },
+    ];
 
   return (
-    <footer className="w-full py-20 px-6 bg-black">
-      <div className="max-w-[1440px] mx-auto relative overflow-hidden rounded-[40px] md:rounded-[64px] bg-[#0A0A0A] border border-white/5 pt-20 pb-12 px-6 md:px-20">
-        {/* Grid Background */}
-        <div
-          className="absolute inset-0 opacity-20 pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-
-        {/* Creative Background Text */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 pointer-events-none select-none">
-          <h2
-            className="text-[12rem] md:text-[24rem] font-bold text-white/[0.03] whitespace-nowrap tracking-tighter"
-            style={{ fontFamily: "var(--font-boldonse)" }}
-          >
-            IMRAN SAFDAR
-          </h2>
-        </div>
-
-        <div className="relative z-10">
-          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-12">
-            {/* Logo & Slogan Column */}
-            <div className="flex flex-col gap-8 max-w-sm">
-              <div className="flex items-center gap-2">
-                <Logo />
-              </div>
-              <p className="text-gray-500 text-lg leading-relaxed">
-                Based in Pakistan. <br />
-                Working with clients worldwide.
+    <footer className="w-full relative flex flex-col gap-[84px] overflow-hidden">
+      <CTASection />
+      <div className="w-full max-w-[1440px] mx-auto flex flex-col gap-[16px] z-20">
+        <div className="flex flex-col lg:flex-row justify-between mb-16 gap-10 lg:gap-0 z-20">
+          {/* Column 1: Brand & Description */}
+          <div className="flex flex-col gap-8 lg:gap-[85px]">
+            <div className="max-w-[415px] flex flex-col gap-6 lg:gap-[36px]">
+              <Logo />
+              <p className="text-[16px] font-medium leading-[24px] text-white">
+                Digital Engineering Agency that helps businesses scale globally by building digital products that are scalable, secure, and efficient.
               </p>
-              <div className="flex items-center gap-6">
-                {socialLinks.map((social) => (
-                  <Link
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-500 hover:text-white transition-colors"
-                  >
-                    <social.icon className="w-5 h-5" />
-                    <span className="sr-only">{social.name}</span>
-                  </Link>
-                ))}
-              </div>
             </div>
+          </div>
 
-            {/* Navigation & Copyright Column */}
-            <div className="flex flex-col gap-8 items-start md:items-end w-full md:w-auto">
-              <nav>
-                <ul className="flex flex-wrap gap-x-8 gap-y-4">
-                  {navLinks.map((link) => (
-                    <li key={link.name}>
+          <div className="flex flex-col sm:flex-row gap-10 sm:gap-[120px]">
+            {linksStack.map((linkGroup, index) => (
+              <div key={index} className="flex flex-col gap-6 lg:gap-[8px]">
+                <h4 className="text-[16px] leading-[24px] font-sora font-bold text-[#0080FF]">
+                  {linkGroup.title}
+                </h4>
+                <ul className="flex items-center gap-[8px]">
+                  {linkGroup.links.map((link, idx) => (
+                    <li key={idx} className="flex items-center gap-[12px]">
+                      {idx == 0 ?
+                        null
+                      : <span className="w-[5px] h-[5px] bg-white rounded-full flex items-center justify-center" />}
                       <Link
                         href={link.href}
-                        className="text-gray-400 hover:text-white transition-colors text-lg font-medium"
+                        className="text-[14px] leading-[20px] font-medium text-white hover:text-[#0080FF] transition-colors duration-300"
                       >
-                        {link.name}
+                        {link.title}
                       </Link>
                     </li>
                   ))}
                 </ul>
-              </nav>
-
-              <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-sm text-gray-500 w-full md:w-auto justify-between border-t border-white/5 pt-8 md:border-none md:pt-0">
-                <p>© {currentYear} —— Built with ❤️ by Imran Safdar</p>
-                <div className="flex items-center gap-4">
-                  <Link
-                    href="/privacy"
-                    className="hover:text-white transition-colors"
-                  >
-                    Privacy
-                  </Link>
-                  <Link
-                    href="/terms"
-                    className="hover:text-white transition-colors"
-                  >
-                    Terms
-                  </Link>
-                </div>
+                {linkGroup.socialLinks && (
+                  <div className="flex gap-4 mt-[16px]">
+                    {linkGroup.socialLinks.map((social, idx) => (
+                      <Link
+                        key={idx}
+                        href={social.href}
+                        target="_blank"
+                        className="w-10 h-10 flex items-center justify-center rounded-[8px] border border-[#FFFFFF]/30 bg-[#FFFFFF]/5 hover:bg-[#0080FF] group transition-all duration-300"
+                      >
+                        <social.icon
+                          size={20}
+                          className="text-[#FFFFFF] group-hover:text-white transition-colors"
+                        />
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+        <div className="relative flex justify-between items-center py-10">
+          <div className="absolute left-0 right-0 -top-[175px] overflow-hidden z-10 opacity-5">
+            <h1 className="text-white text-[12rem] font-sora text-center leading-[11rem] font-extrabold translate-y-[50px]">Imran Safdar</h1>
+          </div>
+          <SectionSeparator orientation="horizontal" color="FFFFFF" centerOpacity={0.25} className="absolute top-0 left-0 w-full h-full" />
+          <h3 className="text-white text-[14px] font-semibold font-sora">Copyright © {currentYear} Imran Safdar. All rights reserved.</h3>
+          <div className="flex justify-center items-center gap-[16px]">
+            <Link href="/privacy-policy" className="text-white text-[14px] font-semibold font-sora hover:text-[#0080FF] transition-colors duration-300">Privacy Policy</Link>
+            <span className="w-[5px] h-[5px] bg-white rounded-full flex items-center justify-center" />
+            <Link href="/terms-of-service" className="text-white text-[14px] font-semibold font-sora hover:text-[#0080FF] transition-colors duration-300">Terms of Service</Link>
           </div>
         </div>
       </div>
