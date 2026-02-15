@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Logo from "@/components/layout/header/Logo";
 import {
   FaLinkedinIn,
   FaGithub,
@@ -9,6 +8,7 @@ import {
 } from "react-icons/fa";
 import CTASection from "@/components/sections/home/cta/CTASection";
 import SectionSeparator from "@/components/shared/SectionSeparator";
+import Image from "next/image";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -49,12 +49,12 @@ export default function Footer() {
   return (
     <footer className="w-full relative flex flex-col gap-[84px] overflow-hidden">
       <CTASection />
-      <div className="w-full max-w-[1440px] mx-auto flex flex-col gap-[16px] z-20">
+      <div className="w-full max-w-[1440px] mx-auto flex flex-col gap-[64px] z-20">
         <div className="flex flex-col lg:flex-row justify-between mb-16 gap-10 lg:gap-0 z-20">
           {/* Column 1: Brand & Description */}
           <div className="flex flex-col gap-8 lg:gap-[85px]">
             <div className="max-w-[415px] flex flex-col gap-6 lg:gap-[36px]">
-              <Logo />
+              <Image src="/images/Imran-Forge.png" alt="Logo" width={150} height={150} />
               <p className="text-[16px] font-medium leading-[24px] text-white">
                 Digital Engineering Agency that helps businesses scale globally by building digital products that are scalable, secure, and efficient.
               </p>
@@ -72,7 +72,7 @@ export default function Footer() {
                     <li key={idx} className="flex items-center gap-[12px]">
                       {idx == 0 ?
                         null
-                      : <span className="w-[5px] h-[5px] bg-white rounded-full flex items-center justify-center" />}
+                        : <span className="w-[5px] h-[5px] bg-white rounded-full flex items-center justify-center" />}
                       <Link
                         href={link.href}
                         className="text-[14px] leading-[20px] font-medium text-white hover:text-[#0080FF] transition-colors duration-300"

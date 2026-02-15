@@ -28,6 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="apple-mobile-web-app-title" content="Imran Forge" />
+      </head>
       <body
         className={`${fontSans.variable} ${fontJakarta.variable} ${fontSora.variable} antialiased dark`}
       >

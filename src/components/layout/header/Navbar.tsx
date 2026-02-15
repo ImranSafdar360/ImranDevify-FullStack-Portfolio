@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Logo from "./Logo";
+import Image from "next/image";
 
 export default function Navbar() {
   // Left side navigation links
@@ -20,7 +20,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50">
-      <div className="relative w-full max-w-[900px] mx-auto flex">
+      <div className="relative w-full max-w-[800px] mx-auto flex">
 
         {/* Main content area with dark glassmorphism effect */}
         <div
@@ -52,7 +52,7 @@ export default function Navbar() {
 
             {/* Center section - Brand Logo */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex-shrink-0">
-              <Logo />
+              <Image src="/images/Imran-Forge.png" alt="Logo" width={100} height={100} />
             </div>
 
             {/* Right section - 3 links */}
