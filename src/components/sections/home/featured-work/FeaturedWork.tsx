@@ -103,7 +103,7 @@ export default function FeaturedWork() {
   );
 
   return (
-    <Section className="w-full max-w-full relative -mt-[70px] min-h-[600px]">
+    <Section className="w-full max-w-full relative -mt-[70px] min-h-[600px] z-20">
       <div
         className="w-full min-h-[600px] relative flex flex-col justify-center items-center gap-[32px] overflow-hidden"
         ref={containerRef}

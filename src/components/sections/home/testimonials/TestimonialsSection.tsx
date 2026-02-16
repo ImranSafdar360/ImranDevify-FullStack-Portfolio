@@ -14,7 +14,8 @@ export function TestimonialsSection() {
   const reviews = [
     {
       name: "Ahmed Al-Rashid",
-      image: "https://img.freepik.com/free-photo/close-up-beautiful-girl-portrait-with-purple-hair_23-2150799937.jpg",
+      image:
+        "https://img.freepik.com/free-photo/close-up-beautiful-girl-portrait-with-purple-hair_23-2150799937.jpg",
       company: "Horizon Travels",
       rating: 5,
       text: "Yelvo Creatives transformed our brand completely. The Shariah-compliant approach gave us confidence, and the results speak for themselves.",
@@ -23,7 +24,8 @@ export function TestimonialsSection() {
     },
     {
       name: "Fatima Hussain",
-      image: "https://img.freepik.com/premium-photo/man-wearing-glasses-blue-shirt-with-white-shirt-that-says-he-is-wearing-blue-shirt_1289061-1605.jpg?w=1480",
+      image:
+        "https://img.freepik.com/premium-photo/man-wearing-glasses-blue-shirt-with-white-shirt-that-says-he-is-wearing-blue-shirt_1289061-1605.jpg?w=1480",
       company: "Al-Habib Traders",
       rating: 5,
       text: "Professional, creative, and ethical. They understood our vision and delivered beyond expectations. Our sales have tripled!",
@@ -32,7 +34,8 @@ export function TestimonialsSection() {
     },
     {
       name: "Omar Farooq",
-      image: "https://img.freepik.com/free-photo/front-view-man-posing-outdoors_23-2151038658.jpg?t=st=1771102312~exp=1771105912~hmac=476e6836417da781c2a27b8ee73a7152d54c2002b30be252c578edb1a8f9c620&w=1480",
+      image:
+        "https://img.freepik.com/free-photo/front-view-man-posing-outdoors_23-2151038658.jpg?t=st=1771102312~exp=1771105912~hmac=476e6836417da781c2a27b8ee73a7152d54c2002b30be252c578edb1a8f9c620&w=1480",
       company: "Al-Zayaba Hajj",
       rating: 5,
       text: "Working with Yelvo was a game-changer. Their strategic approach to branding helped us compete with international agencies.",
@@ -41,7 +44,8 @@ export function TestimonialsSection() {
     },
     {
       name: "Aisha Khan",
-      image: "https://img.freepik.com/free-photo/monochrome-portrait-man-showing-vulnerability-self-acceptance_23-2151237407.jpg",
+      image:
+        "https://img.freepik.com/free-photo/monochrome-portrait-man-showing-vulnerability-self-acceptance_23-2151237407.jpg",
       company: "Barakah Foods",
       rating: 5,
       text: "Finally, a creative agency that understands Islamic business values. The quality of work is world-class.",
@@ -50,7 +54,8 @@ export function TestimonialsSection() {
     },
     {
       name: "Ibrahim Malik",
-      image: "https://img.freepik.com/free-photo/portrait-man-cartoon-style_23-2151134201.jpg",
+      image:
+        "https://img.freepik.com/free-photo/portrait-man-cartoon-style_23-2151134201.jpg",
       company: "Noor Academy",
       rating: 5,
       text: "From concept to execution, Yelvo delivered exceptional results. Our enrollment increased by 250% after the rebrand.",
@@ -59,7 +64,8 @@ export function TestimonialsSection() {
     },
     {
       name: "Mariam Siddiqui",
-      image: "https://img.freepik.com/free-photo/young-businesswoman-smiling-camera_197531-11176.jpg?t=st=1771102312~exp=1771105912~hmac=476e6836417da781c2a27b8ee73a7152d54c2002b30be252c578edb1a8f9c620&w=1480",
+      image:
+        "https://img.freepik.com/free-photo/young-businesswoman-smiling-camera_197531-11176.jpg?t=st=1771102312~exp=1771105912~hmac=476e6836417da781c2a27b8ee73a7152d54c2002b30be252c578edb1a8f9c620&w=1480",
       company: "Halal Eats",
       rating: 5,
       text: "The best investment we made for our business. Professional, responsive, and truly dedicated to our success.",
@@ -69,9 +75,24 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <Section className="max-w-[1280px] mx-auto relative flex flex-col justify-center items-center gap-[44px] overflow-hidden">
-      <Image src="/images/left-vector.svg" alt="Left Vector" width={560} height={235} className="absolute -left-20 top-20 z-10" />
-      <Image src="/images/right-vector.svg" alt="Right Vector" width={560} height={235} className="absolute -right-20 top-20 z-10" />
+    <Section
+      id="testimonials"
+      className="max-w-[1280px] mx-auto relative flex flex-col justify-center items-center gap-[44px] overflow-hidden"
+    >
+      <Image
+        src="/images/left-vector.svg"
+        alt="Left Vector"
+        width={560}
+        height={235}
+        className="absolute -left-20 top-20 z-10"
+      />
+      <Image
+        src="/images/right-vector.svg"
+        alt="Right Vector"
+        width={560}
+        height={235}
+        className="absolute -right-20 top-20 z-10"
+      />
       <SectionHeader
         className="max-w-[60%] items-center gap-[0px] z-20"
         title="Client "
@@ -79,16 +100,12 @@ export function TestimonialsSection() {
         badgeText="Feedback"
         gradientText="Testimonials"
       />
-      <AnimatedButton onClick={() => { }}>
-        Become one of them
-      </AnimatedButton>
+      <AnimatedButton onClick={() => {}}>Become one of them</AnimatedButton>
       {/* Reviews Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 z-20 mt-[44px]">
         {reviews.map((review, index) => (
           <DynamicCard key={index}>
-            <div
-              className="flex flex-col gap-[24px]"
-            >
+            <div className="flex flex-col gap-[24px]">
               <div className="w-full flex justify-between items-center">
                 <div className="relative w-[40px] h-[40px] flex-shrink-0 overflow-hidden rounded-full">
                   <Image

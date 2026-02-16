@@ -51,17 +51,32 @@ export default function Hero() {
   ];
   return (
     <Section className="max-w-full relative flex flex-col justify-start items-center gap-[120px] pt-[150px]">
-      <Image
+      {/* <Image
         src="/images/hero-bg.webp"
         alt="Hero Background Effect"
         fill
         className="object-cover absolute top-0 left-0 w-full h-full"
         loading="lazy"
-      />
+      /> */}
+      <div className="absolute left-0 -top-[150px] z-10 w-full h-full">
+        {/* <Image
+          src="/images/CTA-background.avif"
+          alt="CTA Background"
+          fill
+          className="w-full h-full object-cover rotate-180"
+        /> */}
+        <Image
+          src="/images/hero-bg.webp"
+          alt="Hero Background Effect"
+          fill
+          className="object-cover w-full h-full"
+          loading="lazy"
+        />
+      </div>
 
       <div
         ref={containerRef}
-        className="relative w-full h-full flex flex-col justify-center items-center gap-[32px] mx-auto px-6 z-10"
+        className="relative w-full h-full flex flex-col justify-center items-center gap-[32px] mx-auto px-6 z-20"
       >
         <div className="relative w-full flex justify-center items-center">
           <LiquidGlass

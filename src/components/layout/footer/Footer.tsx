@@ -1,11 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  FaLinkedinIn,
-  FaGithub,
-  FaTwitter,
-} from "react-icons/fa";
+import { FaLinkedinIn, FaGithub, FaTwitter } from "react-icons/fa";
 import CTASection from "@/components/sections/home/cta/CTASection";
 import SectionSeparator from "@/components/shared/SectionSeparator";
 import Image from "next/image";
@@ -20,31 +16,31 @@ export default function Footer() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     socialLinks?: { icon: any; href: string }[];
   }[] = [
-      {
-        title: "Navigation",
-        links: [
-          { title: "About", href: "#about", icon: null },
-          { title: "Featured", href: "#featured", icon: null },
-          { title: "Portfolio", href: "/portfolio", icon: null },
-          { title: "Testimonials", href: "#testimonials", icon: null },
-          { title: "Contact", href: "#contact", icon: null },
-        ],
-        socialLinks: [
-          {
-            icon: FaGithub,
-            href: "https://github.com/ImranSafdar360/",
-          },
-          {
-            icon: FaLinkedinIn,
-            href: "https://www.linkedin.com/in/imran-safdar/",
-          },
-          {
-            icon: FaTwitter,
-            href: "https://x.com/Imransafdar777/",
-          },
-        ],
-      },
-    ];
+    {
+      title: "Navigation",
+      links: [
+        { title: "About", href: "#about", icon: null },
+        { title: "Featured", href: "#featured", icon: null },
+        { title: "Portfolio", href: "/portfolio", icon: null },
+        { title: "Testimonials", href: "#testimonials", icon: null },
+        { title: "Contact", href: "#contact", icon: null },
+      ],
+      socialLinks: [
+        {
+          icon: FaGithub,
+          href: "https://github.com/ImranSafdar360/",
+        },
+        {
+          icon: FaLinkedinIn,
+          href: "https://www.linkedin.com/in/imran-safdar/",
+        },
+        {
+          icon: FaTwitter,
+          href: "https://x.com/Imransafdar777/",
+        },
+      ],
+    },
+  ];
 
   return (
     <footer className="w-full relative flex flex-col gap-[84px] overflow-hidden">
@@ -54,9 +50,16 @@ export default function Footer() {
           {/* Column 1: Brand & Description */}
           <div className="flex flex-col gap-8 lg:gap-[85px]">
             <div className="max-w-[415px] flex flex-col gap-6 lg:gap-[36px]">
-              <Image src="/images/Imran-Forge.png" alt="Logo" width={150} height={150} />
+              <Image
+                src="/images/Imran-Forge.png"
+                alt="Logo"
+                width={150}
+                height={150}
+              />
               <p className="text-[16px] font-medium leading-[24px] text-white">
-                Digital Engineering Agency that helps businesses scale globally by building digital products that are scalable, secure, and efficient.
+                Digital Engineering Agency that helps businesses scale globally
+                by building digital products that are scalable, secure, and
+                efficient.
               </p>
             </div>
           </div>
@@ -70,9 +73,9 @@ export default function Footer() {
                 <ul className="flex items-center gap-[8px]">
                   {linkGroup.links.map((link, idx) => (
                     <li key={idx} className="flex items-center gap-[12px]">
-                      {idx == 0 ?
-                        null
-                        : <span className="w-[5px] h-[5px] bg-white rounded-full flex items-center justify-center" />}
+                      {idx == 0 ? null : (
+                        <span className="w-[5px] h-[5px] bg-white rounded-full flex items-center justify-center" />
+                      )}
                       <Link
                         href={link.href}
                         className="text-[14px] leading-[20px] font-medium text-white hover:text-[#0080FF] transition-colors duration-300"
@@ -105,14 +108,33 @@ export default function Footer() {
         </div>
         <div className="relative flex justify-between items-center py-10">
           <div className="absolute left-0 right-0 -top-[175px] overflow-hidden z-10 opacity-5">
-            <h1 className="text-white text-[12rem] font-sora text-center leading-[11rem] font-extrabold translate-y-[50px]">Imran Safdar</h1>
+            <h1 className="text-white text-[12rem] font-sora text-center leading-[11rem] font-extrabold translate-y-[50px]">
+              Imran Devify
+            </h1>
           </div>
-          <SectionSeparator orientation="horizontal" color="FFFFFF" centerOpacity={0.25} className="absolute top-0 left-0 w-full h-full" />
-          <h3 className="text-white text-[14px] font-semibold font-sora">Copyright © {currentYear} Imran Safdar. All rights reserved.</h3>
+          <SectionSeparator
+            orientation="horizontal"
+            color="FFFFFF"
+            centerOpacity={0.25}
+            className="absolute top-0 left-0 w-full h-full"
+          />
+          <h3 className="text-white text-[14px] font-semibold font-sora">
+            Copyright © {currentYear} Imran Safdar. All rights reserved.
+          </h3>
           <div className="flex justify-center items-center gap-[16px]">
-            <Link href="/privacy-policy" className="text-white text-[14px] font-semibold font-sora hover:text-[#0080FF] transition-colors duration-300">Privacy Policy</Link>
+            <Link
+              href="/privacy-policy"
+              className="text-white text-[14px] font-semibold font-sora hover:text-[#0080FF] transition-colors duration-300"
+            >
+              Privacy Policy
+            </Link>
             <span className="w-[5px] h-[5px] bg-white rounded-full flex items-center justify-center" />
-            <Link href="/terms-of-service" className="text-white text-[14px] font-semibold font-sora hover:text-[#0080FF] transition-colors duration-300">Terms of Service</Link>
+            <Link
+              href="/terms-of-service"
+              className="text-white text-[14px] font-semibold font-sora hover:text-[#0080FF] transition-colors duration-300"
+            >
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>
