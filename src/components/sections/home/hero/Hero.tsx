@@ -10,7 +10,7 @@ import FeaturedWork from "../featured-work/FeaturedWork";
 import whatsappIcon from "../../../../../public/images/icons/whatsapp.png";
 import linkedinIcon from "../../../../../public/images/icons/linkedin.png";
 import gmailIcon from "../../../../../public/images/icons/gmail.png";
-import GradientText from "@/components/ui/gradient-text";
+// import GradientText from "@/components/ui/gradient-text";
 
 const LiquidGlass = dynamic(() => import("liquid-glass-react"), {
   ssr: false,
@@ -23,10 +23,14 @@ export default function Hero() {
   const phoneNumber = "923494898190";
   const email = "imransafdar360@gmail.com";
   const linkedinProfile = "imran-safdar/";
-  
-  const demoMessage = encodeURIComponent("Hi! I'm interested in discussing a project with you. Let's connect!");
+
+  const demoMessage = encodeURIComponent(
+    "Hi! I'm interested in discussing a project with you. Let's connect!",
+  );
   const emailSubject = encodeURIComponent("Project Inquiry - Let's Connect");
-  const emailBody = encodeURIComponent("Hi Imran,\n\nI came across your portfolio and I'm interested in discussing a potential project with you.\n\nLooking forward to hearing from you!\n\nBest regards");
+  const emailBody = encodeURIComponent(
+    "Hi Imran,\n\nI came across your portfolio and I'm interested in discussing a potential project with you.\n\nLooking forward to hearing from you!\n\nBest regards",
+  );
 
   const socialItems = [
     {
@@ -79,14 +83,20 @@ export default function Hero() {
             fontFamily: "var(--font-boldonse)",
           }}
         >
-          Build Products That Perform, Scale, and <span className="bg-white px-2 py-1 rounded-2xl inline-block"><GradientText>Stand Out.</GradientText></span>
+          I Build Conversion Focused Products That Perform and Scale.{" "}
+          {/* <span className="bg-white px-2 py-1 rounded-2xl inline-block">
+            <GradientText>Stand Out.</GradientText>
+          </span> */}
         </h1>
 
         {/* Subtitle */}
-        <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-0 text-center max-w-[900px] font-medium">
-          I’m 𝗜𝗺𝗿𝗮𝗻 𝗦𝗮𝗳𝗱𝗮𝗿, a MERN Stack & React Native developer helping 𝗦𝗮𝗮𝗦
-          𝗳𝗼𝘂𝗻𝗱𝗲𝗿𝘀, 𝗮𝗴𝗲𝗻𝗰𝗶𝗲𝘀, 𝗮𝗻𝗱 𝘀𝘁𝗮𝗿𝘁𝘂𝗽𝘀 turn complex ideas into fast,
-          reliable, growth-ready digital products.
+        <p className="text-lg md:text-xl text-white/70 leading-relaxed mb-0 text-center max-w-[900px] font-medium">
+          I’m <span className="text-white font-semibold">Imran Safdar</span>, a
+          MERN Stack & React Native developer helping {""}
+          <span className="text-white font-semibold">
+            SaaS founders, agencies and startups
+          </span>{" "}
+          turn complex ideas into fast, reliable, growth-ready digital products.
         </p>
 
         {/* CTA Section (A/B Optimized) */}

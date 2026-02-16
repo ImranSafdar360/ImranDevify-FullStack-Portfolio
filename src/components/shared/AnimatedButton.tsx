@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import React, { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
@@ -11,15 +11,15 @@ interface AnimatedButtonProps {
   onClick?: () => void;
   hoverText?: string;
   className?: string;
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
 }
 
-const AnimatedButton = ({ 
-  children, 
-  onClick, 
+const AnimatedButton = ({
+  children,
+  onClick,
   hoverText,
-  className = '',
-  type = 'button'
+  className = "",
+  type = "button",
 }: AnimatedButtonProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const textTopRef = useRef<HTMLSpanElement>(null);
@@ -37,15 +37,15 @@ const AnimatedButton = ({
 
       // Set initial positions - ensure proper positioning
       // Using inline styles for initial state to prevent flash, GSAP will take over
-      gsap.set(textTop, { 
-        yPercent: 0, 
+      gsap.set(textTop, {
+        yPercent: 0,
         opacity: 1,
-        xPercent: 0
+        xPercent: 0,
       });
-      gsap.set(textBottom, { 
-        yPercent: 100, 
+      gsap.set(textBottom, {
+        yPercent: 100,
         opacity: 0,
-        xPercent: -50 // Maintain horizontal centering
+        xPercent: -50, // Maintain horizontal centering
       });
 
       const handleMouseEnter = () => {
@@ -54,7 +54,7 @@ const AnimatedButton = ({
           yPercent: -100,
           opacity: 0,
           duration: 0.4,
-          ease: 'power2.inOut',
+          ease: "power2.inOut",
         });
 
         // Animate bottom text coming up and fading in
@@ -64,7 +64,7 @@ const AnimatedButton = ({
           opacity: 1,
           xPercent: -50,
           duration: 0.4,
-          ease: 'power2.inOut',
+          ease: "power2.inOut",
         });
       };
 
@@ -74,7 +74,7 @@ const AnimatedButton = ({
           yPercent: 0,
           opacity: 1,
           duration: 0.4,
-          ease: 'power2.inOut',
+          ease: "power2.inOut",
         });
 
         // Reset bottom text
@@ -84,19 +84,19 @@ const AnimatedButton = ({
           opacity: 0,
           xPercent: -50,
           duration: 0.4,
-          ease: 'power2.inOut',
+          ease: "power2.inOut",
         });
       };
 
-      button.addEventListener('mouseenter', handleMouseEnter);
-      button.addEventListener('mouseleave', handleMouseLeave);
+      button.addEventListener("mouseenter", handleMouseEnter);
+      button.addEventListener("mouseleave", handleMouseLeave);
 
       return () => {
-        button.removeEventListener('mouseenter', handleMouseEnter);
-        button.removeEventListener('mouseleave', handleMouseLeave);
+        button.removeEventListener("mouseenter", handleMouseEnter);
+        button.removeEventListener("mouseleave", handleMouseLeave);
       };
     },
-    { scope: buttonRef }
+    { scope: buttonRef },
   );
 
   // Determine which text to show initially and on hover
@@ -108,21 +108,21 @@ const AnimatedButton = ({
       ref={buttonRef}
       type={type}
       onClick={onClick}
-      className={`relative w-fit cursor-pointer overflow-hidden rounded-full bg-white px-8 py-5 text-center font-bold text-black shadow-sm transition-all duration-300 hover:shadow-lg ${className}`}
+      className={`relative w-fit cursor-pointer overflow-hidden rounded-2xl bg-white px-8 py-5 text-center font-bold text-black shadow-sm transition-all duration-300 hover:shadow-lg ${className}`}
     >
       <div
         ref={containerRef}
         className="relative flex items-center justify-center w-full"
-        style={{ minHeight: '1.5em' }}
+        style={{ minHeight: "1.5em" }}
       >
         {/* Initial text - visible by default */}
         <span
           ref={textTopRef}
           className="inline-block whitespace-nowrap relative z-10"
-          style={{ 
-            willChange: 'transform, opacity',
+          style={{
+            willChange: "transform, opacity",
             opacity: 1,
-            transform: 'translateY(0%)'
+            transform: "translateY(0%)",
           }}
         >
           {initialText}
@@ -131,12 +131,12 @@ const AnimatedButton = ({
         <span
           ref={textBottomRef}
           className="absolute inline-block whitespace-nowrap"
-          style={{ 
-            willChange: 'transform, opacity',
-            top: '50%',
-            left: '50%',
+          style={{
+            willChange: "transform, opacity",
+            top: "50%",
+            left: "50%",
             opacity: 0,
-            transform: 'translate(-50%, 50%)'
+            transform: "translate(-50%, 50%)",
           }}
         >
           {hoverTextContent}

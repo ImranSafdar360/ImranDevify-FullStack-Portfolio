@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import Image, { StaticImageData } from 'next/image';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import Image, { StaticImageData } from "next/image";
 
 interface SocialIcon {
   imageSrc?: StaticImageData;
@@ -19,7 +19,7 @@ const SocialDock = ({ items, className }: SocialDockProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const handleClick = (href: string) => {
-    window.open(href, '_blank', 'noopener,noreferrer');
+    window.open(href, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -32,11 +32,11 @@ const SocialDock = ({ items, className }: SocialDockProps) => {
           onHoverEnd={() => setHoveredIndex(null)}
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.95 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           {/* Icon Container with Gradient Background */}
           <motion.div
-            className="w-12 h-12 rounded-[12px] flex items-center justify-center cursor-pointer relative overflow-hidden"
+            className="w-14 h-14 rounded-2xl flex items-center justify-center cursor-pointer relative overflow-hidden"
             onClick={() => handleClick(item.href)}
             whileHover={{
               boxShadow: `0 8px 24px rgba(255,255,255,0.4)`,
@@ -45,21 +45,21 @@ const SocialDock = ({ items, className }: SocialDockProps) => {
             {/* Icon */}
             <div className="w-full h-full relative z-10 flex items-center justify-center">
               {item.imageSrc && (
-              <Image
-                src={item.imageSrc}
-                alt={item.label}
-                fill
-                className="object-cover"
-                loading='lazy'
-              />
+                <Image
+                  src={item.imageSrc}
+                  alt={item.label}
+                  fill
+                  className="object-cover"
+                  loading="lazy"
+                />
               )}
             </div>
 
             {/* Shine effect on hover */}
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent z-20"
-              initial={{ x: '-100%' }}
-              animate={hoveredIndex === index ? { x: '100%' } : { x: '-100%' }}
+              initial={{ x: "-100%" }}
+              animate={hoveredIndex === index ? { x: "100%" } : { x: "-100%" }}
               transition={{ duration: 0.6 }}
             />
           </motion.div>
@@ -91,4 +91,3 @@ const SocialDock = ({ items, className }: SocialDockProps) => {
 };
 
 export default SocialDock;
-
