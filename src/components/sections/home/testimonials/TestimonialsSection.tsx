@@ -77,26 +77,26 @@ export function TestimonialsSection() {
   return (
     <Section
       id="testimonials"
-      className="max-w-[1280px] mx-auto relative flex flex-col justify-center items-center gap-[44px] overflow-hidden"
+      className="max-w-[1280px] mx-auto relative flex flex-col justify-center items-center md:gap-[44px] gap-[24px] overflow-hidden"
     >
       <Image
         src="/images/left-vector.svg"
         alt="Left Vector"
         width={560}
         height={235}
-        className="absolute -left-20 top-20 z-10"
+        className="absolute left-[-350px] lg:left-[-200px] xl:left-[-54px] top-20 z-10 hidden md:block"
       />
       <Image
         src="/images/right-vector.svg"
         alt="Right Vector"
         width={560}
         height={235}
-        className="absolute -right-20 top-20 z-10"
+        className="absolute right-[-350px] lg:right-[-200px] xl:right-[-54px] top-20 z-10 hidden md:block"
       />
       <SectionHeader
-        className="max-w-[60%] items-center gap-[0px] z-20"
+        className="max-w-full md:max-w-[70%] lg:max-w-[55%] items-center gap-[16px] z-20"
         title="Client "
-        description="Trusted by 100+ happy clients for their exceptional work."
+        description="Trusted by 100+ happy clients"
         badgeText="Feedback"
         gradientText="Testimonials"
       />

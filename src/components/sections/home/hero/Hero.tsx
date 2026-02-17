@@ -1,20 +1,15 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useRef } from "react";
+import Image from "next/image";
 import AnimatedButton from "@/components/shared/AnimatedButton";
 import SocialDock from "@/components/ui/social-dock";
 import Section from "@/components/shared/Section";
-import Image from "next/image";
 import FeaturedWork from "../featured-work/FeaturedWork";
+
 import whatsappIcon from "../../../../../public/images/icons/whatsapp.png";
 import linkedinIcon from "../../../../../public/images/icons/linkedin.png";
 import gmailIcon from "../../../../../public/images/icons/gmail.png";
-// import GradientText from "@/components/ui/gradient-text";
-
-const LiquidGlass = dynamic(() => import("liquid-glass-react"), {
-  ssr: false,
-});
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -50,21 +45,8 @@ export default function Hero() {
     },
   ];
   return (
-    <Section className="max-w-full relative flex flex-col justify-start items-center gap-[120px] pt-[150px]">
-      {/* <Image
-        src="/images/hero-bg.webp"
-        alt="Hero Background Effect"
-        fill
-        className="object-cover absolute top-0 left-0 w-full h-full"
-        loading="lazy"
-      /> */}
-      <div className="absolute left-0 -top-[150px] z-10 w-full h-full">
-        {/* <Image
-          src="/images/CTA-background.avif"
-          alt="CTA Background"
-          fill
-          className="w-full h-full object-cover rotate-180"
-        /> */}
+    <Section className="max-w-full relative flex flex-col justify-start items-center pt-[130px] gap-[110px] md:gap-[120px] md:pt-[150px] px-0 md:px-0 lg:px-0 xl:px-0">
+      <div className="absolute left-0 top-[-250px] md:top-[-250px] lg:top-[-150px] z-10 w-full h-full">
         <Image
           src="/images/hero-bg.webp"
           alt="Hero Background Effect"
@@ -76,36 +58,28 @@ export default function Hero() {
 
       <div
         ref={containerRef}
-        className="relative w-full h-full flex flex-col justify-center items-center gap-[32px] mx-auto px-6 z-20"
+        className="relative w-full h-full flex flex-col justify-center items-center gap-[16px] lg:gap-[24px] xl:gap-[32px] mx-auto xl:px-6 z-20"
       >
         <div className="relative w-full flex justify-center items-center">
-          <LiquidGlass
-            mouseContainer={containerRef}
-            elasticity={0.3}
-            padding="16px 24px"
-            style={{ position: "absolute", top: "50%", left: "50%" }}
-          >
-            <p className="text-white text-[15px] font-medium">
-              Premium Product Engineering No Templates. No Shortcuts.{" "}
-            </p>
-          </LiquidGlass>
+          <div className="px-4 py-2 md:px-8 md:py-3 rounded-full border border-white/30 bg-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:border-white/20 group">
+            <span className="text-[12px] md:text-sm lg:text-base font-semibold tracking-wide text-white text-center whitespace-nowrap">
+              150+ Satisfied Clients around the world
+            </span>
+          </div>
         </div>
 
         {/* Gradient Title */}
         <h1
-          className="text-4xl md:text-[60px] tracking-tight leading-[94px] mt-6 text-center max-w-[1200px]"
+          className="text-[28px] md:text-[30px] lg:text-4xl xl:text-[60px] tracking-tight leading-normal xl:leading-[94px] text-center max-w-full md:max-w-[600px] lg:max-w-[700px] xl:max-w-[1200px]"
           style={{
             fontFamily: "var(--font-boldonse)",
           }}
         >
-          I Build Conversion Focused Products That Perform and Scale.{" "}
-          {/* <span className="bg-white px-2 py-1 rounded-2xl inline-block">
-            <GradientText>Stand Out.</GradientText>
-          </span> */}
+          I Build Conversion Focused Products That Perform and Scale.
         </h1>
 
         {/* Subtitle */}
-        <p className="text-lg md:text-xl text-white/70 leading-relaxed mb-0 text-center max-w-[900px] font-medium">
+        <p className="text-[15px] md:text-[14px] lg:text-lg xl:text-xl text-white/70 leading-relaxed mb-0 text-center max-w-[90%] md:max-w-[500px] lg:max-w-[700px] xl:max-w-[900px] font-medium">
           I’m <span className="text-white font-semibold">Imran Safdar</span>, a
           MERN Stack & React Native developer helping {""}
           <span className="text-white font-semibold">
@@ -115,10 +89,10 @@ export default function Hero() {
         </p>
 
         {/* CTA Section (A/B Optimized) */}
-        <div className="flex flex-col justify-center items-center gap-[21px] sm:flex-row">
+        <div className="flex justify-center items-center gap-[16px] xl:gap-[21px] flex-row">
           {/* Primary CTA */}
           <AnimatedButton onClick={() => {}}>Book 1:1 Meeting</AnimatedButton>
-          <h6 className="text-gray-300 text-[22px] font-semibold">or DM</h6>
+          <h6 className="text-gray-300 xl:text-[22px] font-semibold">or DM</h6>
           <SocialDock items={socialItems} />
         </div>
       </div>

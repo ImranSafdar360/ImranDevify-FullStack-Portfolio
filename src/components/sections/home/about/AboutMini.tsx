@@ -2,7 +2,7 @@
 
 import React from "react";
 import Section from "@/components/shared/Section";
-import ProfilePic from "../../../../../public/images/profile-pic.avif";
+import ProfilePic from "../../../../../public/images/profile-pic.jpg";
 import ImageCard from "@/components/shared/ImageCard";
 import AnimatedButton from "@/components/shared/AnimatedButton";
 import GradientText from "@/components/ui/gradient-text";
@@ -10,9 +10,11 @@ import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import SectionSeparator from "@/components/shared/SectionSeparator";
 import { useRouter } from "next/navigation";
 import SectionHeader from "@/components/shared/SectionHeader";
+import { useDeviceType } from "@/hooks/use-mobile";
 
 export default function AboutSection() {
   const router = useRouter();
+  const { isMobile, isTablet } = useDeviceType();
 
   const people = [
     {
@@ -50,41 +52,50 @@ export default function AboutSection() {
   };
 
   return (
-    <Section className="relative flex justify-center items-center gap-[84px]">
+    <Section className="relative flex flex-col-reverse lg:flex-row justify-center items-center gap-[64px] lg:gap-[84px]">
       <ImageCard image={ProfilePic} alt="Profile Picture" />
-      <div className="flex flex-col justify-center gap-[30px] w-full max-w-[50%]">
-          <SectionHeader 
-          title="Building Stronger Brands" 
+      <div className="flex flex-col justify-center gap-[30px] w-full max-w-full md:max-w-[80%] lg:max-w-[50%]">
+        <SectionHeader
+          title="Imran Safdar"
           description="Delivering high-quality, on-demand designs with precision.
-          Elevate your brand effortlessly, one snap at a time." 
-          badgeText="About Imran" 
-          gradientText="Creating Impressions!"
-          isAbout={true}
+          Elevate your brand effortlessly, one snap at a time."
+          badgeText="About Imran"
+          gradientText="Digital Engineer"
+          isAbout={isMobile || isTablet ? false : true}
+        />
+        <div className="w-full max-w-full lg:max-w-[230px]">
+          <SectionSeparator
+            orientation="horizontal"
+            color="FFFFFF"
+            centerOpacity={0.25}
           />
-          <div className="w-full max-w-[230px]">
-          <SectionSeparator 
-              orientation="horizontal" 
-              color="FFFFFF" 
-              centerOpacity={0.25}
-            />
-          </div>
-          <div className="flex flex-col gap-[10px]">
-            <h2 className="text-[18px] leading-[22px] font-medium text-white">Expertise in 20+ elite technologies</h2>
-            <p className="text-[16px] leading-[20px] font-light text-white/70">I specialize in 20+ elite technologies, from React, Next.js, and Tailwind CSS to Node.js, MongoDB, and more. I use these technologies to build high-performance, scalable, and efficient web applications.</p>
-          </div>
-          
-        <div className="flex flex-row items-start w-full">
-          <div className="relative flex items-center gap-[24px]">
-            <AnimatedButton onClick={handleAboutClick}>View about Imran</AnimatedButton>
-            <SectionSeparator 
-              orientation="vertical" 
-              color="FFFFFF" 
+        </div>
+        <div className="flex items-center lg:items-start flex-col gap-[10px]">
+          <h2 className="text-[18px] leading-[22px] font-medium text-white">
+            Expertise in 20+ elite technologies
+          </h2>
+          <p className="text-[16px] leading-normal text-center lg:text-start font-medium text-white/70">
+            I specialize in 20+ elite technologies, from React, Next.js, and
+            Tailwind CSS to Node.js, MongoDB, and more. I use these technologies
+            to build high-performance, scalable, and efficient web applications.
+          </p>
+        </div>
+
+        <div className="flex flex-row justify-center lg:justify-start items-start w-full">
+          <div className="relative flex flex-col-reverse md:flex-row items-center gap-[24px]">
+            <AnimatedButton onClick={handleAboutClick}>
+              View about Imran
+            </AnimatedButton>
+            <SectionSeparator
+              orientation="vertical"
+              color="FFFFFF"
               centerOpacity={0.25}
               height="50px"
               width="1px"
+              className="hidden md:block"
             />
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-              <div className="flex justify-center items-center">
+              <div className="flex items-start justify-center md:items-center">
                 <AnimatedTooltip items={people} />
               </div>
               <p className="text-[16px] font-medium text-white text-center sm:text-start leading-[22px]">

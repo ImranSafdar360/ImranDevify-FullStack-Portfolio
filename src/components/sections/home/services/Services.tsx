@@ -6,6 +6,7 @@ import DynamicCard from "@/components/shared/DynamicCard";
 import { Code2, Smartphone, Globe, CheckCircle2 } from "lucide-react";
 import SectionSeparator from "@/components/shared/SectionSeparator";
 import SectionBadge from "@/components/shared/SectionBadge";
+import { useDeviceType } from "@/hooks/use-mobile";
 
 const services = [
   {
@@ -47,12 +48,14 @@ const services = [
 ];
 
 const Services = () => {
+  const { isMobile, isTablet } = useDeviceType();
+
   return (
     <Section
       id="services"
       className="relative flex flex-col lg:flex-row justify-center gap-[84px]"
     >
-      <div className="static lg:sticky top-40 self-start">
+      <div className="static lg:sticky top-40 self-start hidden lg:block">
         <ImageCard image="/images/profile-pic.avif" alt="Services" />
       </div>
       <div className="w-full lg:max-w-[50%] flex flex-col gap-[84px]">
@@ -62,26 +65,15 @@ const Services = () => {
           description="I offer a wide range of services to help you achieve your goals."
           badgeText="Services"
           gradientText="Clear Services Remotely."
-          isAbout={true}
+          isAbout={isMobile || isTablet ? false : true}
         />
 
         <div className="flex flex-col gap-6">
           {services.map((service, index) => (
             <DynamicCard
               key={index}
-              className="relative max-w-[590px] min-h-fit p-8"
+              className="relative max-w-full lg:max-w-[590px] min-h-fit p-8"
             >
-              {/* Background Pattern for Active State */}
-              <div className="absolute inset-0 transition-opacity duration-700">
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    backgroundImage:
-                      "radial-gradient(circle, #000 1px, transparent 1px)",
-                    backgroundSize: "24px 24px",
-                  }}
-                ></div>
-              </div>
               <div className="flex flex-col gap-[44px]">
                 <div className="flex justify-between items-start">
                   <div className="p-3 bg-white/5 rounded-2xl border border-white/10">

@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils";
 
 import { Rocket, Briefcase, Paintbrush, Layout } from "lucide-react";
 
+import IconBox from "@/components/shared/IconBox";
+
 interface ClientCard {
   title: string;
   description: string;
@@ -49,9 +51,9 @@ const clients: ClientCard[] = [
 
 export default function WhoIWorkWith() {
   return (
-    <Section className="relative flex flex-col justify-center items-center gap-[84px]">
+    <Section className="relative flex flex-col justify-center items-center gap-[32px] md:gap-[44px] lg:gap-[84px]">
       <SectionHeader
-        className="max-w-[60%] items-center gap-[8px]"
+        className="max-w-full md:max-w-[70%] lg:max-w-[55%] items-center gap-[16px] z-20"
         title="Who I Usually "
         description="I work with people building serious products — not just websites. Teams that care about quality, clarity, and long-term impact."
         badgeText="Who I Work With"
@@ -66,7 +68,6 @@ export default function WhoIWorkWith() {
         {clients.map((client, index) => {
           const colSpan =
             index === 0 || index === 3 ? "md:col-span-6" : "md:col-span-4";
-          const Icon = client.icon;
 
           return (
             <DynamicCard
@@ -78,9 +79,7 @@ export default function WhoIWorkWith() {
               )}
             >
               {/* Icon with Glowing Effect */}
-              <div className="relative w-fit h-fit z-10 p-5 rounded-2xl bg-[#0080FF]">
-                <Icon className="w-10 h-10 text-white" strokeWidth={1.5} />
-              </div>
+              <IconBox icon={client.icon} size="lg" className="rounded-2xl" />
 
               {/* Bottom Content Area */}
               <div className="mt-auto flex flex-col gap-4">

@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import DynamicCard from "@/components/shared/DynamicCard";
+import IconBox from "@/components/shared/IconBox";
 
 interface ExpertiseItem {
   name: string;
@@ -51,38 +52,33 @@ const ExpertiseSection = () => {
         gradientText="build and scale"
       />
 
-      <div className="flex flex-wrap justify-center gap-4 w-full h-full">
-        {expertises.map((item, index) => {
-          const Icon = item.icon;
+      <div className="flex flex-col items-center gap-6 w-full h-full">
+        {[
+          expertises.slice(0, 4), // Row 1: 4 items
+          expertises.slice(4, 7), // Row 2: 3 items
+          expertises.slice(7, 10), // Row 3: 3 items
+          expertises.slice(10, 12), // Row 4: 2 items
+        ].map((row, rowIndex) => (
+          <div
+            key={rowIndex}
+            className="flex flex-wrap justify-center gap-4 w-full"
+          >
+            {row.map((item, index) => (
+              <DynamicCard
+                key={index}
+                className={cn(
+                  "group flex flex-row items-center justify-center gap-3 p-4 px-6 md:px-8 min-h-fit md:min-h-[90px] w-fit min-w-fit max-w-none transition-all duration-300",
+                )}
+              >
+                <IconBox icon={item.icon} />
 
-          // Pattern: 4 items, 3 items, 3 items, 2 items
-          let basis = "md:basis-[calc(25%-12px)]"; // 4 per row
-          if (index >= 4 && index <= 9)
-            basis = "md:basis-[calc(33.33%-12px)]"; // 3 per row (two rows)
-          else if (index >= 10) basis = "md:basis-[calc(50%-12px)]"; // 2 per row
-
-          return (
-            <DynamicCard
-              key={index}
-              className={cn(
-                "group flex flex-row items-center justify-center gap-5 p-6 h-full min-h-[100px] min-w-fit",
-                basis,
-              )}
-            >
-              <div className="relative flex items-center justify-center w-10 h-10 rounded-xl overflow-hidden shrink-0 bg-[#0080FF]">
-                <div className="absolute inset-0 bg-blue-500/10 blur-sm group-hover:bg-blue-500/20 transition-colors" />
-                <Icon
-                  className="relative z-10 w-5 h-5 text-white/70 group-hover:text-white transition-colors"
-                  strokeWidth={2}
-                />
-              </div>
-
-              <h6 className="text-lg font-bold text-white font-sora group-hover:text-white transition-colors tracking-tight">
-                {item.name}
-              </h6>
-            </DynamicCard>
-          );
-        })}
+                <h6 className="text-base md:text-lg font-bold text-white font-sora transition-colors tracking-tight whitespace-nowrap">
+                  {item.name}
+                </h6>
+              </DynamicCard>
+            ))}
+          </div>
+        ))}
       </div>
     </Section>
   );

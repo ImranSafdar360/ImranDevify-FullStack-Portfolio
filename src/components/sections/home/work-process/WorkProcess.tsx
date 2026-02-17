@@ -8,6 +8,7 @@ import DynamicCard from "@/components/shared/DynamicCard";
 import ImageCard from "@/components/shared/ImageCard";
 import SectionBadge from "@/components/shared/SectionBadge";
 import SectionSeparator from "@/components/shared/SectionSeparator";
+import { useDeviceType } from "@/hooks/use-mobile";
 
 interface ProcessStep {
   id: string;
@@ -30,7 +31,7 @@ const processSteps: ProcessStep[] = [
       "Deeply understanding your goals to create a strategic roadmap for success.",
       "Deeply understanding your goals to create a strategic roadmap for success.",
       "Deeply understanding your goals to create a strategic roadmap for success.",
-    ]
+    ],
   },
   {
     id: "02",
@@ -43,7 +44,7 @@ const processSteps: ProcessStep[] = [
       "Building your product with precision and ensuring it's ready for launch.",
       "Building your product with precision and ensuring it's ready for launch.",
       "Building your product with precision and ensuring it's ready for launch.",
-    ]
+    ],
   },
   {
     id: "03",
@@ -56,12 +57,12 @@ const processSteps: ProcessStep[] = [
       "Testing your product and optimizing it for maximum performance and user satisfaction.",
       "Testing your product and optimizing it for maximum performance and user satisfaction.",
       "Testing your product and optimizing it for maximum performance and user satisfaction.",
-    ]
+    ],
   },
 ];
 
 export default function WorkProcess() {
-
+  const { isMobile, isTablet } = useDeviceType();
   return (
     <Section className="relative flex flex-col lg:flex-row justify-center gap-[64px]">
       <div className="w-full lg:max-w-[47%] flex flex-col gap-[64px]">
@@ -71,25 +72,15 @@ export default function WorkProcess() {
           description="We break down complex ideas into simple, actionable steps to help you achieve your goals."
           badgeText="How We Work?"
           gradientText="From Idea To Launch."
-          isAbout={true}
+          isAbout={isMobile || isTablet ? false : true}
         />
 
         <div className="flex flex-col gap-6">
           {processSteps.map((step, index) => (
-            <DynamicCard key={index} className="relative max-w-[590px] min-h-fit p-8">
-              {/* Background Pattern for Active State */}
-              <div
-                className="absolute inset-0 transition-opacity duration-700"
-              >
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    backgroundImage:
-                      "radial-gradient(circle, #000 1px, transparent 1px)",
-                    backgroundSize: "24px 24px",
-                  }}
-                ></div>
-              </div>
+            <DynamicCard
+              key={index}
+              className="relative max-w-full lg:max-w-[590px] min-h-fit p-8"
+            >
               <div className="flex flex-col gap-[44px]">
                 <div className="flex justify-between items-start">
                   <div className="p-3 bg-white/5 rounded-2xl border border-white/10">
@@ -119,7 +110,9 @@ export default function WorkProcess() {
                   {step.bullets.map((bullet, idx) => (
                     <div key={idx} className="flex items-center gap-3">
                       <CheckCircle2 className="w-5 h-5 text-[#0080FF] shrink-0" />
-                      <span className="text-white/80 font-medium">{bullet}</span>
+                      <span className="text-white/80 font-medium">
+                        {bullet}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -128,7 +121,7 @@ export default function WorkProcess() {
           ))}
         </div>
       </div>
-      <div className='static lg:sticky top-40 self-start'>
+      <div className="static lg:sticky top-40 self-start hidden lg:block">
         <ImageCard image="/images/profile-pic.avif" alt="Services" />
       </div>
     </Section>

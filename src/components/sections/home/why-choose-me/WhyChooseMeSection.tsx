@@ -9,6 +9,7 @@ import GradientText from "@/components/ui/gradient-text";
 import AnimatedButton from "@/components/shared/AnimatedButton";
 import router from "next/router";
 import SectionSeparator from "@/components/shared/SectionSeparator";
+import { useDeviceType } from "@/hooks/use-mobile";
 
 interface FeatureCard {
   id: number;
@@ -57,14 +58,15 @@ const stats = [
 ];
 
 export default function WhyChooseMeSection() {
+  const { isMobile, isTablet } = useDeviceType();
   return (
     <Section
       id="why-me"
       className="relative flex justify-center items-center gap-[84px]"
     >
-      <div className="h-full min-h-[600px] flex justify-between items-center gap-16">
+      <div className="h-full min-h-[600px] flex flex-col lg:flex-row justify-between items-center gap-16">
         {/* Header Section */}
-        <div className="w-full h-full flex flex-col gap-[84px] max-w-[50%]">
+        <div className="w-full h-full flex flex-col items-center lg:items-start gap-[32px] lg:gap-[44px] xl:gap-[84px] max-w-full lg:max-w-[50%]">
           <div className="flex flex-col gap-5">
             <SectionHeader
               title="Why you should choose me as your "
@@ -72,10 +74,10 @@ export default function WhyChooseMeSection() {
           Elevate your brand effortlessly, one snap at a time."
               badgeText="Why me?"
               gradientText="partner"
-              isAbout={true}
+              isAbout={isMobile || isTablet ? false : true}
             />
 
-            <div className="w-full max-w-[220px]">
+            <div className="w-full max-w-full lg:max-w-[220px]">
               <SectionSeparator
                 orientation="horizontal"
                 color="FFFFFF"
@@ -83,10 +85,10 @@ export default function WhyChooseMeSection() {
                 className="my-[12px]"
               />
             </div>
-            <div className="flex justify-start gap-20 items-center">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-[16px] lg:gap-20 items-center">
               {stats.map((item) => (
                 <div key={item.id} className="flex flex-col gap-2 items-center">
-                  <h4 className="text-3xl font-bold text-white">
+                  <h4 className="lg:text-3xl text-[24px] font-bold text-white">
                     <GradientText>{item.title}</GradientText>
                   </h4>
                   <p className="text-sm text-gray-500 uppercase tracking-wider">
@@ -102,7 +104,7 @@ export default function WhyChooseMeSection() {
         </div>
 
         {/* Expandable Cards Area */}
-        <div className="w-full max-w-[50%] h-full flex flex-col justify-center gap-5">
+        <div className="w-full max-w-full lg:max-w-[50%] h-full flex flex-col justify-center gap-5">
           {featureCards.map((card) => (
             <DynamicCard key={card.id} className="max-w-full min-h-[115px]">
               <span>{card.icon}</span>
@@ -114,10 +116,7 @@ export default function WhyChooseMeSection() {
                   {card.description}
                 </p>
               </div>
-              <h6
-                className="absolute top-1/2 -translate-y-1/2 right-[30px] text-[24px] leading-[32px] font-bold text-white/70 transition-all duration-300 group-hover:text-white"
-                // style={{ fontFamily: "var(--font-boldonse)" }}
-              >
+              <h6 className="absolute top-1/2 -translate-y-1/2 right-[30px] text-[24px] leading-[32px] font-bold text-white/70 transition-all duration-300 group-hover:text-white">
                 0{card.id}
               </h6>
             </DynamicCard>

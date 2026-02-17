@@ -22,63 +22,63 @@ const HomePage = () => {
         orientation="horizontal"
         color="FFFFFF"
         centerOpacity={0.25}
-        className="my-32"
+        className="my-20 md:my-32"
       />
       <AboutMini />
       <SectionSeparator
         orientation="horizontal"
         color="FFFFFF"
         centerOpacity={0.25}
-        className="my-32"
+        className="my-20 md:my-32"
       />
       <CaseStudies />
       <SectionSeparator
         orientation="horizontal"
         color="FFFFFF"
         centerOpacity={0.25}
-        className="my-32"
+        className="my-20 md:my-32"
       />
       <Services />
       <SectionSeparator
         orientation="horizontal"
         color="FFFFFF"
         centerOpacity={0.25}
-        className="my-32"
+        className="my-20 md:my-32"
       />
       <WhoIWorkWith />
       <SectionSeparator
         orientation="horizontal"
         color="FFFFFF"
         centerOpacity={0.25}
-        className="my-32"
+        className="my-20 md:my-32"
       />
       <ExpertiseSection />
       <SectionSeparator
         orientation="horizontal"
         color="FFFFFF"
         centerOpacity={0.25}
-        className="my-32"
+        className="my-20 md:my-32"
       />
       <WorkProcess />
       <SectionSeparator
         orientation="horizontal"
         color="FFFFFF"
         centerOpacity={0.25}
-        className="my-32"
+        className="my-20 md:my-32"
       />
       <WhyChooseMeSection />
       <SectionSeparator
         orientation="horizontal"
         color="FFFFFF"
         centerOpacity={0.25}
-        className="my-32"
+        className="my-20 md:my-32"
       />
       <TestimonialsSection />
       <SectionSeparator
         orientation="horizontal"
         color="FFFFFF"
         centerOpacity={0.25}
-        className="my-32"
+        className="my-20 md:my-32"
       />
       <FAQ />
       {/* <CTASection /> */}

@@ -32,12 +32,12 @@ export default function CaseStudyCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.6 }}
-      className={`w-full group relative flex flex-col gap-[24px] cursor-pointer ${index === 4 ? "col-span-2" : "col-span-1"}`}
+      className={`w-full group relative flex flex-col gap-[24px] cursor-pointer ${index === 4 ? "col-span-2" : "col-span-2 lg:col-span-1"}`}
       onClick={onClick}
     >
       {/* Image Mockup Wrapper */}
       <div
-        className={`w-full ${index === 4 ? "w-full h-[800px]" : "h-[500px]"} relative overflow-hidden rounded-[1.5rem]`}
+        className={`w-full ${index === 4 ? "h-[275px] md:h-[500px] lg:h-[700px] xl:h-[800px]" : "h-[275px] md:h-[500px] lg:h-[400px] xl:h-[500px]"} relative overflow-hidden rounded-[1.5rem]`}
       >
         <Image
           src={study.image}
@@ -61,17 +61,19 @@ export default function CaseStudyCard({
 
       {/* Content */}
       <div className="flex items-start justify-between">
-        <div className="w-full max-w-[70%] space-y-2">
-          <h3 className="text-[24px] leading-[30px] font-sora uppercase font-bold text-white">
-            {study.title}
-          </h3>
+        <div className="w-full space-y-2">
+          <div className="flex justify-between items-center gap-[16px]">
+            <h3 className="text-[24px] leading-[30px] font-sora uppercase font-bold text-white">
+              {study.title}
+            </h3>
+            {study.category && (
+              <SectionBadge className="rounded-lg" text={study.category} />
+            )}
+          </div>
           <p className="text-[18px] leading-[24px] font-medium text-white/70">
             {study.description}
           </p>
         </div>
-        {study.category && (
-          <SectionBadge text={study.category} />
-        )}
       </div>
     </motion.div>
   );

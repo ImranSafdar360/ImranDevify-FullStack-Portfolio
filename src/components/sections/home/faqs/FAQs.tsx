@@ -42,13 +42,13 @@ export function FAQ() {
   ];
 
   return (
-    <Section className="max-w-[1080px] mx-auto relative flex flex-col justify-center items-center gap-[84px]">
-      <SectionHeader 
-      className="max-w-[60%] items-center gap-[8px]"
-      title="Have Questions?" 
-      description="We've heard it all. Here's everything you need to know before working with us." 
-      badgeText="FAQs" 
-      gradientText="We've Got Answers." 
+    <Section className="max-w-[1080px] mx-auto relative flex flex-col justify-center items-center gap-[44px] lg:gap-[84px]">
+      <SectionHeader
+        className="max-w-[80%] lg:max-w-[60%] items-center gap-[8px]"
+        title="Have Questions? "
+        description="We've heard it all. Here's everything you need to know before working with us."
+        badgeText="FAQs"
+        gradientText="We've Answers."
       />
 
       {/* FAQ Accordion */}

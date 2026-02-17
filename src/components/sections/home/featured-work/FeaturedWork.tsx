@@ -103,17 +103,17 @@ export default function FeaturedWork() {
   );
 
   return (
-    <Section className="w-full max-w-full relative -mt-[70px] min-h-[600px] z-20">
+    <Section className="w-full max-w-full relative -mt-[70px] min-h-[400px] md:min-h-[600px] z-20 px-0 md:px-0 lg:px-0 xl:px-0">
       <div
-        className="w-full min-h-[600px] relative flex flex-col justify-center items-center gap-[32px] overflow-hidden"
+        className="w-full min-h-[400px] md:min-h-[600px] relative flex flex-col justify-center items-center gap-[32px] overflow-hidden"
         ref={containerRef}
       >
         {/* Gradient overlays */}
-        <div className="absolute top-0 left-0 w-[80px] lg:w-[170px] h-full max-h-[350px] bg-gradient-to-r from-[#050509] to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute top-0 right-0 w-[80px] lg:w-[170px] h-full max-h-[350px] bg-gradient-to-l from-[#050509] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute top-0 left-0 w-[80px] lg:w-[170px] h-full max-h-[600px] bg-gradient-to-r from-[#050509] to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-[80px] lg:w-[170px] h-full max-h-[600px] bg-gradient-to-l from-[#050509] to-transparent z-10 pointer-events-none"></div>
 
         {/* Top Row - Moving Left to Right */}
-        <div className="w-full h-[300px] relative overflow-hidden">
+        <div className="w-full h-[200px] md:h-[300px] relative overflow-hidden">
           <div
             ref={trackTopRef}
             className="flex gap-6 px-6 will-change-transform"
@@ -122,11 +122,7 @@ export default function FeaturedWork() {
             {duplicatedImages.map((image, index) => (
               <div
                 key={`top-${image.alt}-${index}`}
-                className="flex-shrink-0 relative group rounded-[20px] overflow-hidden"
-                style={{
-                  width: `455px`,
-                  height: "300px",
-                }}
+                className="w-[250px] h-[200px] md:w-[455px] md:h-[300px] flex-shrink-0 relative group rounded-[20px] overflow-hidden"
               >
                 <div className="relative w-full h-full overflow-hidden">
                   <Image
@@ -144,7 +140,7 @@ export default function FeaturedWork() {
         </div>
 
         {/* Bottom Row - Moving Right to Left */}
-        <div className="w-full h-[300px] relative overflow-hidden">
+        <div className="w-full h-[200px] md:h-[300px] relative overflow-hidden">
           <div
             ref={trackBottomRef}
             className="flex gap-6 px-6 will-change-transform"
@@ -153,11 +149,7 @@ export default function FeaturedWork() {
             {reversedImages.map((image, index) => (
               <div
                 key={`bottom-${image.alt}-${index}`}
-                className="flex-shrink-0 relative group rounded-[20px] overflow-hidden"
-                style={{
-                  width: `455px`,
-                  height: "300px",
-                }}
+                className="w-[250px] h-[200px] md:w-[455px] md:h-[300px] flex-shrink-0 relative group rounded-[20px] overflow-hidden"
               >
                 <div className="relative w-full h-full overflow-hidden">
                   <Image

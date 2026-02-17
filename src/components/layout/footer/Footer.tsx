@@ -5,6 +5,7 @@ import { FaLinkedinIn, FaGithub, FaTwitter } from "react-icons/fa";
 import CTASection from "@/components/sections/home/cta/CTASection";
 import SectionSeparator from "@/components/shared/SectionSeparator";
 import Image from "next/image";
+import Section from "@/components/shared/Section";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -45,18 +46,18 @@ export default function Footer() {
   return (
     <footer className="w-full relative flex flex-col gap-[84px] overflow-hidden">
       <CTASection />
-      <div className="w-full max-w-[1440px] mx-auto flex flex-col gap-[64px] z-20">
-        <div className="flex flex-col lg:flex-row justify-between mb-16 gap-10 lg:gap-0 z-20">
+      <Section className="flex flex-col gap-[64px] z-20">
+        <div className="flex flex-col justify-center md:flex-row md:justify-between mb-16 xl:mb-24 gap-10 lg:gap-0 z-20">
           {/* Column 1: Brand & Description */}
-          <div className="flex flex-col gap-8 lg:gap-[85px]">
-            <div className="max-w-[415px] flex flex-col gap-6 lg:gap-[36px]">
+          <div className="flex flex-col items-center md:items-start gap-8 md:gap-[85px]">
+            <div className="max-w-[415px] flex flex-col items-center md:items-start gap-6 lg:gap-[36px]">
               <Image
                 src="/images/Imran-Forge.png"
                 alt="Logo"
                 width={150}
                 height={150}
               />
-              <p className="text-[16px] font-medium leading-[24px] text-white">
+              <p className="text-[16px] font-medium leading-[24px] text-white text-center md:text-start">
                 Digital Engineering Agency that helps businesses scale globally
                 by building digital products that are scalable, secure, and
                 efficient.
@@ -64,13 +65,16 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-10 sm:gap-[120px]">
+          <div className="flex flex-col md:flex-row gap-5 md:gap-[120px]">
             {linksStack.map((linkGroup, index) => (
-              <div key={index} className="flex flex-col gap-6 lg:gap-[8px]">
+              <div
+                key={index}
+                className="flex flex-col gap-2 items-center md:items-start md:gap-[8px]"
+              >
                 <h4 className="text-[16px] leading-[24px] font-sora font-bold text-[#0080FF]">
                   {linkGroup.title}
                 </h4>
-                <ul className="flex items-center gap-[8px]">
+                <ul className="flex justify-center md:justify-start max-w-[70%] md:max-w-[100%] items-center gap-[8px] flex-wrap">
                   {linkGroup.links.map((link, idx) => (
                     <li key={idx} className="flex items-center gap-[12px]">
                       {idx == 0 ? null : (
@@ -106,10 +110,10 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="relative flex justify-between items-center py-10">
-          <div className="absolute left-0 right-0 -top-[175px] overflow-hidden z-10 opacity-5">
-            <h1 className="text-white text-[12rem] font-sora text-center leading-[11rem] font-extrabold translate-y-[50px]">
-              Imran Devify
+        <div className="relative flex md:flex-row flex-col justify-between items-center md:py-10 py-6">
+          <div className="absolute left-0 right-0 top-[-155px] md:top-[-100px] lg:top-[-170px] z-10 opacity-5 overflow-visible xl:overflow-hidden">
+            <h1 className="text-white text-[64px] md:text-[84px] lg:text-[192px] font-sora text-center lg:leading-[192px] leading-[52px] font-extrabold translate-y-[50px] xl:translate-y-[0px]">
+              Imran Safdar
             </h1>
           </div>
           <SectionSeparator
@@ -137,7 +141,7 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-      </div>
+      </Section>
     </footer>
   );
 }

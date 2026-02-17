@@ -13,7 +13,10 @@ const Section = ({
   return (
     <section
       id={id}
-      className={cn("w-full max-w-[1440px] h-full mx-auto", className)}
+      className={cn(
+        "w-full max-w-[1440px] h-full mx-auto px-4 md:px-6",
+        className,
+      )}
     >
       {children}
     </section>

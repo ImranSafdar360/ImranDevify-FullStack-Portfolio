@@ -23,7 +23,7 @@ const SocialDock = ({ items, className }: SocialDockProps) => {
   };
 
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
+    <div className={`flex items-center gap-2 md:gap-3 ${className}`}>
       {items.map((item, index) => (
         <motion.div
           key={index}
@@ -36,7 +36,7 @@ const SocialDock = ({ items, className }: SocialDockProps) => {
         >
           {/* Icon Container with Gradient Background */}
           <motion.div
-            className="w-14 h-14 rounded-2xl flex items-center justify-center cursor-pointer relative overflow-hidden"
+            className="w-10 h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 xl:w-14 xl:h-14 rounded-xl xl:rounded-2xl flex items-center justify-center cursor-pointer relative overflow-hidden"
             onClick={() => handleClick(item.href)}
             whileHover={{
               boxShadow: `0 8px 24px rgba(255,255,255,0.4)`,
