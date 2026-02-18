@@ -24,7 +24,7 @@ const ProjectsGrid = ({ projects }: ProjectsGridProps) => {
               transition={{ duration: 0.4, ease: "easeOut" }}
               className="col-span-1"
             >
-              <CaseStudyCard study={project} index={index} onClick={() => {}} />
+              <CaseStudyCard study={project} index={index} />
             </motion.div>
           ))}
         </AnimatePresence>

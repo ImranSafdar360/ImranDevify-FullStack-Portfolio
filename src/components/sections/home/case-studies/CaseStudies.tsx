@@ -36,17 +36,12 @@ export default function CaseStudies() {
         badgeText="Case-studies"
         gradientText="real client work"
       />
-      <AnimatedButton onClick={() => {}} className="z-20">
+      <AnimatedButton onClick={() => router.push("/projects")} className="z-20">
         See All Projects
       </AnimatedButton>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-12 lg:gap-6 xl:gap-12 mt-[34px] lg:mt-[84px]">
         {caseStudies.map((study, index) => (
-          <CaseStudyCard
-            key={study.id}
-            study={study}
-            index={index}
-            onClick={() => router.push("/projects/" + study.id)}
-          />
+          <CaseStudyCard key={study.id} study={study} index={index} />
         ))}
       </div>
     </Section>

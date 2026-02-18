@@ -30,7 +30,7 @@ export default function Navbar() {
 
   const leftLinks = [
     { name: "Why me?", href: "#why-me" },
-    { name: "Testimonials", href: "#testimonials" },
+    { name: "Reviews", href: "#testimonials" },
     { name: "Services", href: "#services" },
   ];
 
