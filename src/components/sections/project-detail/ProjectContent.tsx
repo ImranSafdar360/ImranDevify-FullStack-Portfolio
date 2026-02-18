@@ -13,7 +13,7 @@ interface ProjectContentProps {
 
 const ProjectContent = ({ project }: ProjectContentProps) => {
   return (
-    <Section className="py-10 md:py-16 lg:py-0 xl:py-0">
+    <Section className="py-10 md:py-16 lg:py-20 xl:py-20">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 relative">
         {/* Left Column: Project Details */}
         <div className="lg:col-span-8 flex flex-col gap-16">

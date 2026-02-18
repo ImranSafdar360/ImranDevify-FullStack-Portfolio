@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import Image from "next/image";
 import AnimatedButton from "@/components/shared/AnimatedButton";
+import { PopupModal } from "react-calendly";
+import { useState, useEffect } from "react";
 import SocialDock from "@/components/ui/social-dock";
 import Section from "@/components/shared/Section";
 import FeaturedWork from "../featured-work/FeaturedWork";
@@ -13,6 +15,12 @@ import gmailIcon from "../../../../../public/images/icons/gmail.png";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
+  const [rootElement, setRootElement] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setRootElement(document.body);
+  }, []);
 
   // Social media links with demo messages
   const phoneNumber = "923494898190";
@@ -52,7 +60,7 @@ export default function Hero() {
           alt="Hero Background Effect"
           fill
           className="object-cover w-full h-full"
-          loading="lazy"
+          priority
         />
       </div>
 
@@ -91,7 +99,15 @@ export default function Hero() {
         {/* CTA Section (A/B Optimized) */}
         <div className="flex justify-center items-center gap-[16px] xl:gap-[21px] flex-row">
           {/* Primary CTA */}
-          <AnimatedButton onClick={() => {}}>Book 1:1 Meeting</AnimatedButton>
+          <AnimatedButton onClick={() => setIsCalendlyOpen(true)}>
+            Book 1:1 Meeting
+          </AnimatedButton>
+          <PopupModal
+            url="https://calendly.com/imran-safdar360/30min"
+            onModalClose={() => setIsCalendlyOpen(false)}
+            open={isCalendlyOpen}
+            rootElement={rootElement!}
+          />
           <h6 className="text-gray-300 xl:text-[22px] font-semibold">or DM</h6>
           <SocialDock items={socialItems} />
         </div>

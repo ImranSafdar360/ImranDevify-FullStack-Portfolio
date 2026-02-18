@@ -3,12 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useDeviceType } from "@/hooks/use-mobile";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
   const { isDesktop } = useDeviceType();
 
   // Close menu when switching to desktop
@@ -35,12 +37,19 @@ export default function Navbar() {
   ];
 
   const rightLinks = [
-    { name: "About", href: "/about" },
+    { name: "About", href: "#about" },
     { name: "Portfolio", href: "/projects" },
     { name: "Contact", href: "/contact" },
   ];
 
   const allLinks = [...leftLinks, ...rightLinks];
+
+  const getHref = (href: string) => {
+    if (href.startsWith("#")) {
+      return pathname === "/" ? href : `/${href}`;
+    }
+    return href;
+  };
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50">
@@ -66,7 +75,7 @@ export default function Navbar() {
               {leftLinks.map((link) => (
                 <Link
                   key={link.name}
-                  href={link.href}
+                  href={getHref(link.href)}
                   className="text-white/90 hover:text-white text-base font-semibold transition-all duration-300 relative group whitespace-nowrap"
                 >
                   {link.name}
@@ -91,7 +100,7 @@ export default function Navbar() {
               {rightLinks.map((link) => (
                 <Link
                   key={link.name}
-                  href={link.href}
+                  href={getHref(link.href)}
                   className="text-white/90 hover:text-white text-base font-semibold transition-all duration-300 relative group whitespace-nowrap"
                 >
                   {link.name}
@@ -132,7 +141,7 @@ export default function Navbar() {
                 transition={{ delay: index * 0.1 }}
               >
                 <Link
-                  href={link.href}
+                  href={getHref(link.href)}
                   onClick={() => setIsOpen(false)}
                   className="text-2xl md:text-3xl font-bold text-white hover:text-[#0080FF] transition-colors"
                 >

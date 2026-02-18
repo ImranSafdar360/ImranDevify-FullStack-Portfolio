@@ -24,7 +24,7 @@ export default function Footer() {
         { title: "Featured", href: "#featured", icon: null },
         { title: "Portfolio", href: "/portfolio", icon: null },
         { title: "Testimonials", href: "#testimonials", icon: null },
-        { title: "Contact", href: "#contact", icon: null },
+        { title: "Contact", href: "/contact", icon: null },
       ],
       socialLinks: [
         {

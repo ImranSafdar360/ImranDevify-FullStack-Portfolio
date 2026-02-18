@@ -85,7 +85,9 @@ export default function AboutMini() {
             I&apos;m a Full Stack Developer with over 5 years of experience in
             the field.
           </p>
-          <AnimatedButton onClick={() => {}}>See my Journey</AnimatedButton>
+          <AnimatedButton onClick={() => (window.location.href = "/projects")}>
+            See my Journey
+          </AnimatedButton>
         </div>
         <div
           className="relative flex flex-col gap-[20px] p-[24px] rounded-[20px]"

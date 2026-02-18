@@ -4,8 +4,10 @@ import React from "react";
 import Section from "@/components/shared/Section";
 import SectionHeader from "@/components/shared/SectionHeader";
 import AnimatedButton from "@/components/shared/AnimatedButton";
+import { useRouter } from "next/navigation";
 
 const ProjectsHero = () => {
+  const router = useRouter();
   return (
     <Section className="max-w-full relative flex flex-col justify-start items-center pt-[130px] md:pt-[130px] pb-10 gap-8">
       <div className="relative z-20 w-full flex flex-col items-center">
@@ -17,7 +19,9 @@ const ProjectsHero = () => {
           badgeText="Explore our Portfolio"
         />
       </div>
-      <AnimatedButton>Build your product</AnimatedButton>
+      <AnimatedButton onClick={() => router.push("/contact")}>
+        Build your product
+      </AnimatedButton>
     </Section>
   );
 };

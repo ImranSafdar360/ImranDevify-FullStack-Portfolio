@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { Rocket, Briefcase, Paintbrush, Layout } from "lucide-react";
 
 import IconBox from "@/components/shared/IconBox";
+import { useRouter } from "next/navigation";
 
 interface ClientCard {
   title: string;
@@ -50,8 +51,9 @@ const clients: ClientCard[] = [
 ];
 
 export default function WhoIWorkWith() {
+  const router = useRouter();
   return (
-    <Section className="relative flex flex-col justify-center items-center gap-[32px] md:gap-[44px] lg:gap-[84px]">
+    <Section className="relative flex flex-col justify-center items-center lg:gap-[34px]">
       <SectionHeader
         className="max-w-full md:max-w-[70%] lg:max-w-[55%] items-center gap-[16px] z-20"
         title="Who I Usually "
@@ -59,12 +61,12 @@ export default function WhoIWorkWith() {
         badgeText="Who I Work With"
         gradientText="Work With"
       />
-      <AnimatedButton onClick={() => {}}>
+      <AnimatedButton onClick={() => router.push("/contact")}>
         Let&apos;s Build It Right
       </AnimatedButton>
 
       {/* Client Cards Grid - Bento Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-10 gap-6 w-full max-w-[1240px]">
+      <div className="grid grid-cols-1 md:grid-cols-10 gap-6 w-full max-w-[1240px] mt-[34px] lg:mt-[84px]">
         {clients.map((client, index) => {
           const colSpan =
             index === 0 || index === 3 ? "md:col-span-6" : "md:col-span-4";

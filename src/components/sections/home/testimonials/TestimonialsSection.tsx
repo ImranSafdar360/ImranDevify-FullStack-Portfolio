@@ -100,7 +100,9 @@ export function TestimonialsSection() {
         badgeText="Feedback"
         gradientText="Testimonials"
       />
-      <AnimatedButton onClick={() => {}}>Become one of them</AnimatedButton>
+      <AnimatedButton onClick={() => (window.location.href = "/contact")}>
+        Become one of them
+      </AnimatedButton>
       {/* Reviews Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 z-20 mt-[44px]">
         {reviews.map((review, index) => (

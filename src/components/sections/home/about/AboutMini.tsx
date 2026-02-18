@@ -52,7 +52,10 @@ export default function AboutSection() {
   };
 
   return (
-    <Section className="relative flex flex-col-reverse lg:flex-row justify-center items-center gap-[64px] lg:gap-[84px]">
+    <Section
+      id="about"
+      className="relative flex flex-col-reverse lg:flex-row justify-center items-center gap-[64px] lg:gap-[84px]"
+    >
       <ImageCard image={ProfilePic} alt="Profile Picture" />
       <div className="flex flex-col justify-center gap-[30px] w-full max-w-full md:max-w-[80%] lg:max-w-[50%]">
         <SectionHeader

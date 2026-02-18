@@ -18,9 +18,9 @@ const IconBox = ({
   size = "md",
 }: IconBoxProps) => {
   const sizeClasses = {
-    sm: "w-8 h-8 rounded-lg",
-    md: "w-10 h-10 rounded-xl",
-    lg: "w-12 h-12 rounded-2xl",
+    sm: "w-8 h-8 rounded-md",
+    md: "w-10 h-10 rounded-lg",
+    lg: "w-12 h-12 rounded-xl",
   };
 
   const iconSizeClasses = {
@@ -39,7 +39,7 @@ const IconBox = ({
         className,
       )}
       style={{
-        background: `linear-gradient(to bottom right, #00C7FE 5%, #0080FF 100%)`,
+        background: `linear-gradient(to bottom right, #00C7FE 10%, #0080FF 100%)`,
       }}
     >
       {/* Subtle Inner Glow */}

@@ -7,9 +7,9 @@ import SectionHeader from "@/components/shared/SectionHeader";
 import DynamicCard from "@/components/shared/DynamicCard";
 import GradientText from "@/components/ui/gradient-text";
 import AnimatedButton from "@/components/shared/AnimatedButton";
-import router from "next/router";
 import SectionSeparator from "@/components/shared/SectionSeparator";
 import { useDeviceType } from "@/hooks/use-mobile";
+import { useRouter } from "next/navigation";
 
 interface FeatureCard {
   id: number;
@@ -59,6 +59,7 @@ const stats = [
 
 export default function WhyChooseMeSection() {
   const { isMobile, isTablet } = useDeviceType();
+  const router = useRouter();
   return (
     <Section
       id="why-me"
@@ -98,7 +99,7 @@ export default function WhyChooseMeSection() {
               ))}
             </div>
           </div>
-          <AnimatedButton onClick={() => router.push("/about")}>
+          <AnimatedButton onClick={() => router.push("/contact")}>
             View about Imran
           </AnimatedButton>
         </div>

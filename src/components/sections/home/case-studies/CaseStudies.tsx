@@ -14,7 +14,10 @@ export default function CaseStudies() {
   const router = useRouter();
 
   return (
-    <Section className="relative flex flex-col justify-center items-center gap-[34px] overflow-hidden">
+    <Section
+      id="featured"
+      className="relative flex flex-col justify-center items-center gap-[34px] overflow-hidden"
+    >
       <Image
         src="/images/left-vector.svg"
         alt="Left Vector"

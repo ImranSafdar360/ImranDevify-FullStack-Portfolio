@@ -1,5 +1,6 @@
 import React from "react";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 import { projects } from "@/data/projectData";
 import Section from "@/components/shared/Section";
 import SectionHeader from "@/components/shared/SectionHeader";
@@ -11,6 +12,34 @@ import SectionSeparator from "@/components/shared/SectionSeparator";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
+
+  if (!project) {
+    return {
+      title: "Project Not Found",
+    };
+  }
+
+  return {
+    title: project.title,
+    description: project.description,
+    openGraph: {
+      title: project.title,
+      description: project.description,
+      images: [
+        {
+          url: project.image,
+          alt: project.title,
+        },
+      ],
+    },
+  };
 }
 
 export default async function ProjectDetailPage({ params }: PageProps) {
