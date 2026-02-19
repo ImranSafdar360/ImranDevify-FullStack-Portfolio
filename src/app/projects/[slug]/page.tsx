@@ -60,12 +60,12 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           badgeText={project.category}
           gradientText="Case Study"
         />
-
-        {/* Gallery Section */}
-        <div className="w-full">
-          <ProjectGallery images={project.gallery || [project.image]} />
-        </div>
       </Section>
+
+      {/* Gallery Section */}
+      <div className="w-full my-16">
+        <ProjectGallery images={project.gallery || [project.image]} />
+      </div>
 
       {/* Project Details Content Section */}
       <ProjectContent project={project} />

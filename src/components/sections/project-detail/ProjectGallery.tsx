@@ -30,7 +30,7 @@ const ProjectGallery = ({ images }: ProjectGalleryProps) => {
     images.length < 6 ? [...images, ...images, ...images] : images;
 
   return (
-    <div className="relative w-full group overflow-hidden">
+    <div className="relative w-full group overflow-hidden py-20">
       <div className="!w-[95vw] md:!w-[850px] !h-[350px] md:!h-[650px] absolute top-[47%] left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-[#080808] rounded-[20px] border-[1px] border-white/5  shadow-[0_0_50px_rgba(0,0,0,0.5)] transition-all duration-700"></div>
       {/* Gradient Glow Line */}
       <div
@@ -104,7 +104,7 @@ const ProjectGallery = ({ images }: ProjectGalleryProps) => {
       </div>
 
       {/* Custom Pagination - Sleek indicator below */}
-      <div className="gallery-pagination !bottom-8 flex justify-center gap-3 mt-16" />
+      <div className="gallery-pagination !bottom-8 flex justify-center gap-3 mt-12" />
 
       <style jsx global>{`
         .gallery-swiper .swiper-slide {

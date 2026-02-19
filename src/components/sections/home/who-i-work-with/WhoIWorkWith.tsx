@@ -11,11 +11,12 @@ import { Rocket, Briefcase, Paintbrush, Layout } from "lucide-react";
 
 import IconBox from "@/components/shared/IconBox";
 import { useRouter } from "next/navigation";
+import { IconType } from "react-icons";
 
 interface ClientCard {
   title: string;
   description: string;
-  icon: React.ElementType;
+  icon: IconType;
   gradient: string;
 }
 
@@ -81,7 +82,7 @@ export default function WhoIWorkWith() {
               )}
             >
               {/* Icon with Glowing Effect */}
-              <IconBox icon={client.icon} size="lg" className="rounded-2xl" />
+              <IconBox icon={client.icon} size="lg" />
 
               {/* Bottom Content Area */}
               <div className="mt-auto flex flex-col gap-4">

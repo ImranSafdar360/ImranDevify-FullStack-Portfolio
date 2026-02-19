@@ -1,18 +1,20 @@
 "use client";
 
 import React from "react";
-import { LucideIcon } from "lucide-react";
+import { IconType } from "react-icons";
 import { cn } from "@/lib/utils";
 
 interface IconBoxProps {
-  icon: LucideIcon | React.ElementType;
+  // We use IconType specifically for react-icons
+  // We include React.ComponentType to allow for custom SVG components
+  icon: IconType | React.ComponentType<{ className?: string }>;
   className?: string;
   iconClassName?: string;
   size?: "sm" | "md" | "lg";
 }
 
 const IconBox = ({
-  icon: Icon,
+  icon: Icon, // Destructuring to capital 'Icon' so React treats it as a component
   className,
   iconClassName,
   size = "md",
@@ -33,26 +35,29 @@ const IconBox = ({
     <div
       className={cn(
         "relative flex items-center justify-center shrink-0 overflow-hidden shadow-sm",
-        "border border-white/10 backdrop-blur-sm",
-        "group-hover:border-white/20 transition-all duration-300",
+        "border border-white/10 backdrop-blur-sm transition-all duration-300",
+        "group-hover:border-white/20",
         sizeClasses[size],
         className,
       )}
       style={{
-        background: `linear-gradient(to bottom right, #00C7FE 10%, #0080FF 100%)`,
+        background: `linear-gradient(to bottom right, #0080FF 10%, #0080FF 100%)`,
       }}
     >
-      {/* Subtle Inner Glow */}
       <div className="absolute inset-0 bg-white/5 blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-      <Icon
-        className={cn(
-          "relative z-10 text-white transition-transform duration-300 group-hover:scale-110",
-          iconSizeClasses[size],
-          iconClassName,
-        )}
-        strokeWidth={2.5}
-      />
+      {/* We check if Icon exists before rendering to prevent 
+         "Icon is not a function" runtime errors 
+      */}
+      {Icon && (
+        <Icon
+          className={cn(
+            "relative z-10 text-white transition-transform duration-300 group-hover:scale-110",
+            iconSizeClasses[size],
+            iconClassName,
+          )}
+        />
+      )}
     </div>
   );
 };

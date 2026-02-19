@@ -3,10 +3,17 @@ import Section from "@/components/shared/Section";
 import SectionHeader from "@/components/shared/SectionHeader";
 import ImageCard from "@/components/shared/ImageCard";
 import DynamicCard from "@/components/shared/DynamicCard";
-import { Code2, Smartphone, Globe, CheckCircle2 } from "lucide-react";
+import {
+  LuGauge,
+  LuLayers,
+  LuLayoutDashboard,
+  LuTabletSmartphone,
+} from "react-icons/lu";
 import SectionSeparator from "@/components/shared/SectionSeparator";
 import SectionBadge from "@/components/shared/SectionBadge";
 import { useDeviceType } from "@/hooks/use-mobile";
+import { CheckCircle2 } from "lucide-react";
+import IconBox from "@/components/shared/IconBox";
 
 const services = [
   {
@@ -14,7 +21,7 @@ const services = [
     description:
       "Before writing code, I design the system. Clear backend structure. Scalable database design. Defined API contracts. This prevents future rewrites and scaling issues.",
     category: "Architecture",
-    icon: <Code2 className="w-8 h-8 text-[#0080FF]" />,
+    icon: LuLayers,
     bullets: [
       "Scalable backend & database architecture",
       "Secure authentication & role-based systems",
@@ -26,7 +33,7 @@ const services = [
     description:
       "High-performance SaaS platforms built with clarity and structure. Fast interfaces. Clean state management. Real-world usability.",
     category: "Web Development",
-    icon: <Smartphone className="w-8 h-8 text-[#0080FF]" />,
+    icon: LuLayoutDashboard,
     bullets: [
       "Scalable React & Next.js applications",
       "Optimized frontend-backend integration",
@@ -38,7 +45,7 @@ const services = [
     description:
       "Cross-platform apps engineered for performance and stability. Not just apps that work — apps that handle real users.",
     category: "Mobile Apps",
-    icon: <Globe className="w-8 h-8 text-[#0080FF]" />,
+    icon: LuTabletSmartphone,
     bullets: [
       "iOS & Android apps from one codebase",
       "Background tasks, offline storage & API integration",
@@ -50,7 +57,7 @@ const services = [
     description:
       "Products slow down when growth isn’t planned. I optimize systems at both frontend and backend layers to ensure your product stays fast as usage increases.",
     category: "Optimization",
-    icon: <Globe className="w-8 h-8 text-[#0080FF]" />,
+    icon: LuGauge,
     bullets: [
       "Database indexing & query optimization",
       "Efficient state handling & rendering",
@@ -88,9 +95,7 @@ const Services = () => {
             >
               <div className="flex flex-col gap-[44px]">
                 <div className="flex justify-between items-start">
-                  <div className="p-3 bg-white/5 rounded-2xl border border-white/10">
-                    {service.icon}
-                  </div>
+                  <IconBox icon={service.icon} size="lg" />
                   <SectionBadge className="text-sm" text={service.category} />
                 </div>
 

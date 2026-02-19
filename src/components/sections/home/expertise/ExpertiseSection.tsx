@@ -3,42 +3,40 @@
 import React from "react";
 import Section from "@/components/shared/Section";
 import SectionHeader from "@/components/shared/SectionHeader";
+import { Cpu, Wind, Zap } from "lucide-react";
 import {
-  Code2,
-  Rocket,
-  Server,
-  Database,
-  Smartphone,
-  Cpu,
-  Wind,
-  GitBranch,
-  Terminal,
-  Figma,
-  Globe,
-  Zap,
-} from "lucide-react";
+  SiMongodb,
+  SiExpress,
+  SiReact,
+  SiNodedotjs,
+  SiExpo,
+  SiGithub,
+  SiPostgresql,
+  SiNextdotjs,
+} from "react-icons/si";
 import { cn } from "@/lib/utils";
 import DynamicCard from "@/components/shared/DynamicCard";
 import IconBox from "@/components/shared/IconBox";
+import { IconType } from "react-icons";
 
 interface ExpertiseItem {
   name: string;
-  icon: React.ElementType;
+  icon: IconType;
 }
 
 const expertises: ExpertiseItem[] = [
-  { name: "React.js", icon: Code2 },
-  { name: "Next.js", icon: Globe },
-  { name: "Node.js", icon: Server },
-  { name: "Express.js", icon: Terminal },
-  { name: "MongoDB", icon: Database },
-  { name: "React Native", icon: Smartphone },
-  { name: "Expo", icon: Rocket },
+  { name: "React.js", icon: SiReact },
+  { name: "Next.js", icon: SiNextdotjs },
+  { name: "Node.js", icon: SiNodedotjs },
+  { name: "Express.js", icon: SiExpress },
+  { name: "MongoDB", icon: SiMongodb },
+  { name: "PostgreSQL", icon: SiPostgresql },
+  { name: "React Native", icon: SiReact },
+  { name: "Expo", icon: SiExpo },
   { name: "TypeScript", icon: Zap },
   { name: "Tailwind CSS", icon: Wind },
-  { name: "Git & GitHub", icon: GitBranch },
+  { name: "Git & GitHub", icon: SiGithub },
   { name: "Postman", icon: Cpu },
-  { name: "Figma", icon: Figma },
 ];
 
 const ExpertiseSection = () => {

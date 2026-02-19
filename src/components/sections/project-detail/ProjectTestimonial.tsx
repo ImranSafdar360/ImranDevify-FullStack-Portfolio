@@ -22,7 +22,7 @@ const ProjectTestimonial = ({ project }: ProjectTestimonialProps) => {
   if (!testimonial) return null;
 
   return (
-    <Section className="py-20 flex flex-col items-center gap-[44px]">
+    <Section className="py-20 flex flex-col items-center gap-[44px] mb-16">
       <SectionHeader
         className="max-w-full md:max-w-[70%] lg:max-w-[55%] items-center gap-[16px] z-20"
         title="Client "
@@ -32,8 +32,8 @@ const ProjectTestimonial = ({ project }: ProjectTestimonialProps) => {
       />
 
       <div className="w-full max-w-[850px] z-20 mt-[24px]">
-        <DynamicCard className="max-w-full min-h-fit py-12 px-8 md:px-16 flex flex-col gap-10 items-center text-center">
-          <div className="w-full flex justify-between items-center">
+        <DynamicCard className="w-full max-w-fit flex flex-col gap-10">
+          <div className="w-full flex justify-between">
             <div className="relative w-[60px] h-[60px] overflow-hidden rounded-full border border-white/10">
               <Image
                 src={testimonial.image}
@@ -61,7 +61,7 @@ const ProjectTestimonial = ({ project }: ProjectTestimonialProps) => {
             </div>
           </div>
 
-          <div className="flex gap-1 justify-center">
+          <div className="flex gap-1 justify-start">
             {[...Array(testimonial.rating)].map((_, i) => (
               <Star
                 key={i}
@@ -76,7 +76,7 @@ const ProjectTestimonial = ({ project }: ProjectTestimonialProps) => {
             &ldquo;{testimonial.text}&rdquo;
           </p>
 
-          <div className="w-full max-w-[150px]">
+          <div className="w-full max-w-[50%]">
             <SectionSeparator
               orientation="horizontal"
               color="FFFFFF"
@@ -85,7 +85,7 @@ const ProjectTestimonial = ({ project }: ProjectTestimonialProps) => {
             />
           </div>
 
-          <div className="flex flex-col items-center gap-1">
+          <div className="flex flex-col items-start gap-1">
             <h6 className="text-xl font-bold text-white font-sora">
               {testimonial.name}
             </h6>

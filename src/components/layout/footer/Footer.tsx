@@ -25,7 +25,7 @@ export default function Footer() {
       links: [
         { title: "About", href: "#about", icon: null },
         { title: "Featured", href: "#featured", icon: null },
-        { title: "Portfolio", href: "/portfolio", icon: null },
+        { title: "Portfolio", href: "/projects", icon: null },
         { title: "Testimonials", href: "#testimonials", icon: null },
         { title: "Contact", href: "/contact", icon: null },
       ],
@@ -45,6 +45,30 @@ export default function Footer() {
       ],
     },
   ];
+
+  const getHref = (href: string) => {
+    if (href.startsWith("#")) {
+      return pathname === "/" ? href : `/${href}`;
+    }
+    return href;
+  };
+
+  const handleAnchorClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (!href.startsWith("#")) return; // let Next.js handle page links normally
+
+    if (pathname === "/") {
+      e.preventDefault();
+      const id = href.slice(1);
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+    // if not on home page, let the browser navigate to /#id naturally
+  };
 
   return (
     <footer className="w-full relative flex flex-col gap-[84px] overflow-hidden">
@@ -84,7 +108,8 @@ export default function Footer() {
                         <span className="w-[5px] h-[5px] bg-white rounded-full flex items-center justify-center" />
                       )}
                       <Link
-                        href={link.href}
+                        href={getHref(link.href)}
+                        onClick={(e) => handleAnchorClick(e, link.href)}
                         className="text-[14px] leading-[20px] font-medium text-white hover:text-[#0080FF] transition-colors duration-300"
                       >
                         {link.title}

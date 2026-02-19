@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Compass, Code2, TestTube, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import Section from "@/components/shared/Section";
 import SectionHeader from "@/components/shared/SectionHeader";
 import DynamicCard from "@/components/shared/DynamicCard";
@@ -9,12 +9,15 @@ import ImageCard from "@/components/shared/ImageCard";
 import SectionBadge from "@/components/shared/SectionBadge";
 import SectionSeparator from "@/components/shared/SectionSeparator";
 import { useDeviceType } from "@/hooks/use-mobile";
+import IconBox from "@/components/shared/IconBox";
+import { LuCompass, LuSlidersVertical, LuCode, LuRocket } from "react-icons/lu";
+import { IconType } from "react-icons";
 
 interface ProcessStep {
   id: string;
   title: string;
   description: string;
-  icon: React.ReactNode;
+  icon: IconType;
   category: string;
   bullets: string[];
 }
@@ -25,7 +28,7 @@ const processSteps: ProcessStep[] = [
     title: "Product Clarity & Planning",
     description:
       "Before writing a single line of code, we define the foundation. We align on product goals, core features, user flow, and scalability requirements — so we build the right thing the first time.",
-    icon: <Compass className="w-10 h-10" />,
+    icon: LuCompass,
     category: "Discovery",
     bullets: [
       "Requirement breakdown & feature prioritization",
@@ -38,7 +41,7 @@ const processSteps: ProcessStep[] = [
     title: "Structured Development",
     description:
       "Execution without chaos. I develop the product using clean architecture principles, modular code structure, and performance-focused implementation.",
-    icon: <Code2 className="w-10 h-10" />,
+    icon: LuCode,
     category: "Build",
     bullets: [
       "Backend & database implementation",
@@ -51,7 +54,7 @@ const processSteps: ProcessStep[] = [
     title: "Performance & Refinement",
     description:
       "After core development, I refine what matters. Speed, responsiveness, system stability, and user experience are carefully optimized before launch.",
-    icon: <TestTube className="w-10 h-10" />,
+    icon: LuSlidersVertical,
     category: "Optimize",
     bullets: [
       "Query & API performance tuning",
@@ -64,7 +67,7 @@ const processSteps: ProcessStep[] = [
     title: "Deployment & Growth Readiness",
     description:
       "A product isn’t done at launch. I ensure your system is structured for future updates, scaling users, and feature expansion — without rewriting everything later.",
-    icon: <TestTube className="w-10 h-10" />,
+    icon: LuRocket,
     category: "Launch & Scale",
     bullets: [
       "Production deployment support",
@@ -96,9 +99,7 @@ export default function WorkProcess() {
             >
               <div className="flex flex-col gap-[44px]">
                 <div className="flex justify-between items-start">
-                  <div className="p-3 bg-white/5 rounded-2xl border border-white/10">
-                    {step.icon}
-                  </div>
+                  <IconBox icon={step.icon} size="lg" />
                   <SectionBadge className="text-sm" text={step.category} />
                 </div>
 
