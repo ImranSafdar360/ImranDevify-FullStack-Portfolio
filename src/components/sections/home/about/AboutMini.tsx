@@ -6,64 +6,37 @@ import ProfilePic from "../../../../../public/images/profile-pic.jpg";
 import ImageCard from "@/components/shared/ImageCard";
 import AnimatedButton from "@/components/shared/AnimatedButton";
 import GradientText from "@/components/ui/gradient-text";
-import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import SectionSeparator from "@/components/shared/SectionSeparator";
 import { useRouter } from "next/navigation";
 import SectionHeader from "@/components/shared/SectionHeader";
 import { useDeviceType } from "@/hooks/use-mobile";
+import { Star } from "lucide-react";
 
 export default function AboutSection() {
   const router = useRouter();
   const { isMobile, isTablet } = useDeviceType();
 
-  const people = [
-    {
-      id: 1,
-      name: "John Doe",
-      designation: "Software Engineer",
-      image:
-        "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3387&q=80",
-    },
-    {
-      id: 2,
-      name: "Robert Johnson",
-      designation: "Product Manager",
-      image:
-        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-    },
-    {
-      id: 3,
-      name: "Jane Smith",
-      designation: "Data Scientist",
-      image:
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
-    },
-    {
-      id: 4,
-      name: "Emily Davis",
-      designation: "UX Designer",
-      image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
-    },
-  ];
-
   const handleAboutClick = () => {
-    router.push("/about");
+    router.push("/portfolio");
   };
 
   return (
     <Section
       id="about"
-      className="relative flex flex-col-reverse lg:flex-row justify-center items-center gap-[64px] lg:gap-[84px]"
+      className="wrelative flex flex-col-reverse lg:flex-row justify-center items-center gap-[64px] lg:gap-[84px]"
     >
-      <ImageCard image={ProfilePic} alt="Profile Picture" />
+      <ImageCard
+        className="lg:min-h-[670px]"
+        image={ProfilePic}
+        alt="Profile Picture"
+      />
       <div className="flex flex-col justify-center gap-[30px] w-full max-w-full md:max-w-[80%] lg:max-w-[50%]">
         <SectionHeader
-          title="Imran Safdar"
-          description="Delivering high-quality, on-demand designs with precision.
-          Elevate your brand effortlessly, one snap at a time."
-          badgeText="About Imran"
-          gradientText="Digital Engineer"
+          title="Imran Safdar Full-Stack"
+          description="I build scalable SaaS platforms and high-performance mobile apps using MERN, Next.js, and React Native (Expo).
+          Focused on clean architecture, performance, and real-world usability, I create products that are built to grow, not just launch."
+          badgeText="About me"
+          gradientText="Product Engineer"
           isAbout={isMobile || isTablet ? false : true}
         />
         <div className="w-full max-w-full lg:max-w-[230px]">
@@ -75,19 +48,29 @@ export default function AboutSection() {
         </div>
         <div className="flex items-center lg:items-start flex-col gap-[10px]">
           <h2 className="text-[18px] leading-[22px] font-medium text-white">
-            Expertise in 20+ elite technologies
+            More Than Code, I Think in Systems
           </h2>
           <p className="text-[16px] leading-normal text-center lg:text-start font-medium text-white/70">
-            I specialize in 20+ elite technologies, from React, Next.js, and
-            Tailwind CSS to Node.js, MongoDB, and more. I use these technologies
-            to build high-performance, scalable, and efficient web applications.
+            Strong products aren’t built by stacking features. They’re built
+            through clear system design, clean backend architecture, and
+            thoughtful frontend experience.
+          </p>
+        </div>
+        <div className="flex items-center lg:items-start flex-col gap-[10px]">
+          <h2 className="text-[18px] leading-[22px] font-medium text-white">
+            Built for Production, Not Just Prototypes
+          </h2>
+          <p className="text-[16px] leading-normal text-center lg:text-start font-medium text-white/70">
+            From AI-powered apps to subscription-based SaaS platforms, I’ve led
+            real-world products from idea to deployment, structured for scale
+            and long-term performance.
           </p>
         </div>
 
         <div className="flex flex-row justify-center lg:justify-start items-start w-full">
           <div className="relative flex flex-col-reverse md:flex-row items-center gap-[24px]">
             <AnimatedButton onClick={handleAboutClick}>
-              View about Imran
+              Explore My Work
             </AnimatedButton>
             <SectionSeparator
               orientation="vertical"
@@ -97,13 +80,19 @@ export default function AboutSection() {
               width="1px"
               className="hidden md:block"
             />
-            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-              <div className="flex items-start justify-center md:items-center">
-                <AnimatedTooltip items={people} />
+            <div className="flex flex-col gap-2 sm:gap-4">
+              <div className="flex gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    size={20}
+                    fill="#FFFFFF"
+                    style={{ color: "#FFFFFF" }}
+                  />
+                ))}
               </div>
               <p className="text-[16px] font-medium text-white text-center sm:text-start leading-[22px]">
-                Trusted by <br className="hidden sm:block" />
-                Over <GradientText>50+</GradientText> Clients
+                Trusted by Over <GradientText>50+</GradientText> Clients
               </p>
             </div>
           </div>

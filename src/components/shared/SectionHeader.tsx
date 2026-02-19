@@ -47,9 +47,9 @@ const SectionHeader = ({
       </h1>
       <p
         className={cn(
-          "max-w-full md:max-w-[80%] text-[15px] md:text-[16px] lg:text-[17px] xl:text-[18px] leading-[24px] md:leading-[26px] lg:leading-[26px] xl:leading-[28px] font-medium text-white/70",
+          "max-w-full md:max-w-[95%] text-[15px] md:text-[16px] lg:text-[17px] xl:text-[18px] leading-[24px] md:leading-[26px] lg:leading-[26px] xl:leading-[28px] font-medium text-white/70",
           isAbout
-            ? "text-start max-w-[80%]"
+            ? "text-start max-w-[95%]"
             : "text-center lg:max-w-[70%] max-w-full",
         )}
       >

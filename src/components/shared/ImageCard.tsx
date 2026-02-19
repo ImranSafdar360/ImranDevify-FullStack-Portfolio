@@ -1,16 +1,24 @@
 import React from "react";
 import Image from "next/image";
 import { StaticImageData } from "next/image";
+import { cn } from "@/lib/utils";
 
 const ImageCard = ({
   image,
   alt,
+  className,
 }: {
   image: StaticImageData | string;
   alt: string;
+  className?: string;
 }) => {
   return (
-    <div className="relative w-full h-[400px] md:h-[700px] lg:h-[535px] lg:w-[530px] p-[10px] bg-[#080808] rounded-[30px] border-[1px] border-white/5 z-10">
+    <div
+      className={cn(
+        "relative w-full h-[400px] md:h-[700px] lg:h-[535px] lg:w-[530px] p-[10px] bg-[#080808] rounded-[30px] border-[1px] border-white/5 z-10",
+        className,
+      )}
+    >
       <div className="relative w-full h-full">
         <Image
           src={image}

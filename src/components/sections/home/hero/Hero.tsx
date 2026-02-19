@@ -71,36 +71,32 @@ export default function Hero() {
         <div className="relative w-full flex justify-center items-center">
           <div className="px-4 py-2 md:px-8 md:py-3 rounded-full border border-white/30 bg-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:border-white/20 group">
             <span className="text-[12px] md:text-sm lg:text-base font-semibold tracking-wide text-white text-center whitespace-nowrap">
-              150+ Satisfied Clients around the world
+              30+ Projects Delivered | Scalable SaaS
             </span>
           </div>
         </div>
 
         {/* Gradient Title */}
         <h1
-          className="text-[28px] md:text-[30px] lg:text-4xl xl:text-[60px] tracking-tight leading-normal xl:leading-[94px] text-center max-w-full md:max-w-[600px] lg:max-w-[700px] xl:max-w-[1200px]"
+          className="text-[24px] md:text-[30px] lg:text-4xl xl:text-[60px] tracking-tight leading-relaxed font-sora xl:leading-[94px] text-center max-w-[90%] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[1000px]"
           style={{
             fontFamily: "var(--font-boldonse)",
           }}
         >
-          I Build Conversion Focused Products That Perform and Scale.
+          Building Scalable Products That Actually Perform
         </h1>
 
         {/* Subtitle */}
-        <p className="text-[15px] md:text-[14px] lg:text-lg xl:text-xl text-white/70 leading-relaxed mb-0 text-center max-w-[90%] md:max-w-[500px] lg:max-w-[700px] xl:max-w-[900px] font-medium">
-          I’m <span className="text-white font-semibold">Imran Safdar</span>, a
-          MERN Stack & React Native developer helping {""}
-          <span className="text-white font-semibold">
-            SaaS founders, agencies and startups
-          </span>{" "}
-          turn complex ideas into fast, reliable, growth-ready digital products.
+        <p className="text-[15px] md:text-[14px] lg:text-lg xl:text-xl text-white/70 leading-relaxed mb-0 text-center max-w-[90%] md:max-w-[500px] lg:max-w-[650px] xl:max-w-[800px] font-medium">
+          For SaaS founders and agencies who care about performance, clean
+          architecture, and long-term scalability.
         </p>
 
         {/* CTA Section (A/B Optimized) */}
-        <div className="flex justify-center items-center gap-[16px] xl:gap-[21px] flex-row">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-[16px] xl:gap-[21px]">
           {/* Primary CTA */}
           <AnimatedButton onClick={() => setIsCalendlyOpen(true)}>
-            Book 1:1 Meeting
+            Book a Strategy Call
           </AnimatedButton>
           <PopupModal
             url="https://calendly.com/imran-safdar360/30min"
@@ -108,7 +104,9 @@ export default function Hero() {
             open={isCalendlyOpen}
             rootElement={rootElement!}
           />
-          <h6 className="text-gray-300 xl:text-[22px] font-semibold">or DM</h6>
+          <h6 className="text-gray-300 xl:text-[22px] font-semibold hidden md:block">
+            or DM
+          </h6>
           <SocialDock items={socialItems} />
         </div>
       </div>

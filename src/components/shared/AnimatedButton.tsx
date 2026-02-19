@@ -152,7 +152,7 @@ const AnimatedButton = ({
             top: "50%",
             left: "50%",
             opacity: 0,
-            transform: "translate(-50%, 50%)",
+            transform: "translate(-0%, 50%)",
           }}
         >
           {hoverTextContent}
