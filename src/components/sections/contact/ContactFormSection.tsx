@@ -238,7 +238,9 @@ const ContactFormSection = () => {
                 24/7
               </span>
             </div>
-            <p className="text-white/60 font-medium">help [at] Landin.com</p>
+            <p className="text-white/60 font-medium">
+              help at imransafdar360@gmail.com
+            </p>
           </DynamicCard>
 
           <DynamicCard className="min-h-fit md:min-h-fit h-fit p-6 md:p-8 flex flex-col gap-6 max-w-none">
@@ -246,7 +248,7 @@ const ContactFormSection = () => {
               <IconBox icon={Phone} size="sm" />
               <span className="text-white font-bold text-lg">Phone</span>
             </div>
-            <p className="text-white/60 font-medium">+1 (717) 550-1675</p>
+            <p className="text-white/60 font-medium">+92 3494898190</p>
           </DynamicCard>
 
           <DynamicCard className="min-h-fit md:min-h-fit h-fit p-6 md:p-8 flex flex-col gap-6 max-w-none">
@@ -260,11 +262,9 @@ const ContactFormSection = () => {
               </span>
             </div>
             <div className="text-white/60 font-medium leading-relaxed">
-              California [CA], 90011
+              Lahore. Punjab
               <br />
-              49th St. Los Angeles
-              <br />
-              United States
+              Pakistan
             </div>
           </DynamicCard>
         </div>

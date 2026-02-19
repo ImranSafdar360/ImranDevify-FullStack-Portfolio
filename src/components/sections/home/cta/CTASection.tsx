@@ -61,21 +61,19 @@ export default function CTASection() {
           className="absolute left-0 -bottom-0 z-10 w-full h-full object-cover"
         />
         <div className="relative z-30 flex flex-col items-center gap-[16px]">
-          <SectionBadge text="If You Scrolled This Far" className="mb-[16px]" />
+          <SectionBadge text="Let’s Build" className="mb-[16px]" />
 
           {/* Main Heading */}
           <h2
             className="text-4xl md:text-[48px] lg:text-[64px] tracking-normal leading-normal text-white max-w-4xl"
             style={{ fontFamily: "var(--font-boldonse)" }}
           >
-            You&apos;re serious. <br />{" "}
-            <GradientText>Let&apos;s talk.</GradientText>
+            Ready to Build <br /> <GradientText>That Scales?</GradientText>
           </h2>
 
           <p className="max-w-xl text-md md:text-xl text-white/70 leading-relaxed">
-            Your website. Built to reflect how good you really are.{" "}
-            <br className="hidden md:block" />
-            One that makes you stand out effortlessly.
+            Serious about building a scalable SaaS or mobile product? Let’s
+            talk.
           </p>
 
           {/* Action Area */}
@@ -83,7 +81,7 @@ export default function CTASection() {
             <div className="flex flex-col justify-center items-center gap-3 md:gap-[21px] md:flex-row">
               {/* Primary CTA */}
               <AnimatedButton onClick={() => setIsCalendlyOpen(true)}>
-                Book 1:1 Meeting
+                Book a Strategy Call
               </AnimatedButton>
               <PopupModal
                 url="https://calendly.com/imran-safdar360/30min"

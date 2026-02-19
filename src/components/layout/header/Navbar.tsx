@@ -51,6 +51,23 @@ export default function Navbar() {
     return href;
   };
 
+  const handleAnchorClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    if (!href.startsWith("#")) return; // let Next.js handle page links normally
+
+    if (pathname === "/") {
+      e.preventDefault();
+      const id = href.slice(1);
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+    // if not on home page, let the browser navigate to /#id naturally
+  };
+
   return (
     <nav className="fixed top-0 left-0 w-full z-50">
       <div className="relative w-full max-w-[950px] mx-auto flex">
@@ -76,6 +93,7 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={getHref(link.href)}
+                  onClick={(e) => handleAnchorClick(e, link.href)}
                   className="text-white/90 hover:text-white text-base font-semibold transition-all duration-300 relative group whitespace-nowrap"
                 >
                   {link.name}
@@ -101,6 +119,7 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={getHref(link.href)}
+                  onClick={(e) => handleAnchorClick(e, link.href)}
                   className="text-white/90 hover:text-white text-base font-semibold transition-all duration-300 relative group whitespace-nowrap"
                 >
                   {link.name}
@@ -142,7 +161,10 @@ export default function Navbar() {
               >
                 <Link
                   href={getHref(link.href)}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    handleAnchorClick(e, link.href);
+                    setIsOpen(false);
+                  }}
                   className="text-2xl md:text-3xl font-bold text-white hover:text-[#0080FF] transition-colors"
                 >
                   {link.name}

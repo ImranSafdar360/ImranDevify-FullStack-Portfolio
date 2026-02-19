@@ -1,9 +1,11 @@
+import "locomotive-scroll/dist/locomotive-scroll.css";
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans, Sora } from "next/font/google";
 import Providers from "@/components/layout/providers/Providers";
 import "./globals.css";
 import Footer from "@/components/layout/footer/Footer";
 import Navbar from "@/components/layout/header/Navbar";
+import SmoothScroll from "@/components/layout/SmoothScroll";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -112,7 +114,7 @@ export default function RootLayout({
           <header>
             <Navbar />
           </header>
-          {children}
+          <SmoothScroll>{children}</SmoothScroll>
           <Footer />
         </Providers>
       </body>

@@ -10,34 +10,39 @@ import {
 export function FAQ() {
   const faqs = [
     {
+      question: "What types of projects do you usually work on?",
+      answer:
+        "I primarily work with SaaS founders, digital agencies, and growing businesses building scalable web or mobile products. Most projects involve full product development — from architecture planning to production deployment — including subscription systems, real-time features, and performance-focused builds.",
+    },
+    {
+      question: "Do you handle both frontend and backend development?",
+      answer:
+        "Yes. I build complete systems — from backend architecture and database design to frontend interfaces and mobile apps. This ensures your product stays consistent, optimized, and scalable across all layers.",
+    },
+    {
+      question: "Can you help improve or scale an existing product?",
+      answer:
+        "Absolutely. If your product is already live but struggling with performance, scalability, or messy architecture, I can refactor, optimize, and restructure it for long-term stability and growth.",
+    },
+    {
+      question: "How do you ensure the product is scalable?",
+      answer:
+        "Scalability is designed early — not added later. I focus on clean system architecture, structured APIs, optimized database indexing, and modular code organization so your product can handle growth without major rewrites.",
+    },
+    {
+      question: "Do you work on fixed-price or long-term partnerships?",
+      answer:
+        "Both. Some clients need a clearly defined product build. Others prefer ongoing technical partnership for continuous development and scaling. We define the engagement model based on project scope and growth goals.",
+    },
+    {
       question: "What technologies do you specialize in?",
       answer:
-        "I specialize in full-stack development using modern technologies like React.js, Next.js, Node.js, and TypeScript. For styling and animations, I use Tailwind CSS, GSAP, and Framer Motion to create high-performance, visually stunning interfaces.",
+        "I specialize in MERN stack (MongoDB, Express, React, Node.js), Next.js, and React Native (Expo) — primarily for SaaS platforms and scalable mobile applications.",
     },
     {
-      question: "How long does a typical project take?",
+      question: "How do we get started?",
       answer:
-        "Project timelines depend on the scope and complexity. A landing page usually takes 1-2 weeks, while a complex full-stack web application can take 4-8 weeks. I focus on delivering quality and efficiency.",
-    },
-    {
-      question: "Do you offer maintenance and support after delivery?",
-      answer:
-        "Yes, I provide ongoing support to ensure your application remains secure and up-to-date. This includes bug fixes, performance monitoring, and implementing new features as your project grows.",
-    },
-    {
-      question: "Can you help with UI/UX design as well as development?",
-      answer:
-        "Definitely! I bridge the gap between design and code. I can create pixel-perfect UIs directly in the codebase or work from your existing Figma designs to ensure a seamless user experience.",
-    },
-    {
-      question: "How do you handle project communication?",
-      answer:
-        "I believe in transparency and regular updates. I use tools like Slack, WhatsApp, and video calls to keep you informed at every stage of the development process, ensuring the final product meets your vision.",
-    },
-    {
-      question: "Can you work on existing codebases?",
-      answer:
-        "Yes, I am experienced in jumpstarting development on existing projects. Whether it's refactoring code, fixing bugs, or scaling your current application, I can integrate quickly and deliver improvements.",
+        "Start with a strategy call. We’ll discuss your product idea, growth goals, technical requirements, and timeline — then map out the right approach before development begins.",
     },
   ];
 
@@ -45,10 +50,10 @@ export function FAQ() {
     <Section className="max-w-[1080px] mx-auto relative flex flex-col justify-center items-center gap-[44px] lg:gap-[84px]">
       <SectionHeader
         className="max-w-[80%] lg:max-w-[60%] items-center gap-[8px]"
-        title="Have Questions? "
-        description="We've heard it all. Here's everything you need to know before working with us."
+        title="Everything You Might "
+        description="Clear expectations. Transparent process. No surprises — just structured product development built for long-term growth."
         badgeText="FAQs"
-        gradientText="We've Answers."
+        gradientText="Want to Know"
       />
 
       {/* FAQ Accordion */}

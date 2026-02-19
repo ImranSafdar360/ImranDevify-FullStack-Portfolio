@@ -10,39 +10,51 @@ import { useDeviceType } from "@/hooks/use-mobile";
 
 const services = [
   {
-    title: "Full-Stack SaaS Development",
+    title: "Product Architecture & System Design",
     description:
-      "End-to-end SaaS products built with the MERN stack, focusing on scalability and high performance.",
-    category: "Web Development",
+      "Before writing code, I design the system. Clear backend structure. Scalable database design. Defined API contracts. This prevents future rewrites and scaling issues.",
+    category: "Architecture",
     icon: <Code2 className="w-8 h-8 text-[#0080FF]" />,
     bullets: [
-      "Custom Dashboard & Admin Panels",
-      "Secure API Integration & Auth",
-      "Real-time Data Processing",
+      "Scalable backend & database architecture",
+      "Secure authentication & role-based systems",
+      "Clean API structure for long-term maintainability",
     ],
   },
   {
-    title: "Cross-Platform Mobile Apps",
+    title: "Web Application Development",
     description:
-      "High-performance iOS and Android applications developed using React Native for a seamless user experience.",
-    category: "Mobile Development",
+      "High-performance SaaS platforms built with clarity and structure. Fast interfaces. Clean state management. Real-world usability.",
+    category: "Web Development",
     icon: <Smartphone className="w-8 h-8 text-[#0080FF]" />,
     bullets: [
-      "Native-like Performance & UX",
-      "Offline-first Functionality",
-      "App Store & Play Store Ready",
+      "Scalable React & Next.js applications",
+      "Optimized frontend-backend integration",
+      "Subscription logic & payment integration (Stripe)",
     ],
   },
   {
-    title: "Custom Business Solutions",
+    title: "Mobile App Development (React Native & Expo)",
     description:
-      "Tailored digital solutions for agencies and businesses to automate workflows and enhance digital presence.",
-    category: "Enterprise",
+      "Cross-platform apps engineered for performance and stability. Not just apps that work — apps that handle real users.",
+    category: "Mobile Apps",
     icon: <Globe className="w-8 h-8 text-[#0080FF]" />,
     bullets: [
-      "Automated Business Workflows",
-      "Scalable Architecture Design",
-      "Third-party Service Integration",
+      "iOS & Android apps from one codebase",
+      "Background tasks, offline storage & API integration",
+      "Smooth performance & scalable architecture",
+    ],
+  },
+  {
+    title: "Performance & Growth Optimization",
+    description:
+      "Products slow down when growth isn’t planned. I optimize systems at both frontend and backend layers to ensure your product stays fast as usage increases.",
+    category: "Optimization",
+    icon: <Globe className="w-8 h-8 text-[#0080FF]" />,
+    bullets: [
+      "Database indexing & query optimization",
+      "Efficient state handling & rendering",
+      "Performance-focused refactoring & scaling strategy",
     ],
   },
 ];
@@ -61,10 +73,10 @@ const Services = () => {
       <div className="w-full lg:max-w-[50%] flex flex-col gap-[84px]">
         <SectionHeader
           className="gap-[8px]"
-          title="Get High-Quality"
-          description="I offer a wide range of services to help you achieve your goals."
-          badgeText="Services"
-          gradientText="Clear Services Remotely."
+          title="Building Products That "
+          description="I partner with founders and agencies to design, build, and scale SaaS and mobile products — structured with strong architecture, performance, and long-term growth in mind."
+          badgeText="Core Product Expertise"
+          gradientText="Scale With Confidence"
           isAbout={isMobile || isTablet ? false : true}
         />
 

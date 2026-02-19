@@ -22,20 +22,23 @@ const featureCards: FeatureCard[] = [
   {
     id: 1,
     icon: <Target className="w-[35px] h-[35px]" />,
-    title: "No Generic Templates",
-    description: "Research-based websites that make you stand out",
+    title: "Architecture Before Features",
+    description:
+      "I don’t rush into coding screens. I design the backend structure, database flow, and API contracts first, so your product doesn’t collapse under future updates, new users, or added complexity. Scale isn’t added later. It’s designed early.",
   },
   {
     id: 2,
     icon: <Code className="w-[35px] h-[35px]" />,
-    title: "Conversion-focused pages",
-    description: "Built to Spark Action and Turn Views into Results",
+    title: "Performance at Every Layer",
+    description:
+      "Slow products lose users. Period. From optimized MongoDB queries and structured indexing to efficient state management and frontend rendering, I make sure your system stays fast, stable, and responsive as traffic grows. Performance is built in, not patched later.",
   },
   {
     id: 3,
     icon: <MessageSquare className="w-[35px] h-[35px]" />,
-    title: "Messaging That Connect",
-    description: "Crafting words that resonate with your ideal audience.",
+    title: "Product Thinking, Not Just Development",
+    description:
+      "I don’t build features blindly. I think about user flow, monetization logic, friction points, and long-term maintainability, so every technical decision supports business growth. You get a product engineer, not just a developer.",
   },
 ];
 
@@ -70,11 +73,10 @@ export default function WhyChooseMeSection() {
         <div className="w-full h-full flex flex-col items-center lg:items-start gap-[32px] lg:gap-[44px] xl:gap-[84px] max-w-full lg:max-w-[50%]">
           <div className="flex flex-col gap-5">
             <SectionHeader
-              title="Why you should choose me as your "
-              description="Delivering high-quality, on-demand designs with precision.
-          Elevate your brand effortlessly, one snap at a time."
-              badgeText="Why me?"
-              gradientText="partner"
+              title="Engineered for "
+              description="You don’t need someone to just write code. You need someone who understands product decisions, system architecture, and long-term scalability from day one."
+              badgeText="Why Work With Me?"
+              gradientText="Long-Term Growth"
               isAbout={isMobile || isTablet ? false : true}
             />
 
@@ -100,7 +102,7 @@ export default function WhyChooseMeSection() {
             </div>
           </div>
           <AnimatedButton onClick={() => router.push("/contact")}>
-            View about Imran
+            Start Building the Right Way
           </AnimatedButton>
         </div>
 
@@ -108,7 +110,12 @@ export default function WhyChooseMeSection() {
         <div className="w-full max-w-full lg:max-w-[50%] h-full flex flex-col justify-center gap-5">
           {featureCards.map((card) => (
             <DynamicCard key={card.id} className="max-w-full min-h-[115px]">
-              <span>{card.icon}</span>
+              <div className="flex justify-between items-center">
+                <span>{card.icon}</span>
+                <p className="text-[24px] leading-[32px] font-bold text-white/70 transition-all duration-300 group-hover:text-white">
+                  0{card.id}
+                </p>
+              </div>
               <div className="flex flex-col gap-2">
                 <h3 className="text-[18px] leading-[24px] font-semibold text-white">
                   {card.title}
@@ -117,9 +124,6 @@ export default function WhyChooseMeSection() {
                   {card.description}
                 </p>
               </div>
-              <h6 className="absolute top-1/2 -translate-y-1/2 right-[30px] text-[24px] leading-[32px] font-bold text-white/70 transition-all duration-300 group-hover:text-white">
-                0{card.id}
-              </h6>
             </DynamicCard>
           ))}
         </div>

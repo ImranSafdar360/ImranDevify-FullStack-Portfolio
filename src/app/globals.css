@@ -37,6 +37,18 @@ body {
   font-family: inherit;
 }
 
+html.has-scroll-smooth {
+  overflow: hidden;
+}
+
+html.has-scroll-dragging {
+  user-select: none;
+}
+
+.has-scroll-smooth body {
+  overflow: hidden;
+}
+
 /* Hide scrollbar for featured work section */
 .hide-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */

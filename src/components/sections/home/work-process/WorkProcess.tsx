@@ -22,41 +22,54 @@ interface ProcessStep {
 const processSteps: ProcessStep[] = [
   {
     id: "01",
-    title: "Strategy & Discovery",
+    title: "Product Clarity & Planning",
     description:
-      "Deeply understanding your goals to create a strategic roadmap for success.",
+      "Before writing a single line of code, we define the foundation. We align on product goals, core features, user flow, and scalability requirements — so we build the right thing the first time.",
     icon: <Compass className="w-10 h-10" />,
-    category: "Strategy & Discovery",
+    category: "Discovery",
     bullets: [
-      "Deeply understanding your goals to create a strategic roadmap for success.",
-      "Deeply understanding your goals to create a strategic roadmap for success.",
-      "Deeply understanding your goals to create a strategic roadmap for success.",
+      "Requirement breakdown & feature prioritization",
+      "System flow & architecture planning",
+      "Technical feasibility & scalability mapping",
     ],
   },
   {
     id: "02",
-    title: "Development & Deployment",
+    title: "Structured Development",
     description:
-      "Building your product with precision and ensuring it's ready for launch.",
+      "Execution without chaos. I develop the product using clean architecture principles, modular code structure, and performance-focused implementation.",
     icon: <Code2 className="w-10 h-10" />,
-    category: "Development & Deployment",
+    category: "Build",
     bullets: [
-      "Building your product with precision and ensuring it's ready for launch.",
-      "Building your product with precision and ensuring it's ready for launch.",
-      "Building your product with precision and ensuring it's ready for launch.",
+      "Backend & database implementation",
+      "Frontend / mobile development",
+      "Secure authentication & API integration",
     ],
   },
   {
     id: "03",
-    title: "Testing & Optimization",
+    title: "Performance & Refinement",
     description:
-      "Testing your product and optimizing it for maximum performance and user satisfaction.",
+      "After core development, I refine what matters. Speed, responsiveness, system stability, and user experience are carefully optimized before launch.",
     icon: <TestTube className="w-10 h-10" />,
-    category: "Testing & Optimization",
+    category: "Optimize",
     bullets: [
-      "Testing your product and optimizing it for maximum performance and user satisfaction.",
-      "Testing your product and optimizing it for maximum performance and user satisfaction.",
-      "Testing your product and optimizing it for maximum performance and user satisfaction.",
+      "Query & API performance tuning",
+      "UI/UX refinement & flow improvement",
+      "Code cleanup & structural optimization",
+    ],
+  },
+  {
+    id: "04",
+    title: "Deployment & Growth Readiness",
+    description:
+      "A product isn’t done at launch. I ensure your system is structured for future updates, scaling users, and feature expansion — without rewriting everything later.",
+    icon: <TestTube className="w-10 h-10" />,
+    category: "Launch & Scale",
+    bullets: [
+      "Production deployment support",
+      "Post-launch optimization",
+      "Scalability guidance for growth",
     ],
   },
 ];
@@ -68,10 +81,10 @@ export default function WorkProcess() {
       <div className="w-full lg:max-w-[47%] flex flex-col gap-[64px]">
         <SectionHeader
           className="gap-[8px]"
-          title="We Simplify The Journey"
-          description="We break down complex ideas into simple, actionable steps to help you achieve your goals."
-          badgeText="How We Work?"
-          gradientText="From Idea To Launch."
+          title="A Clear Path From Idea to "
+          description="Every successful product starts with clarity. My process ensures your idea is structured properly, built efficiently, and optimized for long-term growth."
+          badgeText="How I Work?"
+          gradientText="Scalable Product"
           isAbout={isMobile || isTablet ? false : true}
         />
 

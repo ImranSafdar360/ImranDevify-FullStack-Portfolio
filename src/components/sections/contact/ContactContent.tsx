@@ -8,7 +8,7 @@ import { FAQ } from "@/components/sections/home/faqs/FAQs";
 
 const ContactContent = () => {
   return (
-    <main className="min-h-screen flex flex-col items-center">
+    <main className="min-h-screen flex flex-col items-center pb-32">
       <ContactHero />
 
       <SectionSeparator

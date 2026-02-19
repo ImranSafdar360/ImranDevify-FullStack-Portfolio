@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FaLinkedinIn, FaGithub, FaTwitter } from "react-icons/fa";
 import CTASection from "@/components/sections/home/cta/CTASection";
 import SectionSeparator from "@/components/shared/SectionSeparator";
@@ -9,6 +10,8 @@ import Section from "@/components/shared/Section";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+  const showCTA = pathname !== "/contact";
 
   const linksStack: {
     title: string;
@@ -45,7 +48,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full relative flex flex-col gap-[84px] overflow-hidden">
-      <CTASection />
+      {showCTA && <CTASection />}
       <Section className="flex flex-col gap-[64px] z-20">
         <div className="flex flex-col justify-center md:flex-row md:justify-between mb-16 xl:mb-24 gap-10 lg:gap-0 z-20">
           {/* Column 1: Brand & Description */}
@@ -58,9 +61,9 @@ export default function Footer() {
                 height={150}
               />
               <p className="text-[16px] font-medium leading-[24px] text-white text-center md:text-start">
-                Digital Engineering Agency that helps businesses scale globally
-                by building digital products that are scalable, secure, and
-                efficient.
+                Imran Safdar — Full-Stack Product Engineer building scalable
+                SaaS platforms and high-performance mobile applications. Focused
+                on clean architecture, performance, and long-term growth.
               </p>
             </div>
           </div>
@@ -127,14 +130,14 @@ export default function Footer() {
           </h3>
           <div className="flex justify-center items-center gap-[16px]">
             <Link
-              href="/privacy-policy"
+              href="/privacy"
               className="text-white text-[14px] font-semibold font-sora hover:text-[#0080FF] transition-colors duration-300"
             >
               Privacy Policy
             </Link>
             <span className="w-[5px] h-[5px] bg-white rounded-full flex items-center justify-center" />
             <Link
-              href="/terms-of-service"
+              href="/terms"
               className="text-white text-[14px] font-semibold font-sora hover:text-[#0080FF] transition-colors duration-300"
             >
               Terms of Service
