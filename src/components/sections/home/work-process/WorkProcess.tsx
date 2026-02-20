@@ -12,6 +12,12 @@ import { useDeviceType } from "@/hooks/use-mobile";
 import IconBox from "@/components/shared/IconBox";
 import { LuCompass, LuSlidersVertical, LuCode, LuRocket } from "react-icons/lu";
 import { IconType } from "react-icons";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 interface ProcessStep {
   id: string;
@@ -79,6 +85,27 @@ const processSteps: ProcessStep[] = [
 
 export default function WorkProcess() {
   const { isMobile, isTablet } = useDeviceType();
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      gsap.from(".process-card-anim", {
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        opacity: 0,
+        y: 50,
+        scale: 0.85,
+        duration: 0.8,
+        stagger: 0.2, // Sequentially staggers each card
+        ease: "power3.out",
+      });
+    },
+    { scope: cardsRef },
+  );
+
   return (
     <Section className="relative flex flex-col lg:flex-row justify-center gap-[64px]">
       <div className="w-full lg:max-w-[47%] flex flex-col gap-[64px]">
@@ -91,47 +118,46 @@ export default function WorkProcess() {
           isAbout={isMobile || isTablet ? false : true}
         />
 
-        <div className="flex flex-col gap-6">
+        <div ref={cardsRef} className="flex flex-col gap-6">
           {processSteps.map((step, index) => (
-            <DynamicCard
-              key={index}
-              className="relative max-w-full lg:max-w-[590px] min-h-fit p-8"
-            >
-              <div className="flex flex-col gap-[44px]">
-                <div className="flex justify-between items-start">
-                  <IconBox icon={step.icon} size="lg" />
-                  <SectionBadge className="text-sm" text={step.category} />
-                </div>
+            <div key={index} className="process-card-anim">
+              <DynamicCard className="relative max-w-full lg:max-w-[590px] min-h-fit p-8">
+                <div className="flex flex-col gap-[44px]">
+                  <div className="flex justify-between items-start">
+                    <IconBox icon={step.icon} size="lg" />
+                    <SectionBadge className="text-sm" text={step.category} />
+                  </div>
 
-                <div className="flex flex-col gap-3">
-                  <h3 className="text-xl font-bold text-white font-sora">
-                    {step.title}
-                  </h3>
-                  <p className="text-md text-white/60 leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-xl font-bold text-white font-sora">
+                      {step.title}
+                    </h3>
+                    <p className="text-md text-white/60 leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
 
-                <div className="w-full max-w-[50%]">
-                  <SectionSeparator
-                    orientation="horizontal"
-                    color="FFFFFF"
-                    centerOpacity={0.25}
-                  />
-                </div>
+                  <div className="w-full max-w-[50%]">
+                    <SectionSeparator
+                      orientation="horizontal"
+                      color="FFFFFF"
+                      centerOpacity={0.25}
+                    />
+                  </div>
 
-                <div className="flex flex-col gap-4">
-                  {step.bullets.map((bullet, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-[#0080FF] shrink-0" />
-                      <span className="text-white/80 font-medium">
-                        {bullet}
-                      </span>
-                    </div>
-                  ))}
+                  <div className="flex flex-col gap-4">
+                    {step.bullets.map((bullet, idx) => (
+                      <div key={idx} className="flex items-center gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-[#0080FF] shrink-0" />
+                        <span className="text-white/80 font-medium">
+                          {bullet}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </DynamicCard>
+              </DynamicCard>
+            </div>
           ))}
         </div>
       </div>

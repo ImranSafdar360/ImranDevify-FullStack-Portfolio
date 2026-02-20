@@ -6,6 +6,7 @@ import "./globals.css";
 import Footer from "@/components/layout/footer/Footer";
 import Navbar from "@/components/layout/header/Navbar";
 import SmoothScroll from "@/components/layout/SmoothScroll";
+import Preloader from "@/components/shared/Preloader";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -110,6 +111,7 @@ export default function RootLayout({
             }),
           }}
         />
+        <Preloader />
         <Providers>
           <header>
             <Navbar />

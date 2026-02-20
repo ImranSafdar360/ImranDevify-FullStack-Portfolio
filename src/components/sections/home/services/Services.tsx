@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import Section from "@/components/shared/Section";
 import SectionHeader from "@/components/shared/SectionHeader";
 import ImageCard from "@/components/shared/ImageCard";
@@ -14,6 +16,11 @@ import SectionBadge from "@/components/shared/SectionBadge";
 import { useDeviceType } from "@/hooks/use-mobile";
 import { CheckCircle2 } from "lucide-react";
 import IconBox from "@/components/shared/IconBox";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const services = [
   {
@@ -68,6 +75,26 @@ const services = [
 
 const Services = () => {
   const { isMobile, isTablet } = useDeviceType();
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      gsap.from(".service-card-anim", {
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        opacity: 0,
+        y: 50,
+        scale: 0.85,
+        duration: 0.8,
+        stagger: 0.2, // Sequentially staggers each card
+        ease: "power3.out",
+      });
+    },
+    { scope: cardsRef },
+  );
 
   return (
     <Section
@@ -87,47 +114,46 @@ const Services = () => {
           isAbout={isMobile || isTablet ? false : true}
         />
 
-        <div className="flex flex-col gap-6">
+        <div ref={cardsRef} className="flex flex-col gap-6">
           {services.map((service, index) => (
-            <DynamicCard
-              key={index}
-              className="relative max-w-full lg:max-w-[590px] min-h-fit p-8"
-            >
-              <div className="flex flex-col gap-[44px]">
-                <div className="flex justify-between items-start">
-                  <IconBox icon={service.icon} size="lg" />
-                  <SectionBadge className="text-sm" text={service.category} />
-                </div>
+            <div key={index} className="service-card-anim">
+              <DynamicCard className="relative max-w-full lg:max-w-[590px] min-h-fit p-8">
+                <div className="flex flex-col gap-[44px]">
+                  <div className="flex justify-between items-start">
+                    <IconBox icon={service.icon} size="lg" />
+                    <SectionBadge className="text-sm" text={service.category} />
+                  </div>
 
-                <div className="flex flex-col gap-3">
-                  <h3 className="text-xl font-bold text-white font-sora">
-                    {service.title}
-                  </h3>
-                  <p className="text-md text-white/60 leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-xl font-bold text-white font-sora">
+                      {service.title}
+                    </h3>
+                    <p className="text-md text-white/60 leading-relaxed">
+                      {service.description}
+                    </p>
+                  </div>
 
-                <div className="w-full max-w-[50%]">
-                  <SectionSeparator
-                    orientation="horizontal"
-                    color="FFFFFF"
-                    centerOpacity={0.25}
-                  />
-                </div>
+                  <div className="w-full max-w-[50%]">
+                    <SectionSeparator
+                      orientation="horizontal"
+                      color="FFFFFF"
+                      centerOpacity={0.25}
+                    />
+                  </div>
 
-                <div className="flex flex-col gap-4">
-                  {service.bullets.map((bullet, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-[#0080FF] shrink-0" />
-                      <span className="text-white/80 font-medium">
-                        {bullet}
-                      </span>
-                    </div>
-                  ))}
+                  <div className="flex flex-col gap-4">
+                    {service.bullets.map((bullet, idx) => (
+                      <div key={idx} className="flex items-center gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-[#0080FF] shrink-0" />
+                        <span className="text-white/80 font-medium">
+                          {bullet}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </DynamicCard>
+              </DynamicCard>
+            </div>
           ))}
         </div>
       </div>
