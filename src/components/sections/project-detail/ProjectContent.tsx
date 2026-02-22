@@ -6,12 +6,14 @@ import { Project } from "@/data/projectData";
 import DynamicCard from "@/components/shared/DynamicCard";
 import AnimatedButton from "@/components/shared/AnimatedButton";
 import SectionBadge from "@/components/shared/SectionBadge";
+import { useRouter } from "next/navigation";
 
 interface ProjectContentProps {
   project: Project;
 }
 
 const ProjectContent = ({ project }: ProjectContentProps) => {
+  const router = useRouter();
   return (
     <Section className="py-10 md:py-16 lg:py-20">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
@@ -149,7 +151,10 @@ const ProjectContent = ({ project }: ProjectContentProps) => {
               </div>
             </DynamicCard>
 
-            <AnimatedButton onClick={() => {}} className="w-full">
+            <AnimatedButton
+              onClick={() => router.push("/contact")}
+              className="w-full"
+            >
               Let’s Build Your Product
             </AnimatedButton>
           </div>

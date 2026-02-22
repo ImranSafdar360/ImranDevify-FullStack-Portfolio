@@ -17,7 +17,7 @@ export const projectImages: ProjectImage[] = [
     alt: "Blarecast home",
   },
   {
-    src: "/images/featured/tarrar-agriculture.jpg",
+    src: "/images/featured/tarrar-agriculture.webp",
     alt: "Tarrar Agriculture",
   },
   {
@@ -25,7 +25,7 @@ export const projectImages: ProjectImage[] = [
     alt: "Blarecast discover",
   },
   {
-    src: "/images/featured/ochi.jpg",
+    src: "/images/featured/ochi.webp",
     alt: "Ochin",
   },
   {
@@ -33,7 +33,7 @@ export const projectImages: ProjectImage[] = [
     alt: "Xelvo services",
   },
   {
-    src: "/images/featured/significo.jpg",
+    src: "/images/featured/significo.webp",
     alt: "Significo",
   },
   {
@@ -41,7 +41,7 @@ export const projectImages: ProjectImage[] = [
     alt: "E-axon help-faq",
   },
   {
-    src: "/images/featured/miranda.jpg",
+    src: "/images/featured/miranda.webp",
     alt: "Miranda",
   },
   {
@@ -49,7 +49,7 @@ export const projectImages: ProjectImage[] = [
     alt: "Blarecast library",
   },
   {
-    src: "/images/featured/cynthia.jpg",
+    src: "/images/featured/cynthia.webp",
     alt: "Cynthia",
   },
   {

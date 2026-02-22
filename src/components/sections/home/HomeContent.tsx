@@ -23,14 +23,7 @@ const HomeContent = () => {
         centerOpacity={0.25}
         className="my-20 md:my-32"
       />
-      <AboutMini />
-      <SectionSeparator
-        orientation="horizontal"
-        color="FFFFFF"
-        centerOpacity={0.25}
-        className="my-20 md:my-32"
-      />
-      <CaseStudies />
+      <WhoIWorkWith />
       <SectionSeparator
         orientation="horizontal"
         color="FFFFFF"
@@ -44,14 +37,14 @@ const HomeContent = () => {
         centerOpacity={0.25}
         className="my-20 md:my-32"
       />
-      <WhoIWorkWith />
+      <CaseStudies />
       <SectionSeparator
         orientation="horizontal"
         color="FFFFFF"
         centerOpacity={0.25}
         className="my-20 md:my-32"
       />
-      <ExpertiseSection />
+      <WhyChooseMeSection />
       <SectionSeparator
         orientation="horizontal"
         color="FFFFFF"
@@ -65,7 +58,14 @@ const HomeContent = () => {
         centerOpacity={0.25}
         className="my-20 md:my-32"
       />
-      <WhyChooseMeSection />
+      <ExpertiseSection />
+      <SectionSeparator
+        orientation="horizontal"
+        color="FFFFFF"
+        centerOpacity={0.25}
+        className="my-20 md:my-32"
+      />
+      <AboutMini />
       <SectionSeparator
         orientation="horizontal"
         color="FFFFFF"
