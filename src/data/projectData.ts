@@ -7,220 +7,404 @@ export interface Project {
   image: string;
   gallery?: string[];
   category: string;
-  client?: string;
   date?: string;
   service?: string;
   techStack?: string[];
-  challenge?: string;
-  solution?: string;
+  overview?: string;
+  challenges?: {
+    title: string;
+    description: string;
+    solution: string;
+  }[];
   results?: string[];
   features?: string[];
-  liveLink?: string;
-  role?: string;
-  testimonial?: {
-    name: string;
+  role?: {
     role: string;
-    company: string;
-    image: string;
-    text: string;
-    rating: number;
-    socialLink?: string;
-    socialPlatform?: string;
+    responsibilities: string[];
   };
   isCTA?: boolean;
+  testimonial?: {
+    image: string;
+    name: string;
+    socialLink?: string;
+    socialPlatform?: string;
+    rating: number;
+    text: string;
+    role: string;
+    company: string;
+  };
 }
 
 export const projects: Project[] = [
   {
     id: "1",
-    slug: "petsnap",
-    title: "PetSnap",
+    slug: "blarecast",
+    title: "Blarecast",
     description:
-      "Capturing heartfelt moments for past 5 years. Trusted by 120+ happy pet parents across London.",
+      "AI-powered music streaming app with pay-per-listen model built using Expo & Supabase.",
     descriptionLong:
-      "PetSnap is a comprehensive platform designed for pet owners and professional photographers to connect and capture lasting memories. Our goal was to create an intuitive, emotionally resonant experience that simplifies the booking process while showcasing high-quality photography.",
-    image:
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FPetMock.423bd46e.png&w=1080&q=75",
+      "Blarecast is a next-generation mobile music streaming platform built with Expo React Native. It replaces traditional subscription models with a flexible pay-per-listen system, enhanced by AI-driven personalization, social engagement, and gamified listening experiences.",
+    image: "/images/projects/blarecast/hero.png",
     gallery: [
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FPetMock.423bd46e.png&w=1080&q=75",
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FMarkitMock.91eccd8b.png&w=1080&q=75",
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FXionMock.673a96ac.png&w=1080&q=75",
+      "/images/projects/blarecast/auth.png",
+      "/images/projects/blarecast/pricing.png",
+      "/images/projects/blarecast/home.png",
+      "/images/projects/blarecast/playlist.png",
+      "/images/projects/blarecast/player.png",
+      "/images/projects/blarecast/discover.png",
+      "/images/projects/blarecast/library.png",
+      "/images/projects/blarecast/gift.png",
+      "/images/projects/blarecast/profile.png",
     ],
-    category: "Web Design",
-    client: "PetSnap Studio",
-    date: "2024",
-    service: "Full Stack Dev",
-    techStack: ["React", "Tailwind", "GSAP", "Node.js"],
-    challenge:
-      "The client struggled with a fragmented booking system and a website that didn't reflect the warmth and professionalism of their photography brand.",
-    solution:
-      "We built a custom Next.js application with a seamless booking flow, integrated payment gateway, and a stunning gallery system that emphasizes visual storytelling.",
+    category: "Mobile Application",
+    date: "2025",
+    service: "Product Engineering",
+    techStack: [
+      "React Native (Expo)",
+      "Supabase",
+      "Redux Toolkit",
+      "RTK Query",
+      "React Native Track Player",
+      "Stripe",
+      "Google Auth",
+      "Google Cast",
+    ],
+
+    overview:
+      "Blarecast reimagines music consumption through a custom pay-per-listen business model. Users create listening packages instead of buying subscriptions, while AI curates personalized playlists based on mood, behavior, and listening patterns. The goal was to deliver a smooth, Spotify-level streaming experience inside a scalable React Native architecture.",
+
+    challenges: [
+      {
+        title: "Complex Animated Plan Selection UI",
+        description:
+          "The pricing/plan selection page had a highly modern and complex design in Figma. Recreating it natively in React Native was difficult due to advanced shapes and animated layout behavior.",
+        solution:
+          "After deep research and analyzing the web version of the product, I identified that the layout was SVG-driven. I rebuilt the UI using custom SVG components and structured positioning logic, achieving pixel-perfect rendering and smooth animations.",
+      },
+      {
+        title: "Google Authentication + Supabase Integration",
+        description:
+          "Implementing Google Sign-In in a mobile environment was challenging since my background was primarily web. The authentication worked in development but failed in production due to redirect and OAuth configuration issues.",
+        solution:
+          "I configured Google Cloud Console properly, created OAuth credentials, and aligned redirect URLs between Supabase and the Expo environment. After moving the project from testing to production mode and fixing redirect mismatches, authentication worked seamlessly in both dev and production.",
+      },
+      {
+        title: "Stripe Subscription & Payment Logic",
+        description:
+          "Implementing subscription logic for a pay-per-listen model required secure and reliable mobile payment handling.",
+        solution:
+          "I integrated Stripe using Stripe Sheet for mobile-optimized checkout, ensuring secure transactions and proper subscription state handling inside the app.",
+      },
+      {
+        title: "Streaming Engine & Audio Performance",
+        description:
+          "Initially, the app used Expo-AV for streaming. However, it lacked advanced playback features like queue management, shuffle, loop, and background performance comparable to Spotify.",
+        solution:
+          "I migrated the audio engine to React Native Track Player. This enabled advanced queue control, background playback, shuffle, loop functionality, and significantly smoother streaming performance.",
+      },
+    ],
+
     results: [
-      "45% increase in online bookings",
-      "2x user engagement on gallery pages",
-      "Reduced administrative overhead by 60%",
+      "Production-ready streaming architecture",
+      "Secure OAuth authentication in live environment",
+      "Stable Stripe-powered subscription flow",
+      "Advanced queue, shuffle, and background playback system",
     ],
+
     features: [
-      "Smart Booking Calendar",
-      "Real-time Photo Previews",
-      "Secure Payment Integration",
+      "AI-Curated Playlists",
+      "Pay-Per-Listen Business Model",
+      "Music Sharing with Friends",
+      "Daily Listening Challenges",
+      "Offline Playback",
+      "Background Streaming",
+      "Queue, Shuffle & Loop Controls",
+      "Google Cast Integration",
     ],
-    liveLink: "https://petsnap.com",
-    role: "Lead Full Stack Developer & UI/UX Designer",
-    testimonial: {
-      name: "Sarah Jenkins",
-      role: "Founder",
-      company: "PetSnap Studio",
-      image:
-        "https://img.freepik.com/free-photo/young-businesswoman-smiling-camera_197531-11176.jpg",
-      text: "The new platform has completely transformed how we do business. The booking system is seamless, and our clients love the new gallery experience. It reflects our brand perfectly.",
-      rating: 5,
-      socialPlatform: "Twitter",
-      socialLink: "#",
+
+    role: {
+      role: "Product Engineer (Mobile Application)",
+      responsibilities: [
+        "Designed and developed entire mobile UI from scratch",
+        "Architected pay-per-listen business logic",
+        "Integrated Supabase authentication & database",
+        "Implemented Google OAuth production setup",
+        "Built Stripe subscription flow",
+        "Migrated audio engine to React Native Track Player",
+        "Managed global state with Redux Toolkit & RTK Query",
+        "Optimized performance and playback stability",
+      ],
     },
   },
   {
     id: "2",
-    slug: "fizle",
-    title: "Fizle",
+    slug: "your-business-date",
+    title: "Your Business Date",
     description:
-      "For digital institutions, our onboarding system helps the user successful start the journey.",
+      "Subscription-based professional dating & networking SaaS built with Next.js and real-time architecture.",
     descriptionLong:
-      "Fizle is a modern fintech onboarding solution that aims to reduce friction in the digital banking signup process. By focusing on user psychology and minimalist design, we created a flow that feels effortless and secure.",
-    image:
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FMarkitMock.91eccd8b.png&w=1080&q=75",
+      "Your Business Date is a business-focused dating and networking platform combining professional compatibility with romantic matching. Built using Next.js, the platform includes real-time messaging, integrated video calls, subscription monetization, intelligent filtering, and business advertising capabilities. The focus was performance, scalable state management, and seamless real-time user interaction.",
+    image: "/images/projects/ybd/ybd-hero.png",
     gallery: [
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FMarkitMock.91eccd8b.png&w=1080&q=75",
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FXionMock.673a96ac.png&w=1080&q=75",
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FVinhMockup.36fc6310.png&w=1080&q=75",
+      "/images/projects/ybd/ybd-hero.png",
+      "/images/projects/ybd/ybd-chat.png",
+      "/images/projects/ybd/ybd-blogs.png",
+      "/images/projects/ybd/ybd-home.png",
     ],
-    category: "UX/UI Design",
-    client: "Fizle Bank",
+    category: "Web SaaS Platform",
     date: "2024",
-    service: "Product Design",
-    techStack: ["Next.js", "Framer Motion", "Stripe", "Clerk"],
-    challenge:
-      "High drop-off rates during the KYC (Know Your Customer) process were hindering growth for Fizle's digital banking platform.",
-    solution:
-      "Implementation of a multi-step, animated onboarding flow with progressive disclosure and instant validation to keep users engaged and informed.",
+    service: "Frontend Engineering & System Logic Implementation",
+    techStack: [
+      "Next.js",
+      "Redux Toolkit",
+      "Firebase",
+      "Socket.io",
+      "Agora SDK",
+      "Stripe",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Webhooks",
+      "Email Services",
+    ],
+
+    overview:
+      "A subscription-based SaaS platform designed for career-oriented individuals seeking professional networking and meaningful relationships. The platform combines advanced filtering, real-time chat, video calling, subscription management, and business advertising into a high-performance web architecture.",
+
+    challenges: [
+      {
+        title: "Complex Multi-Step Registration & State Management",
+        description:
+          "The registration flow contained 9 multi-step forms with dynamic validation and API payload dependencies. State updates were inconsistent, causing payload mismatches and broken real-time updates.",
+        solution:
+          "After deep collaboration and understanding advanced Redux patterns, I restructured global and local state logic using Redux Toolkit. I separated UI state from API state, normalized form handling, and ensured consistent payload synchronization across steps.",
+      },
+      {
+        title: "Broken Frontend Filtering Logic",
+        description:
+          "The swipe-based discovery page had complex filtering logic by profession, industry, location, and interests. Filters were not returning correct results due to mismatched payload structures.",
+        solution:
+          "I collaborated closely with the backend engineer to understand the API contract and filtering logic. After aligning request structures and refining frontend filtering conditions, the discovery system began returning accurate, real-time results.",
+      },
+      {
+        title: "Real-Time Chat System Implementation",
+        description:
+          "This was my first implementation of a real-time chat system using Socket.io. Message syncing, read receipts, file sharing, and emoji support required careful state synchronization.",
+        solution:
+          "I implemented Socket.io listeners with structured event handling, managed message queues properly in Redux, and built support for image/document uploads and emoji rendering — creating a WhatsApp-like chat experience inside a SaaS platform.",
+      },
+      {
+        title: "Audio & Video Calling with Agora SDK",
+        description:
+          "The Agora SDK documentation lacked clarity for certain edge cases. Calls were failing to connect despite correct logic implementation.",
+        solution:
+          "I carefully studied the SDK documentation, restructured the connection lifecycle, and ensured proper token handling and channel synchronization. After debugging connection flow and event triggers, audio/video calls became stable and production-ready.",
+      },
+    ],
+
     results: [
-      "30% reduction in bounce rate",
-      "25% higher completion rate for KYC",
-      "Positive feedback on mobile UX",
+      "Stable real-time messaging & calling system",
+      "Optimized multi-step onboarding architecture",
+      "Accurate intelligent filtering system",
+      "Seamless Stripe subscription integration",
     ],
+
     features: [
-      "Dynamic Multi-Step Forms",
-      "Automated Document Validation",
-      "Biometric Integration Design",
+      "Swipe-Based Profile Discovery",
+      "Advanced Professional Filtering",
+      "Real-Time Messaging (Socket.io)",
+      "Integrated Video Calling (Agora)",
+      "Subscription-Based Monetization (Stripe)",
+      "Business Advertising Portal",
+      "Event & Networking Management",
+      "AI-Based Compatibility Matching",
+      "Analytics Dashboard",
     ],
-    liveLink: "https://fizle.io",
-    role: "Senior Product Designer",
-    testimonial: {
-      name: "Mark Thompson",
-      role: "CEO",
-      company: "Fizle Bank",
-      image:
-        "https://img.freepik.com/premium-photo/man-wearing-glasses-blue-shirt-with-white-shirt-that-says-he-is-wearing-blue-shirt_1289061-1605.jpg",
-      text: "Working with the team was a game-changer. Our onboarding drop-off rates plummeted, and the user feedback has been overwhelmingly positive. The design is clean, intuitive, and secure.",
-      rating: 5,
-      socialPlatform: "LinkedIn",
-      socialLink: "#",
+
+    role: {
+      role: "Frontend Engineer",
+      responsibilities: [
+        "Built complete UI architecture using Next.js & Tailwind",
+        "Implemented API integration & business logic",
+        "Structured multi-step registration flow",
+        "Integrated Stripe subscription system",
+        "Built real-time chat system using Socket.io",
+        "Implemented Agora-based audio & video calling",
+        "Handled animations using Framer Motion",
+        "Collaborated with backend team for API alignment",
+      ],
     },
   },
   {
     id: "3",
-    slug: "xion",
-    title: "Xion",
+    slug: "e-axon",
+    title: "E-Axon",
     description:
-      "Trusted by 1M+ creators around the world. Create scroll-stopping visuals with just one prompt.",
+      "Multi-page digital solutions platform built with scalable frontend architecture.",
     descriptionLong:
-      "Xion is an AI-powered creative platform that allows users to generate high-fidelity visuals using simple text prompts. Our work focused on the dashboard experience, making complex AI tools accessible to creators of all skill levels.",
-    image:
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FXionMock.673a96ac.png&w=1080&q=75",
+      "E-Axon is a digital transformation platform designed to showcase agency services including quality assurance, application modernization, mobile app development, and AI integration. Built using Next.js, the platform focuses on performance, modular architecture, and scalable content management through optimized state handling.",
+    image: "/images/projects/e-axon/hero.png",
     gallery: [
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FXionMock.673a96ac.png&w=1080&q=75",
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FVinhMockup.36fc6310.png&w=1080&q=75",
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FPetMock.423bd46e.png&w=1080&q=75",
+      "/images/projects/e-axon/hero.png",
+      "/images/projects/e-axon/help-faq.png",
+      "/images/projects/e-axon/services-stats.png",
+      "/images/projects/e-axon/footer-process.png",
+      "/images/projects/e-axon/service-details.png",
+      "/images/projects/e-axon/work-details.png",
+      "/images/projects/e-axon/about-story.png",
+      "/images/projects/e-axon/about-details.png",
     ],
-    category: "SaaS Platform",
-    client: "Xion Corp",
-    date: "2023",
-    service: "Dashboard Dev",
-    techStack: ["React", "D3.js", "Tailwind", "Python"],
-    challenge:
-      "The existing AI interface was too technical for non-designers, leading to underutilization of the tool's advanced features.",
-    solution:
-      "A complete redesign of the workspace, introducing a 'Natural Language First' approach and real-time visual feedback loops.",
+    category: "Web Platform",
+    date: "2024",
+    service: "Frontend Engineering",
+    techStack: [
+      "Next.js",
+      "React",
+      "Redux Toolkit",
+      "Tailwind CSS",
+      "GSAP",
+      "JavaScript",
+    ],
+
+    overview:
+      "E-Axon was built as a structured multi-page platform to present agency services in a scalable and performance-optimized way. The focus was on reusable architecture, dynamic routing, centralized service data handling, and modern animation systems to deliver a polished digital experience.",
+
+    challenges: [
+      {
+        title: "Scalable State Management for Multi-Service Architecture",
+        description:
+          "The platform included 9 service pages, each requiring structured data handling. Managing service data individually across pages risked duplication and performance overhead.",
+        solution:
+          "I implemented a centralized Redux store to manage all service data efficiently. By storing and accessing service content through the global store, I reduced redundancy, improved performance, and simplified page rendering logic.",
+      },
+      {
+        title: "Dynamic Routing with Complex UI Components",
+        description:
+          "Each service required its own detailed page with sliders, hero sections, tech stack components, and structured layouts. Building separate static pages would have increased code duplication.",
+        solution:
+          "I created a single dynamic service template using reusable components and Next.js dynamic routing. Service-specific data was injected from the Redux store, enabling scalable page generation with clean, maintainable architecture.",
+      },
+    ],
+
     results: [
-      "1M+ active monthly users",
-      "4.8/5 average user rating",
-      "Increased feature adoption by 70%",
+      "Optimized multi-page architecture",
+      "Reusable component-driven system",
+      "Improved development efficiency",
+      "High-performance responsive design",
     ],
+
     features: [
-      "Prompt-to-Image Canvas",
-      "Real-time Style Tuning",
-      "Batch Export Management",
+      "Dynamic Service Pages (9 Services)",
+      "Reusable Component Architecture",
+      "Centralized Redux Data Management",
+      "Smooth GSAP Animations",
+      "Fully Responsive Layout",
+      "SEO-Friendly Next.js Routing",
     ],
-    liveLink: "https://xion.ai",
-    role: "Frontend Engineer",
-    testimonial: {
-      name: "David Lee",
-      role: "Product Lead",
-      company: "Xion Corp",
-      image:
-        "https://img.freepik.com/free-photo/front-view-man-posing-outdoors_23-2151038658.jpg",
-      text: "The redesign of our creator dashboard was pivotal. It made high-end AI tools accessible to everyone, not just experts. Our user engagement metrics have never been higher.",
-      rating: 5,
-      socialPlatform: "Instagram",
-      socialLink: "#",
+
+    role: {
+      role: "Frontend Engineer",
+      responsibilities: [
+        "Designed and developed full multi-page platform",
+        "Implemented Redux Toolkit for structured service data management",
+        "Built dynamic service pages using reusable components",
+        "Integrated GSAP animations for modern UI transitions",
+        "Ensured responsiveness across all devices",
+        "Implemented email & call interaction logic in footer",
+        "Optimized component reusability and maintainability",
+      ],
     },
   },
   {
     id: "4",
-    slug: "vinh-lei",
-    title: "Vinh Lei",
+    slug: "xelvo-creative",
+    title: "Xelvo Creative",
     description:
-      "Trusted by founders. We help brands stand out in a crowded market with unique identity.",
+      "Performance-focused design agency platform with integrated admin system and lead management.",
     descriptionLong:
-      "Vinh Lei is a premium fashion brand that needed a digital experience as refined as their physical products. We focused on high-end animations and smooth transitions to create a luxury shopping environment.",
-    image:
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FVinhMockup.36fc6310.png&w=1080&q=75",
+      "Xelvo Creative is a premium single-page agency platform built for performance, scalability, and operational efficiency. Beyond converting a high-end Figma design into a pixel-perfect Next.js experience, the project evolved into a full-stack system including a custom-built admin dashboard for lead management, content control, and project updates.",
+    image: "/images/projects/xelvo/hero.png",
     gallery: [
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FVinhMockup.36fc6310.png&w=1080&q=75",
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FPetMock.423bd46e.png&w=1080&q=75",
-      "https://www.wzwebs.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FMarkitMock.91eccd8b.png&w=1080&q=75",
+      "/images/projects/xelvo/hero-new.png",
+      "/images/projects/xelvo/services.png",
+      "/images/projects/xelvo/projects-skills.png",
+      "/images/projects/xelvo/faqs-reviews.png",
+      "/images/projects/xelvo/footer.png",
+      "/images/projects/xelvo/admin.png",
+      "/images/projects/xelvo/admin-projects.png",
+      "/images/projects/xelvo/admin-reviews.png",
+      "/images/projects/xelvo/admin-talent.png",
+      "/images/projects/xelvo/admin-contact.png",
     ],
-    category: "Branding",
-    client: "Vinh Lei",
-    date: "2023",
-    service: "UI/UX & Branding",
-    techStack: ["Next.js", "Three.js", "GSAP", "Shopify"],
-    challenge:
-      "The client wanted to move away from a standard e-commerce template to a bespoke 'digital flagship' store that tells their story.",
-    solution:
-      "Development of a 3D-infused product showcase using Three.js and high-performance animations with GSAP, integrated with a custom Shopify backend.",
+    category: "Web Platform",
+    date: "2024",
+    service: "Full Stack Engineering",
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "Redux Toolkit",
+      "GSAP",
+      "ShadCN UI",
+      "bcrypt.js",
+      "Supabase Storage",
+    ],
+
+    overview:
+      "Originally scoped as a high-end landing page, this project evolved into a complete performance-driven agency platform. I transformed a modern Figma design into a pixel-perfect, animated Next.js application and proposed an integrated admin dashboard to replace manual lead handling workflows. The result was a scalable system combining marketing presence with operational efficiency.",
+
+    challenges: [
+      {
+        title: "Complex Premium UI Implementation",
+        description:
+          "The landing page design required precise animation timing, structured layouts, and high visual fidelity across devices.",
+        solution:
+          "I carefully translated the Figma design into a responsive Next.js implementation using GSAP for smooth animations, ensuring pixel-perfect accuracy and consistent performance across screen sizes.",
+      },
+      {
+        title: "Building an Admin System from Scratch",
+        description:
+          "The client initially requested only a landing page. However, the agency managed leads manually through external tools, creating inefficiencies.",
+        solution:
+          "I proposed and developed a full admin dashboard as an internal system. The dashboard allows CRUD operations for projects and testimonials, lead status management (qualified, rejected, converted, hired), resume handling, and real-time content updates — giving the agency full operational control.",
+      },
+      {
+        title: "Supabase Configuration & Security Policies",
+        description:
+          "Setting up Supabase required database structuring, storage bucket configuration, row-level security policies, and authentication handling.",
+        solution:
+          "I configured secure database schemas, implemented Supabase authentication, hashed credentials using bcrypt.js, and established protected admin routes. Storage buckets were configured for project assets and resume uploads with proper access control.",
+      },
+    ],
+
     results: [
-      "Average session duration increased by 4 min",
-      "15% increase in premium line sales",
-      "Award-winning digital experience",
+      "High-performance marketing landing page",
+      "Custom-built internal admin dashboard",
+      "Structured lead qualification workflow",
+      "Secure authentication & data handling",
+      "Reduced manual agency operations",
     ],
+
     features: [
-      "3D Product Interactive Lab",
-      "Immersive Storytelling Scroll",
-      "Custom Checkout Flow",
+      "Pixel-Perfect Figma to Code Implementation",
+      "GSAP-Based Smooth Animations",
+      "Admin Dashboard with CRUD Control",
+      "Lead Status Management System",
+      "Secure Supabase Authentication",
+      "Resume & Asset Storage Handling",
+      "Fully Responsive Premium UI",
     ],
-    liveLink: "https://vinhlei.com",
-    role: "Creative Director",
-    testimonial: {
-      name: "Lena Vinh",
-      role: "Creative Director",
-      company: "Vinh Lei",
-      image:
-        "https://img.freepik.com/free-photo/close-up-beautiful-girl-portrait-with-purple-hair_23-2150799937.jpg",
-      text: "A truly exceptional partner. They translated our luxury brand values into a digital experience that is both stunning and highly functional. Our digital flagship is now our strongest asset.",
-      rating: 5,
-      socialPlatform: "Twitter",
-      socialLink: "#",
+
+    role: {
+      role: "Full Stack Engineer",
+      responsibilities: [
+        "Converted complex Figma design into production-ready Next.js app",
+        "Architected and built custom admin dashboard",
+        "Implemented Supabase backend & storage system",
+        "Built authentication & protected admin routes",
+        "Developed CRUD operations for projects & testimonials",
+        "Created structured lead management workflow",
+        "Integrated GSAP animations for premium UX",
+      ],
     },
   },
 ];

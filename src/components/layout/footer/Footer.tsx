@@ -13,6 +13,10 @@ export default function Footer() {
   const pathname = usePathname();
   const showCTA = pathname !== "/contact";
 
+  if (pathname.startsWith("/projects/") && pathname !== "/projects") {
+    return null;
+  }
+
   const linksStack: {
     title: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

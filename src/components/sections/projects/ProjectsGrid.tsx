@@ -4,6 +4,7 @@ import React from "react";
 import CaseStudyCard from "@/components/sections/home/case-studies/CaseStudyCard";
 import { Project } from "@/data/projectData";
 import { motion, AnimatePresence } from "framer-motion";
+import Section from "@/components/shared/Section";
 
 interface ProjectsGridProps {
   projects: Project[];
@@ -11,7 +12,7 @@ interface ProjectsGridProps {
 
 const ProjectsGrid = ({ projects }: ProjectsGridProps) => {
   return (
-    <div className="w-full max-w-[1240px] px-4 md:px-6 lg:px-0">
+    <Section className="px-4 md:px-6 lg:px-0">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-12 lg:gap-8 xl:gap-12">
         <AnimatePresence mode="popLayout">
           {projects.map((project, index) => (
@@ -29,7 +30,7 @@ const ProjectsGrid = ({ projects }: ProjectsGridProps) => {
           ))}
         </AnimatePresence>
       </div>
-    </div>
+    </Section>
   );
 };
 

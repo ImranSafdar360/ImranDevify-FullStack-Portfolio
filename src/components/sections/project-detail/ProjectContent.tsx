@@ -13,171 +13,144 @@ interface ProjectContentProps {
 
 const ProjectContent = ({ project }: ProjectContentProps) => {
   return (
-    <Section className="py-10 md:py-16 lg:py-20 xl:py-20">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 relative">
-        {/* Left Column: Project Details */}
-        <div className="lg:col-span-8 flex flex-col gap-16">
-          {/* My Role */}
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-[1px] bg-blue-500" />
-              <span className="text-blue-500 font-medium uppercase tracking-[0.2em] text-sm">
-                The Impact
-              </span>
-            </div>
-            <div className="flex flex-col gap-3">
-              <h2 className="text-2xl md:text-3xl font-bold text-white font-sora">
-                My Role
-              </h2>
-              <p className="text-xl text-white/60 leading-relaxed font-light italic">
-                {project.role || "Lead Designer & Developer"}
-              </p>
-            </div>
+    <Section className="py-10 md:py-16 lg:py-20">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+        {/* LEFT COLUMN */}
+        <div className="lg:col-span-8 flex flex-col gap-20">
+          {/* Overview */}
+          <div className="flex flex-col gap-4">
+            <span className="text-blue-500 uppercase tracking-[0.2em] text-sm font-medium">
+              Overview
+            </span>
+            <h2 className="text-3xl font-bold text-white font-sora">
+              Project Overview
+            </h2>
+            <p className="text-white/60 leading-relaxed">{project.overview}</p>
           </div>
 
-          {/* Challenge */}
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-[1px] bg-white/20" />
-              <span className="text-white/40 font-medium uppercase tracking-[0.2em] text-sm">
-                01. The Challenge
-              </span>
-            </div>
-            <div className="flex flex-col gap-3">
-              <h2 className="text-2xl md:text-3xl font-bold text-white font-sora">
-                The Problem
-              </h2>
-              <p className="text-lg text-white/50 leading-relaxed">
-                {project.challenge ||
-                  "Identifying and addressing complex user pain points while ensuring technical feasibility and brand alignment."}
-              </p>
-            </div>
+          {/* Role */}
+          <div className="flex flex-col gap-4">
+            <span className="text-white/70 uppercase tracking-[0.2em] text-sm font-medium">
+              My Role
+            </span>
+            <h2 className="text-3xl font-bold text-white font-sora">
+              {project.role?.role}
+            </h2>
+
+            <ul className="space-y-3 mt-6">
+              {project.role?.responsibilities?.map((item, index) => (
+                <li key={index} className="flex gap-3 text-white/60 text-sm">
+                  <span className="w-2 h-2 bg-blue-500 rounded-full mt-2" />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Solution */}
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-[1px] bg-white/20" />
-              <span className="text-white/40 font-medium uppercase tracking-[0.2em] text-sm">
-                02. Our Solution
-              </span>
-            </div>
-            <div className="flex flex-col gap-3">
-              <h2 className="text-2xl md:text-3xl font-bold text-white font-sora">
-                Crafting Success
-              </h2>
-              <p className="text-lg text-white/50 leading-relaxed">
-                {project.solution ||
-                  "Implementing a robust, scalable architecture combined with intuitive UI/UX patterns to elevate the user journey."}
-              </p>
-              {/* Visual Accent */}
-              <div className="w-full h-[1px] bg-gradient-to-r from-white/10 to-transparent mt-4" />
-            </div>
+          {/* Challenges */}
+          <div className="flex flex-col gap-8">
+            <span className="text-white/70 uppercase tracking-[0.2em] text-sm font-medium">
+              Challenges & Solutions
+            </span>
+
+            {project.challenges?.map((item, index) => (
+              <div key={index} className="flex flex-col gap-4">
+                <h3 className="text-2xl font-bold text-white font-sora">
+                  {index + 1}. {item.title}
+                </h3>
+
+                <p className="text-white/50 leading-relaxed">
+                  {item.description}
+                </p>
+
+                <DynamicCard className="min-w-full min-h-fit">
+                  <p className="text-blue-400 font-semibold mb-2">Solution</p>
+                  <p className="text-white/60 leading-relaxed">
+                    {item.solution}
+                  </p>
+                </DynamicCard>
+              </div>
+            ))}
           </div>
 
           {/* Results */}
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-[1px] bg-white/20" />
-              <span className="text-white/40 font-medium uppercase tracking-[0.2em] text-sm">
-                03. The Outcomes
-              </span>
+          <div className="flex flex-col gap-6">
+            <span className="text-white/70 uppercase tracking-[0.2em] text-sm font-medium">
+              Results
+            </span>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {project.results?.map((result, index) => (
+                <DynamicCard key={index} className="p-6 min-h-fit min-w-full">
+                  <p className="text-white font-semibold">{result}</p>
+                </DynamicCard>
+              ))}
             </div>
-            <div className="flex flex-col gap-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-white font-sora">
-                Proven Results
-              </h2>
-              <div className="w-full max-w-full grid grid-cols-1 md:grid-cols-2 gap-8">
-                {project.results?.map((result, index) => (
-                  <DynamicCard
-                    key={index}
-                    className="flex flex-col gap-4 w-full max-w-full min-h-fit"
-                  >
-                    <h4 className="text-3xl font-bold text-white font-sora">
-                      {result.split(" ")[0]}
-                    </h4>
-                    <p className="text-white/40 leading-relaxed uppercase tracking-widest text-xs font-semibold">
-                      {result.split(" ").slice(1).join(" ")}
-                    </p>
-                  </DynamicCard>
-                ))}
-              </div>
+          </div>
+
+          {/* Features */}
+          <div className="flex flex-col gap-6">
+            <span className="text-white/70 uppercase tracking-[0.2em] text-sm font-medium">
+              Key Features
+            </span>
+
+            <div className="flex flex-wrap gap-3">
+              {project.features?.map((feature) => (
+                <SectionBadge
+                  key={feature}
+                  text={feature}
+                  className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-white/60 uppercase tracking-widest"
+                />
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Right Column: Sticky Client Details */}
-        <div className="lg:col-span-4 relative">
-          <div className="sticky top-32 flex flex-col gap-4 z-10">
-            <DynamicCard className="w-full max-w-full flex flex-col gap-12">
-              <div className="flex flex-col gap-2">
-                <h3 className="text-3xl font-bold text-white font-sora">
+        {/* RIGHT COLUMN */}
+        <div className="lg:col-span-4 w-fit">
+          <div className="sticky top-32 flex flex-col gap-6">
+            <DynamicCard className="p-8 flex flex-col gap-8">
+              <div>
+                <h3 className="text-2xl font-bold text-white font-sora">
                   Project Recap
                 </h3>
-                <p className="text-white/40 font-medium">
-                  Delivering excellence since {project.date}
-                </p>
+                <p className="text-white/70 mt-2">Built in {project.date}</p>
               </div>
 
-              <div className="flex flex-col gap-8">
-                <div className="flex flex-col gap-2">
-                  <span className="text-xs uppercase tracking-widest text-white/30 font-bold">
-                    Client
-                  </span>
-                  <p className="text-lg font-medium text-white">
-                    {project.client}
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <span className="text-xs uppercase tracking-widest text-white/30 font-bold">
+              <div className="flex flex-col gap-6 text-sm">
+                <div>
+                  <p className="text-white/30 uppercase tracking-widest text-xs">
                     Industry
-                  </span>
-                  <p className="text-lg font-medium text-white">
-                    {project.category}
                   </p>
+                  <p className="text-white">{project.category}</p>
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <span className="text-xs uppercase tracking-widest text-white/30 font-bold">
+                <div>
+                  <p className="text-white/30 uppercase tracking-widest text-xs">
                     Service
-                  </span>
-                  <p className="text-lg font-medium text-white">
-                    {project.service}
                   </p>
+                  <p className="text-white">{project.service}</p>
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <span className="text-xs uppercase tracking-widest text-white/30 font-bold">
+                <div>
+                  <p className="text-white/30 uppercase tracking-widest text-xs">
                     Tech Stack
-                  </span>
-                  <div className="flex flex-wrap gap-2 pt-2">
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-3">
                     {project.techStack?.map((tech) => (
                       <SectionBadge
-                        text={tech}
                         key={tech}
-                        className="px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-[10px] font-bold text-white/60 uppercase tracking-widest"
+                        text={tech}
+                        className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-bold text-white/60 uppercase tracking-widest"
                       />
                     ))}
                   </div>
                 </div>
               </div>
-
-              {project.liveLink && (
-                <a
-                  href={project.liveLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative flex items-center justify-center py-5 px-8 rounded-2xl bg-white text-black font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-blue-500 hover:text-white"
-                >
-                  Launch Project
-                </a>
-              )}
             </DynamicCard>
 
-            {/* Subtle Decorative Element */}
             <AnimatedButton onClick={() => {}} className="w-full">
-              Build your product
+              Let’s Build Your Product
             </AnimatedButton>
           </div>
         </div>

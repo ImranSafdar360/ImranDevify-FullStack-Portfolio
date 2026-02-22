@@ -30,6 +30,10 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
+  const isProjectDetailsPage =
+    pathname.startsWith("/projects/") && pathname !== "/projects";
+  if (isProjectDetailsPage) return null;
+
   const leftLinks = [
     { name: "Why me?", href: "#why-me" },
     { name: "Reviews", href: "#testimonials" },

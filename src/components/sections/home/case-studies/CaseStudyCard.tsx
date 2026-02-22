@@ -5,25 +5,13 @@ import Magnet from "@/components/shared/Magnet";
 import SectionBadge from "@/components/shared/SectionBadge";
 import Link from "next/link";
 
-interface CaseStudy {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  image: string;
-  category?: string;
-  client?: string;
-  date?: string;
-  service?: string;
-  techStack?: string[];
-  isCTA?: boolean;
-}
+import { Project } from "@/data/projectData";
 
 export default function CaseStudyCard({
   study,
   index,
 }: {
-  study: CaseStudy;
+  study: Project;
   index: number;
 }) {
   return (
@@ -47,7 +35,7 @@ export default function CaseStudyCard({
           />
           {/* Modern Overlay */}
           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-            <Magnet padding={20} disabled={false} magnetStrength={10}>
+            <Magnet padding={300} disabled={false} magnetStrength={5}>
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -67,7 +55,10 @@ export default function CaseStudyCard({
                 {study.title}
               </h3>
               {study.category && (
-                <SectionBadge className="rounded-lg" text={study.category} />
+                <SectionBadge
+                  className="rounded-full text-[14px]"
+                  text={study.category}
+                />
               )}
             </div>
             <p className="text-[18px] leading-[24px] font-medium text-white/70">
