@@ -7,7 +7,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AnimatedButton from "@/components/shared/AnimatedButton";
 import Image from "next/image";
-import ProfilePic from "../../../../public/images/profile-pic.png";
+import ProfilePic from "../../../../public/images/profile-pic.jpg";
 import Link from "next/link";
 import GradientText from "@/components/ui/gradient-text";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";

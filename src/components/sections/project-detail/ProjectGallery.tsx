@@ -100,7 +100,7 @@ const ProjectGallery = ({ images }: ProjectGalleryProps) => {
               fill
               className="object-cover object-top transition-all duration-[800ms] group-hover:scale-[1.03] opacity-80 group-hover:opacity-100"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1200px"
-              quality={90}
+              loading="lazy"
             />
             {/* Overlay Gradient on Hover */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 md:p-10">

@@ -5,15 +5,15 @@ interface ProjectImage {
 
 export const projectImages: ProjectImage[] = [
   {
-    src: "/images/featured/hero-eaxon.png",
+    src: "/images/featured/hero-eaxon.webp",
     alt: "E-axon Hero",
   },
   {
-    src: "/images/featured/hero.png",
+    src: "/images/featured/hero.webp",
     alt: "Xelvo hero",
   },
   {
-    src: "/images/featured/home.png",
+    src: "/images/featured/home.webp",
     alt: "Blarecast home",
   },
   {
@@ -21,7 +21,7 @@ export const projectImages: ProjectImage[] = [
     alt: "Tarrar Agriculture",
   },
   {
-    src: "/images/featured/discover.png",
+    src: "/images/featured/discover.webp",
     alt: "Blarecast discover",
   },
   {
@@ -29,7 +29,7 @@ export const projectImages: ProjectImage[] = [
     alt: "Ochin",
   },
   {
-    src: "/images/featured/services.png",
+    src: "/images/featured/services.webp",
     alt: "Xelvo services",
   },
   {
@@ -37,7 +37,7 @@ export const projectImages: ProjectImage[] = [
     alt: "Significo",
   },
   {
-    src: "/images/featured/help-faq.png",
+    src: "/images/featured/help-faq.webp",
     alt: "E-axon help-faq",
   },
   {
@@ -45,7 +45,7 @@ export const projectImages: ProjectImage[] = [
     alt: "Miranda",
   },
   {
-    src: "/images/featured/library.png",
+    src: "/images/featured/library.webp",
     alt: "Blarecast library",
   },
   {
@@ -53,7 +53,7 @@ export const projectImages: ProjectImage[] = [
     alt: "Cynthia",
   },
   {
-    src: "/images/featured/projects-skills.png",
+    src: "/images/featured/projects-skills.webp",
     alt: "Projects Skills Xelvo",
   },
 ];
