@@ -2,9 +2,9 @@ import ContactContent from "@/components/sections/contact/ContactContent";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Hire a SaaS & React Native Developer",
   description:
-    "Ready to build something world-class? Get in touch with Imran Safdar to discuss your next SaaS product, agency project, or cross-platform mobile app.",
+    "Looking to build a SaaS platform, startup MVP, or cross-platform mobile app? Contact Imran Safdar to discuss your project and turn your product idea into a scalable digital solution.",
   alternates: {
     canonical: "/contact",
   },

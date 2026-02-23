@@ -2,9 +2,9 @@ import AboutSection from "@/components/sections/about-page/AboutSection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Imran Safdar – SaaS Developer",
   description:
-    "Learn more about Imran Safdar's journey as a Digital Engineer. Discover my background, expertise in elite technologies, and my commitment to delivering high-quality digital solutions.",
+    "Learn about Imran Safdar, a Full-Stack SaaS Developer and React Native Engineer with experience building scalable web applications, startup MVPs, and mobile platforms for founders and agencies.",
   alternates: {
     canonical: "/about",
   },

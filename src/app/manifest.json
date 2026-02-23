@@ -1,6 +1,6 @@
 {
-  "name": "ImranForge",
-  "short_name": "Forge",
+  "name": "Imran Safdar – SaaS Developer",
+  "short_name": "Imran",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +15,8 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "theme_color": "#0080FF",
+  "background_color": "#0B0F19",
+  "display": "standalone",
+  "start_url": "/"
 }

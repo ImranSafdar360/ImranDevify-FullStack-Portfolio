@@ -4,7 +4,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Terms & Conditions",
   description:
-    "Read the Terms & Conditions for using Imran Safdar's portfolio website. Understand the rules governing content, intellectual property, and use of this site.",
+    "Review the Terms & Conditions governing the use of Imran Safdar's portfolio website, including intellectual property and acceptable usage policies.",
   alternates: {
     canonical: "/terms",
   },

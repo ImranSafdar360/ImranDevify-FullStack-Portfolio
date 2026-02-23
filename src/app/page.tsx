@@ -2,9 +2,9 @@ import HomeContent from "@/components/sections/home/HomeContent";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Imran Safdar | Full-Stack & React Native Engineer",
+  title: "Full-Stack SaaS Developer & React Native Engineer",
   description:
-    "Explore the portfolio of Imran Safdar, a Digital Engineer specializing in high-performance SaaS products, mobile apps, and scalable web solutions.",
+    "Imran Safdar is a Full-Stack SaaS Developer and React Native Engineer helping startups, SaaS founders, and agencies build scalable web applications, high-performance mobile apps, and modern digital platforms.",
   alternates: {
     canonical: "/",
   },

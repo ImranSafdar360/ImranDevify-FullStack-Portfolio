@@ -4,7 +4,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Learn how Imran Safdar's portfolio website handles your personal information, what data is collected, and how it is protected.",
+    "Read the Privacy Policy of Imran Safdar's portfolio website to understand how user data is handled, stored, and protected.",
   alternates: {
     canonical: "/privacy",
   },

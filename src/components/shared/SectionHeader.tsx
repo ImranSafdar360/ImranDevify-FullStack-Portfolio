@@ -62,7 +62,7 @@ const SectionHeader = ({
           text={badgeText}
         />
       </div>
-      <h1
+      <h2
         className={cn(
           "text-[36px] md:text-[40px] lg:text-[44px] xl:text-[52px] leading-[40px] md:leading-[48px] lg:leading-[52px] xl:leading-[60px] font-bold text-white font-sora section-header-anim",
           isAbout ? "text-start" : "text-center",
@@ -74,7 +74,7 @@ const SectionHeader = ({
             {gradientText}
           </GradientText>
         )}
-      </h1>
+      </h2>
       <p
         className={cn(
           "max-w-full md:max-w-[95%] text-[15px] md:text-[16px] lg:text-[17px] xl:text-[18px] leading-[24px] md:leading-[26px] lg:leading-[26px] xl:leading-[28px] font-medium text-white/70 section-header-anim",

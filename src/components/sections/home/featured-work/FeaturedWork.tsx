@@ -78,7 +78,6 @@ export default function FeaturedWork() {
                     fill
                     className="object-cover rounded-[24px]"
                     priority={index < 4}
-                    loading="lazy"
                   />
                 </div>
               </div>

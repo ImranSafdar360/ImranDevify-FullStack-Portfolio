@@ -144,9 +144,9 @@ export default function Footer() {
         </div>
         <div className="relative flex md:flex-row flex-col justify-between items-center md:py-10 py-6">
           <div className="absolute left-0 right-0 top-[-155px] md:top-[-100px] lg:top-[-170px] z-10 opacity-5 overflow-visible xl:overflow-hidden">
-            <h1 className="text-white text-[64px] md:text-[84px] lg:text-[192px] font-sora text-center lg:leading-[192px] leading-[52px] font-extrabold translate-y-[50px] xl:translate-y-[0px]">
+            <h3 className="text-white text-[64px] md:text-[84px] lg:text-[192px] font-sora text-center lg:leading-[192px] leading-[52px] font-extrabold translate-y-[50px] xl:translate-y-[0px]">
               Imran Safdar
-            </h1>
+            </h3>
           </div>
           <SectionSeparator
             orientation="horizontal"
