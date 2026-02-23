@@ -33,6 +33,24 @@ export function TestimonialsSection() {
       company: "Designer & Creator",
       text: "Imran transformed my ideas into a polished, well-functioning website with zero complications. His support didn’t stop after launch — he’s responsive, patient, and truly works like a reliable teammate.",
     },
+    {
+      name: "Founder",
+      image: "/images/reviews/xelvocreatives_logo.webp",
+      company: "Xelvo Creatives",
+      text: "Imran transformed our landing page into a high-performance digital experience and went beyond expectations by building a complete admin dashboard for managing projects, leads, and testimonials. His product thinking and technical execution added real operational value to our agency.",
+    },
+    {
+      name: "Usama Khawar",
+      image: "/images/reviews/usama-profile.webp",
+      company: "Freelance Collaborator",
+      text: "I’ve partnered with Imran on multiple client projects, and he consistently delivers structured, scalable, and production-ready solutions. His ability to translate requirements into clean architecture makes collaboration seamless. He’s someone I confidently rely on for critical development work.",
+    },
+    {
+      name: "Ali Raza",
+      image: "/images/reviews/ali-raza-hr.webp",
+      company: "Mentor & Human Resource Manager",
+      text: "I’ve mentored Imran and closely observed his growth as a Full-Stack and React Native Engineer. His product mindset, architectural thinking, and focus on scalable solutions truly stand out. He’s building with intention and long-term vision.",
+    },
   ];
 
   return (
