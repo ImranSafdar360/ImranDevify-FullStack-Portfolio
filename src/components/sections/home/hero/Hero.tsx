@@ -32,7 +32,7 @@ export default function Hero() {
 
   useGSAP(() => {
     // Start animation exactly after the preloader closes (1.5s delay + 0.6s fade out = 2.1s)
-    const tl = gsap.timeline({ delay: 1.5 });
+    const tl = gsap.timeline({ delay: 0 });
 
     tl.from(badgeRef.current, {
       opacity: 0,

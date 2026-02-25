@@ -81,8 +81,8 @@ export default function Navbar() {
           style={{
             background:
               "linear-gradient(to bottom, rgba(10, 10, 10, 0.85) 0%, rgba(15, 15, 15, 0.75) 50%, rgba(20, 20, 20, 0.65) 100%)",
-            backdropFilter: "blur(20px) saturate(180%)",
-            WebkitBackdropFilter: "blur(20px) saturate(180%)",
+            backdropFilter: "blur(10px) saturate(180%)",
+            WebkitBackdropFilter: "blur(10px) saturate(180%)",
             boxShadow:
               "0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.1)",
             border: "1px solid rgba(255, 255, 255, 0.1)",
@@ -90,7 +90,7 @@ export default function Navbar() {
           }}
         >
           {/* Content container */}
-          <div className="relative flex items-center justify-between px-4 md:px-20 py-4 md:py-5">
+          <div className="relative flex items-center justify-between px-4 md:px-20">
             {/* Desktop Left section */}
             <div className="hidden lg:flex items-center gap-8 flex-1 justify-start">
               {leftLinks.map((link) => (
@@ -107,15 +107,16 @@ export default function Navbar() {
             </div>
 
             {/* Center section - Brand Logo */}
-            <Link href="/" className="z-50">
-              <Image
-                src="/images/Imran-Forge.png"
-                alt="Logo"
-                width={100}
-                height={100}
-                className="w-[80px] md:w-[100px] h-auto"
-              />
-            </Link>
+            <div className="relative w-[110px] h-[70px]">
+              <Link href="/" className="w-full h-full z-50">
+                <Image
+                  src="/images/Imran-Devify.png"
+                  alt="Logo"
+                  fill
+                  className="object-contain"
+                />
+              </Link>
+            </div>
 
             {/* Desktop Right section */}
             <div className="hidden lg:flex items-center gap-8 flex-1 justify-end">

@@ -81,13 +81,18 @@ export default function Footer() {
         <div className="flex flex-col justify-center md:flex-row md:justify-between mb-16 xl:mb-24 gap-10 lg:gap-0 z-20">
           {/* Column 1: Brand & Description */}
           <div className="flex flex-col items-center md:items-start gap-8 md:gap-[85px]">
-            <div className="max-w-[415px] flex flex-col items-center md:items-start gap-6 lg:gap-[36px]">
-              <Image
-                src="/images/Imran-Forge.png"
-                alt="Logo"
-                width={150}
-                height={150}
-              />
+            <div className="max-w-[415px] flex flex-col items-center md:items-start gap-6">
+              {/* Center section - Brand Logo */}
+              <div className="relative w-[150px] h-[50px]">
+                <Link href="/" className="w-full h-full z-50">
+                  <Image
+                    src="/images/Imran-Devify.png"
+                    alt="Logo"
+                    fill
+                    className="object-contain"
+                  />
+                </Link>
+              </div>
               <p className="text-[16px] font-medium leading-[24px] text-white text-center md:text-start">
                 Imran Safdar — Full-Stack Product Engineer building scalable
                 SaaS platforms and high-performance mobile applications. Focused
@@ -145,7 +150,7 @@ export default function Footer() {
         <div className="relative flex md:flex-row flex-col justify-between items-center md:py-10 py-6">
           <div className="absolute left-0 right-0 top-[-155px] md:top-[-100px] lg:top-[-170px] z-10 opacity-5 overflow-visible xl:overflow-hidden">
             <h3 className="text-white text-[64px] md:text-[84px] lg:text-[192px] font-sora text-center lg:leading-[192px] leading-[52px] font-extrabold translate-y-[50px] xl:translate-y-[0px]">
-              Imran Safdar
+              Imran Devify
             </h3>
           </div>
           <SectionSeparator
@@ -155,7 +160,7 @@ export default function Footer() {
             className="absolute top-0 left-0 w-full h-full"
           />
           <h3 className="text-white text-[14px] font-semibold font-sora">
-            Copyright © {currentYear} Imran Safdar. All rights reserved.
+            Copyright © {currentYear} Imran Devify. All rights reserved.
           </h3>
           <div className="flex justify-center items-center gap-[16px]">
             <Link

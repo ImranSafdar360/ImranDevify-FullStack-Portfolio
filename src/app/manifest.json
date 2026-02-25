@@ -1,6 +1,6 @@
 {
-  "name": "Imran Safdar – SaaS Developer",
-  "short_name": "Imran",
+  "name": "MyWebSite",
+  "short_name": "MySite",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,8 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#0080FF",
-  "background_color": "#0B0F19",
-  "display": "standalone",
-  "start_url": "/"
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
 }
