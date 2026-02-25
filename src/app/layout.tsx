@@ -25,10 +25,10 @@ const fontSora = Sora({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://imran-devify.com"),
+  metadataBase: new URL("https://imrandevify.online"),
   title: {
-    template: "%s | Imran Safdar – SaaS & React Native Engineer",
-    default: "Imran Safdar – Full-Stack SaaS Developer & React Native Engineer",
+    template: "%s | Imran Devify – SaaS & React Native Engineer",
+    default: "Imran Devify – Full-Stack SaaS Developer & React Native Engineer",
   },
   description:
     "Full-Stack SaaS Developer and React Native Engineer helping startups, SaaS founders, and digital agencies build scalable web applications, mobile apps, and high-performance digital products using Next.js, MERN Stack, and modern architecture.",
@@ -41,32 +41,32 @@ export const metadata: Metadata = {
     "Startup App Developer",
     "SaaS Application Development",
     "Mobile App Developer",
-    "Imran Safdar",
+    "Imran Devify",
   ],
-  authors: [{ name: "Imran Safdar" }],
+  authors: [{ name: "Imran Devify" }],
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://imran-devify.com",
-    siteName: "Imran Safdar Portfolio",
-    title: "Imran Safdar – Full-Stack SaaS Developer & React Native Engineer",
+    url: "https://imrandevify.online",
+    siteName: "Imran Devify Portfolio",
+    title: "Imran Devify – Full-Stack SaaS Developer & React Native Engineer",
     description:
       "Helping SaaS founders and agencies build scalable web platforms, mobile apps, and high-performance digital products.",
     images: [
       {
-        url: "/images/og-image.png",
+        url: "/images/og-image.webp",
         width: 1200,
         height: 630,
-        alt: "Imran Safdar – SaaS & React Native Developer Portfolio",
+        alt: "Imran Devify – SaaS & React Native Developer Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Imran Safdar – Full-Stack SaaS Developer & React Native Engineer",
+    title: "Imran Devify – Full-Stack SaaS Developer & React Native Engineer",
     description:
       "Building scalable SaaS platforms, modern web apps, and cross-platform mobile applications.",
-    images: ["/images/og-image.png"],
+    images: ["/images/og-image.webp"],
     creator: "@imransafdar",
   },
   icons: {
@@ -103,8 +103,8 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              name: "Imran Safdar",
-              url: "https://imran-devify.com",
+              name: "Imran Devify",
+              url: "https://imrandevify.online",
               jobTitle: "Full-Stack SaaS Developer & React Native Engineer",
               description:
                 "Full-Stack Developer specializing in SaaS platforms, scalable web applications, and cross-platform mobile app development using Next.js, MERN Stack, and React Native.",

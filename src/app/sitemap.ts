@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { projects } from "@/data/projectData";
 
-const baseUrl = "https://imran-devify.com";
+const baseUrl = "https://imrandevify.online";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
