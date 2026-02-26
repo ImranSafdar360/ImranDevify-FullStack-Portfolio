@@ -103,6 +103,7 @@ export function TestimonialsSection() {
           autoplay={{
             delay: 4000,
             disableOnInteraction: false,
+            pauseOnMouseEnter: true,
           }}
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
