@@ -1,17 +1,37 @@
 import "locomotive-scroll/dist/locomotive-scroll.css";
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans, Sora } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Instrument_Serif,
+  Plus_Jakarta_Sans,
+  Sora,
+} from "next/font/google";
 import Providers from "@/components/layout/providers/Providers";
 import "./globals.css";
-import Footer from "@/components/layout/footer/Footer";
-import Navbar from "@/components/layout/header/Navbar";
+import Footer from "@/components/layout/Footer";
+import Nav from "@/components/layout/Nav";
 import SmoothScroll from "@/components/layout/SmoothScroll";
 
-const fontSans = Inter({
+const fontSans = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
+const fontMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
+
+const fontSerif = Instrument_Serif({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  weight: "400",
+  style: ["normal", "italic"],
+});
+
+/* LEGACY fonts — still referenced by existing components; remove once
+   those components are replaced in the redesign. */
 const fontJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
@@ -82,7 +102,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html
+      lang="en"
+      className={`dark ${fontSans.variable} ${fontMono.variable} ${fontSerif.variable} ${fontJakarta.variable} ${fontSora.variable}`}
+    >
       <head>
         <link
           href="https://assets.calendly.com/assets/external/widget.css"
@@ -94,9 +117,7 @@ export default function RootLayout({
           async
         ></script>
       </head>
-      <body
-        className={`${fontSans.variable} ${fontJakarta.variable} ${fontSora.variable} antialiased dark`}
-      >
+      <body className="bg-bg text-text font-sans antialiased min-h-screen">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -124,10 +145,10 @@ export default function RootLayout({
           }}
         />
         <Providers>
-          <header>
-            <Navbar />
-          </header>
-          <SmoothScroll>{children}</SmoothScroll>
+          <Nav />
+          <SmoothScroll>
+            <main className="min-h-screen">{children}</main>
+          </SmoothScroll>
           <Footer />
         </Providers>
       </body>
