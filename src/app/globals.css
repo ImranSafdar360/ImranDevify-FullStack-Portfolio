@@ -52,6 +52,7 @@
   /* Animations */
   --animate-pulse-soft: pulse-soft 2.5s ease-in-out infinite;
   --animate-fade-up: fade-up 0.6s ease-out forwards;
+  --animate-fade-up-card: fade-up-card 0.7s ease-out forwards;
 
   @keyframes pulse-soft {
     0%,
@@ -67,6 +68,17 @@
     from {
       opacity: 0;
       transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-up-card {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
     }
     to {
       opacity: 1;
