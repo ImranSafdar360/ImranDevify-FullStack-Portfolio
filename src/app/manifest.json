@@ -1,6 +1,7 @@
 {
-  "name": "Imran Devify",
-  "short_name": "Devify",
+  "name": "Imran Safdar — AI-Product Engineer",
+  "short_name": "Imran Safdar",
+  "description": "I build AI-powered SaaS products end-to-end for founders — architecture, interface, and the intelligence inside. React Native and Next.js. Based in Lahore, working globally.",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

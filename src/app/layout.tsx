@@ -47,45 +47,47 @@ const fontSora = Sora({
 export const metadata: Metadata = {
   metadataBase: new URL("https://imrandevify.online"),
   title: {
-    template: "%s | Imran Devify – SaaS & React Native Engineer",
-    default: "Imran Devify – Full-Stack SaaS Developer & React Native Engineer",
+    default: "Imran Safdar — AI-Product Engineer | AI-Powered SaaS & Mobile",
+    template: "%s | Imran Safdar — AI-Product Engineer",
   },
   description:
-    "Full-Stack SaaS Developer and React Native Engineer helping startups, SaaS founders, and digital agencies build scalable web applications, mobile apps, and high-performance digital products using Next.js, MERN Stack, and modern architecture.",
+    "I build AI-powered SaaS products end-to-end for founders — architecture, interface, and the intelligence inside. React Native and Next.js. Based in Lahore, working globally.",
   keywords: [
-    "SaaS Developer",
-    "Full-Stack Developer",
-    "React Native Developer",
-    "Next.js Developer",
-    "MERN Stack Developer",
-    "Startup App Developer",
-    "SaaS Application Development",
-    "Mobile App Developer",
-    "Imran Devify",
+    "AI-product engineer",
+    "AI-powered SaaS",
+    "React Native developer",
+    "Next.js developer",
+    "AI integration",
+    "SaaS MVP",
+    "Lahore",
+    "fractional engineer",
   ],
-  authors: [{ name: "Imran Devify" }],
+  authors: [{ name: "Imran Safdar" }],
+  creator: "Imran Safdar",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://imrandevify.online",
-    siteName: "Imran Devify Portfolio",
-    title: "Imran Devify – Full-Stack SaaS Developer & React Native Engineer",
+    siteName: "Imran Safdar",
+    title: "Imran Safdar — AI-Product Engineer | AI-Powered SaaS & Mobile",
     description:
-      "Helping SaaS founders and agencies build scalable web platforms, mobile apps, and high-performance digital products.",
+      "I build AI-powered SaaS products end-to-end for founders — architecture, interface, and the intelligence inside. React Native and Next.js. Based in Lahore, working globally.",
+    // TODO: replace og-image with new AI-product-engineer share card (1200x630)
     images: [
       {
         url: "/images/og-image.webp",
         width: 1200,
         height: 630,
-        alt: "Imran Devify – SaaS & React Native Developer Portfolio",
+        alt: "Imran Safdar — AI-Product Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Imran Devify – Full-Stack SaaS Developer & React Native Engineer",
+    title: "Imran Safdar — AI-Product Engineer | AI-Powered SaaS & Mobile",
     description:
-      "Building scalable SaaS platforms, modern web apps, and cross-platform mobile applications.",
+      "I build AI-powered SaaS products end-to-end for founders — architecture, interface, and the intelligence inside. React Native and Next.js. Based in Lahore, working globally.",
+    // TODO: replace og-image with new AI-product-engineer share card (1200x630)
     images: ["/images/og-image.webp"],
     creator: "@imransafdar",
   },
@@ -124,22 +126,22 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              name: "Imran Devify",
+              name: "Imran Safdar",
               url: "https://imrandevify.online",
-              jobTitle: "Full-Stack SaaS Developer & React Native Engineer",
+              jobTitle: "AI-Product Engineer",
               description:
-                "Full-Stack Developer specializing in SaaS platforms, scalable web applications, and cross-platform mobile app development using Next.js, MERN Stack, and React Native.",
+                "AI-product engineer building AI-powered SaaS products and React Native apps end-to-end for founders — architecture, interface, and the intelligence inside.",
               sameAs: [
                 "https://www.linkedin.com/in/imran-safdar",
                 "https://github.com/imran-safdar",
               ],
               knowsAbout: [
-                "SaaS Development",
-                "React Native App Development",
-                "Next.js Development",
-                "MERN Stack",
-                "Startup MVP Development",
-                "API Integration",
+                "AI-powered SaaS",
+                "AI integration",
+                "React Native",
+                "Next.js",
+                "Product engineering",
+                "SaaS MVP development",
               ],
             }),
           }}

@@ -2,9 +2,10 @@ import AboutSection from "@/components/sections/about-page/AboutSection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Imran Safdar – SaaS Developer",
+  // Renders as "About | Imran Safdar — AI-Product Engineer" via the layout template.
+  title: "About",
   description:
-    "Learn about Imran Safdar, a Full-Stack SaaS Developer and React Native Engineer with experience building scalable web applications, startup MVPs, and mobile platforms for founders and agencies.",
+    "Imran Safdar is an AI-product engineer building AI-powered SaaS products and React Native apps end-to-end for founders. Based in Lahore, working globally.",
   alternates: {
     canonical: "/about",
   },
