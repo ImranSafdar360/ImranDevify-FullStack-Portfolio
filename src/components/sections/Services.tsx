@@ -2,6 +2,7 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SectionNumberBadge from "@/components/shared/SectionNumberBadge";
 import { useEffect, useLayoutEffect, useRef } from "react";
 
 // useLayoutEffect warns during SSR; this client component is still
@@ -79,12 +80,10 @@ export default function Services() {
 
   return (
     <section id="services" ref={sectionRef} className="py-20 md:py-28">
-      <div className="mx-auto max-w-[1200px] px-6">
+      <div className="container">
         {/* Header */}
         <div className="mb-14">
-          <p className="mb-4 font-mono text-meta uppercase tracking-wider text-text-subtle">
-            What I Build
-          </p>
+          <SectionNumberBadge number="06" label="What I Build" className="mb-4" />
           <h2 className="mb-4 font-serif text-[34px] text-text md:text-display-2">
             What I build.
           </h2>

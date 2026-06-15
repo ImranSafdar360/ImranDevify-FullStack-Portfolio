@@ -2,6 +2,7 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SectionNumberBadge from "@/components/shared/SectionNumberBadge";
 import { useEffect, useLayoutEffect, useRef } from "react";
 
 // useLayoutEffect warns during SSR; this client component is still
@@ -43,9 +44,7 @@ export default function FinalCTA() {
   return (
     <section id="contact" ref={sectionRef} className="py-28 md:py-40">
       <div ref={contentRef} className="mx-auto max-w-[720px] px-6 text-center">
-        <p className="mb-6 font-mono text-meta uppercase tracking-wider text-accent">
-          Ready to ship?
-        </p>
+        <SectionNumberBadge number="11" label="Ready to ship?" className="mb-6" />
         <h2 className="mb-8 font-serif text-[40px] leading-[1.05] text-text md:text-[56px]">
           If you&apos;re building an AI-powered product and want one person who
           can ship the whole thing,

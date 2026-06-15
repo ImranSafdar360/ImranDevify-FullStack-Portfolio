@@ -11,6 +11,7 @@ import Providers from "@/components/layout/providers/Providers";
 import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import Nav from "@/components/layout/Nav";
+import PageRails from "@/components/layout/PageRails";
 import SmoothScroll from "@/components/layout/SmoothScroll";
 
 const fontSans = Geist({
@@ -146,6 +147,7 @@ export default function RootLayout({
             }),
           }}
         />
+        <PageRails />
         <Providers>
           <Nav />
           <SmoothScroll>

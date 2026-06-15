@@ -2,6 +2,7 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SectionNumberBadge from "@/components/shared/SectionNumberBadge";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 // useLayoutEffect warns during SSR; this client component is still
@@ -105,12 +106,14 @@ export default function AIWorkflow() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-[1200px] px-6">
+      <div className="container relative z-10">
         {/* Header */}
         <div className="mx-auto mb-16 max-w-[640px] text-center">
-          <p className="mb-4 font-mono text-meta uppercase tracking-wider text-text-subtle">
-            How I Work With AI
-          </p>
+          <SectionNumberBadge
+            number="04"
+            label="How I Work With AI"
+            className="mb-4"
+          />
           <h2 className="mb-4 font-serif text-[34px] text-text md:text-display-2">
             How I work with AI.
           </h2>

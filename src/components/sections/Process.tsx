@@ -2,6 +2,7 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SectionNumberBadge from "@/components/shared/SectionNumberBadge";
 import { useEffect, useLayoutEffect, useRef } from "react";
 
 // useLayoutEffect warns during SSR; this client component is still
@@ -103,12 +104,14 @@ export default function Process() {
 
   return (
     <section id="process" ref={sectionRef} className="py-20 md:py-28">
-      <div className="mx-auto max-w-[820px] px-6">
+      <div className="container">
         {/* Header */}
         <div className="mb-16">
-          <p className="mb-4 font-mono text-meta uppercase tracking-wider text-text-subtle">
-            How a project runs
-          </p>
+          <SectionNumberBadge
+            number="05"
+            label="How a project runs"
+            className="mb-4"
+          />
           <h2 className="mb-4 font-serif text-[34px] text-text md:text-display-2">
             How a project actually runs.
           </h2>
@@ -118,8 +121,10 @@ export default function Process() {
           </p>
         </div>
 
-        {/* Steps with timeline */}
-        <div ref={stepsContainerRef} className="relative">
+        {/* Steps with timeline — header aligns to the page frame, but the step
+            text stays at a readable measure (full-frame line lengths would be
+            too long to scan). */}
+        <div ref={stepsContainerRef} className="relative max-w-[820px]">
           {/* Static track line */}
           <div className="absolute bottom-0 left-[31px] top-0 w-[2px] bg-border" />
           {/* Animated progress line (height drawn by GSAP on scroll) */}
