@@ -119,7 +119,7 @@ const nextConfig: NextConfig = {
 
   // Experimental features
   experimental: {
-    optimizePackageImports: ["lucide-react", "framer-motion"],
+    optimizePackageImports: ["lucide-react", "motion"],
     webVitalsAttribution: ["CLS", "LCP"],
   },
 };

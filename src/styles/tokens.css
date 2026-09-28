@@ -1,0 +1,64 @@
+/* Portfolio V3 — Black / Type / System */
+:root {
+  --color-bg: #070707;
+  --color-surface-1: #0d0d0d;
+  --color-surface-2: #121212;
+  --color-text-primary: #f2f0ea;
+  --color-text-strong: #faf9f6;
+  --color-text-secondary: #a09f9a;
+  --color-text-muted: #666662;
+  --color-border: #242424;
+  --color-accent-blue: #5577ff;
+  --color-accent-yellow: #e3c45a;
+
+  /* Cabinet Grotesk and Satoshi are the intended brand faces. Until licensed
+     files are supplied, these roles use dependable local system fallbacks. */
+  --font-display: "Cabinet Grotesk", "Arial Black", "Helvetica Neue", sans-serif;
+  --font-body: "Satoshi", Inter, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Geist Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-signature: inherit;
+
+  --type-mega: clamp(3.375rem, 8.8vw, 9rem);
+  --type-page-display: clamp(3rem, 7vw, 6.5rem);
+  --type-section-heading: clamp(2.375rem, 5vw, 4.5rem);
+  --type-project-title: clamp(2.125rem, 4.3vw, 4rem);
+  --type-subheading: clamp(1.375rem, 2.3vw, 2rem);
+  --type-body-large: clamp(1.125rem, 1.4vw, 1.375rem);
+  --type-body: clamp(1rem, 1.05vw, 1.125rem);
+  --type-meta: clamp(0.6875rem, 0.8vw, 0.8125rem);
+  --leading-display: 0.94;
+  --leading-heading: 1;
+  --leading-body: 1.6;
+  --tracking-display: -0.045em;
+  --tracking-heading: -0.03em;
+  --tracking-meta: 0.1em;
+
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --space-7: 4rem;
+  --space-8: 6rem;
+  --space-9: 8rem;
+  --space-10: 10rem;
+  --section-space: clamp(4.5rem, 11vw, 11.25rem);
+  --container-max: 85rem;
+  --page-padding: clamp(1.25rem, 4vw, 4rem);
+  --grid-gutter: 1.5rem;
+
+  --radius-small: 0.375rem;
+  --radius-medium: 0.5rem;
+  --radius-large: 0.75rem;
+  --radius-pill: 999px;
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 180ms;
+  --duration-base: 360ms;
+  --duration-slow: 600ms;
+  --z-grain: 100;
+}
+
+@media (max-width: 48rem) {
+  :root { --page-padding: 1.25rem; --grid-gutter: 1rem; }
+}

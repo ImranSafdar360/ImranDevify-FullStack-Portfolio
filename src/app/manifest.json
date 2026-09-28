@@ -1,7 +1,7 @@
 {
-  "name": "Imran Safdar — AI-Product Engineer",
+  "name": "Imran Safdar — Portfolio",
   "short_name": "Imran Safdar",
-  "description": "I build AI-powered SaaS products end-to-end for founders — architecture, interface, and the intelligence inside. React Native and Next.js. Based in Lahore, working globally.",
+  "description": "The personal portfolio of product engineer Imran Safdar.",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -16,7 +16,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#070707",
+  "background_color": "#070707",
   "display": "standalone"
 }
