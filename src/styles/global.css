@@ -1,11 +1,18 @@
 @import "tailwindcss";
 @import "./tokens.css";
 @import "./utilities.css";
+@import "./wireframe.css";
+@import "./selected-work.css";
+@import "./ybd-project.css";
+@import "./private-saas-project.css";
+@import "./engineering-capabilities.css";
+@import "./experience.css";
+@import "./about.css";
+@import "./contact.css";
 
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
-  min-width: 320px;
   background: var(--color-bg);
   color-scheme: dark;
   scroll-behavior: smooth;
