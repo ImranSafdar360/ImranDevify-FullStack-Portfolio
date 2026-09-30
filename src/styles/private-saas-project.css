@@ -1,5 +1,6 @@
 .private-saas-project {
   padding-block: clamp(var(--space-9), 12vw, 11rem);
+  padding-top: clamp(var(--space-8), 10vw, 9rem);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -31,9 +32,9 @@
   flex-direction: column;
   color: var(--color-text-strong);
   font-family: var(--font-display);
-  font-size: clamp(4.5rem, 7.65vw, 6.875rem);
+  font-size: var(--type-page-display);
   font-weight: 800;
-  line-height: 0.84;
+  line-height: 0.88;
   letter-spacing: var(--tracking-display);
   text-transform: uppercase;
 }
@@ -183,11 +184,8 @@
   grid-column: 1 / span 5;
   justify-self: start;
   margin-top: var(--space-7);
-  color: var(--color-text-primary);
-  text-decoration: none;
+  color: var(--color-text-muted);
 }
-
-.private-saas-project__link:hover { color: var(--color-text-strong); }
 
 @media (max-width: 64rem) {
   .private-saas-project__title { grid-column: 1 / span 9; }
@@ -216,7 +214,7 @@
 }
 
 @media (max-width: 47.9375rem) {
-  .private-saas-project { padding-block: var(--space-9); }
+  .private-saas-project { padding-block: var(--space-8); }
   .private-saas-project__header { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .private-saas-project__index { grid-column: 1 / -1; }
   .private-saas-project__meta {
@@ -239,32 +237,40 @@
     padding-bottom: 0;
   }
 
-  .private-saas-visual { margin-top: var(--space-9); }
+  .private-saas-visual { margin-top: var(--space-8); }
   .private-saas-visual__caption { align-items: flex-start; flex-direction: column; gap: var(--space-3); }
   .private-saas-map {
-    display: flex;
+    display: grid;
     min-height: 0;
-    flex-direction: column;
-    gap: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+    gap: var(--space-3) var(--grid-gutter);
     margin-top: var(--space-6);
   }
   .private-saas-module {
-    width: 100%;
+    width: auto;
     min-height: auto;
     padding: var(--space-3) 0;
+    grid-column: auto;
+    grid-row: auto;
     justify-content: flex-start;
-    border-top: 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 0;
     text-align: left;
   }
   .private-saas-module__label { text-align: left; }
-  .private-saas-system { order: -1; width: 100%; min-height: 8rem; margin-bottom: var(--space-6); }
+  .private-saas-system { width: 100%; min-height: 7rem; grid-column: 1 / -1; grid-row: 1; margin-bottom: var(--space-3); }
 
-  .private-saas-info { display: block; margin-top: var(--space-9); }
+  .private-saas-info { display: block; margin-top: var(--space-8); }
   .private-saas-info__work,
-  .private-saas-info__environment { margin-top: var(--space-8); }
-  .private-saas-project__link { margin-top: var(--space-7); }
+  .private-saas-info__environment { margin-top: var(--space-7); }
+  .private-saas-info__rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3) var(--grid-gutter); }
+  .private-saas-info__rows li,
+  .private-saas-info__rows li:last-child { padding: 0; border: 0; font-size: 0.8125rem; line-height: 1.45; }
+  .private-saas-info__rows li::before { margin-right: var(--space-2); color: var(--color-text-muted); content: "·"; }
+  .private-saas-project__link { margin-top: var(--space-6); }
 }
 
 @media (max-width: 22rem) {
-  .private-saas-project__title { font-size: 2.4rem; }
+  .private-saas-project__title { font-size: 2.3rem; }
 }

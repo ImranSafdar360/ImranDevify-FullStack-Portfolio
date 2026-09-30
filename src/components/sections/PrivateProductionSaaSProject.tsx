@@ -126,12 +126,10 @@ export function PrivateProductionSaaSProject() {
             <InformationRows items={workingEnvironment} />
           </div>
 
-          <a
-            className="private-saas-project__link text-meta"
-            href="#private-production-saas"
-          >
-            View engineering overview <span aria-hidden="true">↗</span>
-          </a>
+          {/* TODO: connect a publishable engineering overview when client constraints allow. */}
+          <span className="private-saas-project__link text-meta">
+            Engineering overview / Private
+          </span>
         </div>
       </div>
     </section>

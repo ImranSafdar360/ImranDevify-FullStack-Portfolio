@@ -1,5 +1,5 @@
 .experience {
-  padding-block: clamp(var(--space-9), 12vw, 11rem);
+  padding-block: var(--section-space-dense);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -24,10 +24,10 @@
   flex-direction: column;
   color: var(--color-text-strong);
   font-family: var(--font-display);
-  font-size: clamp(4rem, 6.8vw, 6rem);
-  font-weight: 800;
-  line-height: 0.87;
-  letter-spacing: var(--tracking-display);
+  font-size: var(--type-quiet-display);
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: var(--tracking-heading);
   text-transform: uppercase;
 }
 
@@ -101,7 +101,7 @@
 .experience__milestone--current .experience__marker {
   width: 0.625rem;
   height: 0.625rem;
-  background: var(--color-text-secondary);
+  background: var(--color-accent-engineering);
 }
 
 .experience__milestone-meta {
@@ -180,26 +180,22 @@
   content: "/";
 }
 
-@media (max-width: 64rem) {
+@media (min-width: 48rem) and (max-width: 68.75rem) {
   .experience__title { grid-column: 1 / span 9; }
   .experience__statement { grid-column: 9 / -1; }
 
-  .experience__timeline::before {
-    top: 0.35rem;
-    right: auto;
-    bottom: 0;
-    left: 0.25rem;
-    width: 1px;
-    height: auto;
+  .experience__timeline::before { display: none; }
+  .experience__timeline > ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-9) var(--space-7);
   }
-
-  .experience__timeline > ol { display: block; }
   .experience__milestone {
     display: block;
     min-height: 0;
-    padding: 0 0 var(--space-8) var(--space-7);
+    grid-column: auto;
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
   }
-  .experience__milestone:last-child { padding-bottom: 0; }
   .experience__milestone-body,
   .experience__milestone--foundation .experience__milestone-body,
   .experience__milestone--beyonds .experience__milestone-body,
@@ -208,12 +204,12 @@
   .experience__marker,
   .experience__milestone--current .experience__marker {
     position: absolute;
-    top: 0.1rem;
+    top: -0.25rem;
     left: 0;
   }
-  .experience__milestone h3 { max-width: 38rem; }
-  .experience__milestone-summary { max-width: 36rem; }
-  .experience__evidence { max-width: 38rem; }
+  .experience__milestone h3 { max-width: 26rem; }
+  .experience__milestone-summary { max-width: 30rem; }
+  .experience__evidence { max-width: 30rem; }
 }
 
 @media (max-width: 47.9375rem) {
@@ -233,12 +229,48 @@
   }
 
   .experience__timeline { margin-top: var(--space-8); }
-  .experience__milestone { padding: 0 0 var(--space-7) var(--space-6); }
+  .experience__timeline::before {
+    top: 0.35rem;
+    right: auto;
+    bottom: 0;
+    left: 0.25rem;
+    width: 1px;
+    height: auto;
+  }
+  .experience__timeline > ol { display: block; }
+  .experience__milestone { display: block; min-height: 0; padding: 0 0 var(--space-7) var(--space-6); }
+  .experience__milestone:last-child { padding-bottom: 0; }
+  .experience__milestone-body,
+  .experience__milestone--foundation .experience__milestone-body,
+  .experience__milestone--beyonds .experience__milestone-body,
+  .experience__milestone--codart .experience__milestone-body,
+  .experience__milestone--current .experience__milestone-body { padding: 0; }
+  .experience__marker,
+  .experience__milestone--current .experience__marker {
+    position: absolute;
+    top: 0.1rem;
+    left: 0;
+  }
   .experience__milestone h3,
   .experience__milestone--foundation h3,
   .experience__milestone--codart h3,
   .experience__milestone--current h3 { font-size: clamp(1.65rem, 8.2vw, 2rem); }
   .experience__milestone-meta { align-items: flex-start; flex-direction: column; gap: var(--space-2); }
+  .experience__milestone--foundation .experience__evidence { display: none; }
+  .experience__evidence {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+    margin-top: var(--space-4);
+  }
+  .experience__evidence li,
+  .experience__evidence li:last-child { padding: 0; border: 0; font-size: 0.75rem; }
+  .experience__evidence li:not(:last-child)::after {
+    margin-left: var(--space-3);
+    color: var(--color-text-muted);
+    content: "/";
+  }
+  .experience__projects { margin-top: var(--space-4); }
 }
 
 @media (max-width: 22rem) {

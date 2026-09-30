@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import { GeistMono } from "geist/font/mono";
 import "@/styles/global.css";
+
+const fontshareStylesheet =
+  "https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=satoshi@400,500,700&display=swap";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://imrandevify.online"),
@@ -37,7 +41,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={GeistMono.variable}>
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href={fontshareStylesheet} />
+      </head>
       <body>{children}</body>
     </html>
   );

@@ -47,9 +47,8 @@ export function BlarecastProject() {
             </ul>
           </div>
 
-          <a className="featured-project__link text-meta" href="#blarecast">
-            View case study <span aria-hidden="true">↗</span>
-          </a>
+          {/* TODO: connect the published Blarecast case study when available. */}
+          <span className="featured-project__link text-meta">Case study / Pending</span>
         </div>
       </div>
     </section>

@@ -6,22 +6,25 @@
   --color-text-primary: #f2f0ea;
   --color-text-strong: #faf9f6;
   --color-text-secondary: #a09f9a;
-  --color-text-muted: #666662;
+  /* Lifted slightly from the art-direction reference so 11–13px metadata
+     remains readable against the canvas. */
+  --color-text-muted: #787874;
   --color-border: #242424;
-  --color-accent-blue: #5577ff;
-  --color-accent-yellow: #e3c45a;
+  --color-accent-engineering: #5577ff;
+  --color-accent-human: #e3c45a;
+  --color-focus-ring: var(--color-accent-engineering);
 
-  /* Cabinet Grotesk and Satoshi are the intended brand faces. Until licensed
-     files are supplied, these roles use dependable local system fallbacks. */
+  /* Fontshare hosts the brand faces; Geist Mono is self-hosted by next/font. */
   --font-display: "Cabinet Grotesk", "Arial Black", "Helvetica Neue", sans-serif;
   --font-body: "Satoshi", Inter, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "Geist Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-mono: var(--font-geist-mono), "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   --font-signature: inherit;
 
-  --type-mega: clamp(3.375rem, 8.8vw, 9rem);
-  --type-page-display: clamp(3rem, 7vw, 6.5rem);
-  --type-section-heading: clamp(2.375rem, 5vw, 4.5rem);
-  --type-project-title: clamp(2.125rem, 4.3vw, 4rem);
+  --type-mega: clamp(5.25rem, 8.8vw, 9rem);
+  --type-page-display: clamp(4.5rem, 7vw, 7rem);
+  --type-section-heading: clamp(3.5rem, 5.5vw, 5.5rem);
+  --type-quiet-display: clamp(2.75rem, 4vw, 4.25rem);
+  --type-project-title: clamp(1.75rem, 2.7vw, 2.625rem);
   --type-subheading: clamp(1.375rem, 2.3vw, 2rem);
   --type-body-large: clamp(1.125rem, 1.4vw, 1.375rem);
   --type-body: clamp(1rem, 1.05vw, 1.125rem);
@@ -44,6 +47,9 @@
   --space-9: 8rem;
   --space-10: 10rem;
   --section-space: clamp(4.5rem, 11vw, 11.25rem);
+  --section-space-cinematic: clamp(var(--space-9), 12vw, 11rem);
+  --section-space-dense: clamp(var(--space-8), 9vw, var(--space-9));
+  --section-space-editorial: clamp(var(--space-8), 10vw, 9rem);
   --container-max: 85rem;
   --page-padding: clamp(1.25rem, 4vw, 4rem);
   --grid-gutter: 1.5rem;
@@ -56,9 +62,16 @@
   --duration-fast: 180ms;
   --duration-base: 360ms;
   --duration-slow: 600ms;
+  --media-radius-editorial: var(--radius-small);
   --z-grain: 100;
 }
 
 @media (max-width: 48rem) {
-  :root { --page-padding: 1.25rem; --grid-gutter: 1rem; }
+  :root {
+    --page-padding: 1.25rem;
+    --grid-gutter: 1rem;
+    --section-space-cinematic: var(--space-9);
+    --section-space-dense: var(--space-8);
+    --section-space-editorial: var(--space-8);
+  }
 }

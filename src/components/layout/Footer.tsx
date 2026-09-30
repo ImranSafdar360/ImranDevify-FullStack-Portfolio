@@ -45,7 +45,7 @@ export function Footer() {
 
         <div className="site-footer__bottom">
           <p className="text-meta">© 2026</p>
-          <p className="site-footer__dev text-meta">Portfolio V3 / Wireframe</p>
+          <p className="site-footer__dev text-meta">Portfolio V3 / System</p>
           <a className="text-meta" href="#top">Back to top <span aria-hidden="true">↑</span></a>
         </div>
       </div>

@@ -1,8 +1,15 @@
-const contactChannels = [
+type ContactChannel = {
+  label: string;
+  value: string;
+  href?: string;
+  external?: boolean;
+  primary?: boolean;
+};
+
+const contactChannels: ContactChannel[] = [
   {
     label: "Email",
-    value: "hello@example.com",
-    href: "mailto:hello@example.com",
+    value: "To be connected",
     primary: true,
   },
   {
@@ -19,8 +26,7 @@ const contactChannels = [
   },
   {
     label: "Resume",
-    value: "View / Pending",
-    href: "#resume",
+    value: "Pending",
   },
 ];
 
@@ -49,19 +55,19 @@ export function ContactAvailability() {
             Open to strong remote product-engineering opportunities and selected SaaS product
             work.
           </p>
-          <p className="contact__status text-meta">
-            Available for remote opportunities / Selected product work
-          </p>
         </header>
 
-        <div className="contact__audiences" aria-label="Ways to work together">
-          {audiences.map(({ label, description }) => (
-            <div key={label}>
-              <p className="contact__audience-label text-meta">{label}</p>
-              <p>{description}</p>
-            </div>
-          ))}
-        </div>
+        <section className="contact__audiences" aria-labelledby="contact-audiences-title">
+          <h3 id="contact-audiences-title" className="sr-only">Ways to work together</h3>
+          <ul>
+            {audiences.map(({ label, description }) => (
+              <li key={label}>
+                <p className="contact__audience-label text-meta">{label}</p>
+                <p>{description}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
 
         <nav className="contact__channels" aria-labelledby="contact-channels-title">
           <h3 id="contact-channels-title" className="text-meta">
@@ -71,23 +77,27 @@ export function ContactAvailability() {
             {contactChannels.map(({ label, value, href, external, primary }) => (
               <li id={label === "Resume" ? "resume" : undefined} key={label}>
                 <p className="text-meta">{label}</p>
-                <a
-                  className={primary ? "contact__channel-link contact__channel-link--primary" : "contact__channel-link"}
-                  href={href}
-                  target={external ? "_blank" : undefined}
-                  rel={external ? "noreferrer" : undefined}
-                >
-                  {value} <span aria-hidden="true">↗</span>
-                </a>
+                {href ? (
+                  <a
+                    className={primary ? "contact__channel-link contact__channel-link--primary" : "contact__channel-link"}
+                    href={href}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noreferrer" : undefined}
+                  >
+                    {value} <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <span className={primary ? "contact__channel-label contact__channel-label--primary" : "contact__channel-label"}>
+                    {value}
+                  </span>
+                )}
               </li>
             ))}
           </ul>
         </nav>
 
-        {/* TODO: replace the temporary wireframe email when the final address is supplied. */}
-        <a className="contact__primary-action" href="mailto:hello@example.com">
-          Let&apos;s talk <span aria-hidden="true">↗</span>
-        </a>
+        {/* TODO: connect the primary contact action when a real email is supplied. */}
+        <span className="contact__primary-action">Let&apos;s talk</span>
       </div>
     </section>
   );

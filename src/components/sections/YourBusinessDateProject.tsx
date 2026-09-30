@@ -96,9 +96,8 @@ export function YourBusinessDateProject() {
           <InformationList items={technologies} />
         </div>
 
-        <a className="ybd-project__link text-meta" href="#your-business-date">
-          View case study <span aria-hidden="true">↗</span>
-        </a>
+        {/* TODO: connect the published Your Business Date case study when available. */}
+        <span className="ybd-project__link text-meta">Case study / Pending</span>
       </div>
     </section>
   );

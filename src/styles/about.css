@@ -1,5 +1,6 @@
 .about {
   padding-block: clamp(var(--space-9), 12vw, 11rem);
+  padding-bottom: clamp(var(--space-8), 9vw, 8rem);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -18,9 +19,9 @@
   flex-direction: column;
   color: var(--color-text-strong);
   font-family: var(--font-display);
-  font-size: clamp(4rem, 7.5vw, 6.75rem);
+  font-size: var(--type-page-display);
   font-weight: 800;
-  line-height: 0.87;
+  line-height: 0.9;
   letter-spacing: var(--tracking-display);
   text-transform: uppercase;
 }
@@ -53,7 +54,9 @@
   margin: var(--space-7) 0 0;
   aspect-ratio: 3 / 4;
   place-items: center;
+  overflow: hidden;
   border: 1px solid var(--color-border);
+  border-radius: var(--media-radius-editorial);
   background: var(--color-surface-1);
   color: var(--color-text-muted);
 }
@@ -141,7 +144,7 @@
 }
 
 @media (max-width: 47.9375rem) {
-  .about { padding-block: var(--space-9); }
+  .about { padding-block: var(--space-8); }
   .about__layout { display: block; }
   .about__title {
     margin-top: var(--space-5);
@@ -179,12 +182,13 @@
   .about__journey-name { font-size: 1.75rem; }
 
   .about__portrait {
-    width: min(100%, 26rem);
-    margin: var(--space-8) 0 0 auto;
+    width: min(78%, 18rem);
+    margin: var(--space-7) 0 0 auto;
   }
-  .about__currently { margin-top: var(--space-8); }
+  .about__currently { margin-top: var(--space-7); }
   .about__currently ul { display: block; }
   .about__currently li + li { margin-top: var(--space-4); }
+  .about__currently li:nth-child(2) { display: none; }
 }
 
 @media (max-width: 22rem) {
