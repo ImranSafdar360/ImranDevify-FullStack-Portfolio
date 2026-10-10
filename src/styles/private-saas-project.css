@@ -66,16 +66,28 @@
 .private-saas-visual__clarification { color: var(--color-text-muted); opacity: 0.72; }
 
 .private-saas-map {
+  position: relative;
   display: grid;
+  overflow: hidden;
   min-height: clamp(34rem, 45vw, 42rem);
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-rows: auto 4rem auto 4rem auto;
   margin-top: var(--space-7);
   align-items: center;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-1);
+  isolation: isolate;
+}
+
+.private-saas-map__image {
+  z-index: 0;
+  object-fit: cover;
+  opacity: 0.3;
+  filter: grayscale(0.5) saturate(0.62) contrast(1.12) brightness(0.62);
 }
 
 .private-saas-module {
-  z-index: 2;
+  z-index: 3;
   display: flex;
   min-height: 5rem;
   align-items: center;
@@ -83,7 +95,8 @@
   padding: var(--space-4);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
-  background: var(--color-bg);
+  background: rgb(7 7 8 / 90%);
+  backdrop-filter: blur(8px);
 }
 
 .private-saas-module__label { color: var(--color-text-secondary); text-align: center; }
@@ -96,7 +109,7 @@
 .private-saas-module--deployment { grid-column: 9 / span 3; grid-row: 5; }
 
 .private-saas-system {
-  z-index: 3;
+  z-index: 4;
   display: flex;
   min-height: 10rem;
   grid-column: 5 / span 4;
@@ -105,7 +118,8 @@
   justify-content: center;
   padding: var(--space-5);
   border: 1px solid var(--color-border);
-  background: var(--color-surface-1);
+  background: rgb(17 17 19 / 92%);
+  backdrop-filter: blur(10px);
   flex-direction: column;
   gap: var(--space-3);
   text-align: center;
@@ -115,7 +129,7 @@
 .private-saas-system__label { color: var(--color-text-primary); }
 
 .private-saas-connector {
-  z-index: 1;
+  z-index: 2;
   display: block;
   align-self: stretch;
   pointer-events: none;

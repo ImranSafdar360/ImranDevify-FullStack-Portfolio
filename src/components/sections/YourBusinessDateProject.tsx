@@ -1,4 +1,10 @@
+import Image from "next/image";
+
 const workflows = ["Onboarding", "Discovery", "Chat", "Calling", "Subscription"];
+
+// Temporary visual: Unsplash CDN photo-1497366811353-6870744d04b2
+const ybdTestingImage =
+  "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=82";
 
 const keySystems = [
   "Multi-step onboarding",
@@ -31,11 +37,33 @@ function WebProductPlaceholder() {
   return (
     <div className="ybd-visual" aria-hidden="true">
       <p className="ybd-visual__label text-meta">Web product visual</p>
-      <div className="ybd-visual__panel ybd-visual__panel--utility" />
+      <div className="ybd-visual__panel ybd-visual__panel--utility">
+        <Image
+          src={ybdTestingImage}
+          alt=""
+          fill
+          sizes="(max-width: 768px) 45vw, 24vw"
+          className="ybd-visual__image"
+        />
+      </div>
       <div className="ybd-visual__panel ybd-visual__panel--primary">
+        <Image
+          src={ybdTestingImage}
+          alt=""
+          fill
+          sizes="(max-width: 768px) 100vw, 66vw"
+          className="ybd-visual__image"
+        />
         <span className="text-meta">Primary application</span>
       </div>
       <div className="ybd-visual__panel ybd-visual__panel--secondary">
+        <Image
+          src={ybdTestingImage}
+          alt=""
+          fill
+          sizes="(max-width: 768px) 55vw, 32vw"
+          className="ybd-visual__image"
+        />
         <span className="text-meta">Secondary state</span>
       </div>
     </div>

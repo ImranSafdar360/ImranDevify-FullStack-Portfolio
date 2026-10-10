@@ -68,8 +68,33 @@
 }
 
 .ybd-visual__panel {
+  position: relative;
+  overflow: hidden;
   border: 1px solid var(--color-border);
   background: var(--color-surface-1);
+  isolation: isolate;
+}
+
+.ybd-visual__panel::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(145deg, rgb(7 7 8 / 8%), rgb(7 7 8 / 62%));
+  content: "";
+  pointer-events: none;
+}
+
+.ybd-visual__image {
+  object-fit: cover;
+  filter: saturate(0.64) contrast(1.06) brightness(0.76);
+}
+
+.ybd-visual__panel--utility .ybd-visual__image {
+  object-position: left center;
+}
+
+.ybd-visual__panel--secondary .ybd-visual__image {
+  object-position: right center;
 }
 
 .ybd-visual__panel--utility {
@@ -90,7 +115,11 @@
 }
 
 .ybd-visual__panel--primary span,
-.ybd-visual__panel--secondary span { color: var(--color-text-muted); }
+.ybd-visual__panel--secondary span {
+  z-index: 2;
+  color: var(--color-text-primary);
+  text-shadow: 0 1px 18px rgb(0 0 0 / 80%);
+}
 
 .ybd-visual__panel--secondary {
   z-index: 3;

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const engineeringWork = [
   "Feature development",
   "Production debugging",
@@ -22,6 +24,10 @@ const contributionSurfaces = [
   { label: "Deployment", modifier: "deployment" },
 ];
 
+// Temporary visual: https://unsplash.com/photos/klWUhr-wPJ8
+const privateSaasTestingImage =
+  "https://images.unsplash.com/photo-1506399558188-acca6f8cbf41?auto=format&fit=crop&w=1800&q=82";
+
 function RepresentativeEngineeringVisual() {
   return (
     <figure
@@ -40,6 +46,14 @@ function RepresentativeEngineeringVisual() {
       </figcaption>
 
       <div className="private-saas-map" aria-hidden="true">
+        <Image
+          src={privateSaasTestingImage}
+          alt=""
+          fill
+          sizes="(max-width: 768px) 100vw, 84vw"
+          className="private-saas-map__image"
+        />
+
         <div className="private-saas-system">
           <span className="private-saas-system__context text-meta">
             Client system / Anonymized
