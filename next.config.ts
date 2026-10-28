@@ -1,19 +1,8 @@
 import type { NextConfig } from "next";
-import bundleAnalyzer from "@next/bundle-analyzer";
-
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === "true",
-});
 
 const nextConfig: NextConfig = {
-  // ESLint configuration
-  eslint: {
-    // Ignore ESLint errors during build to avoid compatibility issues
-    ignoreDuringBuilds: false,
-  },
   // TypeScript configuration
   typescript: {
-    // Ignore TypeScript errors during build (set to false in production)
     ignoreBuildErrors: false,
   },
   // Performance optimizations
@@ -23,35 +12,20 @@ const nextConfig: NextConfig = {
   // SEO and metadata
   generateEtags: true,
 
-  // Image optimization
+  // Image optimization. Screenshots and portraits are served from Cloudinary (docs/portfolio-redesign/06-tech-spec.md).
   images: {
-    formats: ["image/webp", "image/avif"],
+    formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    qualities: [75, 90],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "images.unsplash.com",
+        hostname: "res.cloudinary.com",
         pathname: "/**",
       },
-      {
-        protocol: "https",
-        hostname: "cdn.prod.website-files.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "www.wzwebs.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "img.freepik.com",
-        pathname: "/**",
-      }
     ],
   },
 
@@ -98,30 +72,10 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Redirects for SEO - Disabled to prevent redirect loops on Vercel
-  // async redirects() {
-  //   return [
-  //     // Redirect trailing slashes (except root)
-  //     {
-  //       source: '/:path*/',
-  //       destination: '/:path*',
-  //       permanent: true,
-  //       has: [
-  //         {
-  //           type: 'header',
-  //           key: 'host',
-  //           value: '(?!localhost).*',
-  //         },
-  //       ],
-  //     },
-  //   ];
-  // },
-
   // Experimental features
   experimental: {
-    optimizePackageImports: ["lucide-react", "motion"],
     webVitalsAttribution: ["CLS", "LCP"],
   },
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default nextConfig;

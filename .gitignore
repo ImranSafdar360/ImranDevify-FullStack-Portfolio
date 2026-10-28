@@ -41,3 +41,21 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .gstack/
+# Playwright CLI output (may contain credentials)
+.playwright-cli/
+
+# Playwright test output
+/test-results/
+/playwright-report/
+/blob-report/
+
+# Private planning sources: personal data, salaries, client research. Kept local only (repo is public).
+/docs/*.pdf
+/docs/MASTER_PROFILE.md
+/docs/STORY_BANK.md
+/docs/EXPERIENCE_BANK.md
+/docs/PERSONAL_BRAND_BIBLE.md
+/docs/IMRAN_SAFDAR_PORTFOLIO_PROFILE_FOR_CLAUDE.md
+/docs/portfolio-redesign/01-profile-brief.md
+/docs/portfolio-redesign/case-studies/
+/docs/portfolio-redesign/references/

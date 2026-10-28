@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+/* Temporary base until T4 brings in the full token system (docs/portfolio-redesign/05-theme.md). */
+html {
+  background: #0b0b0c;
+  color: #eeeeee;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
