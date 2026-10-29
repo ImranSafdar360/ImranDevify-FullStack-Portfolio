@@ -1,13 +1,139 @@
 @import "tailwindcss";
+@import "./tokens.css";
 
-/* Temporary base until T4 brings in the full token system (docs/portfolio-redesign/05-theme.md). */
-html {
-  background: #0b0b0c;
-  color: #eeeeee;
-  color-scheme: dark;
+/* Expose tokens as Tailwind utilities: bg-surface, text-text-2, border-line, font-display, rounded-card, … */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+  --color-text-4: var(--text-4);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-pressed: var(--accent-pressed);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+
+  --font-display: var(--font-mohave), "Arial Narrow", sans-serif;
+  --font-script: var(--font-rock-salt), cursive;
+  --font-sans: var(--font-satoshi), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --radius-card: var(--radius-card);
+  --radius-nested: var(--radius-nested);
+  --radius-icon: var(--radius-icon);
+
+  --ease-ui: var(--ease-ui);
+  --ease-out-strong: var(--ease-out-strong);
+  --ease-drawer: var(--ease-drawer);
+
+  /* Three-dot loader wave in the nav chip: each dot swells, lifts and turns accent in turn. */
+  --animate-nav-dot: nav-dot 1.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+
+  @keyframes nav-dot {
+    0%,
+    80%,
+    100% {
+      transform: translateY(0) scale(0.6);
+      opacity: 0.35;
+      background-color: var(--text-2);
+    }
+    40% {
+      transform: translateY(-3px) scale(1.1);
+      opacity: 1;
+      background-color: var(--accent);
+    }
+  }
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--text);
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--bg);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+}
+
+/* "+" crosshair where section rules meet the frame rails (05-theme §3.1). */
+@utility plus-marker {
+  width: 15px;
+  height: 15px;
+  background:
+    linear-gradient(var(--text-3), var(--text-3)) center / 100% 1px no-repeat,
+    linear-gradient(var(--text-3), var(--text-3)) center / 1px 100% no-repeat;
+}
+
+/* Diagonal hatch spacer between sections. */
+@utility hatch-band {
+  background: repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 11px);
+}
+
+/* Reduced motion for the morphing nav: no movement, blur or stagger, only a quick fade. */
+@media (prefers-reduced-motion: reduce) {
+  [data-nav-anim] {
+    transform: none !important;
+    translate: none !important;
+    scale: none !important;
+    filter: none !important;
+    transition-property: opacity !important;
+    transition-duration: 120ms !important;
+    transition-delay: 0ms !important;
+  }
+  nav[data-nav-shell] {
+    transition: none !important;
+  }
+}
+
+/* Static grain overlay (05-theme §4): one tiled SVG noise texture, never animated. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+@media (prefers-contrast: more) {
+  body::after {
+    display: none;
+  }
+}
+
+@media print {
+  body::after {
+    display: none;
+  }
 }

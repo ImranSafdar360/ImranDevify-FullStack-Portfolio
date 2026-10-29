@@ -1,0 +1,45 @@
+/*
+ * Design tokens: docs/portfolio-redesign/05-theme.md.
+ * These are the defaults; the admin theme editor (T31) overrides them at runtime.
+ */
+:root {
+  /* Surfaces and lines */
+  --bg: #0b0b0c;
+  --surface: #141416;
+  --surface-2: #1b1b1e;
+  --line: #2a2a2e;
+  --line-strong: #3a3a40;
+
+  /* Text */
+  --text: #eeeeee;
+  --text-2: #a4a4a4;
+  --text-3: #8a8a8a;
+  --text-4: #6e6e6e; /* large or decorative text only */
+
+  /* Accent (derived states follow src/lib/theme/color.ts) */
+  --accent: #3d7bff;
+  --accent-hover: #5a8fff;
+  --accent-pressed: #3265d1;
+  --accent-soft: rgb(61 123 255 / 0.16);
+  --accent-ink: #0b0b0c;
+
+  /* Feedback */
+  --success: #4ade80;
+  --danger: #f87171;
+
+  /* Shape */
+  --radius-card: 22px;
+  --radius-nested: 16px;
+  --radius-icon: 12px;
+
+  /* Layout */
+  --frame: min(1320px, 100% - 32px);
+
+  /* Texture */
+  --grain-opacity: 0.1;
+
+  /* Motion */
+  --ease-ui: cubic-bezier(0.62, 0, 0.34, 0.99); /* Rama hover fills, masks */
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1); /* elements entering/leaving */
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1); /* shapes morphing (nav shell) */
+}

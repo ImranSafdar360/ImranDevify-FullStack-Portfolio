@@ -50,7 +50,7 @@ Contrast ratios are measured on `--bg`.
 |---|---|---|---|
 | `--accent` | `#3D7BFF` | 5.1:1 | Script labels, links, live dot, active states, "Built" badge, highlights, CTA fills |
 | `--accent-hover` | `#5A8FFF` | — | Hover on accent text/links |
-| `--accent-pressed` | `#2F63D6` | — | Pressed state |
+| `--accent-pressed` | `#3265D1` | — | Pressed state (derived: accent mixed 18% toward black; `src/lib/theme/color.ts`) |
 | `--accent-soft` | `#3D7BFF` at 16% | — | Badge backgrounds, selection, chart fills |
 | `--accent-ink` | `#0B0B0C` | 5.1:1 on accent | **Text on accent fills** |
 
@@ -174,13 +174,13 @@ All sizes are fluid `clamp()` values, taken from the Theme Lab.
 
 | Component | Spec |
 |---|---|
-| **Morphing nav** | **Full bar** at the top: wordmark on the left, links centred, outline "Download resume" on the right. At 140px of scroll it becomes a **chip**: 236×52, radius 999, avatar + "Imran" + 3 bouncing dots. **On hover, tap, or keyboard focus** it expands downward (height about 268px): links, resume, live Lahore time. On Home, the hero wordmark Flips into the chip (GSAP, Step 7). The transition curve is `cubic-bezier(.62,0,.34,.99)` |
+| **Morphing nav** | **Full bar** at the top: wordmark on the left, links centred, outline "Download resume" on the right. At 140px of scroll it becomes a **chip**: 236×52, radius 999, avatar + "Imran" + 3 bouncing dots. **On hover, click/tap, or Enter/Space on the focused chip** it expands downward (height about 268px): links, resume, live Lahore time. On Home, the hero wordmark Flips into the chip (GSAP, Step 7). The transition curve is `cubic-bezier(.62,0,.34,.99)` |
 | **CTA bar** | Full width, 58px, `--accent` fill, `--accent-ink` text 600. Hover: a `--text` fill rises from the bottom, the label rolls up, the arrow moves ↗ |
 | **Button: primary** | Pill, 48px, accent fill. Same fill-and-roll hover |
 | **Button: ghost** | Pill, 48px, `--line-strong` outline. Hover fills with `--text` and the text turns `--bg` |
 | **Text link** | 1px underline in the text colour; accent on hover |
 | **Pill tag** | 28px, outline `--line-strong`, `--text-2`. Used for stack tags |
-| **Ownership badges** | **Built:** `--accent-soft` fill with accent text · **Extended:** neutral outline · **In development:** dashed accent outline |
+| **Ownership badges** | **Built:** `--accent-soft` fill with **`--accent-hover`** text (plain accent on the soft fill measured 4.37:1, below AA; the hover shade gives about 5.4:1) · **Extended:** neutral outline · **In development:** dashed accent outline |
 | **Bezel card** | Outer: `--radius`, 6px padding, `--line` border, `--surface-2` → `--surface` gradient. Inner: `--radius-nested`, `--surface`, `--line` border. Optional 44px icon tile with an accent icon |
 | **Process card** | Alternately tilted −2.5° / +2°, 280px min height. Big Mohave number in `--text-4` (accent when active). Large faded outline icon at 7%. It straightens and turns accent when active or hovered. Hand-drawn connecting arrows (SVG) |
 | **Bento tile** | `--surface`, `--radius`. Big Mohave number + caption + a small data graphic in `--accent` (timeline bar, provider nodes, 9-dot stepper, test grid, sparkline, world clocks) |
@@ -199,7 +199,10 @@ Full values are in 03 §1.5.
 | Token | Value |
 |---|---|
 | `--ease-reveal` | CustomEase `M0,160 C40,144 40,0 160,0`. Reveals: 1s, stagger 0.1, y 1.25rem → 0, scale 0.9 → 1, start `top 75%` |
-| `--ease-ui` | `cubic-bezier(.62,0,.34,.99)`. Hovers and fills: 0.45s; nav: 0.55s |
+| `--ease-ui` | `cubic-bezier(.62,0,.34,.99)`. Hover fills and masks: 0.45s |
+| `--ease-out-strong` | `cubic-bezier(0.23,1,0.32,1)`. Anything entering or leaving (nav content, menu items), plus button press `scale(0.97)` in 150ms |
+| `--ease-drawer` | `cubic-bezier(0.32,0.72,0,1)`. Shapes morphing: nav shell full↔chip 520ms, open 340ms, close 260ms |
+| Nav choreography | Old content leaves first (150ms: fade + scale 0.96 + blur 3px), then the shell morphs, then new content arrives staggered: bar items 220ms + 45ms each, chip items 160/210/260ms, menu items 90ms + 35ms each. The dots rotate into a "×" when open. Exits are faster than entrances. Reduced motion: no movement, blur, or stagger, only a 120ms fade |
 | Image mask reveal | 1.3s |
 | Divider draw | 1s |
 | Parallax tiers | 12.5rem / 6.25rem / −6.25rem, scrubbed |

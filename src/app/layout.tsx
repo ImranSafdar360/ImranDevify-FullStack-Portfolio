@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { GeistMono } from "geist/font/mono";
+import { WiggleFilter } from "@/components/ui/wiggle-filter";
+import { MotionLayer } from "@/lib/motion/motion-layer";
+import { fontVariables } from "./fonts";
 import "@/styles/base.css";
 
 export const metadata: Metadata = {
@@ -38,8 +40,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={GeistMono.variable}>
-      <body>{children}</body>
+    <html lang="en" className={fontVariables}>
+      <body>
+        <WiggleFilter />
+        {children}
+        <MotionLayer />
+      </body>
     </html>
   );
 }

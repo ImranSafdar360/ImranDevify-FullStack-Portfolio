@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test'
 
-const PORT = 3000
+// E2E_PORT lets tests run while a dev server already uses 3000.
+const PORT = Number(process.env.E2E_PORT ?? 3000)
 const baseURL = process.env.BASE_URL ?? `http://localhost:${PORT}`
 
 export default defineConfig({

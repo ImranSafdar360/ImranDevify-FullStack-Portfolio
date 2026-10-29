@@ -89,10 +89,10 @@ Vitest uses Vite's native `resolve.tsconfigPaths` (no `vite-tsconfig-paths`). Th
 
 **Deps:** T2. **Files:** `vitest.config.ts`, `playwright.config.ts`, `e2e/smoke.spec.ts`, `.github/workflows/ci.yml`, `package.json`. **Size:** M
 
-### Checkpoint 0 ✅ (29 Oct, local)
+### Checkpoint 0 ✅ (29 Oct)
 - [x] Clean Next 16.4 app.
 - [x] check + smoke e2e green.
-- [x] CI configured (first green run pending the first push).
+- [x] CI configured; first GitHub Actions run **green** (commit 960eccf).
 
 **Notes:**
 - `sharp` upgraded to 0.35.5 (libvips CVEs fixed).
@@ -110,10 +110,15 @@ Vitest uses Vite's native `resolve.tsconfigPaths` (no `vite-tsconfig-paths`). Th
 - Fonts: `next/font` Mohave + Rock Salt, local Satoshi woff2, Geist Mono.
 - `lib/theme`: derive hover / pressed / soft / ink from the accent, plus a contrast ratio function.
 
-**Acceptance:**
-- [ ] Page background `#0B0B0C`; fonts load self-hosted.
-- [ ] `deriveAccent('#3D7BFF')` gives ink `#0B0B0C`.
-- [ ] Contrast unit tests match the 05-theme values within ±0.1.
+**Acceptance:** ✅ **Done 29 Oct**
+- [x] Page background `#0B0B0C`; fonts load self-hosted (6 woff2 from the site itself; no Google / Fontshare requests).
+- [x] `deriveAccent('#3D7BFF')` gives ink `#0B0B0C`.
+- [x] Contrast unit tests match the 05-theme values (10/10 unit tests pass).
+
+**Notes:**
+- Tokens are exposed to Tailwind via `@theme inline` (`bg-surface`, `text-text-2`, `font-display`, …).
+- "Pressed" is derived as `#3265D1`; 05-theme was updated to match.
+- Satoshi woff2 lives in `src/fonts/`.
 
 **Verify:** test; browser (fonts render, no FOIT).
 
@@ -128,10 +133,14 @@ Vitest uses Vite's native `resolve.tsconfigPaths` (no `vite-tsconfig-paths`). Th
 - `ScriptLabel`: Rock Salt + SVG wiggle filter; static when reduced motion is on.
 - `/styleguide` page (noindex) showing them.
 
-**Acceptance:**
-- [ ] Matches the Theme Lab visually.
-- [ ] Wiggle stops with reduced motion.
-- [ ] `/styleguide` is excluded from the sitemap and has noindex.
+**Acceptance:** ✅ **Done 29 Oct**
+- [x] Matches the Theme Lab visually (checked at 1440px and 520px).
+- [x] Wiggle stops with reduced motion (unit test + e2e).
+- [x] `/styleguide` is excluded from the sitemap and has noindex (e2e). Owner-only protection comes in T27.
+
+**Notes:**
+- The `+` marker and hatch are Tailwind `@utility` classes.
+- `WiggleFilter` is mounted once in the root layout, and pauses while the tab is hidden.
 
 **Verify:** browser screenshots vs Theme Lab; component test for reduced motion.
 
@@ -149,10 +158,15 @@ Vitest uses Vite's native `resolve.tsconfigPaths` (no `vite-tsconfig-paths`). Th
 
 All are added to the styleguide.
 
-**Acceptance:**
-- [ ] Hover, focus, and pressed states match 05 §5.
-- [ ] Badge maps ownership enum → style (unit test).
-- [ ] All primitives are keyboard-focusable with a visible ring.
+**Acceptance:** ✅ **Done 29 Oct**
+- [x] Hover, focus, and pressed states match 05 §5 (checked in the browser).
+- [x] Badge maps ownership enum → style (unit test, 6 cases).
+- [x] All primitives are keyboard-focusable with a visible ring.
+- [x] axe 0 serious on `/styleguide`.
+
+**Notes:**
+- Fixed a real contrast failure found by axe: "Built" badge text measured 4.37:1, so it now uses `--accent-hover` (about 5.4:1). 05-theme was updated.
+- Files: `badge.tsx`, `button.tsx` (Button + CtaBar), `surfaces.tsx` (Pill, BezelCard, MetaTable).
 
 **Verify:** test; browser (hover/focus); axe on `/styleguide` shows 0 serious.
 
@@ -166,10 +180,18 @@ All are added to the styleguide.
 - `AnimEngine`: scans `data-anim` and runs lines / words / stagger / slide / mask / draw reveals with `useGSAP` scoping.
 - Cleanup on route change.
 
-**Acceptance:**
-- [ ] Reveals play once at `top 75%`.
-- [ ] With reduced motion: no Lenis, no reveals (content visible immediately).
-- [ ] No ScrollTrigger leaks after client navigation.
+**Acceptance:** ✅ **Done 29 Oct**
+- [x] Reveals play once at `top 75%` (`mask` at `top 90%`).
+- [x] With reduced motion: no Lenis, no reveals (content visible immediately). Covered by unit + e2e tests.
+- [x] No ScrollTrigger leaks after client navigation: `useGSAP` with `revertOnUpdate` on the pathname; e2e navigation test shows 0 console errors.
+
+**Notes:**
+- Content on screen at load is never animated (protects LCP; unit-tested).
+- Rama's CustomEase paths turned out to be `cubic-bezier(.25,.1,.25,1)` and `cubic-bezier(.62,0,.34,.99)`.
+- SplitText uses `aria: 'none'` + span tags: the default `aria-label` failed axe on `<p>`.
+- Files: `src/lib/motion/{config.ts,gsap.ts,anim-engine.tsx,smooth-scroll.tsx}`.
+- Test setup now registers Testing Library cleanup.
+- `E2E_PORT` env var lets e2e run beside a dev server.
 
 **Verify:** unit test (reduced motion → no-op); e2e: navigate away and back → no console errors; browser check.
 
@@ -183,21 +205,60 @@ All are added to the styleguide.
 - Live Lahore clock.
 - Footer shell: "Let's talk", emails, links, from static props for now.
 
-**Acceptance:**
-- [ ] Every chip state works by mouse, touch, and keyboard.
-- [ ] Focus is trapped neither in the chip nor outside it.
-- [ ] e2e covers chip → expand → link.
+**Acceptance:** ✅ **Done 29 Oct**
+- [x] Every chip state works by mouse, touch, and keyboard: Enter opens, Tab moves into the menu, Escape closes and refocuses the chip.
+- [x] Focus is trapped neither in the chip nor outside it (`inert` on hidden parts; blur outside closes).
+- [x] e2e covers full → chip → open on desktop, keyboard, and mobile tap (`e2e/nav.spec.ts`).
+
+**Notes:**
+- Placeholder pages for `/work`, `/about`, `/contact` (noindex), so nav links never 404. They are replaced by T19, T23, T18a.
+- Buttons render a plain `<a>` for files, external links, and mailto.
+- `/resume.pdf` doesn't exist until the ATS resume task.
 
 **Verify:** e2e `nav.spec.ts`; browser at 1440 / 520; axe.
 
 **Deps:** T6, T7. **Files:** `src/components/layout/{nav,footer,clock}.tsx`, `e2e/nav.spec.ts`. **Size:** M
 
 ### Checkpoint 1: Foundation
-- [ ] `/styleguide` matches the Theme Lab (screenshots attached for Imran).
-- [ ] axe 0 serious.
-- [ ] Lighthouse on `/styleguide`: Performance ≥ 90.
-- [ ] `code-review-and-quality` pass.
-- [ ] **Imran reviews** before Phase 3.
+- [x] `/styleguide` matches the Theme Lab (Imran reviewed T4–T6 on 29 Oct; nav and footer added since).
+- [x] axe 0 serious (100 accessibility in Lighthouse).
+- [x] Lighthouse on `/styleguide`: Performance ≥ 90.
+- [x] `code-review-and-quality` pass: an independent reviewer found 4 must-fix issues + nice-to-haves. All must-fix items are fixed with new tests:
+  1. A mouse click on a hover-opened chip closed it. Fixed; e2e added.
+  2. Lenis could pull a new page down after a link click mid-scroll. It now resets on link navigation, keeps browser restoration on Back/Forward; e2e added.
+  3. Phones saw the full bar before hydration. CSS `max-[899px]` chip; no-JS e2e added.
+  4. Motion tests didn't prove reveals or client navigation. Rewritten.
+- Also fixed:
+  - focus handed to the chip when the bar turns inert
+  - menu no longer reappears after returning to the full bar
+  - wiggle repaints only while a script label is on screen (IntersectionObserver)
+  - `aria-current` on nav links
+  - cached clock formatter
+  - Link-only props stripped from plain `<a>`
+  - GSAP lag smoothing restored
+  - docs aligned
+- Not done (low, noted): reduced-motion toggled *mid-session* isn't picked up by Lenis / the engine until reload.
+- Totals: 34 unit + 23 e2e pass.
+- [x] **Imran reviewed and approved** (29 Oct), after two refinements:
+  - smoother nav morph and dropdown choreography (Emil Kowalski principles)
+  - three-dot loader wave on the chip
+
+**Lighthouse mobile, 29 Oct:**
+
+| Page / mode | Performance | Accessibility | Best Practices | LCP | TBT | CLS |
+|---|---|---|---|---|---|---|
+| `/` simulated | 93 | 100 | 100 | 2.9 s | 140 ms | 0 |
+| `/styleguide` simulated | 94 | 100 | 100 | 2.9 s | 130 ms | 0 |
+| `/` real devtools throttling | 92 | — | — | **2.1 s** | 250 ms | 0 |
+
+- First run was 88 / 3.9 s. Fixes:
+  - Satoshi variable font (1 file, 42.6 KB instead of 3 files, 75 KB).
+  - Preload only Mohave + Satoshi.
+  - Geist Mono single weight via `next/font/google` (`geist` package removed).
+  - GSAP + Lenis lazy-loaded on idle (`MotionLayer`).
+- Initial JS is about 152 KB; the motion chunks (about 57 KB) load after idle.
+- **Open:** simulated LCP 2.9 s > 2.5 s target. Re-measure at CP3 with the real hero, where the LCP element is the Mohave H1.
+- **Planned:** subset Rock Salt to the glyphs used (about 51 KB → about 25 KB) in T46.
 
 ---
 
