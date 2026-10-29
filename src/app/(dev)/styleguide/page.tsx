@@ -5,6 +5,7 @@ import { OwnershipBadge } from '@/components/ui/badge'
 import { Button, CtaBar } from '@/components/ui/button'
 import { ScriptLabel } from '@/components/ui/script-label'
 import { BezelCard, MetaTable, Pill } from '@/components/ui/surfaces'
+import { getFeaturedProjects } from '@/lib/content/projects'
 import { contrastRatio } from '@/lib/theme/color'
 
 // Internal review page for the design system (tasks/todo.md T5–T8). Never indexed.
@@ -45,6 +46,27 @@ const typeSpecimens = [
   { label: 'Script label', node: <ScriptLabel className="text-[1.6em]">The challenges</ScriptLabel> },
   { label: 'Mono label', node: <span className="font-mono text-[0.9rem] uppercase text-text-3">/ 02 / What I build · 2025 – now · Built solo</span> },
 ]
+
+// Checkpoint 2: proves the cached read layer renders real database content. Replaced by the case-study carousel (T14).
+async function FeaturedFromDatabase() {
+  const projects = await getFeaturedProjects()
+  return (
+    <ol className="m-0 grid list-none gap-3 p-0 md:grid-cols-3">
+      {projects.map((project) => (
+        <li key={project.id}>
+          <BezelCard>
+            <p className="mb-3 font-mono text-[0.75rem] uppercase text-text-3">
+              {project.year} · {project.role}
+            </p>
+            <h3 className="mb-2 font-display text-[2rem] font-bold uppercase leading-[0.9] tracking-[-0.04em]">{project.title}</h3>
+            <p className="m-0 mb-4 text-[0.95rem] text-text-2">{project.oneLiner}</p>
+            <OwnershipBadge ownership={project.ownership} />
+          </BezelCard>
+        </li>
+      ))}
+    </ol>
+  )
+}
 
 function CardIcon() {
   return (
@@ -111,6 +133,14 @@ export default function StyleguidePage() {
               )
             })}
           </ul>
+        </Section>
+
+        <Section hatchAfter aria-labelledby="sg-data">
+          <SectionLabel index="05">Data · featured projects from MongoDB</SectionLabel>
+          <h2 id="sg-data" className="sr-only">
+            Featured projects from the database
+          </h2>
+          <FeaturedFromDatabase />
         </Section>
 
         <Section hatchAfter aria-labelledby="sg-ui">

@@ -1,0 +1,23 @@
+{
+  "availability": {
+    "open": true,
+    "label": "Open to remote roles",
+    "note": "Start: immediately"
+  },
+  "contact": {
+    "emailHiring": "imransafdar360@gmail.com",
+    "emailProjects": "imranguru360@gmail.com",
+    "location": "Lahore, PKT",
+    "timeZone": "Asia/Karachi",
+    "replyNote": "I usually reply within a few hours"
+  },
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/imran-safdar/",
+    "github": "https://github.com/ImranSafdar360",
+    "resume": "/resume.pdf"
+  },
+  "seo": {
+    "title": "Imran Safdar | Full-stack product engineer",
+    "description": "Full-stack product engineer building payments, forms, real-time features and mobile apps inside live SaaS products."
+  }
+}

@@ -272,10 +272,17 @@ All are added to the styleguide.
 - `getSettings()` with `'use cache'` / `cacheLife('max')` / `cacheTag('content:settings')`.
 - The footer reads emails and availability from it.
 
-**Acceptance:**
-- [ ] One connection is reused across calls.
-- [ ] Integration test (mongodb-memory-server) reads defaults.
-- [ ] The footer shows DB values.
+**Acceptance:** ✅ **Done 29 Oct**
+- [x] One connection is reused across calls (integration test).
+- [x] Integration test (mongodb-memory-server) reads defaults; 6 tests covering schema, defaults, partial merge, plain-data output, and connection reuse.
+- [x] The footer shows DB values: verified end to end by building and serving against a seeded temporary MongoDB.
+
+**Notes:**
+- Cache Components is on (`cacheComponents` + `partialPrefetching`).
+- `getSettings()` uses `'use cache'` + `cacheTag('content:settings')`. It falls back to the brief's defaults when `MONGODB_URI` is missing or unreachable, so builds never break.
+- The nav and footer read Settings through the async `SiteShell`. `SITE` now holds structure only.
+- CI caches the MongoDB binary.
+- **H1 pending:** Imran's `.env.local` URI still has the `<cluster>` placeholder and a weak password. To fix: rotate the password, paste the real host.
 
 **Verify:** test; browser footer.
 
@@ -288,9 +295,14 @@ All are added to the styleguide.
 - Read functions: `getFeaturedProjects`, `getProjectBySlug`, `getAllProjects`, with `cacheTag('content:projects')`.
 - Published-only filter.
 
-**Acceptance:**
-- [ ] Schema rejects an unknown ownership value or a block type that doesn't match its data.
-- [ ] Drafts are never returned by public reads.
+**Acceptance:** ✅ **Done 29 Oct**
+- [x] Schema rejects an unknown ownership value or a block type that doesn't match its data.
+- [x] Drafts are never returned by public reads. 8 integration tests, including ordering, plain data, and unique slugs.
+
+**Notes:**
+- 8 block types: overview, role, challenge, diagram, scopeFacts, stack, image, callout.
+- `OWNERSHIP` lives in the schema; the badge imports it.
+- Project reads have no fallback: a missing DB fails the build loudly.
 
 **Verify:** unit (schema) + integration (reads) tests.
 
@@ -303,19 +315,26 @@ All are added to the styleguide.
 - `scripts/seed.ts` does an idempotent upsert by slug/key.
 - **humanizer** pass on the seed copy.
 
-**Acceptance:**
-- [ ] Running the seed twice produces no duplicates.
-- [ ] Every claim maps to a line in 01 or the case-study files (checklist in the PR description).
-- [ ] No case-study "Part A" research is seeded.
+**Acceptance:** ✅ **Done 29 Oct**
+- [x] Running the seed twice produces no duplicates: integration test, and verified on Atlas (1 settings, 9 projects after two runs).
+- [x] Every claim maps to a line in 01 or the case-study files. Ownership labels are asserted in a test.
+- [x] No case-study "Part A" research is seeded.
+
+**Notes:**
+- **Scope change:** seeds for FAQ, experience, and home sections are added in their own slices (T12, T16, T17), together with their models.
+- Copy was written under the humanizer rules (no dashes, no AI tells; scan clean).
+- `npm run seed` uses `tsx --env-file-if-exists=.env.local`.
+- CI runs a `mongo:7` service and seeds it before the build.
+- DB connect logic moved to `src/lib/db/connect.ts` (shared with scripts), including the `MONGODB_DNS_SERVERS` override for local DNS that blocks SRV lookups.
 
 **Verify:** integration test (idempotency); manual claim audit.
 
 **Deps:** T10. **Files:** `content/seed/{settings,projects,faqs,experience,sections}.json`, `scripts/seed.ts`, `tests/integration/seed.test.ts`. **Size:** M
 
-### Checkpoint 2: Content
-- [ ] Seeded Atlas DB.
-- [ ] A test page renders featured projects from the DB.
-- [ ] Prerender works with no "blocking route" errors.
+### Checkpoint 2: Content ✅ (29 Oct)
+- [x] Seeded Atlas DB.
+- [x] A test page renders featured projects from the DB: `/styleguide` section 05, temporary until T14.
+- [x] Prerender works with no "blocking route" errors. All routes are static, with Cache Components.
 
 ---
 

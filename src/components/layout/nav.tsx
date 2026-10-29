@@ -47,7 +47,14 @@ function reveal(visible: boolean, index: number, { after, step }: { after: numbe
 // Morphing nav (05-theme §5): full bar at the top → "Imran ···" chip after scrolling (always a chip below 900px)
 // → expands downward on hover, click/tap, or Enter. Escape closes and returns focus to the chip.
 // Small screens get the chip from CSS too (max-[899px]: variants), so there is no full-bar flash before hydration.
-export function Nav() {
+type NavProps = {
+  resumeHref: string
+  emailHiring: string
+  timeZone: string
+  city: string
+}
+
+export function Nav({ resumeHref, emailHiring, timeZone, city }: NavProps) {
   const pathname = usePathname()
   const scrolled = useSyncExternalStore(subscribeScroll, () => window.scrollY > CHIP_AFTER_PX, () => false)
   const compact = useSyncExternalStore(subscribeCompact, () => window.matchMedia(COMPACT_QUERY).matches, () => false)
@@ -136,7 +143,7 @@ export function Nav() {
           })}
         </ul>
         <div data-nav-anim="" style={barCta.style} className={cn(barCta.className, 'justify-self-end')}>
-          <Button href={SITE.links.resume} className="h-10">
+          <Button href={resumeHref} className="h-10">
             Download resume
           </Button>
         </div>
@@ -239,8 +246,8 @@ export function Nav() {
             )
           })}
           {[
-            { href: SITE.links.resume, label: 'Download resume' },
-            { href: `mailto:${SITE.emails.hiring}`, label: 'Email me' },
+            { href: resumeHref, label: 'Download resume' },
+            { href: `mailto:${emailHiring}`, label: 'Email me' },
           ].map((item, i) => {
             const anim = reveal(expanded, SITE.nav.length + i, MENU_TIMING)
             return (
@@ -253,7 +260,7 @@ export function Nav() {
           })}
         </ul>
         <p data-nav-anim="" style={menuClock.style} className={cn(menuClock.className, 'm-0 pt-2 font-mono text-[0.72rem] uppercase text-text-3')}>
-          Lahore · <LiveClock timeZone={SITE.timeZone} />
+          {city} · <LiveClock timeZone={timeZone} />
         </p>
       </div>
     </nav>

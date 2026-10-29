@@ -1,7 +1,9 @@
 import { cn } from '@/lib/utils'
+import type { Ownership } from '@/schemas/project'
+
+export type { Ownership }
 
 // Ownership labels from the profile brief (01 §5). The label text is the claim, so it always renders.
-export type Ownership = 'built' | 'built-solo' | 'extended' | 'contributed' | 'in-development'
 type BadgeVariant = 'built' | 'neutral' | 'development'
 
 const OWNERSHIP: Record<Ownership, { label: string; variant: BadgeVariant }> = {

@@ -1,0 +1,386 @@
+[
+  {
+    "slug": "clientmanager",
+    "kind": "case-study",
+    "status": "published",
+    "featured": true,
+    "order": 1,
+    "title": "ClientManager",
+    "oneLiner": "Payments for five providers, embeddable forms and project planning inside a live client-management SaaS.",
+    "year": "Since 2025",
+    "role": "Full-stack engineer (client work)",
+    "context": "client",
+    "ownership": "built",
+    "ownershipDetail": "payments, forms, Gantt and Team tab",
+    "platform": "Web app and client portal",
+    "stack": ["React", "Redux", "Node.js", "Express", "MongoDB", "Next.js", "Socket.IO"],
+    "blocks": [
+      {
+        "type": "overview",
+        "heading": "Overview",
+        "body": "ClientManager is an all-in-one SaaS for agencies and freelancers. Clients, projects, proposals, contracts, invoices and payments live in one place, and the product has real users and a team of developers. I joined in late 2025 with small fixes. Since January 2026 I have owned whole modules: the payment system, the Forms module, invoice templates, Gantt planning and the new AI assistant."
+      },
+      {
+        "type": "role",
+        "heading": "What I owned",
+        "body": "Every module below is live in production except the AI assistant.",
+        "items": [
+          "Payment system: built",
+          "Forms and bookings: built",
+          "Gantt charts and Team tab: built",
+          "Invoices and templates: built and extended",
+          "Projects and tasks: extended",
+          "Questionnaires: extended",
+          "AI assistant: in development"
+        ]
+      },
+      {
+        "type": "challenge",
+        "title": "One payment system, five providers",
+        "problem": "Agencies get paid through Stripe, PayPal, Square, Authorize.Net and Venmo. Each provider has its own sign-in flow, its own checkout and its own idea of when an invoice counts as paid. Each agency connects its own account, so payment notifications never reach ClientManager itself.",
+        "approach": "I designed one payment layer that every provider plugs into. A workspace connects its provider once and the credentials are stored encrypted. Every provider answers the same four requests: create a payment link, check its status, close the link and finish the connection. One job checks pending invoices for all providers, and the invoice page checks again when a client comes back from paying. Every path that can mark an invoice paid goes through a single step, so an invoice is marked paid exactly once and fires one invoice-paid event.",
+        "result": "Five providers run on one design, and adding the fifth meant writing a new adapter. Along the way I caught a currency bug that would have charged Japanese yen and Korean won 100 times over; it was fixed and tested before release. Switching provider can no longer leave behind a link that gets paid twice.",
+        "diagram": "payment-layer"
+      },
+      {
+        "type": "challenge",
+        "title": "Forms that turn website visitors into paying clients",
+        "problem": "Agencies wanted to capture leads, take bookings and sell services from their own websites, with everything landing in ClientManager.",
+        "approach": "I built the Forms module end to end. It has a step-by-step builder for contact, appointment and service forms, a small embed script that places a form inline, as a popup or as a floating button, and booking that works across team members and time zones. In the Quick Hire flow a visitor picks a fixed-price service, verifies their email, signs the agreement and pays. The paid invoice then creates the client, deal, contract, project and portal access.",
+        "result": "Builder changes used to miss forms already on customer sites, because the settings were baked into the pasted code. I moved the settings to the server so the snippet only carries an ID, and updates now reach live sites in about a minute. I also stopped half-filled forms from using up the spam limit meant for real submissions, made public forms load about three times faster in development by running lookups in parallel, and made one loader handle every form on a page.",
+        "diagram": "forms-pipeline"
+      },
+      {
+        "type": "challenge",
+        "title": "Planning that teams can actually see",
+        "problem": "Projects and tasks existed, but teams couldn't see timelines or who was working on what, and progress numbers didn't always match task statuses.",
+        "approach": "I built two Gantt views, including a timeline grouped by team member that the chart library couldn't draw on its own, and a Team tab with stats, roles and rates for each project. I added bulk create, assign and delete for tasks and milestones, drag-to-reorder, and turning tasks into subtasks. Task status became the single source of truth, so progress is weighted by real status and counts subtasks. I also rebuilt how project-team access is stored, so being on a project grants exactly what it should.",
+        "result": "Teams plan visually, update tasks in bulk and can trust the progress numbers."
+      },
+      {
+        "type": "callout",
+        "badge": "in-development",
+        "title": "AI assistant",
+        "body": "I'm building ClientManager's AI assistant on Claude: a supervisor agent that hands work to separate agents for clients and contacts. It has 27 tools. Reading data happens automatically, and changing data asks the user for approval first. Runs survive server restarts and every action happens exactly once. The foundation and the first two agents are built and tested; it isn't released yet."
+      },
+      {
+        "type": "scopeFacts",
+        "items": [
+          { "value": "~780", "label": "Commits across 3 repos in about 14 months" },
+          { "value": "5", "label": "Payment providers on one design" },
+          { "value": "240", "label": "Automated tests on shipped modules" },
+          { "value": "3", "label": "Apps: web app, client portal and embed script" }
+        ]
+      },
+      {
+        "type": "stack",
+        "groups": [
+          { "label": "Frontend", "items": ["React 18", "Redux Toolkit", "Tailwind CSS", "Socket.IO", "frappe-gantt"] },
+          { "label": "Backend", "items": ["Node.js", "Express", "MongoDB", "Mongoose", "node-cron", "Jest", "supertest"] },
+          { "label": "Client portal", "items": ["Next.js 14", "NextAuth"] },
+          { "label": "Payments", "items": ["Stripe Connect", "PayPal", "Square", "Authorize.Net", "Braintree (Venmo)"] },
+          { "label": "AI", "items": ["Claude (Anthropic SDK)", "Managed agents"] }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "blarecast",
+    "kind": "case-study",
+    "status": "published",
+    "featured": true,
+    "order": 2,
+    "title": "Blarecast",
+    "oneLiner": "A pay-per-listen music-streaming app I built solo in React Native, from the playback engine to payments.",
+    "year": "2025",
+    "role": "Mobile engineer (client work at Codart)",
+    "context": "client",
+    "ownership": "built-solo",
+    "ownershipDetail": "the whole mobile app",
+    "platform": "iOS and Android",
+    "stack": ["React Native", "Expo", "Supabase", "Redux Toolkit", "RTK Query", "React Native Track Player", "Stripe"],
+    "blocks": [
+      {
+        "type": "overview",
+        "heading": "Overview",
+        "body": "Blarecast is a music-streaming app where listeners buy listening packages instead of paying a flat subscription, with AI-curated playlists on top. I was a web developer when Codart gave me the project. I spent about a week learning React Native, then built the app on my own."
+      },
+      {
+        "type": "role",
+        "heading": "What I built",
+        "body": "The whole mobile app, working from the product's design direction.",
+        "items": [
+          "Pay-per-listen business logic",
+          "Supabase auth and data",
+          "Google and Apple sign-in",
+          "Stripe mobile payments",
+          "Redux Toolkit and RTK Query data layer",
+          "Playback with a queue, shuffle, loop, background play and Google Cast",
+          "Offline downloads",
+          "AI playlist creation and advanced search"
+        ]
+      },
+      {
+        "type": "challenge",
+        "title": "Rebuilding the playback engine",
+        "problem": "The app started on Expo AV, which couldn't handle a queue, shuffle, loop or background playback.",
+        "approach": "I migrated playback to React Native Track Player and rebuilt the player around it.",
+        "result": "A stable, full music player that keeps playing in the background.",
+        "diagram": "playback-architecture"
+      },
+      {
+        "type": "challenge",
+        "title": "Google sign-in that broke only in production",
+        "problem": "Google sign-in worked in development and failed in the production build.",
+        "approach": "I lined up the Google Cloud OAuth credentials, the Supabase configuration, the Expo redirect URLs and the production build settings.",
+        "result": "Sign-in works in both environments."
+      },
+      {
+        "type": "challenge",
+        "title": "A plan selector built from custom shapes",
+        "problem": "The plan-selection screen used complex shapes that standard mobile components couldn't draw.",
+        "approach": "I studied how the web version built them, then recreated the shapes with custom SVG components and positioning logic.",
+        "result": "The plan screen works on mobile with the same shapes, and its purchases run through Stripe's mobile payment flow, connected to the listening-package logic."
+      },
+      {
+        "type": "scopeFacts",
+        "items": [
+          { "value": "Solo", "label": "Built the whole mobile app" },
+          { "value": "1 week", "label": "Learning React Native before starting" },
+          { "value": "2", "label": "Sign-in providers in production" }
+        ]
+      },
+      {
+        "type": "stack",
+        "groups": [
+          { "label": "Mobile", "items": ["React Native", "Expo", "React Native Track Player"] },
+          { "label": "Data and auth", "items": ["Supabase", "Redux Toolkit", "RTK Query", "Google and Apple sign-in"] },
+          { "label": "Payments and casting", "items": ["Stripe", "Google Cast"] }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "your-business-date",
+    "kind": "case-study",
+    "status": "published",
+    "featured": true,
+    "order": 3,
+    "title": "Your Business Date",
+    "oneLiner": "A networking platform for professionals. I built the frontend and its logic, including a 9-step signup, live chat and video calls.",
+    "year": "2024 to 2025",
+    "role": "Frontend engineer (client work at Codart)",
+    "context": "client",
+    "ownership": "built",
+    "ownershipDetail": "the frontend and its logic",
+    "platform": "Web",
+    "stack": ["Next.js", "Redux Toolkit", "Socket.IO", "Agora", "Stripe", "Tailwind CSS"],
+    "blocks": [
+      {
+        "type": "overview",
+        "heading": "Overview",
+        "body": "Your Business Date is a subscription platform where career-focused professionals meet. It has onboarding, profile discovery with professional filters, messaging, audio and video calls, subscriptions, business advertising and events. It was my first project at Codart; I started on it a week after joining."
+      },
+      {
+        "type": "role",
+        "heading": "What I built",
+        "body": "The frontend and the logic behind it. I worked closely with the backend engineer on the API contracts.",
+        "items": [
+          "Frontend architecture in Next.js and Tailwind",
+          "API integration and frontend business logic",
+          "Redux Toolkit state",
+          "Stripe subscriptions",
+          "Real-time chat with Socket.IO",
+          "Audio and video calls with Agora",
+          "Animations with Framer Motion"
+        ]
+      },
+      {
+        "type": "challenge",
+        "title": "A 9-step signup that kept losing data",
+        "problem": "State and payload mismatches broke the nine-step registration.",
+        "approach": "I separated UI state from API state with Redux Toolkit.",
+        "result": "Data stays consistent across all nine steps.",
+        "diagram": "registration-state"
+      },
+      {
+        "type": "challenge",
+        "title": "Filters that returned the wrong people",
+        "problem": "The frontend's filter conditions didn't match the API contract, so discovery results were inaccurate.",
+        "approach": "I worked with the backend engineer to align the request structures with the API.",
+        "result": "The filters now send what the API expects."
+      },
+      {
+        "type": "challenge",
+        "title": "My first real-time chat",
+        "problem": "The chat needed live messages, read state, file, image and document sharing, and emoji.",
+        "approach": "I built it on Socket.IO, wiring the events and listeners and keeping message state in sync.",
+        "result": "It showed me how much harder real-time state is than normal request and response UI.",
+        "diagram": "chat-events"
+      },
+      {
+        "type": "challenge",
+        "title": "Video calls that kept dropping",
+        "problem": "Agora calls had connection and lifecycle bugs.",
+        "approach": "I studied token handling, channel sync and the SDK's event flow, then fixed the call lifecycle.",
+        "result": "Calls became stable."
+      },
+      {
+        "type": "scopeFacts",
+        "items": [
+          { "value": "9", "label": "Signup steps kept in sync" },
+          { "value": "2", "label": "Real-time systems: chat and calls" }
+        ]
+      },
+      {
+        "type": "stack",
+        "groups": [
+          { "label": "Frontend", "items": ["Next.js", "Tailwind CSS", "Redux Toolkit", "Framer Motion"] },
+          { "label": "Real-time", "items": ["Socket.IO", "Agora SDK"] },
+          { "label": "Platform", "items": ["Firebase", "Stripe", "Webhooks", "Email services"] }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "learning-cms",
+    "kind": "note",
+    "status": "published",
+    "featured": false,
+    "order": 4,
+    "title": "Learning platform and CMS",
+    "oneLiner": "A public learning site with an admin page builder. I built the Next.js frontend and the Laravel backend in about three weeks.",
+    "year": "2026",
+    "role": "Full-stack engineer at Codart",
+    "context": "company",
+    "ownership": "built",
+    "ownershipDetail": "frontend and backend",
+    "platform": "Web",
+    "stack": ["Next.js", "Tailwind CSS", "Laravel"],
+    "blocks": [
+      {
+        "type": "overview",
+        "heading": "What it is",
+        "body": "The app has two sides: a public, read-only side and an admin side for building and managing pages, similar to a CMS. It was my last project at Codart."
+      },
+      {
+        "type": "role",
+        "heading": "What I did",
+        "body": "I built both sides in about three weeks.",
+        "items": []
+      },
+      {
+        "type": "overview",
+        "heading": "What I learned",
+        "body": "Laravel isn't my main stack. The CEO asked me to build the backend too, so I built it with AI assistance and reviewed what it produced."
+      }
+    ]
+  },
+  {
+    "slug": "e-axon",
+    "kind": "note",
+    "status": "published",
+    "featured": false,
+    "order": 5,
+    "title": "E-Axon",
+    "oneLiner": "My first client website: a multi-page Next.js site with reusable, data-driven service pages and GSAP animation.",
+    "year": "2024",
+    "role": "Frontend developer at Beyonds Logic",
+    "context": "client",
+    "ownership": "built",
+    "ownershipDetail": "the frontend",
+    "platform": "Web",
+    "stack": ["Next.js", "React", "Redux Toolkit", "Tailwind CSS", "GSAP"],
+    "blocks": [
+      {
+        "type": "overview",
+        "heading": "What it is",
+        "body": "A multi-page website for an agency's digital services, and my first real client delivery."
+      },
+      {
+        "type": "role",
+        "heading": "What I did",
+        "body": "I built the frontend.",
+        "items": [
+          "Reusable components and one dynamic template for every service page",
+          "Service data kept in a single Redux Toolkit store instead of a separate page per service",
+          "Responsive layouts",
+          "GSAP animations"
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "codebase-cleanup",
+    "kind": "note",
+    "status": "published",
+    "featured": false,
+    "order": 6,
+    "title": "Codebase cleanup",
+    "oneLiner": "I took over an AI-generated codebase for an Upwork client, restructured it and finished several modules in a month.",
+    "year": "2026",
+    "role": "Freelance developer (Upwork)",
+    "context": "freelance",
+    "ownership": "contributed",
+    "ownershipDetail": "cleanup and module work",
+    "stack": [],
+    "blocks": [
+      {
+        "type": "overview",
+        "heading": "What it was",
+        "body": "The client's product had been built mostly through AI \"vibe coding\" and needed structure before it could grow."
+      },
+      {
+        "type": "role",
+        "heading": "What I did",
+        "body": "Over about a month I reviewed the code, restructured it, cleaned up the implementation and completed several modules.",
+        "items": []
+      }
+    ]
+  },
+  {
+    "slug": "shahid-recovery-service",
+    "kind": "other",
+    "status": "published",
+    "featured": false,
+    "order": 7,
+    "title": "Shahid Recovery Service",
+    "oneLiner": "A landing page for a small towing and recovery business.",
+    "year": "2026",
+    "role": "Freelance developer",
+    "context": "freelance",
+    "ownership": "built",
+    "stack": [],
+    "blocks": []
+  },
+  {
+    "slug": "react-panelist",
+    "kind": "other",
+    "status": "published",
+    "featured": false,
+    "order": 8,
+    "title": "React Panelist",
+    "oneLiner": "UI work, bug fixes and features inside an existing panel-management app.",
+    "year": "2024",
+    "role": "Frontend developer at Beyonds Logic",
+    "context": "company",
+    "ownership": "contributed",
+    "stack": [],
+    "blocks": []
+  },
+  {
+    "slug": "sit-down-members",
+    "kind": "other",
+    "status": "published",
+    "featured": false,
+    "order": 9,
+    "title": "Sit Down Members",
+    "oneLiner": "UI work, bug fixes and features inside an existing member platform for business leaders.",
+    "year": "2024",
+    "role": "Frontend developer at Beyonds Logic",
+    "context": "company",
+    "ownership": "contributed",
+    "stack": [],
+    "blocks": []
+  }
+]

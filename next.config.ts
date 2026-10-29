@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Cache Components: public pages prerender to a static shell; content reads use 'use cache' + cacheTag,
+  // and admin saves expire exactly the affected tags (06-tech-spec §3).
+  cacheComponents: true,
+  partialPrefetching: true,
+
   // TypeScript configuration
   typescript: {
     ignoreBuildErrors: false,
