@@ -2,8 +2,10 @@ import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { z } from 'zod'
 import { ProjectModel } from '@/models/project'
+import { SectionModel } from '@/models/section'
 import { SettingsModel } from '@/models/settings'
 import { projectSchema } from '@/schemas/project'
+import { sectionSchema } from '@/schemas/section'
 import { settingsSchema } from '@/schemas/settings'
 
 // Loads content/seed/*.json into MongoDB. Every item is validated first; nothing is written if any item is invalid.
@@ -19,21 +21,29 @@ async function readJson(file: string): Promise<unknown> {
 export async function loadSeedFiles() {
   const settings = settingsSchema.parse(await readJson('settings.json'))
   const projects = z.array(projectSchema).parse(await readJson('projects.json'))
+  const sections = z.array(sectionSchema).parse(await readJson('sections.json'))
 
-  const slugs = projects.map((p) => p.slug)
-  const duplicate = slugs.find((slug, i) => slugs.indexOf(slug) !== i)
-  if (duplicate) throw new Error(`Duplicate project slug in projects.json: ${duplicate}`)
+  assertUnique(projects.map((p) => p.slug), 'project slug in projects.json')
+  assertUnique(sections.map((s) => `${s.page}/${s.key}`), 'section in sections.json')
 
-  return { settings, projects }
+  return { settings, projects, sections }
+}
+
+function assertUnique(values: string[], what: string) {
+  const duplicate = values.find((value, i) => values.indexOf(value) !== i)
+  if (duplicate) throw new Error(`Duplicate ${what}: ${duplicate}`)
 }
 
 export async function seedContent() {
-  const { settings, projects } = await loadSeedFiles()
+  const { settings, projects, sections } = await loadSeedFiles()
 
   await SettingsModel.updateOne({ key: 'site' }, { $set: { value: settings } }, { upsert: true })
   for (const project of projects) {
     await ProjectModel.replaceOne({ slug: project.slug }, project, { upsert: true })
   }
+  for (const section of sections) {
+    await SectionModel.replaceOne({ page: section.page, key: section.key }, section, { upsert: true })
+  }
 
-  return { settings: 1, projects: projects.length }
+  return { settings: 1, projects: projects.length, sections: sections.length }
 }

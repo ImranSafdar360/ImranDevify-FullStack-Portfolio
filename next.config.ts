@@ -64,16 +64,8 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // Cache static assets
-      {
-        source: "/(.*)\\.(ico|png|jpg|jpeg|gif|webp|svg|css|js)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
+      // No blanket Cache-Control here: Next already serves /_next/static as immutable in production, and forcing it
+      // on every .css/.js also froze dev chunks (stable names, changing content) and unhashed /public files.
     ];
   },
 

@@ -19,7 +19,7 @@ function mockReducedMotion(reduce: boolean) {
 }
 
 // jsdom has no layout, so fake every element's position before AnimEngine's layout effect reads it.
-function renderPage({ top }: { top: number }) {
+function renderPage({ top, anim = 'slide' }: { top: number; anim?: string }) {
   vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockReturnValue({
     top,
     bottom: top + 100,
@@ -33,7 +33,7 @@ function renderPage({ top }: { top: number }) {
   })
   const utils = render(
     <>
-      <p data-anim="slide" data-testid="target">
+      <p data-anim={anim} data-testid="target">
         Live products. Real users.
       </p>
       <AnimEngine />
@@ -65,5 +65,11 @@ describe('AnimEngine', () => {
     mockReducedMotion(false)
     const el = renderPage({ top: 2000 })
     expect(el.style.opacity).toBe('0')
+  })
+
+  it('binds the hero wordmark handoff on screen without hiding it at load', () => {
+    mockReducedMotion(false)
+    const el = renderPage({ top: 100, anim: 'nav-flip' })
+    expect(el.style.opacity).not.toBe('0')
   })
 })

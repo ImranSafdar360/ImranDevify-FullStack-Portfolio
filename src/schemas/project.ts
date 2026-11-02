@@ -1,18 +1,10 @@
 import { z } from 'zod'
+import { imageSchema, text } from './common'
 
 // Projects (06-tech-spec §5). Ownership labels are the honesty contract from the profile brief (01 §5):
 // a project can only claim one of these five.
 export const OWNERSHIP = ['built', 'built-solo', 'extended', 'contributed', 'in-development'] as const
 export type Ownership = (typeof OWNERSHIP)[number]
-
-const text = z.string().trim().min(1)
-
-const imageSchema = z.object({
-  src: text,
-  alt: text, // required: every image needs a description
-  width: z.number().int().positive().optional(),
-  height: z.number().int().positive().optional(),
-})
 
 // Case-study building blocks (04 §5, 03 §4.3). The `type` decides which fields are required.
 export const blockSchema = z.discriminatedUnion('type', [

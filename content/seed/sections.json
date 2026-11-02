@@ -1,0 +1,22 @@
+[
+  {
+    "page": "home",
+    "key": "hero",
+    "type": "hero",
+    "order": 1,
+    "visible": true,
+    "content": {
+      "wordmark": "Imran Safdar",
+      "scriptLabel": "Hi, I'm Imran",
+      "headline": "Full-stack engineer for products that are already live.",
+      "intro": "I've spent 2+ years shipping inside real SaaS and mobile products: a payment system for five providers, embeddable forms that turn visitors into clients, real-time chat and video calls, and a music-streaming app I built solo in React Native.",
+      "cta": { "label": "See the case studies", "href": "#cases" },
+      "secondary": { "label": "Download resume", "href": "/resume.pdf" },
+      "frames": [
+        { "label": "ClientManager", "variant": "desktop" },
+        { "label": "Blarecast", "variant": "phone" },
+        { "label": "Your Business Date", "variant": "card" }
+      ]
+    }
+  }
+]

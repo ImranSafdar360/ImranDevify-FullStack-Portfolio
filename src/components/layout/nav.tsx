@@ -118,14 +118,19 @@ export function Nav({ resumeHref, emailHiring, timeZone, city }: NavProps) {
           isChip ? 'pointer-events-none' : 'max-[899px]:pointer-events-none max-[899px]:opacity-0',
         )}
       >
-        <Link
-          href="/"
-          data-nav-anim=""
-          style={barLogo.style}
-          className={cn(barLogo.className, 'font-display text-[1.35rem] font-bold uppercase tracking-[-0.04em] text-text no-underline')}
-        >
-          {SITE.shortName}
-        </Link>
+        {/* On Home the hero wordmark is the name, and it flies into the chip; the bar's slot stays empty (04 §0). */}
+        {pathname === '/' ? (
+          <span aria-hidden="true" />
+        ) : (
+          <Link
+            href="/"
+            data-nav-anim=""
+            style={barLogo.style}
+            className={cn(barLogo.className, 'font-display text-[1.35rem] font-bold uppercase tracking-[-0.04em] text-text no-underline')}
+          >
+            {SITE.shortName}
+          </Link>
+        )}
         <ul className="m-0 flex list-none gap-7 p-0 text-[0.95rem]">
           {SITE.nav.map((item, i) => {
             const anim = reveal(showBar, i + 1, BAR_TIMING)

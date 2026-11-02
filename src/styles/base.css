@@ -33,6 +33,54 @@
   --ease-out-strong: var(--ease-out-strong);
   --ease-drawer: var(--ease-drawer);
 
+  /* Hero: screenshots rise behind a mask, props pop in then float, and the availability pulse. */
+  --animate-rise: rise 1.1s var(--ease-ui) both;
+  --animate-pop: pop 0.6s var(--ease-out-strong) both;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-live-pulse: live-pulse 2s ease-out infinite;
+
+  @keyframes rise {
+    from {
+      clip-path: inset(100% -50% -50% -50%);
+      translate: 0 32px;
+    }
+    /* Negative insets at the end so the frame's drop shadow is not clipped once revealed. */
+    to {
+      clip-path: inset(-50% -50% -50% -50%);
+      translate: 0 0;
+    }
+  }
+
+  @keyframes pop {
+    from {
+      opacity: 0;
+      scale: 0.6;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -10px;
+    }
+  }
+
+  @keyframes live-pulse {
+    0% {
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent);
+    }
+    100% {
+      box-shadow: 0 0 0 10px transparent;
+    }
+  }
+
   /* Three-dot loader wave in the nav chip: each dot swells, lifts and turns accent in turn. */
   --animate-nav-dot: nav-dot 1.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 
@@ -91,6 +139,21 @@
   background:
     linear-gradient(var(--text-3), var(--text-3)) center / 100% 1px no-repeat,
     linear-gradient(var(--text-3), var(--text-3)) center / 1px 100% no-repeat;
+}
+
+/* "Inflated" 3D-style prop (03 §4.6): placeholder for pre-rendered props until Step 6 assets. */
+@utility inflated-prop {
+  background: radial-gradient(
+    circle at 30% 25%,
+    color-mix(in srgb, var(--accent) 55%, white) 0%,
+    var(--accent) 45%,
+    color-mix(in srgb, var(--accent) 60%, black) 100%
+  );
+  box-shadow:
+    inset -8px -10px 18px rgb(0 0 0 / 0.35),
+    inset 6px 8px 14px rgb(255 255 255 / 0.35),
+    0 20px 40px -12px rgb(0 0 0 / 0.7);
+  color: var(--accent-ink);
 }
 
 /* Diagonal hatch spacer between sections. */

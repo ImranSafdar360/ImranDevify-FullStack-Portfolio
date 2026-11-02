@@ -4,6 +4,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { openConnection } from '@/lib/db/connect'
 import { ProjectModel } from '@/models/project'
+import { SectionModel } from '@/models/section'
 import { SettingsModel } from '@/models/settings'
 import { loadSeedFiles, seedContent } from '../../scripts/seed-content'
 
@@ -55,6 +56,13 @@ describe('seed content', () => {
 
     expect(second).toEqual(first)
     expect(await ProjectModel.countDocuments()).toBe(first.projects)
+    expect(await SectionModel.countDocuments()).toBe(first.sections)
     expect(await SettingsModel.countDocuments()).toBe(1)
+  })
+
+  it('seeds the home hero with the approved headline', async () => {
+    const { sections } = await loadSeedFiles()
+    const hero = sections.find((s) => s.page === 'home' && s.type === 'hero')
+    expect(hero?.content.headline).toBe('Full-stack engineer for products that are already live.')
   })
 })

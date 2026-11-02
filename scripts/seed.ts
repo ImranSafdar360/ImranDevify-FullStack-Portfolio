@@ -9,7 +9,9 @@ async function main() {
 
   await openConnection(uri)
   const result = await seedContent()
-  console.log(`Seeded ${result.settings} settings document and ${result.projects} projects into "${mongoose.connection.name}".`)
+  console.log(
+    `Seeded ${result.settings} settings document, ${result.projects} projects and ${result.sections} sections into "${mongoose.connection.name}".`,
+  )
 }
 
 main()

@@ -21,7 +21,13 @@ export const DRAW = { duration: 1, start: 'top 75%' } as const
 
 export const LENIS_DURATION = 1.1
 
-export const ANIM_TYPES = ['lines', 'words', 'stagger', 'slide', 'mask', 'draw'] as const
+// Hero wordmark → nav chip handoff: scrubbed over the first `end` px of scroll, shrinking to `width` px.
+export const NAV_FLIP = { end: 220, width: 110, scrub: 0.3 } as const
+
+// Parallax drift: element moves up by data-speed × viewport height over the first viewport of scroll.
+export const PARALLAX = { defaultSpeed: 0.15 } as const
+
+export const ANIM_TYPES = ['lines', 'words', 'stagger', 'slide', 'mask', 'draw', 'nav-flip', 'parallax'] as const
 export type AnimType = (typeof ANIM_TYPES)[number]
 
 export function prefersReducedMotion(): boolean {
