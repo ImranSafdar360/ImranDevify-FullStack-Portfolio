@@ -13,6 +13,8 @@ export async function loadPageSections(page: Page): Promise<Section[]> {
   return docs.map(({ page, key, type, order, visible, content }) => sectionSchema.parse({ page, key, type, order, visible, content }))
 }
 
+// Cached for the life of the content; admin saves call updateTag(SECTIONS_TAG). In dev, after `npm run seed`, do a hard
+// refresh (Ctrl+Shift+R): it re-runs cached functions; a normal reload keeps serving the cached result.
 export async function getPageSections(page: Page): Promise<Section[]> {
   'use cache'
   cacheLife('max')

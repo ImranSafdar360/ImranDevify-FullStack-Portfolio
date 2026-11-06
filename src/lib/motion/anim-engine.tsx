@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import { useGSAP } from '@gsap/react'
-import { ANIM_TYPES, DRAW, EASE_REVEAL, EASE_UI, MASK, NAV_FLIP, PARALLAX, REVEAL, prefersReducedMotion, type AnimType } from './config'
+import { ANIM_TYPES, DRAW, EASE_REVEAL, EASE_UI, MASK, OUTLINE, REVEAL, prefersReducedMotion, type AnimType } from './config'
 import { gsap, registerGsap, SplitText } from './gsap'
 
 const FROM = { opacity: 0, y: REVEAL.y, scale: REVEAL.scale }
@@ -17,49 +17,7 @@ function isOnScreen(el: HTMLElement) {
   return rect.top < window.innerHeight && rect.bottom > 0
 }
 
-// Scroll-linked types start from the element's natural state, so they are safe on screen at load.
-const SCROLL_LINKED: readonly AnimType[] = ['nav-flip', 'parallax']
-
-// The hero wordmark shrinks and flies into the nav chip as the page scrolls, and reverses on the way back up.
-// Measured from the untransformed parent and size so refreshes (resize, fonts) never read a mid-flight transform.
-function navFlip(el: HTMLElement) {
-  const box = () => el.parentElement!.getBoundingClientRect()
-  const scale = () => NAV_FLIP.width / el.offsetWidth
-  const chipCenter = () => {
-    const nav = document.querySelector('nav[data-nav-shell]')?.getBoundingClientRect()
-    return { x: window.innerWidth / 2, y: nav ? nav.top + nav.height / 2 : 40 }
-  }
-
-  gsap
-    .timeline({
-      scrollTrigger: { start: 0, end: NAV_FLIP.end, scrub: NAV_FLIP.scrub, invalidateOnRefresh: true },
-      defaults: { ease: 'none' },
-    })
-    .to(el, {
-      transformOrigin: 'left top',
-      scale,
-      x: () => chipCenter().x - box().left - (el.offsetWidth * scale()) / 2,
-      // Element moves up by `end` px of scroll; offset that so it lands on the chip's centre.
-      y: () => chipCenter().y + NAV_FLIP.end - (box().top + window.scrollY) - (el.offsetHeight * scale()) / 2,
-      duration: 1,
-    })
-    .to(el, { opacity: 0, duration: 0.35 }, 0.65)
-}
-
-// Hero props drift upward as the page scrolls. Starts at scroll 0 with no offset, so nothing jumps when it binds.
-function parallax(el: HTMLElement) {
-  const speed = Number(el.dataset.speed) || PARALLAX.defaultSpeed
-  gsap.to(el, {
-    y: () => -speed * window.innerHeight,
-    ease: 'none',
-    scrollTrigger: { start: 0, end: () => window.innerHeight, scrub: true, invalidateOnRefresh: true },
-  })
-}
-
 function animate(el: HTMLElement, type: AnimType) {
-  if (type === 'nav-flip') return navFlip(el)
-  if (type === 'parallax') return parallax(el)
-
   const reveal = { duration: REVEAL.duration, ease: EASE_REVEAL, scrollTrigger: { trigger: el, start: REVEAL.start, once: true } }
 
   switch (type) {
@@ -97,10 +55,32 @@ function animate(el: HTMLElement, type: AnimType) {
         scrollTrigger: { trigger: el, start: DRAW.start, once: true },
       })
       break
+    case 'outline':
+      outline(el)
+      break
   }
 }
 
-// One engine for every scroll reveal: elements opt in with data-anim="lines|words|stagger|slide|mask|draw|nav-flip|parallax".
+// Each [data-line] holds the real text ([data-fill]) and an aria-hidden outline copy ([data-outline]) on top of it.
+const HIDDEN = 'inset(0% 100% 0% 0%)'
+const SHOWN = 'inset(0% 0% 0% 0%)'
+
+function outline(el: HTMLElement) {
+  const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: OUTLINE.start, once: true } })
+  el.querySelectorAll<HTMLElement>('[data-line]').forEach((line, i) => {
+    const stroke = line.querySelector<HTMLElement>('[data-outline]')
+    const fill = line.querySelector<HTMLElement>('[data-fill]')
+    if (!stroke || !fill) return
+    const at = i * OUTLINE.stagger
+    gsap.set(stroke, { opacity: 1, clipPath: HIDDEN })
+    gsap.set(fill, { clipPath: HIDDEN })
+    tl.to(stroke, { clipPath: SHOWN, duration: OUTLINE.outline, ease: EASE_UI }, at)
+      .to(fill, { clipPath: SHOWN, duration: OUTLINE.fill, ease: EASE_UI }, at + OUTLINE.outline - OUTLINE.overlap)
+      .to(stroke, { opacity: 0, duration: 0.4, ease: 'none' }, at + OUTLINE.outline - OUTLINE.overlap + OUTLINE.fill)
+  })
+}
+
+// One engine for every scroll reveal: elements opt in with data-anim="lines|words|stagger|slide|mask|draw|outline".
 // Re-runs on each route change; useGSAP reverts the previous page's animations and ScrollTriggers.
 export function AnimEngine() {
   const pathname = usePathname()
@@ -111,7 +91,7 @@ export function AnimEngine() {
       registerGsap()
       for (const el of gsap.utils.toArray<HTMLElement>('[data-anim]')) {
         const type = el.dataset.anim
-        if (isAnimType(type) && (SCROLL_LINKED.includes(type) || !isOnScreen(el))) animate(el, type)
+        if (isAnimType(type) && !isOnScreen(el)) animate(el, type)
       }
     },
     { dependencies: [pathname], revertOnUpdate: true },

@@ -63,6 +63,87 @@ describe('seed content', () => {
   it('seeds the home hero with the approved headline', async () => {
     const { sections } = await loadSeedFiles()
     const hero = sections.find((s) => s.page === 'home' && s.type === 'hero')
-    expect(hero?.content.headline).toBe('Full-stack engineer for products that are already live.')
+    if (hero?.type !== 'hero') throw new Error('hero section missing')
+    expect(hero.content.headline).toBe('Full-stack engineer for products that are already live.')
+  })
+
+  it('lists only integrations verified in the profile brief, straight after the hero', async () => {
+    const { sections } = await loadSeedFiles()
+    const strip = sections.find((s) => s.page === 'home' && s.type === 'integrations')
+    if (strip?.type !== 'integrations') throw new Error('integrations section missing')
+    // 01 §5–6: the five payment providers (Venmo via Braintree), Agora + Socket.io, Supabase + Firebase, Google/Apple sign-in.
+    expect(strip.content.items.map((i) => i.name)).toEqual([
+      'Stripe',
+      'PayPal',
+      'Square',
+      'Authorize.Net',
+      'Braintree · Venmo',
+      'Agora',
+      'Socket.io',
+      'Supabase',
+      'Firebase',
+      'Google Sign-In',
+      'Sign in with Apple',
+    ])
+    const home = sections.filter((s) => s.page === 'home').sort((a, b) => a.order - b.order)
+    expect(home.slice(0, 2).map((s) => s.type)).toEqual(['hero', 'integrations'])
+  })
+
+  it('gives every integration a real brand mark, except the two shown without one', async () => {
+    const { BRAND_ICONS } = await import('@/features/home/integrations/brand-icons')
+    const { sections } = await loadSeedFiles()
+    const strip = sections.find((s) => s.type === 'integrations')
+    if (strip?.type !== 'integrations') throw new Error('integrations section missing')
+    const withoutMark = strip.content.items.filter((i) => !i.icon || !(i.icon in BRAND_ICONS))
+    // Authorize.Net has no published mark (neutral card glyph); Agora's mark is a wordmark (name only).
+    expect(withoutMark).toEqual([
+      { name: 'Authorize.Net', icon: 'card' },
+      { name: 'Agora' },
+    ])
+  })
+
+  it('opens the capabilities with the decided statement, last line in accent, and its annotation', async () => {
+    const { sections } = await loadSeedFiles()
+    const capabilities = sections.find((s) => s.page === 'home' && s.type === 'capabilities')
+    if (capabilities?.type !== 'capabilities') throw new Error('capabilities section missing')
+    expect(capabilities.content.intro).toEqual({
+      lines: ['Live products.', 'Real users.', 'Real consequences.'],
+      accentLine: 2,
+      annotation: 'Most of my work is inside products people already pay for. That changes how carefully you build.',
+    })
+  })
+
+  it('backs every capability with published projects ("Seen in" links resolve)', async () => {
+    const { sections, projects } = await loadSeedFiles()
+    const capabilities = sections.find((s) => s.page === 'home' && s.type === 'capabilities')
+    if (capabilities?.type !== 'capabilities') throw new Error('capabilities section missing')
+
+    const published = new Set(projects.filter((p) => p.status === 'published').map((p) => p.slug))
+    expect(capabilities.content.rows).toHaveLength(6)
+    for (const row of capabilities.content.rows) {
+      for (const slug of row.seenIn) expect(published, `${row.title} → ${slug}`).toContain(slug)
+    }
+  })
+
+  it('backs every capability with a proof, and never presents the AI agents as released', async () => {
+    const { sections } = await loadSeedFiles()
+    const capabilities = sections.find((s) => s.type === 'capabilities')
+    if (capabilities?.type !== 'capabilities') throw new Error('capabilities section missing')
+    for (const row of capabilities.content.rows) expect(row.proof?.points.length, row.title).toBeGreaterThan(0)
+
+    const ai = capabilities.content.rows.find((r) => r.title === 'AI agents')
+    expect(ai?.proof?.points).toContain('In development on a dev branch, not released yet')
+    // Payments: the five providers from 01 §5 (Venmo via Braintree).
+    const payments = capabilities.content.rows.find((r) => r.title === 'Payments & invoicing')
+    expect(payments?.proof?.figure?.value).toBe('5')
+    expect(payments?.proof?.marks.map((m) => m.name)).toEqual(['Stripe', 'PayPal', 'Square', 'Authorize.Net', 'Braintree · Venmo'])
+  })
+
+  it('marks only the AI agents capability as in development', async () => {
+    const { sections } = await loadSeedFiles()
+    const capabilities = sections.find((s) => s.type === 'capabilities')
+    if (capabilities?.type !== 'capabilities') throw new Error('capabilities section missing')
+    const inDevelopment = capabilities.content.rows.filter((r) => r.inDevelopment).map((r) => r.title)
+    expect(inDevelopment).toEqual(['AI agents'])
   })
 })

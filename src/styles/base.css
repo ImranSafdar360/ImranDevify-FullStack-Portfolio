@@ -33,44 +33,8 @@
   --ease-out-strong: var(--ease-out-strong);
   --ease-drawer: var(--ease-drawer);
 
-  /* Hero: screenshots rise behind a mask, props pop in then float, and the availability pulse. */
-  --animate-rise: rise 1.1s var(--ease-ui) both;
-  --animate-pop: pop 0.6s var(--ease-out-strong) both;
-  --animate-float: float 6s ease-in-out infinite;
+  /* Availability pulse in the hero. */
   --animate-live-pulse: live-pulse 2s ease-out infinite;
-
-  @keyframes rise {
-    from {
-      clip-path: inset(100% -50% -50% -50%);
-      translate: 0 32px;
-    }
-    /* Negative insets at the end so the frame's drop shadow is not clipped once revealed. */
-    to {
-      clip-path: inset(-50% -50% -50% -50%);
-      translate: 0 0;
-    }
-  }
-
-  @keyframes pop {
-    from {
-      opacity: 0;
-      scale: 0.6;
-    }
-    to {
-      opacity: 1;
-      scale: 1;
-    }
-  }
-
-  @keyframes float {
-    0%,
-    100% {
-      translate: 0 0;
-    }
-    50% {
-      translate: 0 -10px;
-    }
-  }
 
   @keyframes live-pulse {
     0% {
@@ -81,10 +45,24 @@
     }
   }
 
-  /* Three-dot loader wave in the nav chip: each dot swells, lifts and turns accent in turn. */
-  --animate-nav-dot: nav-dot 1.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  /* Dock settles up from the bottom edge on load. */
+  --animate-dock-in: dock-in 0.6s var(--ease-out-strong) both;
 
-  @keyframes nav-dot {
+  @keyframes dock-in {
+    from {
+      opacity: 0;
+      translate: 0 20px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  /* Loader-wave dots in the scrolled dock chip: each swells, lifts and turns accent in turn. */
+  --animate-dock-dot: dock-dot 1.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+
+  @keyframes dock-dot {
     0%,
     80%,
     100% {
@@ -132,49 +110,123 @@
   }
 }
 
-/* "+" crosshair where section rules meet the frame rails (05-theme §3.1). */
-@utility plus-marker {
-  width: 15px;
-  height: 15px;
-  background:
-    linear-gradient(var(--text-3), var(--text-3)) center / 100% 1px no-repeat,
-    linear-gradient(var(--text-3), var(--text-3)) center / 1px 100% no-repeat;
-}
-
-/* "Inflated" 3D-style prop (03 §4.6): placeholder for pre-rendered props until Step 6 assets. */
-@utility inflated-prop {
-  background: radial-gradient(
-    circle at 30% 25%,
-    color-mix(in srgb, var(--accent) 55%, white) 0%,
-    var(--accent) 45%,
-    color-mix(in srgb, var(--accent) 60%, black) 100%
-  );
-  box-shadow:
-    inset -8px -10px 18px rgb(0 0 0 / 0.35),
-    inset 6px 8px 14px rgb(255 255 255 / 0.35),
-    0 20px 40px -12px rgb(0 0 0 / 0.7);
-  color: var(--accent-ink);
-}
-
 /* Diagonal hatch spacer between sections. */
 @utility hatch-band {
   background: repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 11px);
 }
 
-/* Reduced motion for the morphing nav: no movement, blur or stagger, only a quick fade. */
-@media (prefers-reduced-motion: reduce) {
-  [data-nav-anim] {
-    transform: none !important;
-    translate: none !important;
-    scale: none !important;
-    filter: none !important;
-    transition-property: opacity !important;
-    transition-duration: 120ms !important;
-    transition-delay: 0ms !important;
+/* Grunge texture for dark-band sections (05-theme §4: ~6% opacity behind the statement / Challenges bands).
+   Blotchy low-frequency noise, unlike the fine site grain. It drifts with scroll where scroll-driven animations
+   exist (pure CSS, no JS); elsewhere, and with reduced motion, it simply sits still. */
+@utility grunge-band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -12% 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='520'><filter id='g' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.0125 0.02' numOctaves='5' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 2.2 -0.9'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+    background-size: 520px 520px;
   }
-  nav[data-nav-shell] {
-    transition: none !important;
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      &::before {
+        animation: grunge-drift linear both;
+        animation-timeline: view();
+      }
+    }
   }
+}
+
+@keyframes grunge-drift {
+  from {
+    translate: 0 -9%;
+  }
+  to {
+    translate: 0 9%;
+  }
+}
+
+/* The outline copy for data-anim="outline": an accent-stroked, hollow duplicate laid over the real text. Hidden by
+   default, so without JS or with reduced motion only the real (solid) text shows. */
+@utility outline-copy {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Glossy pressable button surface — reverse-engineered from Aceternity's `t-surface`, mapped to our palette.
+   The fill, white sheen, gradient border and layered shadow all live on ::before, so the label stays above the gloss
+   and the surface (not the text) presses in on :active, exactly like the original. Variants only set the --s-* tokens.
+   background-color is a solid fallback (hidden under ::before) so contrast tools measure the label against it. */
+@utility surface {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    border: 1px solid transparent;
+    background:
+      var(--s-sheen, linear-gradient(transparent, transparent)) padding-box,
+      linear-gradient(var(--s-top), var(--s-fall)) padding-box,
+      linear-gradient(var(--s-edge-top), var(--s-edge-top), var(--s-edge-bottom)) border-box,
+      linear-gradient(var(--s-top), var(--s-fall)) border-box;
+    box-shadow:
+      0 0 0 1px var(--s-ring),
+      inset 0 -3px 6px -3px var(--s-shade),
+      0 2px 6px -1px var(--s-drop);
+    transition: scale 150ms var(--ease-out-strong);
+  }
+
+  &:active::before {
+    scale: 0.99;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before {
+      transition: none;
+    }
+  }
+}
+
+/* Primary: the blue CTA (our accent). background-color is accent-pressed so white text clears contrast. */
+@utility surface-primary {
+  background-color: var(--accent-pressed);
+  --s-top: var(--accent);
+  --s-fall: var(--accent-pressed);
+  --s-sheen: linear-gradient(color-mix(in srgb, white 16%, transparent), transparent 50%);
+  --s-edge-top: color-mix(in srgb, var(--accent) 66%, white);
+  --s-edge-bottom: color-mix(in srgb, var(--accent) 72%, black);
+  --s-ring: color-mix(in srgb, var(--accent) 56%, black);
+  --s-shade: color-mix(in srgb, color-mix(in srgb, var(--accent) 22%, black) 55%, transparent);
+  --s-drop: color-mix(in srgb, color-mix(in srgb, var(--accent) 22%, black) 30%, transparent);
+}
+
+/* Secondary: a dark neutral glossy surface for secondary actions. */
+@utility surface-secondary {
+  background-color: var(--surface-2);
+  --s-top: var(--line-strong);
+  --s-fall: var(--surface);
+  --s-sheen: linear-gradient(color-mix(in srgb, white 7%, transparent), transparent 50%);
+  --s-edge-top: color-mix(in srgb, white 12%, transparent);
+  --s-edge-bottom: var(--line);
+  --s-ring: var(--line-strong);
+  --s-shade: color-mix(in srgb, #000 42%, transparent);
+  --s-drop: color-mix(in srgb, #000 42%, transparent);
 }
 
 /* Static grain overlay (05-theme §4): one tiled SVG noise texture, never animated. */

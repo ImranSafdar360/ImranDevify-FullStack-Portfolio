@@ -10,12 +10,274 @@
       "scriptLabel": "Hi, I'm Imran",
       "headline": "Full-stack engineer for products that are already live.",
       "intro": "I've spent 2+ years shipping inside real SaaS and mobile products: a payment system for five providers, embeddable forms that turn visitors into clients, real-time chat and video calls, and a music-streaming app I built solo in React Native.",
-      "cta": { "label": "See the case studies", "href": "#cases" },
-      "secondary": { "label": "Download resume", "href": "/resume.pdf" },
+      "cta": {
+        "label": "See the case studies",
+        "href": "#cases"
+      },
+      "secondary": {
+        "label": "Download resume",
+        "href": "/resume.pdf"
+      },
       "frames": [
-        { "label": "ClientManager", "variant": "desktop" },
-        { "label": "Blarecast", "variant": "phone" },
-        { "label": "Your Business Date", "variant": "card" }
+        {
+          "label": "ClientManager",
+          "variant": "desktop"
+        },
+        {
+          "label": "Blarecast",
+          "variant": "phone"
+        },
+        {
+          "label": "Your Business Date",
+          "variant": "card"
+        }
+      ]
+    }
+  },
+  {
+    "page": "home",
+    "key": "integrations",
+    "type": "integrations",
+    "order": 2,
+    "visible": true,
+    "content": {
+      "label": "Integrated in production",
+      "items": [
+        {
+          "name": "Stripe",
+          "icon": "stripe"
+        },
+        {
+          "name": "PayPal",
+          "icon": "paypal"
+        },
+        {
+          "name": "Square",
+          "icon": "square"
+        },
+        {
+          "name": "Authorize.Net",
+          "icon": "card"
+        },
+        {
+          "name": "Braintree · Venmo",
+          "icon": "braintree"
+        },
+        {
+          "name": "Agora"
+        },
+        {
+          "name": "Socket.io",
+          "icon": "socket-io"
+        },
+        {
+          "name": "Supabase",
+          "icon": "supabase"
+        },
+        {
+          "name": "Firebase",
+          "icon": "firebase"
+        },
+        {
+          "name": "Google Sign-In",
+          "icon": "google"
+        },
+        {
+          "name": "Sign in with Apple",
+          "icon": "apple"
+        }
+      ]
+    }
+  },
+  {
+    "page": "home",
+    "key": "capabilities",
+    "type": "capabilities",
+    "order": 4,
+    "visible": true,
+    "content": {
+      "index": "02",
+      "label": "What I build",
+      "intro": {
+        "lines": [
+          "Live products.",
+          "Real users.",
+          "Real consequences."
+        ],
+        "accentLine": 2,
+        "annotation": "Most of my work is inside products people already pay for. That changes how carefully you build."
+      },
+      "title": "What I’m good at",
+      "rows": [
+        {
+          "title": "Payments & invoicing",
+          "line": "One payment system for Stripe, PayPal, Square, Authorize.Net, and Venmo. Invoices, recurring billing, and “paid” that’s marked exactly once.",
+          "seenIn": [
+            "clientmanager",
+            "blarecast",
+            "your-business-date"
+          ],
+          "icon": "payments",
+          "proof": {
+            "figure": {
+              "value": "5",
+              "caption": "payment providers behind one payment system"
+            },
+            "marks": [
+              {
+                "name": "Stripe",
+                "icon": "stripe"
+              },
+              {
+                "name": "PayPal",
+                "icon": "paypal"
+              },
+              {
+                "name": "Square",
+                "icon": "square"
+              },
+              {
+                "name": "Authorize.Net",
+                "icon": "card"
+              },
+              {
+                "name": "Braintree · Venmo",
+                "icon": "braintree"
+              }
+            ],
+            "points": [
+              "Invoices, templates and recurring billing in ClientManager",
+              "Stripe mobile payments tied to listening packages in Blarecast",
+              "Stripe subscriptions in Your Business Date"
+            ]
+          }
+        },
+        {
+          "title": "Forms, bookings & checkout",
+          "line": "Embeddable forms that capture leads, book meetings across time zones, and sell services, straight into the CRM.",
+          "seenIn": [
+            "clientmanager"
+          ],
+          "icon": "forms",
+          "proof": {
+            "figure": {
+              "value": "3",
+              "caption": "form types built end to end: contact, booking and service"
+            },
+            "points": [
+              "An embed loader that puts the forms on any website",
+              "Quick Hire checkout for selling services",
+              "Every entry goes straight into the CRM"
+            ],
+            "stack": [
+              "React",
+              "Redux",
+              "Node.js",
+              "MongoDB"
+            ]
+          }
+        },
+        {
+          "title": "Real-time features",
+          "line": "Live chat with Socket.io; audio and video calls with Agora; live updates in dashboards.",
+          "seenIn": [
+            "your-business-date",
+            "clientmanager"
+          ],
+          "icon": "realtime",
+          "proof": {
+            "marks": [
+              {
+                "name": "Socket.io",
+                "icon": "socket-io"
+              },
+              {
+                "name": "Agora"
+              }
+            ],
+            "points": [
+              "My first real-time chat: read state, file, image and document sharing, and emoji",
+              "Agora audio and video calls, made stable by working through tokens, channel sync and SDK events",
+              "Live updates in dashboards"
+            ]
+          }
+        },
+        {
+          "title": "Auth, roles & access",
+          "line": "JWT, role-based permissions, Google and Apple sign-in that works in production, not just locally.",
+          "seenIn": [
+            "blarecast",
+            "clientmanager"
+          ],
+          "icon": "auth",
+          "proof": {
+            "marks": [
+              {
+                "name": "Google Sign-In",
+                "icon": "google"
+              },
+              {
+                "name": "Sign in with Apple",
+                "icon": "apple"
+              },
+              {
+                "name": "Supabase",
+                "icon": "supabase"
+              }
+            ],
+            "points": [
+              "Google sign-in broke only in production. I fixed it by lining up the OAuth credentials, Supabase, Expo redirect URLs and build settings",
+              "JWT auth and role-based permissions"
+            ]
+          }
+        },
+        {
+          "title": "Mobile apps",
+          "line": "React Native + Expo: background audio, offline downloads, queue and playback control.",
+          "seenIn": [
+            "blarecast"
+          ],
+          "icon": "mobile",
+          "proof": {
+            "figure": {
+              "value": "1 week",
+              "caption": "to learn React Native, then I built Blarecast alone"
+            },
+            "points": [
+              "Playback on React Native Track Player: queue, shuffle, loop and background play",
+              "Offline downloads, AI playlists and Google Cast"
+            ],
+            "stack": [
+              "React Native",
+              "Expo",
+              "Supabase",
+              "Redux Toolkit"
+            ]
+          }
+        },
+        {
+          "title": "AI agents",
+          "line": "Claude-based agents that read and change CRM data through safe tools, with user approval before every change.",
+          "seenIn": [
+            "clientmanager"
+          ],
+          "icon": "agents",
+          "inDevelopment": true,
+          "proof": {
+            "figure": {
+              "value": "27",
+              "caption": "tools across a supervisor and 2 agents"
+            },
+            "points": [
+              "Every change to CRM data waits for the user’s approval",
+              "In development on a dev branch, not released yet"
+            ],
+            "stack": [
+              "Claude",
+              "Anthropic SDK"
+            ]
+          }
+        }
       ]
     }
   }

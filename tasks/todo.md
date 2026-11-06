@@ -214,8 +214,9 @@ All are added to the styleguide.
 - Placeholder pages for `/work`, `/about`, `/contact` (noindex), so nav links never 404. They are replaced by T19, T23, T18a.
 - Buttons render a plain `<a>` for files, external links, and mailto.
 - `/resume.pdf` doesn't exist until the ATS resume task.
+- **Superseded in Phase 3 (5–6 Nov, Imran's decision):** the top morphing nav was replaced by a bottom-centre macOS-style **dock** (`src/components/layout/dock.tsx`, `e2e/dock.spec.ts`; `nav.tsx` and `nav.spec.ts` deleted). Logo · icon links (magnify on hover, tooltip, active dot) · Résumé `SurfaceButton`. It collapses to a chip (logo + loader-wave dots) once scrolled, and expands at the top or on hover / focus. With touch it stays full. The links stay in the a11y tree while collapsed; focus re-expands it.
 
-**Verify:** e2e `nav.spec.ts`; browser at 1440 / 520; axe.
+**Verify:** e2e `dock.spec.ts` (was `nav.spec.ts`); browser at 1440 / 520; axe.
 
 **Deps:** T6, T7. **Files:** `src/components/layout/{nav,footer,clock}.tsx`, `e2e/nav.spec.ts`. **Size:** M
 
@@ -347,29 +348,53 @@ All are added to the styleguide.
 - Right side: screenshot composition with placeholder frames + placeholder props.
 - GSAP Flip moves the wordmark into the nav chip on scroll.
 
-**Acceptance:**
-- [ ] Matches 04 §1 copy from the DB.
-- [ ] LCP element is text (not an image).
-- [ ] Flip reverses at the top.
-- [ ] With reduced motion, the chip simply appears.
+**Changed during build (5–6 Nov, Imran's decisions):**
+- No Flip into a nav chip: the nav became the bottom dock (see T8 notes), which does its own collapse to a chip.
+- No screenshot composition on the right. The hero is a **type-specimen sheet**: status row (script label · availability + clock), the name drawn across the frame by `TechText` (vendored from React Bits, `src/components/ui/tech-text.tsx`) with labelled guide lines and dashed-outline letters under the cursor, then a three-part footer (headline · intro · CTAs). Phones stack first / last name. The schema's `frames` field is unused for now.
+- New reusable pieces made along the way: `SurfaceButton` (glossy primary / secondary / ghost, sm–lg, optional icon, hover roll), `SectionDivider` (hatch band with corner brackets), `Divider`, `AppLink`, icon set.
 
-**Verify:** e2e (hero visible, CTA → `#cases`); browser; Lighthouse on `/` (LCP < 2.5s).
+**Acceptance:** ✅ **Done 6 Nov**
+- [x] Matches 04 §1 copy from the DB (script label, wordmark, headline, intro, CTA, resume link, availability + clock).
+- [x] LCP element is text: the intro `<p>` (540 ms desktop / 364 ms mobile on the dev server). The canvas wordmark is `aria-hidden`; a real `<h1>` holds the name.
+- [x] ~~Flip reverses at the top~~ → replaced: the dock collapses on scroll and expands again at the top (`e2e/dock.spec.ts`).
+- [x] With reduced motion: no TechText intro or sweep, no button roll, no dock magnify; everything is visible at once.
+
+**Verify:** e2e (hero visible, CTA → `#cases`); browser; Lighthouse on `/` (LCP < 2.5s). Re-measure LCP on the production build at Checkpoint 3.
 
 **Deps:** CP1, CP2. **Files:** `src/features/home/hero/*`, `src/models/section.ts`, `src/schemas/section.ts`, `src/lib/content/sections.ts`. **Size:** M
 
-### T13: Statement band + capabilities scroll list
+### T12b: Integrations strip (added 6 Nov, Imran's request)
 
-**Description:** "LIVE PRODUCTS. REAL USERS. REAL CONSEQUENCES." with grunge band; 6 capability rows. The active row is the one at the centre of the viewport. "Seen in →" links to case studies.
+**Description:** A small framed strip straight under the hero, from Imran's reference (a logo rail between hatch bands): a caption cell "Integrated in production" + a slow marquee of services wired into live products. Built on React Bits' **LogoLoop** (`src/components/ui/logo-loop.tsx`); the Aceternity logo blocks are Pro-only. Marks are monochrome simple-icons paths (CC0) kept in `src/features/home/integrations/brand-icons.ts`, so pages never load the package. Authorize.Net has no published mark (neutral card glyph); Agora's and Venmo's marks are wordmarks, unreadable at icon size (name only; Venmo shares Braintree's cell, as in 01 §5).
+
+**Acceptance:** ✅ **Done 6 Nov**
+- [x] Every item is verified in 01 §5–6; the seed test pins the exact list and that it comes right after the hero.
+- [x] Announced once to assistive tech (the marquee copies are `aria-hidden`); pauses on hover; still with reduced motion.
+- [x] Content lives in the DB (`integrations` section type), so the admin can edit it later.
+
+**Verify:** e2e `integrations.spec.ts`; browser at 1440 / 390.
+
+### T13: Statement + capabilities ("What I build")
+
+**Description:** "LIVE PRODUCTS. REAL USERS. REAL CONSEQUENCES." as the intro of the capabilities section, then the 6 capabilities in a sticky scroll. "Seen in →" links to case studies. (Originally a standalone grunge band + a scroll list with an active row; see Status.)
+
+**Status:** ✅ **Redesigned 6 Nov** (awaiting Imran's review). Path: first pass (standalone statement band + scroll list) rejected as hard to understand → a card grid (approved as a layout, but it showed all six at once) → Imran's call: a **sticky layout, one capability per screen**, with the **statement as the section's intro**. The card grid (React Bits' `SpotlightCard`, kept in `src/components/ui/spotlight-card.tsx`) moves to §6 "How I work".
+
+**Built as** (`src/features/home/capabilities/`), one section, "/ 02 / What I build":
+- Intro: the statement is the `<h2>` (LIVE PRODUCTS. / REAL USERS. / REAL CONSEQUENCES., last line accent) with its annotation beside it; `data-anim="outline"` reveal (plain solid text with no JS / reduced motion).
+- Sticky scroll (layout idea from Aceternity's `sticky-scroll-reveal`, rebuilt without `motion` and without its inner scroll box): the list scrolls on the left, one capability per screen (05 "Capability row": inactive `--text-4`, the active one `--text`, slides 10px, accent number). A sticky `BezelCard` on the right shows its **proof**: icon tile, `01 / 06` counter, a key figure (Mohave, accent), the services behind it as marks, verified facts, stack `Pill`s, and a 6-step progress rail. Panel swap: CSS transition, 260 ms `--ease-out-strong`, 8px rise + 2px blur (emil-design-eng); reduced motion fades only.
+- Accessibility: each item carries its own proof (inline card on phones, screen-reader-only on desktop), so reading order stays in the list and the panel is an `aria-hidden` mirror. Active item = the one crossing the viewport centre (IntersectionObserver).
+- Content model: rows gained `proof` (`figure`, `marks`, `points`, `stack`), every line traced to 01 §5–6 / 04 §4; the standalone `statement` section type was removed (its copy is `capabilities.intro`; the old Atlas document was deleted).
 
 **Acceptance:**
-- [ ] Rows come from the DB.
-- [ ] The active state follows scroll.
-- [ ] Links resolve to existing slugs.
-- [ ] AI row shows the "In development" badge.
+- [x] Capabilities and proofs come from the DB (order 4; 3 stays free for the T14 carousel).
+- [x] The active state follows scroll, and the panel stays pinned while the list scrolls (e2e).
+- [x] Links resolve to existing slugs (seed test + renderer drops unknown slugs). They point at `/work/[slug]`, built in T20a / T22.
+- [x] Only AI agents shows "In development", and its proof says it isn't released (seed test + e2e).
 
-**Verify:** e2e (links); browser scroll check.
+**Verify:** e2e `capabilities.spec.ts` (14 pass, desktop + mobile, incl. reduced motion, read-once a11y, sticky position); browser at 1440 / 390; axe 0 serious.
 
-**Deps:** T12. **Files:** `src/features/home/{statement,capabilities}/*`. **Size:** M
+**Deps:** T12. **Files:** `src/features/home/capabilities/*`, `src/components/ui/spotlight-card.tsx`. **Size:** M
 
 ### T14: Featured case-study carousel (high risk, build early)
 

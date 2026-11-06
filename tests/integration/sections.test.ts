@@ -61,6 +61,32 @@ describe('section schema', () => {
   it('rejects an unknown section type', () => {
     expect(sectionSchema.safeParse({ ...hero(), type: 'carousel-of-everything' }).success).toBe(false)
   })
+
+  const capabilities = (rows: unknown[], intro?: Record<string, unknown>) =>
+    ({
+      page: 'home',
+      key: 'capabilities',
+      type: 'capabilities',
+      content: { index: '02', label: 'What I build', title: 'What I’m good at', rows, ...(intro && { intro }) },
+    }) as SectionInput
+  const row = { title: 'Payments', line: 'One payment system.', seenIn: ['clientmanager'] }
+
+  it('accepts a statement intro and rejects an accent line that points past the last line', () => {
+    expect(sectionSchema.safeParse(capabilities([row], { lines: ['Live products.', 'Real users.'], accentLine: 1 })).success).toBe(true)
+    expect(sectionSchema.safeParse(capabilities([row], { lines: ['Live products.'], accentLine: 1 })).success).toBe(false)
+  })
+
+  it('only accepts capability icons from the known set', () => {
+    expect(sectionSchema.safeParse(capabilities([{ ...row, icon: 'payments' }])).success).toBe(true)
+    expect(sectionSchema.safeParse(capabilities([{ ...row, icon: 'rocket' }])).success).toBe(false)
+  })
+
+  it('requires every capability to name at least one project by slug', () => {
+    const parsed = sectionSchema.parse(capabilities([row]))
+    expect(parsed.type === 'capabilities' && parsed.content.rows[0].inDevelopment).toBe(false)
+    expect(sectionSchema.safeParse(capabilities([{ ...row, seenIn: [] }])).success).toBe(false)
+    expect(sectionSchema.safeParse(capabilities([{ ...row, seenIn: ['Client Manager'] }])).success).toBe(false)
+  })
 })
 
 describe('page section reads', () => {
