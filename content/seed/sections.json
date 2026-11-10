@@ -91,6 +91,23 @@
   },
   {
     "page": "home",
+    "key": "cases",
+    "type": "cases",
+    "order": 3,
+    "visible": true,
+    "content": {
+      "index": "01",
+      "label": "Selected work",
+      "title": "Case studies",
+      "scriptLabel": "Real products",
+      "all": {
+        "label": "All projects",
+        "href": "/work"
+      }
+    }
+  },
+  {
+    "page": "home",
     "key": "capabilities",
     "type": "capabilities",
     "order": 4,
@@ -104,8 +121,14 @@
           "Real users.",
           "Real consequences."
         ],
+        "notes": [
+          "ClientManager is a production SaaS, live with real users",
+          "Agencies, freelancers and businesses run their whole client lifecycle on it",
+          "My work sits where mistakes cost money or trust: payments, access and live data"
+        ],
         "accentLine": 2,
-        "annotation": "Most of my work is inside products people already pay for. That changes how carefully you build."
+        "annotation": "Most of my work is inside products people already pay for. That changes how carefully you build.",
+        "scriptLabel": "Why it matters"
       },
       "title": "What I’m good at",
       "rows": [

@@ -4,7 +4,7 @@ const CASE_STUDIES = ['/work/clientmanager', '/work/blarecast', '/work/your-busi
 const LINES = ['Live products.', 'Real users.', 'Real consequences.']
 const section = (page: Page) => page.locator('#capabilities')
 const headline = (page: Page) => section(page).getByRole('heading', { level: 2 })
-const items = (page: Page) => section(page).locator('ol > li')
+const items = (page: Page) => section(page).locator('li[data-index]') // the six capability rows
 const panel = (page: Page) => section(page).locator('[data-capability-panel]')
 
 async function centre(page: Page, index: number) {
@@ -21,6 +21,27 @@ test.describe('what I build', () => {
     await expect(headline(page)).toHaveAccessibleName(LINES.join(' '))
     await expect(section(page).getByText('That changes how carefully you build.')).toBeVisible()
     await expect(section(page).getByText(/What I.m good at/i)).toBeVisible()
+  })
+
+  test('backs every statement line with an evidence note', async ({ page }) => {
+    await page.goto('/')
+    for (const note of [
+      'ClientManager is a production SaaS, live with real users',
+      'Agencies, freelancers and businesses run their whole client lifecycle on it',
+      'My work sits where mistakes cost money or trust: payments, access and live data',
+    ]) {
+      await expect(section(page).getByRole('listitem').filter({ hasText: note })).toHaveCount(1)
+    }
+    await expect(section(page).getByText('Why it matters')).toBeVisible()
+  })
+
+  test('the focus frame travels between the lines on its own', async ({ page }) => {
+    await page.goto('/')
+    await headline(page).evaluate((el) => el.scrollIntoView({ block: 'center' }))
+    const focused = () => headline(page).locator('[data-focus="true"]')
+    await expect(focused()).toHaveCount(1)
+    const first = await focused().innerText()
+    await expect(async () => expect(await focused().innerText()).not.toBe(first)).toPass({ timeout: 8_000 })
   })
 
   test('the headline reveal ends fully solid ("blueprint becomes real")', async ({ page }) => {
@@ -68,6 +89,16 @@ test.describe('what I build', () => {
 test.describe('what I build: sticky panel (desktop)', () => {
   test.skip(({ isMobile }) => isMobile, 'the sticky panel is a desktop layout; phones show the proof inline')
 
+  test('hovering a statement line holds the focus frame on it', async ({ page }) => {
+    await page.goto('/')
+    await headline(page).evaluate((el) => el.scrollIntoView({ block: 'center' }))
+    const row = headline(page).locator('[data-focus]').first()
+    await row.hover()
+    await expect(row).toHaveAttribute('data-focus', 'true')
+    await page.waitForTimeout(3_200) // longer than one cycle
+    await expect(row).toHaveAttribute('data-focus', 'true')
+  })
+
   test('the panel follows scroll, one capability at a time, and stays in view', async ({ page }) => {
     await page.goto('/')
     // From the second capability on, the panel is pinned (before that it travels up with the list into place).
@@ -113,5 +144,14 @@ test.describe('what I build with reduced motion', () => {
     for (const outline of await headline(page).locator('[data-outline]').all()) {
       await expect(outline).toHaveCSS('opacity', '0')
     }
+  })
+
+  test('keeps the focus frame still on the accent line', async ({ page }) => {
+    await page.goto('/')
+    await headline(page).evaluate((el) => el.scrollIntoView({ block: 'center' }))
+    const rest = headline(page).locator('[data-focus]').nth(2)
+    await expect(rest).toHaveAttribute('data-focus', 'true')
+    await page.waitForTimeout(3_200) // longer than one cycle
+    await expect(rest).toHaveAttribute('data-focus', 'true')
   })
 })

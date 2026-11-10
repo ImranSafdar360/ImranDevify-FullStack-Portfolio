@@ -381,7 +381,7 @@ All are added to the styleguide.
 **Status:** ✅ **Redesigned 6 Nov** (awaiting Imran's review). Path: first pass (standalone statement band + scroll list) rejected as hard to understand → a card grid (approved as a layout, but it showed all six at once) → Imran's call: a **sticky layout, one capability per screen**, with the **statement as the section's intro**. The card grid (React Bits' `SpotlightCard`, kept in `src/components/ui/spotlight-card.tsx`) moves to §6 "How I work".
 
 **Built as** (`src/features/home/capabilities/`), one section, "/ 02 / What I build":
-- Intro: the statement is the `<h2>` (LIVE PRODUCTS. / REAL USERS. / REAL CONSEQUENCES., last line accent) with its annotation beside it; `data-anim="outline"` reveal (plain solid text with no JS / reduced motion).
+- Intro (header redone 10 Nov: Imran found the stacked-slogan version generic): an **annotated spec table** (`statement-spec.tsx`), per 04 §1 "every annotation points at evidence". Each line of the `<h2>` is a ruled row: index, line, dashed leader, then its evidence note from 01 §1–5 (`intro.notes`). An accent corner-bracket frame travels between the lines (idea from React Bits' TrueFocus, rebuilt without `motion`; transform-only), cycling while on screen, holding on hover, resting on `accentLine` with reduced motion. The annotation is a margin note with a Rock Salt "Why it matters" label (`intro.scriptLabel`). Keeps the `data-anim="outline"` reveal.
 - Sticky scroll (layout idea from Aceternity's `sticky-scroll-reveal`, rebuilt without `motion` and without its inner scroll box): the list scrolls on the left, one capability per screen (05 "Capability row": inactive `--text-4`, the active one `--text`, slides 10px, accent number). A sticky `BezelCard` on the right shows its **proof**: icon tile, `01 / 06` counter, a key figure (Mohave, accent), the services behind it as marks, verified facts, stack `Pill`s, and a 6-step progress rail. Panel swap: CSS transition, 260 ms `--ease-out-strong`, 8px rise + 2px blur (emil-design-eng); reduced motion fades only.
 - Accessibility: each item carries its own proof (inline card on phones, screen-reader-only on desktop), so reading order stays in the list and the panel is an `aria-hidden` mirror. Active item = the one crossing the viewport centre (IntersectionObserver).
 - Content model: rows gained `proof` (`figure`, `marks`, `points`, `stack`), every line traced to 01 §5–6 / 04 §4; the standalone `statement` section type was removed (its copy is `capabilities.intro`; the old Atlas document was deleted).
@@ -407,11 +407,20 @@ All are added to the styleguide.
 
 Fallback: stacked cards on mobile and with reduced motion.
 
-**Acceptance:**
-- [ ] Scrolling advances projects 1 → 3 smoothly.
-- [ ] Every card is reachable by keyboard.
-- [ ] No pin jump after client navigation.
-- [ ] Stacked layout below 900px and with reduced motion.
+**Built as (10 Nov):** behaviour modelled on the reference's works section (measured with REA + a browser probe: a native CSS-sticky panel, a scroll-linked image wipe where the frame slides up while its content slides down, details rolling over). Rebuilt on our system, not copied. `src/features/home/cases/`:
+- `case-timeline.ts`: pure scroll maths (rest → one wipe per project → a final rest, so the last project is seen at rest; unit-tested).
+- `case-showcase.tsx`: sticky stage (BezelCard of details + image frame). The project list is a tablist (arrow keys / Home / End / click jump to a project), with a progress line per project. Wipe and drift are written to `translate` once per frame (0 long tasks while scrolling).
+- `case-details.tsx`: OwnershipBadge, MetaTable (mono keys, per 05-theme rather than Rama's script keys), Pill stack, SurfaceButton "Read case study".
+- `cases.tsx`: section `#cases` (the hero CTA now lands here); "CASE STUDIES (03)" marquee on LogoLoop with one Rock Salt label.
+- Content: `cases` section type (order 3); projects = the DB's featured case studies. Covers are **placeholder Unsplash photos** (`public/images/placeholders/`, licence and credits in CREDITS.md), labelled on the frame until H7 screenshots arrive.
+
+**Acceptance:** ✅ **Done 10 Nov** (open for the final polish phase)
+- [x] Scrolling advances projects 1 → 3 smoothly (e2e on the production build; stage stays pinned).
+- [x] Every card is reachable by keyboard (tablist + jump; only the shown panel is interactive).
+- [x] No pin jump after client navigation: native `position: sticky`, no JS pinning.
+- [x] Stacked layout below 1024px and with reduced motion (e2e).
+
+**Polish later:** MetaTable's fixed 110px key column squeezes the stack pills on phones; consider a tighter key column on small screens.
 
 **Verify:** e2e (navigate into a case study and back); browser at both widths; performance trace shows no long tasks over 200ms while scrolling.
 

@@ -32,12 +32,21 @@ export const heroContentSchema = z.object({
 export const statementSchema = z
   .object({
     lines: z.array(text).min(1).max(4),
+    // The evidence behind each line, in the same order (04 §1: every annotation points at evidence).
+    notes: z.array(text).max(4).optional(),
+    // The line shown in focus at rest (and the only one with reduced motion).
     accentLine: z.number().int().min(0).optional(),
     annotation: text.optional(),
+    // Handwritten label above the annotation (05-theme §2.3: Rock Salt, up to ~4 words).
+    scriptLabel: text.optional(),
   })
   .refine((c) => c.accentLine === undefined || c.accentLine < c.lines.length, {
     message: 'accentLine must point at one of the lines',
     path: ['accentLine'],
+  })
+  .refine((c) => c.notes === undefined || c.notes.length === c.lines.length, {
+    message: 'notes must have one entry per line',
+    path: ['notes'],
   })
 
 const projectSlug = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
@@ -81,9 +90,20 @@ export const integrationsContentSchema = z.object({
   items: z.array(integrationItemSchema).min(3).max(24),
 })
 
+// Featured case studies (04 §3): the section's own copy. The projects themselves are the DB's featured projects,
+// in their order (the admin decides which are featured).
+export const casesContentSchema = z.object({
+  index: text,
+  label: text,
+  title: text,
+  scriptLabel: text.optional(),
+  all: linkSchema,
+})
+
 export const sectionSchema = z.discriminatedUnion('type', [
   z.object({ ...base, type: z.literal('hero'), content: heroContentSchema }),
   z.object({ ...base, type: z.literal('integrations'), content: integrationsContentSchema }),
+  z.object({ ...base, type: z.literal('cases'), content: casesContentSchema }),
   z.object({ ...base, type: z.literal('capabilities'), content: capabilitiesContentSchema }),
 ])
 
@@ -91,6 +111,7 @@ export type SectionInput = z.input<typeof sectionSchema>
 export type Section = z.output<typeof sectionSchema>
 export type HeroContent = z.output<typeof heroContentSchema>
 export type IntegrationsContent = z.output<typeof integrationsContentSchema>
+export type CasesContent = z.output<typeof casesContentSchema>
 export type Statement = z.output<typeof statementSchema>
 export type CapabilitiesContent = z.output<typeof capabilitiesContentSchema>
 export type CapabilityRow = z.output<typeof capabilityRowSchema>

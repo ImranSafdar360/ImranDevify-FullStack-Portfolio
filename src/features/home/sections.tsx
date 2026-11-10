@@ -2,6 +2,7 @@ import type { Project } from '@/schemas/project'
 import type { Section } from '@/schemas/section'
 import type { Settings } from '@/schemas/settings'
 import { Capabilities } from './capabilities/capabilities'
+import { Cases } from './cases/cases'
 import { Hero } from './hero/hero'
 import { Integrations } from './integrations/integrations'
 
@@ -15,6 +16,8 @@ export function HomeSections({ sections, settings, projects }: HomeSectionsProps
         return <Hero key={section.key} content={section.content} settings={settings} />
       case 'integrations':
         return <Integrations key={section.key} content={section.content} />
+      case 'cases':
+        return <Cases key={section.key} content={section.content} projects={projects} />
       case 'capabilities':
         return <Capabilities key={section.key} content={section.content} projects={projects} />
     }

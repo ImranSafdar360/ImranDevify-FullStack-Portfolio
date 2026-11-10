@@ -102,14 +102,22 @@ describe('seed content', () => {
     ])
   })
 
-  it('opens the capabilities with the decided statement, last line in accent, and its annotation', async () => {
+  it('opens the capabilities with the decided statement, each line backed by evidence from the brief', async () => {
     const { sections } = await loadSeedFiles()
     const capabilities = sections.find((s) => s.page === 'home' && s.type === 'capabilities')
     if (capabilities?.type !== 'capabilities') throw new Error('capabilities section missing')
     expect(capabilities.content.intro).toEqual({
       lines: ['Live products.', 'Real users.', 'Real consequences.'],
+      // 01 §5 ("It is live, with real users"; "agencies, freelancers, and businesses … the whole client lifecycle")
+      // and 01 §1–2 ("work where mistakes cost money or trust"; "money, access, and live data").
+      notes: [
+        'ClientManager is a production SaaS, live with real users',
+        'Agencies, freelancers and businesses run their whole client lifecycle on it',
+        'My work sits where mistakes cost money or trust: payments, access and live data',
+      ],
       accentLine: 2,
       annotation: 'Most of my work is inside products people already pay for. That changes how carefully you build.',
+      scriptLabel: 'Why it matters',
     })
   })
 

@@ -1,11 +1,12 @@
 import { Frame } from '@/components/layout/frame'
 import { Section, SectionDivider, SectionLabel } from '@/components/layout/section'
 import { AgentIcon, AuthIcon, FormsIcon, MobileIcon, PaymentsIcon, RealtimeIcon } from '@/components/ui/icons'
-import { cn } from '@/lib/utils'
+import { ScriptLabel } from '@/components/ui/script-label'
 import type { Project } from '@/schemas/project'
 import type { CapabilitiesContent, CapabilityRow } from '@/schemas/section'
 import { CapabilityProof } from './capability-proof'
 import { CapabilityScroller, type CapabilityItem } from './capability-scroller'
+import { StatementSpec } from './statement-spec'
 
 const ICONS: Record<NonNullable<CapabilityRow['icon']>, React.ComponentType<{ className?: string }>> = {
   payments: PaymentsIcon,
@@ -16,7 +17,8 @@ const ICONS: Record<NonNullable<CapabilityRow['icon']>, React.ComponentType<{ cl
   agents: AgentIcon,
 }
 
-// "What I build" (04 §2 + §4, merged): the statement explains why the work is careful, then the six capabilities,
+// "What I build" (04 §2 + §4, merged): the statement, as an annotated spec table where each line carries its evidence,
+// explains why the work is careful; then the six capabilities,
 // one per screen: the list scrolls while a sticky panel shows what backs the current one (verified facts only).
 // Unknown "Seen in" slugs are dropped, so no link can point at a project that doesn't exist.
 export function Capabilities({ content, projects }: { content: CapabilitiesContent; projects: Project[] }) {
@@ -42,33 +44,26 @@ export function Capabilities({ content, projects }: { content: CapabilitiesConte
   return (
     <Frame>
       <Section id="capabilities" aria-labelledby="capabilities-title">
-        <SectionLabel index={content.index}>{content.label}</SectionLabel>
-
         {intro ? (
-          <div className="grid gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,21rem)] lg:items-end">
-            <h2
-              id="capabilities-title"
-              data-anim="outline"
-              className="m-0 font-display text-[clamp(2.8rem,7.4vw,6.6rem)] font-bold uppercase leading-[0.88] tracking-[-0.04em]"
-            >
-              {intro.lines.map((line, i) => (
-                <span key={line} data-line className={cn('relative block w-fit', i === intro.accentLine ? 'text-accent' : 'text-text')}>
-                  <span data-fill className="block">
-                    {line}
-                  </span>
-                  <span data-outline aria-hidden="true" className="outline-copy">
-                    {line}
-                  </span>
-                </span>
-              ))}
-            </h2>
-            {intro.annotation && (
-              <div className="flex gap-4 lg:pb-3">
-                <span aria-hidden="true" className="mt-[0.75em] h-px w-10 shrink-0 bg-accent" />
-                <p className="m-0 text-[1.05rem] leading-[1.6] text-text-2">{intro.annotation}</p>
-              </div>
-            )}
-          </div>
+          <>
+            {/* Sheet header: the section label, and the "why" as a handwritten margin note. */}
+            <div className="mb-[clamp(28px,4vw,48px)] flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
+              <SectionLabel index={content.index} className="mb-0">
+                {content.label}
+              </SectionLabel>
+              {intro.annotation && (
+                <div className="max-w-[40ch]">
+                  {intro.scriptLabel && (
+                    <ScriptLabel as="p" className="m-0 mb-2 text-[1.05rem]">
+                      {intro.scriptLabel}
+                    </ScriptLabel>
+                  )}
+                  <p className="m-0 text-[1rem] leading-[1.6] text-text-2">{intro.annotation}</p>
+                </div>
+              )}
+            </div>
+            <StatementSpec id="capabilities-title" lines={intro.lines} notes={intro.notes} accentLine={intro.accentLine} />
+          </>
         ) : (
           <h2 id="capabilities-title" className="m-0 font-display text-[clamp(2.6rem,6.5vw,5.5rem)] font-bold uppercase leading-[0.9] tracking-[-0.04em]">
             {content.title}

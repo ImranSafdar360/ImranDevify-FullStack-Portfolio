@@ -76,6 +76,12 @@ describe('section schema', () => {
     expect(sectionSchema.safeParse(capabilities([row], { lines: ['Live products.'], accentLine: 1 })).success).toBe(false)
   })
 
+  it('requires one evidence note per statement line', () => {
+    const lines = ['Live products.', 'Real users.']
+    expect(sectionSchema.safeParse(capabilities([row], { lines, notes: ['Live', 'Users'] })).success).toBe(true)
+    expect(sectionSchema.safeParse(capabilities([row], { lines, notes: ['Only one'] })).success).toBe(false)
+  })
+
   it('only accepts capability icons from the known set', () => {
     expect(sectionSchema.safeParse(capabilities([{ ...row, icon: 'payments' }])).success).toBe(true)
     expect(sectionSchema.safeParse(capabilities([{ ...row, icon: 'rocket' }])).success).toBe(false)
